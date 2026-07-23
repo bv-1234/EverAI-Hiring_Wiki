@@ -75,24 +75,20 @@
   .confidential-strip strong{ color: var(--danger); }
   .confidential-strip span.body{ color: var(--ink); font-size: 14px; }
 
-  .layout{
-    display: grid; grid-template-columns: 252px minmax(0,1fr); gap: 48px;
-    max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px; align-items: start;
+  .topnav{ position: sticky; top: 0; z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .topnav-inner{
+    max-width: 1180px; margin: 0 auto; padding: 0 max(24px, calc((100vw - 1180px)/2));
+    display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin;
   }
-  nav.toc{ position: sticky; top: 24px; align-self: start; max-height: calc(100vh - 48px); overflow-y: auto; }
-  nav.toc .toc-label{
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--ink-faint); margin: 0 0 12px 4px;
+  .topnav-inner::-webkit-scrollbar{ height: 4px; }
+  .topnav a{
+    flex-shrink: 0; padding: 15px 13px 13px; font-size: 13.5px; font-weight: 600; text-decoration: none;
+    color: var(--ink-soft); border-bottom: 2px solid transparent; white-space: nowrap;
   }
-  nav.toc ol{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
-  nav.toc a{
-    display: flex; align-items: baseline; gap: 10px; padding: 7px 10px; border-radius: 7px;
-    text-decoration: none; color: var(--ink-soft); font-size: 14.5px; line-height: 1.35;
-  }
-  nav.toc a .num{ font-family: var(--mono); font-size: 11px; color: var(--ink-faint); flex-shrink: 0; width: 16px; }
-  nav.toc a:hover{ background: var(--surface); color: var(--ink); }
-  nav.toc a.active{ background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
+  .topnav a:hover{ color: var(--ink); }
+  .topnav a.active{ color: var(--accent-ink); border-bottom-color: var(--accent); }
 
+  .page-body{ max-width: 880px; margin: 0 auto; padding: 40px 24px 100px; }
   main{ min-width: 0; }
 
   section.card{
@@ -262,10 +258,8 @@
   footer .foot-inner{ border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
   @media (max-width: 880px){
-    .layout{ grid-template-columns: 1fr; padding-top: 24px; }
-    nav.toc{ position: static; max-height: none; overflow: visible; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 8px; }
-    nav.toc ol{ flex-direction: row; flex-wrap: wrap; }
-    nav.toc a{ font-size: 13.5px; }
+    .page-body{ padding-top: 28px; }
+    .topnav a{ font-size: 13px; padding: 13px 10px 11px; }
     .embed-wrap iframe{ height: 420px; }
     .page-nav{ flex-direction: column; }
     .page-nav a{ max-width: 100%; }
@@ -279,16 +273,15 @@
   <h1>👩‍💻 Ruby Engineer</h1>
 </header>
 
-<div class="layout">
-  <nav class="toc" aria-label="Table of contents">
-    <p class="toc-label">Role Briefs</p>
-    <ol>
-      <li><a href="performance-marketer.html"><span class="num">01</span> Performance Marketer</a></li>
-      <li><a href="ai-cinematic-video-editor.html"><span class="num">02</span> AI Cinematic Video Editor</a></li>
-      <li><a href="ruby-engineer.html" class="active"><span class="num">03</span> Ruby Engineer</a></li>
-    </ol>
-  </nav>
+<nav class="topnav" aria-label="Section navigation">
+  <div class="topnav-inner">
+    <a href="performance-marketer.html">Performance Marketer</a>
+    <a href="ai-cinematic-video-editor.html">AI Cinematic Video Editor</a>
+    <a href="ruby-engineer.html" class="active">Ruby Engineer</a>
+  </div>
+</nav>
 
+<div class="page-body">
   <main>
 <section class="card" id="ruby-engineer">
       <div class="kicker"><span class="icon">👩‍💻</span></div>
