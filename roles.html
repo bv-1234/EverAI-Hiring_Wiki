@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Role Briefs — EverAI Partner Hiring Wiki</title>
+<style>
+  :root{
+    --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
+    --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
+    --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
+    --radius: 10px;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3;
+      --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733;
+      --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
+    }
+  }
+  :root[data-theme="dark"]{ --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3; --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733; --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422; }
+  :root[data-theme="light"]{ --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560; --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC; --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1; }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a{ color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 2px; }
+  a:hover{ text-decoration-color: var(--accent-ink); }
+  a:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  .masthead{ background: linear-gradient(180deg, var(--surface-2), var(--bg)); border-bottom: 1px solid var(--line); padding: 40px max(24px, calc((100vw - 1000px)/2)) 26px; }
+  .back-link{ font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; color: var(--ink-soft); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px; }
+  .back-link:hover{ color: var(--accent-ink); }
+  .masthead h1{ font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 4vw, 36px); margin: 0 0 8px; text-wrap: balance; }
+  .masthead p{ color: var(--ink-soft); font-size: 15.5px; margin: 0; max-width: 640px; }
+
+  .layout{ max-width: 1000px; margin: 0 auto; padding: 36px 24px 100px; display: grid; grid-template-columns: 220px minmax(0,1fr); gap: 40px; align-items: start; }
+  nav.toc{ position: sticky; top: 24px; }
+  nav.toc .toc-label{ font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 12px 4px; }
+  nav.toc ol{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  nav.toc a{ display: block; padding: 8px 10px; border-radius: 7px; text-decoration: none; color: var(--ink-soft); font-size: 14px; line-height: 1.3; }
+  nav.toc a:hover{ background: var(--surface); color: var(--ink); }
+
+  main{ min-width: 0; }
+  section.card{ background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 34px clamp(18px,4vw,40px); margin-bottom: 28px; scroll-margin-top: 24px; }
+  section.card .kicker{ display:flex; align-items:center; gap:10px; margin-bottom:4px; }
+  section.card .kicker .icon{ font-size:22px; }
+  section.card h2{ font-family: var(--serif); font-weight:400; font-size:26px; letter-spacing: -0.005em; margin: 2px 0 18px; text-wrap: balance; }
+  section.card h3{ font-family: var(--sans); font-size:15.5px; font-weight:700; margin: 26px 0 10px; }
+  section.card h4{ font-size:13.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); font-weight:700; margin: 20px 0 8px; }
+  section.card p{ margin:0 0 14px; }
+  section.card p.dim{ color:var(--ink-soft); }
+  section.card ul, section.card ol{ margin:0 0 14px; padding-left:20px; }
+  section.card li{ margin-bottom:6px; }
+  section.card li::marker{ color: var(--ink-faint); }
+
+  .callout{ display:flex; gap:12px; border-radius:var(--radius); padding:14px 16px; margin:16px 0; border:1px solid var(--line); background:var(--surface-2); }
+  .callout .glyph{ font-size:16px; flex-shrink:0; }
+  .callout .content > *:last-child{ margin-bottom:0; }
+  .callout.danger{ background:var(--danger-soft); border-color:color-mix(in srgb, var(--danger) 35%, transparent); }
+  .callout.accent{ background:var(--accent-soft); border-color:color-mix(in srgb, var(--accent) 35%, transparent); }
+  .callout.warn{ background:var(--warn-soft); border-color:color-mix(in srgb, var(--warn) 35%, transparent); }
+
+  .role-meta{ display:grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap:10px 20px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; margin: 10px 0 18px; font-size:13.5px; }
+  .role-meta div span.label{ display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px; }
+
+  .table-wrap{ overflow-x:auto; margin:8px 0 20px; border:1px solid var(--line); border-radius:10px; }
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:640px; }
+  thead th{ text-align:left; font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); background:var(--surface-2); padding:10px 14px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  tbody td{ padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tbody tr:last-child td{ border-bottom:none; }
+
+  .badge{ display:inline-flex; align-items:center; gap:5px; font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.03em; padding:3px 8px; border-radius:999px; text-transform:uppercase; }
+  .badge.p0{ background:var(--danger-soft); color:var(--danger); }
+  .badge.open{ background:var(--good-soft); color:var(--good); }
+
+  .nn-list{ list-style:none; margin:0 0 16px; padding:0; counter-reset: nn; }
+  .nn-list li{ counter-increment: nn; position:relative; padding-left:30px; margin-bottom:10px; }
+  .nn-list li::before{ content: counter(nn); position:absolute; left:0; top:1px; width:20px; height:20px; border-radius:50%; background:var(--danger-soft); color:var(--danger); font-family:var(--mono); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .nn-list li::marker{ content:none; }
+
+  .filter-line{ font-size:13.5px; color:var(--danger); margin: 4px 0 14px; padding-left: 22px; }
+  .filter-line::before{ content:"❌ "; }
+
+  .eval-cat{ border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-bottom:12px; background:var(--surface-2); }
+  .eval-cat .pct{ font-family:var(--mono); color:var(--accent-ink); font-weight:700; }
+
+  .tool-tier{ margin: 4px 0 6px; }
+  .tool-tier .tier-label{ font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--accent-ink); font-weight:700; }
+
+  details.faq{ border:1px solid var(--line); border-radius:8px; margin-bottom:8px; background:var(--surface-2); }
+  details.faq summary{ padding:10px 14px; font-weight:600; font-size:13.5px; cursor:pointer; }
+  details.faq .faq-body{ padding: 0 14px 14px; font-size:13.5px; color:var(--ink-soft); }
+  details.faq .faq-body p{ margin: 0 0 10px; }
+
+  hr.rule{ border:none; border-top:1px solid var(--line); margin:24px 0; }
+  footer{ max-width:1000px; margin:0 auto; padding:0 24px 60px; color:var(--ink-faint); font-size:13px; border-top:1px solid var(--line); padding-top:20px; }
+
+  @media (max-width: 800px){
+    .layout{ grid-template-columns: 1fr; }
+    nav.toc{ position:static; border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:6px; }
+    nav.toc ol{ flex-direction:row; flex-wrap:wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <a class="back-link" href="index.html">← Back to the Partner Hiring Wiki</a>
+  <h1>➡️ Role Briefs</h1>
+  <p>Full briefs and pre-screen questions for every open role. Read the relevant brief in full before sourcing or screening candidates.</p>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">Briefs</p>
+    <ol>
+      <li><a href="#performance-marketer">📈 Performance Marketer</a></li>
+      <li><a href="#ai-cinematic-video-editor">🎥 AI Cinematic Video Editor</a></li>
+      <li><a href="#ruby-engineer">👩‍💻 Ruby Engineer</a></li>
+    </ol>
+    <p class="toc-label" style="margin-top:18px">Not currently open</p>
+    <ol>
+      <li><a href="past-briefs.html">🗄️ Past Briefs ↗</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- PERFORMANCE MARKETER -->
+    <section class="card" id="performance-marketer">
+      <div class="kicker"><span class="icon">📈</span></div>
+      <h2>Performance Marketer</h2>
+
+      <div class="callout accent">
+        <span class="glyph">📌</span>
+        <div class="content"><p style="margin-bottom:0">This brief covers <strong>4 separate hires</strong>. Use the table below to find your track, then jump to that section.</p></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Track</th><th>Team</th><th>Seniority</th><th>Location</th><th>NSFW required?</th><th>Key differentiator</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1 - Senior · Adult RTB</strong></td><td>Hugo</td><td>Senior</td><td>Europe, Asia, LATAM, US (East)</td><td>✅ Yes — dealbreaker</td><td>Adult/dating background strongly preferred; flat deals on adult sites</td></tr>
+            <tr><td><strong>2 - Senior · Mainstream</strong></td><td>Thomas</td><td>Senior</td><td>Europe, Asia, LATAM, US (East)</td><td>❌ No — Not required</td><td>Owned Meta/TikTok/Google/Instagram at $300K+/mo; will work on our new business, an AI mini-series studio</td></tr>
+            <tr><td><strong>3 - Junior · Adult RTB</strong></td><td>Egor</td><td>Junior</td><td>Europe only</td><td>✅ Yes — dealbreaker</td><td>Motivation + sharpness over experience; will learn on the job</td></tr>
+            <tr><td><strong>4 - Junior · Mainstream</strong></td><td>Thomas</td><td>Junior</td><td>Europe only</td><td>❌ No — Not required</td><td>Motivation + sharpness</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>🧑‍🧑‍🧒‍🧒 Team & Environment Context</h3>
+      <ul>
+        <li><strong>Lean setup:</strong> small teams, no layers, no buffers. Every hire owns their channel end-to-end.</li>
+        <li><strong>Aggressive growth:</strong> 50M users in 2 years. Mission is 100M+ and beyond.</li>
+        <li><strong>High-stakes budgets:</strong> 6–7 figure monthly spend. Decisions have immediate financial consequences.</li>
+        <li><strong>The products:</strong> Candy.ai and YumeAI.com, AI companionship platforms + we launched a new product/business recently, which is an AI mini-series studio. NSFW comfort is required for two of the three tracks (see table above).</li>
+        <li><strong>Channel mix:</strong> adult RTB (TrafficJunky, ExoClick) + mainstream (Meta, TikTok, Google, IG).</li>
+        <li><strong>Culture:</strong> DTC/B2C DNA. Funnel-obsessed. High-velocity testing. Executers, not delegators.</li>
+      </ul>
+
+      <h3>🎯 Calibration Anchors — All Tracks</h3>
+      <p><strong>Strong backgrounds</strong></p>
+      <ul>
+        <li>Performance agencies (e.g. Phiture, AppTweak-type) — bring operational rigour and channel contacts</li>
+        <li>App publishers (e.g. MWM.ai-type)</li>
+        <li>Dating & social: Pure App, Feeld, Dating.com Group, Grindr</li>
+        <li>Sexual wellness / telehealth: Hims/Hers, Ro, BlueChew, Kilo Health</li>
+        <li>DTC / subscriptions: O Positiv, Flo Vitamins, Trafilea, Boom! Beauty</li>
+        <li>High-spend apps: NordVPN, ExpressVPN, Tango Me, Chai AI</li>
+      </ul>
+      <p><strong>Signals that correlate with success</strong></p>
+      <ul>
+        <li>Smaller companies &gt; large corporates</li>
+        <li>Web experience &gt; mobile-first (mobile gaming transfers poorly — different channels, different analytics)</li>
+        <li>Agency background often beats pure in-house — brings process rigour and channel contacts</li>
+      </ul>
+
+      <hr class="rule" />
+      <h3 style="margin-top:0">Track 1 — Senior · Adult RTB</h3>
+      <div class="role-meta">
+        <div><span class="label">Owner</span>Hugo</div>
+        <div><span class="label">Department</span>Growth</div>
+        <div><span class="label">Location</span>Europe or Asia</div>
+        <div><span class="label">Budget</span>€80K–€100K (total package)</div>
+        <div><span class="label">Contract</span>B2B preferred</div>
+        <div><span class="label">Openings</span>1</div>
+        <div><span class="label">Priority</span><span class="badge p0">🔴 P0</span></div>
+        <div><span class="label">NSFW comfort</span>Required — 100% dealbreaker</div>
+      </div>
+      <div class="callout accent">
+        <span class="glyph">📌</span>
+        <div class="content">
+          <p>This hire will own <strong>flat-deal partnerships and direct buys on adult traffic sources</strong>.</p>
+          <p><strong>Daily work involves NSFW and explicit creatives.</strong> Do not submit candidates unless NSFW comfort has been explicitly confirmed on a call.</p>
+          <p style="margin-bottom:0"><strong>Adult or dating industry background is strongly preferred.</strong></p>
+        </div>
+      </div>
+      <h4>⛔️ Non-Negotiables</h4>
+      <ol class="nn-list">
+        <li><strong>NSFW comfort</strong> — 100% dealbreaker</li>
+        <li><strong>Adult or dating industry background</strong> — strongly preferred; profiles without it will face a higher bar</li>
+        <li><strong>B2C/DTC experience</strong> — must understand high-velocity testing culture</li>
+        <li><strong>Web performance marketing ownership</strong> — not exclusively mobile</li>
+        <li><strong>Hands-on execution</strong> — executes their own campaigns; not strategy-only</li>
+      </ol>
+
+      <h3>Track 2 — Senior · Mainstream</h3>
+      <div class="role-meta">
+        <div><span class="label">Owner</span>Thomas Lacroix (CMO & Co-founder)</div>
+        <div><span class="label">Department</span>Growth</div>
+        <div><span class="label">Location</span>Europe or Asia</div>
+        <div><span class="label">Budget</span>€80K–€100K (total package)</div>
+        <div><span class="label">Contract</span>B2B preferred</div>
+        <div><span class="label">Openings</span>1</div>
+        <div><span class="label">Priority</span><span class="badge p0">🔴 P0</span></div>
+        <div><span class="label">NSFW comfort</span>Not required — comfort is a positive signal</div>
+      </div>
+      <div class="callout accent">
+        <span class="glyph">📌</span>
+        <div class="content">
+          <p>This hire owns mainstream paid channels (Meta, TikTok, Google, Instagram, etc.).</p>
+          <p>They will work with the product and its companionship positioning, but will not handle explicit creatives.</p>
+          <p style="margin-bottom:0">NSFW comfort is a plus, not a dealbreaker.</p>
+        </div>
+      </div>
+      <h4>⛔️ Non-Negotiables</h4>
+      <ol class="nn-list">
+        <li><strong>Minimum $300K/month budget owned directly</strong> on Meta, TikTok, Google, Instagram, or another relevant social media — personal ownership and P&amp;L accountability</li>
+        <li><strong>Web performance marketing ownership</strong> — must have owned mainstream channels at scale; not exclusively mobile</li>
+        <li><strong>B2C/DTC experience</strong> — subscription or DTC acquisition funnels strongly preferred</li>
+        <li><strong>Hands-on execution</strong> — runs their own campaigns; systematic testing; not strategy-only</li>
+        <li><strong>NSFW comfort</strong> — not required, but a meaningful positive signal</li>
+      </ol>
+
+      <h3>Track 3 — Junior · Adult RTB</h3>
+      <div class="role-meta">
+        <div><span class="label">Owner</span>Egor</div>
+        <div><span class="label">Department</span>Growth</div>
+        <div><span class="label">Location</span>Europe</div>
+        <div><span class="label">Budget</span>€42K (total package)</div>
+        <div><span class="label">Contract</span>B2B preferred</div>
+        <div><span class="label">Openings</span>1</div>
+        <div><span class="label">Priority</span><span class="badge p0">🔴 P0</span></div>
+        <div><span class="label">NSFW comfort</span>Required — 100% dealbreaker</div>
+      </div>
+      <div class="callout accent">
+        <span class="glyph">📌</span>
+        <div class="content">
+          <p>This hire will work directly with adult traffic sources under Egor's team.</p>
+          <p>NSFW comfort is non-negotiable — do not submit candidates unless explicitly confirmed on a call.</p>
+          <p style="margin-bottom:0">We are not screening for scale or seniority. We are screening for motivation, sharpness, and raw potential. The right person is genuinely excited by performance marketing as a craft and wants to grow fast.</p>
+        </div>
+      </div>
+      <h4>⛔️ Non-Negotiables</h4>
+      <ol class="nn-list">
+        <li><strong>NSFW comfort</strong> — 100% dealbreaker; must be explicitly confirmed before submission</li>
+        <li><strong>Motivation and hunger</strong> — must have concrete examples of things they've built, tested, or experimented with; "I like marketing" is not enough</li>
+        <li><strong>Data orientation</strong> — uses numbers to make decisions, not gut feeling; can explain what they'd test and why</li>
+        <li><strong>Some hands-on channel experience</strong> — has managed at least one channel end-to-end, even at small scale; understands CPA, ROAS, basic performance hygiene</li>
+        <li><strong>Web performance marketing</strong> — at least basic exposure; not exclusively mobile</li>
+      </ol>
+
+      <hr class="rule" />
+      <h3 style="margin-top:0">💬 Pre-Screen Questions</h3>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">Use these questions during your screening call. Include a summary of answers in your submission notes in Ashby.</p></div>
+      </div>
+      <p><strong>All tracks</strong></p>
+      <ol>
+        <li>What is your current situation, and why are you considering a move right now?</li>
+        <li>What specifically attracted you to this opportunity with EverAI?</li>
+        <li>Have you worked with NSFW or adult content in a professional context before? Are you fully comfortable working with explicit creatives on a daily basis?</li>
+        <li>Which platforms and budgets do you typically manage?</li>
+        <li>What metrics do you check every day?</li>
+        <li>Have you run A/B tests on creatives? How do you decide what to test, and how do you know when you have a winner?</li>
+      </ol>
+      <p><strong>Seniors only (Adult RTB + Mainstream)</strong></p>
+      <ol>
+        <li>What's the largest monthly budget you've personally owned and optimised?</li>
+        <li>Tell me about a campaign you took from loss to profit. What did you change, and how long did it take?</li>
+      </ol>
+    </section>
+
+    <!-- AI CINEMATIC VIDEO EDITOR -->
+    <section class="card" id="ai-cinematic-video-editor">
+      <div class="kicker"><span class="icon">🎥</span></div>
+      <h2>AI Cinematic Video Editor</h2>
+
+      <div class="role-meta">
+        <div><span class="label">Department</span>R&amp;D</div>
+        <div><span class="label">Hiring Manager</span>Andrea Neri Galanti (Content Lead)</div>
+        <div><span class="label">Location</span>Worldwide (CET overlap not required)</div>
+        <div><span class="label">Contract</span>B2B preferred (1st month freelance, then full-time B2B)</div>
+        <div><span class="label">Openings</span>6</div>
+        <div><span class="label">Seniorities</span>Junior to Senior</div>
+        <div><span class="label">Priority</span><span class="badge p0">🔴 P0</span></div>
+        <div style="grid-column: 1 / -1"><span class="label">Budget</span>Mid: LATAM $28K–$42K · Europe €42K–€65K · US/Canada $60K–$80K.<br />Senior: LATAM $42K–$58K · Europe €65K–€80K · US/Canada $80K–$100K.</div>
+      </div>
+
+      <h3>🧑‍🧑‍🧒‍🧒 Team & Environment Context</h3>
+      <ul>
+        <li><strong>The Team:</strong> Embedded in R&amp;D. Content ownership is split across two streams: <strong>MPC / Companion Mode</strong>, and <strong>Mini-Series &amp; Interactive Stories</strong>. Candidates assessed as 100% comfortable with NSFW are routed toward Andrea's stream; others toward Mike's. This is a deeply technical creative role — not a standard editing position. Candidate works with high autonomy on execution and technical decisions.</li>
+        <li><strong>The Content:</strong> Candy.ai and YumeAI. We operate in the AI companionship space. 100% comfort with explicit NSFW content is a non-negotiable baseline requirement — including uncensored models and adult narratives. The bar for MPC / Companion Mode work is higher: full comfort with hardcore NSFW.</li>
+        <li><strong>AI-First Stack:</strong> Generative AI workflows are the core of the role, not a bonus. Candidates must be active prompt engineers working with current AI video tooling. ComfyUI is a strong plus but no longer required.</li>
+        <li><strong>Full Ownership:</strong> End-to-end production ownership — from concept and prompting through editing, compositing, and final delivery.</li>
+        <li><strong>Iteration Culture:</strong> Test, fail, refine, improve — and share learnings with the team. High experimentation appetite required.</li>
+      </ul>
+
+      <h3>🎯 Calibration Anchors & Target Profiles</h3>
+      <p><strong>Ideal backgrounds:</strong></p>
+      <ul>
+        <li>AI-native video studios, generative content agencies, or AI filmmaking projects</li>
+        <li>VFX houses or post-production studios that have moved into generative AI workflows</li>
+        <li>Independent creators with a strong AI video / Stable Diffusion track record</li>
+        <li>Adult content production companies with AI-integrated pipelines (strong bonus)</li>
+        <li>LA-based creative and tech communities</li>
+      </ul>
+      <h4>⛔️ Non-Negotiables</h4>
+      <ol class="nn-list">
+        <li><strong>NSFW Comfort</strong> — 100% comfort with explicit adult content. Dealbreaker if absent. <strong>Hardcore NSFW comfort</strong> required for MPC / Companion Mode candidates.</li>
+        <li><strong>AI Video Tooling</strong> — Active, hands-on professional use of current AI video generation tools (Kling, Seedance, Runway, Pika, Happy Horse, or equivalents).</li>
+        <li><strong>Portfolio</strong> — Must include AI-driven video work.</li>
+        <li><strong>AI Fluency</strong> — Active professional use of generative AI tools (SD, Runway, Kling, etc.) with a clear iteration mindset.</li>
+        <li><strong>Seniority</strong> — Mid/Senior only. 4+ years in video production, VFX, or digital art.</li>
+      </ol>
+
+      <h4>🛠️ Tools</h4>
+      <div class="tool-tier"><span class="tier-label">Essential:</span> Current AI video generation tools — Kling, Seedance, Happy Horse, Runway, Pika, and emerging equivalents (active professional use); Premiere Pro, After Effects, or equivalent — for final assembly and polish.</div>
+      <div class="tool-tier"><span class="tier-label">Strong plus:</span> ComfyUI — node-based workflow building, customisation, and optimisation; Stable Diffusion / AUTOMATIC1111 (advanced prompting, LoRAs, refining, upscaling, inpainting).</div>
+      <div class="tool-tier"><span class="tier-label">Great to have:</span> 3D or VFX background, colourist experience, model training (LoRAs, embeddings, fine-tuning), Photoshop &amp; Design skills.</div>
+
+      <h3>📋 Evaluation Framework</h3>
+      <div class="eval-cat"><p style="margin-bottom:6px"><strong>1. Generative AI &amp; ComfyUI Mastery</strong> — <span class="pct">35%</span></p><p style="margin-bottom:6px">Active, professional use of current AI video tooling (Kling, Runway, Pika, Seedance, Happy Horse). Advanced Stable Diffusion / AUTOMATIC1111 usage (LoRAs, inpainting, upscaling, batching). Uses AI for character consistency, B-roll generation, style control, and post-processing. ComfyUI node-building and pipeline optimisation is a strong plus.</p><p class="filter-line" style="margin-bottom:0">Hard Filters: No active AI video tooling in current workflow. Traditional-only or AI-resistant mindset = no fit.</p></div>
+      <div class="eval-cat"><p style="margin-bottom:6px"><strong>2. Narrative Storytelling &amp; Visual Craft</strong> — <span class="pct">30%</span></p><p style="margin-bottom:6px">Strong cinematic language: pacing, composition, atmosphere, visual coherence. Creates narrative-driven longform content from concept. Maintains character and scene consistency across longer AI-generated sequences using advanced techniques.</p><p class="filter-line" style="margin-bottom:0">Hard Filters: Cinematic reel only with no narrative structure. No demonstrated character or style consistency across sequences.</p></div>
+      <div class="eval-cat"><p style="margin-bottom:6px"><strong>3. Technical Autonomy &amp; Post-Production</strong> — <span class="pct">20%</span></p><p style="margin-bottom:6px">Fully independent across the full production stack: compositing, colour correction, motion graphics, final export. Manages own workflows, render queues, and file structures for scalability and high-volume iteration. Shares techniques and learnings with the rest of the team.</p><p class="filter-line" style="margin-bottom:0">Hard Filters: Requires another specialist (colourist, compositor) to deliver a finished sequence.</p></div>
+      <div class="eval-cat"><p style="margin-bottom:6px"><strong>4. Startup Grit &amp; Communication</strong> — <span class="pct">15%</span></p><p style="margin-bottom:6px">Fluent English. High ownership — takes ideas from concept to final delivery independently. Comfortable navigating ambiguity and evolving tooling. Fast iteration mindset. Open to feedback. Kills ego-work without hesitation if the output isn't right.</p><p class="filter-line" style="margin-bottom:0">Hard Filters: NSFW sensitivity. Needs heavy direction. No recent AI-driven portfolio. Under 4 years of relevant experience.</p></div>
+
+      <h3>🔄 Hiring Process</h3>
+      <ol>
+        <li>Initial Portfolio Review</li>
+        <li>Recruiter Screening Call (20 min)</li>
+        <li>Case Study (Paid assignment)</li>
+        <li>Hiring Manager - Technical Interview</li>
+        <li>CEO - Cultural Fit Interview</li>
+      </ol>
+
+      <h3>💬 Pre-Screen Questions</h3>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">Use these questions during your screening call. Include a summary of the candidate's answers in your submission notes in Ashby.</p></div>
+      </div>
+      <ol>
+        <li>Walk me through your current workflow — what does a typical production look like from brief to delivery?</li>
+        <li>Which AI video generation tools are you actively using right now, and what are you using them for?</li>
+        <li>Share a piece of AI-generated long-form content you're proud of — what were the technical and creative challenges?</li>
+        <li>How do you maintain character and scene consistency across a longer AI-generated narrative sequence?</li>
+        <li>Have you tried Candy.ai or YumeAI? Our products operate in the adult AI companionship space — are you fully comfortable working with explicit NSFW content on a daily basis?
+          <ol><li>Do you have previous experience working in the adult space?</li></ol>
+        </li>
+        <li>Do you use ComfyUI? If yes, walk me through a workflow you've built. <em>(Bonus signal — not a filter.)</em></li>
+        <li>If you were able to create anything you wanted without budget constraints or rules, but simply for your pleasure, what would it be?</li>
+      </ol>
+    </section>
+
+    <!-- SOFTWARE ENGINEER -->
+    <section class="card" id="ruby-engineer">
+      <div class="kicker"><span class="icon">👩‍💻</span></div>
+      <h2>Ruby Engineer</h2>
+
+      <div class="role-meta">
+        <div><span class="label">Department</span>R&amp;D</div>
+        <div><span class="label">Hiring Manager</span>Michael Monin</div>
+        <div><span class="label">Location</span>Europe</div>
+        <div><span class="label">Budget</span>Up to €120K (EU)</div>
+        <div><span class="label">Contract</span>B2B preferred</div>
+        <div><span class="label">Openings</span>2</div>
+        <div><span class="label">Seniorities</span>Senior</div>
+        <div><span class="label">Priority</span><span class="badge p0">🔴 P0</span></div>
+      </div>
+
+      <h3>🧑‍🧑‍🧒‍🧒 Team & Environment Context</h3>
+      <ul>
+        <li><strong>The Product:</strong> Candy.ai and YumeAI — two of the world's leading AI companion platforms. Candidates must be 100% comfortable with NSFW/explicit content as part of their daily work.</li>
+        <li><strong>The Scale:</strong> High-traffic, production-grade systems serving millions of users. This is not a side project or internal tool — engineering decisions have immediate product consequences.</li>
+        <li><strong>The Stack:</strong> Primary backend stack is Ruby on Rails.</li>
+        <li><strong>The Team:</strong> Fully remote, cross-functional engineering team (4 squads). Engineers work closely with PMs, Designers, QA, and AI/DevOps — no silos, no narrow lanes.</li>
+        <li><strong>The Bar:</strong> Everyone is hands-on. Ownership is expected from day one. Engineers take initiative, make decisions, and solve hard problems without waiting for permission.</li>
+      </ul>
+
+      <h3>🎯 Calibration Anchors & Target Profiles</h3>
+      <div class="callout accent">
+        <span class="glyph">1️⃣</span>
+        <div class="content"><p style="margin-bottom:0"><strong>Profile — Ruby on Rails</strong><br />5+ years of backend engineering experience with Ruby on Rails in production. Strong web fundamentals. Comfortable working at scale.</p></div>
+      </div>
+      <p>We are looking for engineers where production backend work at scale was their daily reality — not a side project or occasional task.</p>
+      <ul>
+        <li>Engineers from <strong>high-traffic B2C or SaaS products</strong></li>
+        <li>Experience in <strong>monolithic architecture</strong> and/or scaling challenges</li>
+        <li>Comfortable in a <strong>startup environment</strong>: ambiguity, fast iteration, direct communication</li>
+        <li>Candidates who <strong>actively use AI tools</strong> in their development workflow</li>
+        <li><strong>Scale-up experience expected</strong> — high-growth pace is part of the context here</li>
+      </ul>
+      <div class="callout warn">
+        <span class="glyph">🆕</span>
+        <div class="content"><p style="margin-bottom:0"><strong>Industries that don't transfer well</strong><br />Healthcare, government, and similarly regulated or slow-moving environments. Candidates from these backgrounds rarely adapt to our pace and culture.</p></div>
+      </div>
+      <h4>⛔️ Non-Negotiables</h4>
+      <ol class="nn-list">
+        <li>NSFW comfort — 100% dealbreaker if absent</li>
+        <li>5+ years of backend engineering experience (Ruby on Rails preferred; other modern stacks considered)</li>
+        <li>Production experience with high-traffic, scalable systems — not just CRUD apps or small internal tools</li>
+        <li>Fully committed — no multiple concurrent jobs or projects</li>
+        <li>CET timezone overlap — must be able to work within CET ±3</li>
+      </ol>
+
+      <h3>📋 Evaluation Framework</h3>
+      <div class="eval-cat"><p style="margin-bottom:6px"><strong>1. Technical Depth</strong> — <span class="pct">40%</span></p><p style="margin-bottom:6px">Strong backend engineering experience with real production systems. Can clearly explain their technical contributions, decisions, and the challenges they personally solved — not just what the team did. Familiar with scaling, performance optimisation, and architecture trade-offs. Profile 1: Ruby on Rails, 5+ years preferred for Senior. For frontend-touching roles: familiarity with Turbo, Stimulus, Hotwire is a plus.</p><p class="filter-line" style="margin-bottom:0">Hard Filters: Only worked on small/internal apps with no scaling exposure; vague about their personal technical contributions; can't explain decisions they made; no production experience.</p></div>
+      <div class="eval-cat"><p style="margin-bottom:6px"><strong>2. Ownership & Collaboration</strong> — <span class="pct">25%</span></p><p style="margin-bottom:6px">Takes initiative, leads technical decisions, and solves problems without waiting for approval. Has worked in teams of 15+ engineers and collaborated cross-functionally with PMs, Designers, QA, and AI/DevOps.</p><p class="filter-line" style="margin-bottom:0">Hard Filters: Always solo or tiny teams only; no signs of ownership or independent decision-making; no cross-functional experience.</p></div>
+      <div class="eval-cat"><p style="margin-bottom:6px"><strong>3. Mindset & Culture Fit</strong> — <span class="pct">20%</span></p><p style="margin-bottom:6px">Comfortable with startup speed, ambiguity, and pressure. Motivated by impact and ownership — not just salary. Straight-to-the-point communicator in English. Humble and receptive to feedback.</p><p class="filter-line" style="margin-bottom:0">Hard Filters: Corporate/bureaucratic background with no flexibility; low energy or no signs of passion for building; poor English communication; arrogant or dismissive of feedback.</p></div>
+      <div class="eval-cat">
+        <p style="margin-bottom:6px"><strong>4. Growth & Learning</strong> — <span class="pct">15%</span></p>
+        <p style="margin-bottom:6px">Stays current with RoR trends and the broader engineering ecosystem. Uses AI tools (ChatGPT, Copilot, Cursor, etc.) in their daily workflow. Demonstrates self-driven learning — not just passive experience accumulation.</p>
+        <div class="callout warn" style="margin: 10px 0"><span class="glyph">🆕</span><div class="content"><p style="margin-bottom:0"><strong>AI usage is a hard filter</strong><br />Candidates not using AI at all — professionally or personally — are an immediate no. Those not using it professionally yet can still be considered, depending on their reasoning.</p></div></div>
+        <p class="filter-line" style="margin-bottom:0">Hard Filters: Not up to date with tech trends; no learning habits or initiative; against using AI tools in development work.</p>
+      </div>
+
+      <h3>💬 Pre-Screen Questions</h3>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">Use these questions during your screening call. Include a summary of the candidate's answers in your submission notes in Ashby.</p></div>
+      </div>
+      <ol>
+        <li>Can you briefly walk me through your current role and main responsibilities?</li>
+        <li>What is the biggest technical challenge you faced in the last 6 months?</li>
+        <li>Why are you considering a move now? <em>(If applicable)</em> You've had some leadership exposure — why are you interested in a Senior IC position rather than continuing in management?</li>
+        <li>Have you tried <a href="http://candy.ai/" target="_blank" rel="noopener">Candy.ai</a>? What do you think about it?</li>
+        <li>Our flagship product involves AI companionship and adult-oriented content. Are you fully comfortable working in an environment that can include NSFW or adult themes, handled respectfully and professionally?</li>
+        <li>What are the top 2–3 things you're looking for in your next opportunity?</li>
+        <li>Do you use AI tools in your development workflow? Which ones?</li>
+        <li>How do you feel about working in a fast-moving startup that is scaling quickly?</li>
+      </ol>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  EverAI Partner Hiring Wiki · Role Briefs · <a href="index.html">← Back to the wiki</a>
+</footer>
+
+</body>
+</html>

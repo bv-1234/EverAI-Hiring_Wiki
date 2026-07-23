@@ -1,0 +1,1638 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EverAI Partner Hiring Wiki</title>
+<style>
+  :root{
+    --bg: #F7F4F5;
+    --surface: #FFFFFF;
+    --surface-2: #FBF8F9;
+    --ink: #211B22;
+    --ink-soft: #5B5560;
+    --ink-faint: #948D93;
+    --line: #E6E0E2;
+    --accent: #7A3B69;
+    --accent-ink: #5C2C4F;
+    --accent-soft: #F1E3EC;
+    --good: #2E7D5B;
+    --good-soft: #E3F1EA;
+    --warn: #A16A17;
+    --warn-soft: #F7EDD9;
+    --danger: #B23A3A;
+    --danger-soft: #F6E2E1;
+    --radius: 10px;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg: #16121A;
+      --surface: #1E1822;
+      --surface-2: #241C29;
+      --ink: #ECE6EA;
+      --ink-soft: #B3A9B3;
+      --ink-faint: #7C7480;
+      --line: #332C39;
+      --accent: #D08CBB;
+      --accent-ink: #E7B4D5;
+      --accent-soft: #3A2733;
+      --good: #6BC79A;
+      --good-soft: #1F332B;
+      --warn: #E3B25A;
+      --warn-soft: #3A2F1B;
+      --danger: #E28A87;
+      --danger-soft: #3A2422;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3;
+    --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733;
+    --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
+  }
+  :root[data-theme="light"]{
+    --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
+    --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
+    --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 2px; }
+  a:hover{ text-decoration-color: var(--accent-ink); }
+  a:focus-visible, button:focus-visible, summary:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    background: linear-gradient(180deg, var(--surface-2), var(--bg));
+    border-bottom: 1px solid var(--line);
+    padding: 44px max(24px, calc((100vw - 1180px)/2)) 28px;
+  }
+  .masthead-eyebrow{
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px;
+  }
+  .masthead-eyebrow::before{
+    content: "";
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+  .masthead h1{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+  .masthead p.lede{
+    max-width: 640px;
+    color: var(--ink-soft);
+    font-size: 16.5px;
+    margin: 0 0 18px;
+  }
+  .masthead-contact{
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .masthead-contact a{ color: var(--accent-ink); font-weight: 600; text-decoration: none; }
+  .masthead-contact a:hover{ text-decoration: underline; }
+
+  .confidential-strip{
+    margin-top: 22px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--danger-soft);
+    border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+    border-radius: var(--radius);
+    padding: 13px 16px;
+    max-width: 780px;
+  }
+  .confidential-strip .glyph{ font-size: 17px; line-height: 1.4; }
+  .confidential-strip strong{ color: var(--danger); }
+  .confidential-strip span.body{ color: var(--ink); font-size: 14px; }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    display: grid;
+    grid-template-columns: 252px minmax(0,1fr);
+    gap: 48px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 40px 24px 100px;
+    align-items: start;
+  }
+  nav.toc{
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+  }
+  nav.toc .toc-label{
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 12px 4px;
+  }
+  nav.toc ol{
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column;
+    gap: 2px;
+    counter-reset: toc;
+  }
+  nav.toc li{ counter-increment: toc; }
+  nav.toc a{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 7px 10px;
+    border-radius: 7px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.35;
+    transition: background 0.12s ease, color 0.12s ease;
+  }
+  nav.toc a .num{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    flex-shrink: 0;
+    width: 16px;
+  }
+  nav.toc a:hover{ background: var(--surface); color: var(--ink); }
+  nav.toc a.active{ background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
+
+  main{ min-width: 0; }
+
+  section.card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 36px clamp(20px, 4vw, 44px);
+    margin-bottom: 28px;
+    scroll-margin-top: 24px;
+  }
+  section.card > .kicker{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  section.card .kicker .icon{ font-size: 24px; line-height: 1; }
+  section.card .kicker .idx{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+  }
+  section.card h2{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: -0.005em;
+    margin: 2px 0 6px;
+    text-wrap: balance;
+  }
+  section.card p.subtitle{
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin: 0 0 22px;
+  }
+  section.card h3{
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 15.5px;
+    margin: 30px 0 10px;
+    color: var(--ink);
+  }
+  section.card h3.numbered{ display:flex; align-items:center; gap:8px; }
+  section.card h3 .step-dot{
+    display:inline-flex; align-items:center; justify-content:center;
+    width: 20px; height:20px; border-radius:50%;
+    background: var(--accent-soft); color: var(--accent-ink);
+    font-family: var(--mono); font-size: 11px; font-weight:700;
+    flex-shrink:0;
+  }
+  section.card h4{
+    font-size: 13.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    font-weight: 700;
+    margin: 22px 0 8px;
+  }
+  section.card h5{
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 16px 0 6px;
+  }
+  section.card p{ margin: 0 0 14px; color: var(--ink); }
+  section.card p.dim{ color: var(--ink-soft); }
+  section.card ul, section.card ol.plain{ margin: 0 0 14px; padding-left: 22px; }
+  section.card li{ margin-bottom: 7px; }
+  section.card li::marker{ color: var(--ink-faint); }
+  section.card ul ul, section.card ol.plain ul, section.card ul ol, section.card ol ol{ margin: 6px 0 6px; }
+  section.card .step-list{ padding-left: 20px; margin: 0 0 6px; }
+  section.card .step-list > li{ margin-bottom: 16px; }
+
+  /* screenshots */
+  figure.shot{
+    margin: 12px 0 18px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface-2);
+    padding: 8px;
+  }
+  figure.shot img{
+    display: block;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+  }
+  figure.shot figcaption{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    padding: 8px 4px 2px;
+  }
+
+  /* video / embed chips */
+  .media-chip{
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-2);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--accent-ink);
+    margin: 4px 0 16px;
+  }
+  .media-chip:hover{ border-color: var(--accent); }
+  .media-note{
+    font-size: 13px;
+    color: var(--ink-faint);
+    font-style: italic;
+    margin: 4px 0 16px;
+  }
+  .embed-wrap{
+    margin: 10px 0 18px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .embed-wrap iframe{ width: 100%; height: 560px; border: none; display: block; }
+
+  /* callouts */
+  .callout{
+    display: flex; gap: 12px;
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin: 18px 0;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+  .callout .glyph{ font-size: 17px; flex-shrink: 0; line-height: 1.5; }
+  .callout .content > *:last-child{ margin-bottom: 0; }
+  .callout.warn{ background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, transparent); }
+  .callout.danger{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 35%, transparent); }
+  .callout.good{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 35%, transparent); }
+  .callout.accent{ background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+
+  /* badges & chips */
+  .badge{
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 3px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+  }
+  .badge.p0{ background: var(--danger-soft); color: var(--danger); }
+  .badge.p1{ background: var(--warn-soft); color: var(--warn); }
+  .badge.open{ background: var(--good-soft); color: var(--good); }
+  .badge.soon{ background: var(--accent-soft); color: var(--accent-ink); }
+  .badge.tier-red{ background: var(--danger-soft); color: var(--danger); }
+  .badge.tier-yellow{ background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-green{ background: var(--good-soft); color: var(--good); }
+  .tag{
+    display:inline-block;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1px 7px;
+    font-family: var(--mono);
+  }
+  .new-tag{
+    display:inline-block;
+    font-size: 11px;
+    color: var(--danger);
+    font-weight: 700;
+  }
+
+  /* tables */
+  .table-wrap{ overflow-x: auto; margin: 6px 0 22px; border: 1px solid var(--line); border-radius: 10px; }
+  table{ width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+  table caption{ text-align:left; padding: 10px 16px 0; font-size: 12px; color: var(--ink-faint); }
+  thead th{
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    background: var(--surface-2);
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody td{
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    color: var(--ink);
+  }
+  tbody tr:last-child td{ border-bottom: none; }
+  tbody td.num, thead th.num{ font-variant-numeric: tabular-nums; }
+  tbody td strong{ font-weight: 700; }
+
+  /* do / dont columns */
+  .split{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 8px 0 10px;
+  }
+  @media (max-width: 720px){ .split{ grid-template-columns: 1fr; } }
+  .split .col{ border-radius: var(--radius); padding: 18px 20px; border: 1px solid var(--line); }
+  .split .col.do{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 30%, transparent); }
+  .split .col.dont{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 30%, transparent); }
+  .split h4{ margin-top: 0; color: inherit; }
+  .split .col.do h4{ color: var(--good); }
+  .split .col.dont h4{ color: var(--danger); }
+  .split ul{ margin: 0; padding-left: 20px; }
+  .split li{ font-size: 14.5px; }
+
+  /* red-flag cards */
+  .flag{
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--danger);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 0 0 14px;
+    background: var(--surface-2);
+  }
+  .flag .flag-title{ font-weight: 700; margin: 0 0 6px; }
+  .flag .flag-title .glyph{ margin-right: 6px; }
+  .flag .flag-title span.line{ display:block; }
+  .flag p{ margin: 0 0 8px; font-size: 14.5px; color: var(--ink-soft); }
+  .flag p.ask{ margin: 0; font-size: 13.5px; color: var(--accent-ink); font-style: italic; }
+
+  /* pill list for countries */
+  .pills{ display:flex; flex-wrap:wrap; gap:6px; margin: 6px 0 18px; }
+  .pills .pill{
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--ink-soft);
+  }
+  .pills.red .pill{ border-color: color-mix(in srgb, var(--danger) 30%, transparent); color: var(--danger); background: var(--danger-soft); }
+  .pills.green .pill{ border-color: color-mix(in srgb, var(--good) 30%, transparent); color: var(--good); background: var(--good-soft); }
+
+  /* resource list */
+  .resource-list{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .resource-list li{ margin: 0; }
+  .resource-list a{
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 18px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface-2);
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .resource-list a:hover{ border-color: var(--accent); background: var(--accent-soft); }
+  .resource-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); }
+
+  /* role brief links */
+  .brief-list{ list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .brief-list a{
+    display: flex; align-items: center; gap: 8px;
+    padding: 11px 15px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-2);
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 14.5px;
+  }
+  .brief-list a:hover{ border-color: var(--accent); background: var(--accent-soft); }
+  .brief-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); margin-left: auto; }
+
+  hr.rule{ border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+
+  footer{
+    max-width: 1180px; margin: 0 auto; padding: 0 24px 60px;
+    color: var(--ink-faint); font-size: 13px;
+  }
+  footer .foot-inner{
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+
+  @media (max-width: 880px){
+    .layout{ grid-template-columns: 1fr; padding-top: 24px; }
+    nav.toc{
+      position: static;
+      max-height: none;
+      overflow: visible;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 8px;
+    }
+    nav.toc ol{ flex-direction: row; flex-wrap: wrap; }
+    nav.toc a{ font-size: 13.5px; }
+    .embed-wrap iframe{ height: 420px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <p class="masthead-eyebrow">🤝 Internal Wiki · TA + Partner Use</p>
+  <h1>EverAI Partner Hiring Wiki</h1>
+  <p class="lede">Your central, single source of truth for recruiting on behalf of EverAI — the company behind Candy.ai and YumeAI. Use the index to jump to any topic.</p>
+  <p class="masthead-contact">Questions or issues? Contact our TA team directly</p>
+  <div class="confidential-strip">
+    <span class="glyph">⚠️</span>
+    <span class="body"><strong>Important —</strong> this wiki is for EverAI TA + partner use only. Do not reuse internal notes, private process details, or confidential company information in public JDs, public-facing pages, or broad outbound templates.</span>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">On this page</p>
+    <ol>
+      <li><a href="#ashby"><span class="num">01</span> How to Use Ashby</a></li>
+      <li><a href="#roles"><span class="num">02</span> Our Open Roles</a></li>
+      <li><a href="#process"><span class="num">03</span> Hiring Process &amp; SLAs</a></li>
+      <li><a href="#dos-donts"><span class="num">04</span> Do's and Don'ts</a></li>
+      <li><a href="#pitch"><span class="num">05</span> Pitching the Company</a></li>
+      <li><a href="#prep"><span class="num">06</span> Preparing Candidates</a></li>
+      <li><a href="#international"><span class="num">07</span> Hiring Internationally</a></li>
+      <li><a href="#jurisdiction"><span class="num">08</span> Jurisdiction Risk Guide</a></li>
+      <li><a href="#red-flags"><span class="num">09</span> Candidate Red Flags</a></li>
+      <li><a href="#off-limits"><span class="num">10</span> Off-Limits Companies</a></li>
+      <li><a href="#resources"><span class="num">11</span> Helpful Resources</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 01 ASHBY -->
+    <section class="card" id="ashby">
+      <div class="kicker"><span class="icon">👋</span><span class="idx">01 / 11</span></div>
+      <h2>How to Use Ashby (our ATS)</h2>
+      <p class="subtitle">🪜 Using Ashby: A Step-by-Step Guide for Recruitment Agencies</p>
+
+      <h3 class="numbered"><span class="step-dot">1</span>Step 1: Access Ashby</h3>
+      <ol class="step-list">
+        <li>
+          <strong>Receive Your Invite</strong>: Upon being granted access, you should receive an automatic invitation from Ashby. An example of the invite email is shown below 👇
+          <figure class="shot">
+            <img src="assets/images/01-invite-email.png" alt="Example Ashby invite email" />
+          </figure>
+        </li>
+        <li>
+          <strong>Log In</strong>:
+          <ul>
+            <li>Use the credentials provided in the email to log into Ashby using this <a href="https://app.ashbyhq.com/signin" target="_blank" rel="noopener">link</a>.</li>
+            <li>You should be able to see the log in options, as below 👇
+              <figure class="shot">
+                <img src="assets/images/02-login-options.png" alt="Ashby login options screen" />
+              </figure>
+            </li>
+            <li>If you encounter any login issues, check with your admin (Bárbara) to confirm your account setup.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Familiarize Yourself</strong>:
+          <ul>
+            <li>Once logged in, take some time to explore the Ashby interface. Key sections to familiarize yourself with include:
+              <ul>
+                <li><strong>Candidate Dashboard</strong>: Manage candidates, their statuses, and associated details.</li>
+                <li><strong>Job Requisitions</strong>: View job openings assigned to you and their hiring pipelines.</li>
+                <li><strong>Reports and Metrics</strong>: Access data-driven insights for recruitment performance.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3 class="numbered"><span class="step-dot">2</span>Step 2: Navigating the Home Page - Key Areas and Features</h3>
+      <ol class="step-list">
+        <li>
+          <strong>Welcome to Your Ashby Home Screen:</strong>
+          <ul>
+            <li>Once logged in, you'll arrive at your <strong>Home Screen</strong>, the central hub for accessing Ashby's key features. From here, you can efficiently manage, add, and track candidates throughout the recruitment process.
+              <figure class="shot">
+                <img src="assets/images/03-home-screen.webp" alt="Ashby home screen" />
+              </figure>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Get to know and Understand the Key things you will need:</strong><br />
+          The screenshot above ☝️ outlines the <strong>seven key areas</strong> of the Ashby home page, designed to streamline your recruitment workflow:
+          <ol class="plain">
+            <li><strong>Candidates:</strong>
+              <ul>
+                <li>Access the <strong>Candidate Pipeline</strong> to view where candidates are in the hiring process.</li>
+                <li>Use <strong>Candidate Search</strong> to filter candidates with basic or advanced search options.</li>
+              </ul>
+            </li>
+            <li><strong>Jobs</strong>:
+              <ul><li>Open the <strong>Jobs Dashboard</strong> to see a high-level summary of candidates across different stages for each job.</li></ul>
+            </li>
+            <li><strong>Notifications</strong>:
+              <ul><li>View and manage your notifications within Ashby from this section.</li></ul>
+            </li>
+            <li><strong>Add</strong>:
+              <ul><li>Use the <strong>+Add</strong> button to manually add a new candidate to a job requisition.</li></ul>
+            </li>
+            <li><strong>Search</strong>:
+              <ul><li>Quickly search for candidates or jobs using <strong>Command + K</strong> (Mac) or <strong>CTRL + K</strong> (Windows).</li></ul>
+            </li>
+            <li><strong>Personal Settings</strong>:
+              <ul><li>Update your profile settings such as avatar, timezone, and notification preferences.</li></ul>
+            </li>
+            <li><strong>Tasks</strong>:
+              <ul><li>Access your tasks when you're <strong>@mentioned</strong> in notes on candidate profiles. You can respond directly from this section.</li></ul>
+            </li>
+          </ol>
+        </li>
+      </ol>
+
+      <h3 class="numbered"><span class="step-dot">3</span>Step 3: Add New Candidates</h3>
+      <ol class="step-list">
+        <li>
+          <strong>Navigate to <em>Add Candidate</em></strong>:
+          <ul>
+            <li>Click the <em>+Add</em> button, located in the top-right corner.</li>
+            <li>Select <em>Add Candidate</em> from the dropdown.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Enter Candidate Information</strong>:
+          <ul>
+            <li><strong>Upload the CV</strong>:
+              <ul>
+                <li>Use the <strong>CV Upload</strong> feature to add the candidate's resume.</li>
+                <li><strong>Ashby will automatically parse and fill in</strong> most of the candidate's details, such as their name, email, and phone number.</li>
+                <li>Illustration here:
+                  <figure class="shot"><img src="assets/images/04-cv-upload.png" alt="Ashby CV upload screen" /></figure>
+                </li>
+              </ul>
+            </li>
+            <li><strong>Verify or Fill In Missing Information</strong>:
+              <ul>
+                <li>Double-check the parsed information and manually fill in any missing details:
+                  <ul>
+                    <li><strong>Name</strong>: Ensure the candidate's full name is accurate.</li>
+                    <li><strong>Email</strong>: Confirm the email address provided.</li>
+                    <li><strong>Phone Number</strong>: Add or verify their contact number.</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><strong>Verify the Attribution (Ownership) of the Candidate:</strong>
+              <ul>
+                <li>When you add a candidate to Ashby, the platform automatically attributes the source to you and your recruitment agency.</li>
+                <li>Illustration here:
+                  <figure class="shot"><img src="assets/images/05-attribution.png" alt="Ashby candidate attribution screen" /></figure>
+                </li>
+              </ul>
+            </li>
+            <li><strong>Add Social Links to the Candidate's Profile:</strong>
+              <ul>
+                <li>Click on the <em>+ Add</em> button.</li>
+                <li>In the dropdown, select the type of link:
+                  <ul>
+                    <li><strong>LinkedIn (mandatory)</strong>: <strong>For all candidates (always add it, if the candidate has a LinkedIn profile).</strong></li>
+                    <li>Website (optional): you can use the <em>Website</em> option for any additional websites, portfolios, blogs, or relevant URLs.</li>
+                    <li>GitHub/StackOverflow/Medium/Twitter (optional)</li>
+                  </ul>
+                </li>
+                <li>Illustration here:
+                  <figure class="shot"><img src="assets/images/06-social-links.png" alt="Ashby social links screen" /></figure>
+                </li>
+              </ul>
+            </li>
+            <li><strong>Once you click on <em>Next</em>, add the Candidate to an Open Job:</strong>
+              <ul>
+                <li><strong>Select the Open Job</strong>:
+                  <ul>
+                    <li>On the next screen, you will see a list of available job requisitions.</li>
+                    <li>Use the search bar or scroll to find the relevant job title.</li>
+                  </ul>
+                </li>
+                <li><strong>Assign the Candidate</strong>:
+                  <ul>
+                    <li>Click on the job title to select it.</li>
+                    <li>Ensure the job matches the candidate's profile and skillset.</li>
+                  </ul>
+                </li>
+                <li>Double-check the Attribution, if needed, as mentioned before.</li>
+                <li>Illustration here:
+                  <figure class="shot"><img src="assets/images/07-add-to-job.png" alt="Ashby add to job screen" /></figure>
+                </li>
+              </ul>
+            </li>
+            <li><strong>Click on <em>Add to Job</em>, to finalize.</strong></li>
+            <li><strong>Tutorial video:</strong>
+              <p class="media-note">This step's tutorial video is hosted as an internal Notion file and requires Notion authentication — it isn't publicly embeddable here. See the source Notion page for the walkthrough.</p>
+            </li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3 class="numbered"><span class="step-dot">4</span>Step 4: Check Candidates' Profiles</h3>
+      <p>The <strong>Candidate Profile</strong> in Ashby is the central hub for managing and viewing all candidate details. It allows you to keep track of their progress and collaborate with your team effectively.</p>
+      <figure class="shot"><img src="assets/images/08-candidate-profile.png" alt="Ashby candidate profile" /></figure>
+      <p><strong>Here's a breakdown of the key areas:</strong></p>
+      <p><strong>1. Activities and Progress:</strong></p>
+      <ul>
+        <li>View the candidate's progress through the interview stages.</li>
+        <li>Track where they are in the hiring pipeline and update their status as needed.</li>
+      </ul>
+      <p><strong>2. Summary:</strong></p>
+      <ul>
+        <li>Find essential candidate details such as:
+          <ul>
+            <li><strong>Name</strong></li>
+            <li><strong>Email</strong></li>
+            <li><strong>Location</strong></li>
+          </ul>
+        </li>
+        <li>Quickly access the most important information at a glance.</li>
+      </ul>
+      <p><strong>3. Resume:</strong></p>
+      <ul>
+        <li>Access and view the candidate's uploaded resume.</li>
+        <li>Ensure the document is complete and formatted correctly.</li>
+      </ul>
+      <p><strong>4. Feed:</strong></p>
+      <ul>
+        <li>View a chronological log of all activities related to the candidate, including:
+          <ul>
+            <li>Notes</li>
+            <li>Feedback</li>
+            <li>Emails (if you have the necessary permissions).</li>
+          </ul>
+        </li>
+        <li>Use the <strong>Notes</strong> and <strong>Emails</strong> filters to customize your view and focus on specific updates.</li>
+      </ul>
+      <p><strong>5. Notes:</strong></p>
+      <ul>
+        <li>Here, you can add detailed notes about the candidate, including observations or next steps.</li>
+        <li><strong style="color:var(--danger)">Mandatory:</strong> Use <strong>@mentions</strong> to involve other team members and assign tasks.<br /><strong style="text-decoration:underline">Please assign Bárbara to ALL candidates you add</strong> <span style="text-decoration:underline">by @mentioning her, ensuring proper visibility.</span></li>
+        <li><strong style="color:var(--danger)">Mandatory:</strong> <strong>Write down a note with this template:</strong>
+          <ul>
+            <li><strong>Location/Timezone:</strong></li>
+            <li><strong>Visa/Right to Work:</strong></li>
+            <li><strong>LinkedIn Profile:</strong></li>
+            <li><strong>Portfolio or GitHub:</strong> <em>(if applicable only)</em></li>
+            <li><strong>Salary Expectations:</strong></li>
+            <li><strong>Preferred Currency for Salary payment:</strong></li>
+            <li><strong>Type of Contract:</strong></li>
+            <li><strong>Availability:</strong></li>
+            <li><strong>Notice Period:</strong></li>
+            <li><strong>Other Offers/Recruitment processes:</strong></li>
+            <li><strong>Interview Recording Link:</strong></li>
+            <li><strong>Notes/Summary:</strong></li>
+          </ul>
+        </li>
+        <li>Check the <strong>Create Task</strong> box to turn the note into a task for better tracking and accountability.</li>
+      </ul>
+
+      <div class="callout warn">
+        <span class="glyph">⚠️</span>
+        <div class="content"><p style="margin-bottom:0"><strong>Tutorial video here:</strong></p></div>
+      </div>
+      <a class="media-chip" href="https://www.loom.com/share/19f538812bc74a45b04acbc9987f4d65?sid=de8ac2d2-28d4-478b-b0f3-2f255f222fd4" target="_blank" rel="noopener">▶ Watch the Ashby walkthrough on Loom</a>
+
+      <h4 style="margin-top:32px">🛠️ Other Features</h4>
+      <h5>Candidate Pipeline</h5>
+      <p>The Candidate Pipeline allows you to view your candidates across jobs and stages. You can use the search bar to search for specific candidates and the filters to pull candidates that meet specific criteria. From there, you can click on the arrow next to a job to view the pipeline and the candidates in each stage.</p>
+      <figure class="shot"><img src="assets/images/09-candidate-pipeline.png" alt="Ashby candidate pipeline" /></figure>
+      <p><strong>1) Search</strong> - Search for a candidate by name here.</p>
+      <p><strong>2) Filters</strong> - Filter by specific criteria to pull the candidates you're looking for here.</p>
+      <p><strong>3) Jobs and pipelines</strong> - jobs you have access to will be listed here, click the arrow to the left of the job title to open the pipeline and view the candidates in each stage.</p>
+
+      <h5>Tasks</h5>
+      <p>When someone @mentions you on a candidate's profile, or you have an overdue task to submit feedback on a candidate, a task will be created on your home page. You'll receive notifications via email until the task is resolved.</p>
+      <figure class="shot"><img src="assets/images/10-tasks.png" alt="Ashby tasks" /></figure>
+
+      <h5>Personal Settings</h5>
+      <p>Your Personal Settings are where you manage account settings specific to you, including your name, avatar, and notification settings. Under Notifications, you have the option to enable or disable email notifications for when:</p>
+      <ul>
+        <li>You are mentioned in a note</li>
+        <li>A candidate is hired</li>
+        <li>A candidate is moved to a new interview stage</li>
+        <li>Someone replies to a note that you wrote</li>
+        <li>You have overdue tasks (report sent daily)</li>
+      </ul>
+
+      <h4>💡 Additional Tips</h4>
+      <h5>Using the Ashby Chrome Extension</h5>
+      <ul>
+        <li>Install the Ashby Chrome Extension to add candidates directly from LinkedIn.</li>
+        <li>Visit a candidate's LinkedIn profile, open the extension, and click "Add to Ashby" to import their information.</li>
+      </ul>
+      <h5>Bulk Importing Candidates</h5>
+      <ul>
+        <li>For adding multiple candidates simultaneously, use Ashby's bulk import feature.</li>
+        <li>Ensure your data file is formatted correctly to match Ashby's requirements.</li>
+      </ul>
+
+      <div class="callout accent">
+        <span class="glyph">🆘</span>
+        <div class="content"><p style="margin-bottom:0">For more info and tutorials, please visit <a href="https://ashbyhq.notion.site/Ashby-Knowledge-Base-efd04871f5554358ada837de165070ca" target="_blank" rel="noopener">Ashby's Knowledge Base</a>.<br /><br />Thank you!</p></div>
+      </div>
+    </section>
+
+    <!-- 02 OPEN ROLES -->
+    <section class="card" id="roles">
+      <div class="kicker"><span class="icon">📌</span><span class="idx">02 / 11</span></div>
+      <h2>Our Open Roles (+ Briefs &amp; Pre-Screen Questions)</h2>
+
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content">
+          <p>This page lists all roles we are actively hiring for at EverAI — the company behind <a href="http://candy.ai/" target="_blank" rel="noopener">Candy.ai</a> and YumeAI, two of the leading AI companion platforms in the adult space.</p>
+          <p>We work with a select group of agency partners to source talent across R&amp;D, Growth, and Operations.</p>
+          <p style="margin-bottom:0">Before submitting candidates, make sure you have read this guide.</p>
+        </div>
+      </div>
+
+      <div class="callout danger">
+        <span class="glyph">🔒</span>
+        <div class="content">
+          <p><strong>Visibility ≠ authorization.</strong></p>
+          <p style="margin-bottom:0">This page lists every role across all agency partners so you have full context — but seeing a role here does <strong>not</strong> mean you're cleared to submit for it. <strong>Only submit candidates for roles your TA contact has explicitly assigned to you.</strong> If you're unsure whether a role is yours to work, ask before sourcing or submitting.</p>
+        </div>
+      </div>
+
+      <h3>🎯 How to Prioritize</h3>
+      <ul>
+        <li><strong>Attack P0 Roles First:</strong> These are our most urgent needs. We aim for a <strong>30-day time-to-offer</strong> for these positions.</li>
+        <li><strong>Quality &gt; Volume:</strong> One perfectly matched candidate is worth more to us than ten "maybe" profiles.</li>
+        <li><strong>Check the Off-Limits List:</strong> Ensure your candidates are not currently employed by our restricted partners, on this list <a href="#off-limits">here</a>.</li>
+        <li>If unsure whether a candidate is a fit, ask your TA contact before submitting</li>
+      </ul>
+
+      <h3>✋ Submission Quality Bar</h3>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0"><strong>IMPORTANT</strong><br />We strongly prefer <strong>fewer, high-quality candidates</strong> over volume.</p></div>
+      </div>
+      <p>Before clicking "Submit" in <strong>Ashby</strong>, run every candidate through this final checklist:</p>
+      <ul>
+        <li><strong>The "Doer" Test:</strong> Does this person actually build things, or do they just "manage" processes? We only hire hands-on executors.</li>
+        <li><strong>Budget Alignment:</strong> Are they strictly within the ranges listed in the table below?</li>
+        <li><strong>Location &amp; Deel Logic:</strong> Does their location align with our <strong>B2B vs. EOR</strong> preference? (Check <a href="#international">this page</a> before submitting).</li>
+        <li><strong>NSFW Comfort:</strong> Have you explicitly confirmed they are comfortable working with adults-only AI content daily?</li>
+      </ul>
+      <div class="callout danger">
+        <span class="glyph">❌</span>
+        <div class="content"><p style="margin-bottom:0"><strong>If the answer to any of the above is no → do not submit.</strong></p></div>
+      </div>
+
+      <h3>➡️ Open Roles by Department</h3>
+      <h4>R&amp;D</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Role</th><th>Seniority</th><th class="num">Openings</th><th>Location / Timezone</th><th>Budget</th><th>Priority</th><th>Submissions</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Product Designer</strong></td>
+              <td>Senior</td>
+              <td class="num">1</td>
+              <td>Europe</td>
+              <td>€120K</td>
+              <td><span class="badge p0">🔴 P0</span></td>
+              <td><strong><span class="badge soon">⏸️ On Hold</span></strong></td>
+              <td><span class="new-tag">New brief coming soon 🆕</span><br /><span class="new-tag">New role 🆕</span></td>
+            </tr>
+            <tr>
+              <td><strong>Ruby Engineer</strong></td>
+              <td>Senior</td>
+              <td class="num">2</td>
+              <td>Europe</td>
+              <td>Up to €120K</td>
+              <td><span class="badge p0">🔴 P0</span></td>
+              <td><strong><span class="badge open">✅ Open</span></strong></td>
+              <td><span class="new-tag">New role 🆕</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Growth</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Role</th><th>Seniority</th><th class="num">Openings</th><th>Location / Timezone</th><th>Budget</th><th>Priority</th><th>Submissions</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Performance Marketer</strong></td>
+              <td>Junior - Senior</td>
+              <td class="num">4</td>
+              <td>Junior: Europe<br />Senior: Worldwide</td>
+              <td>€30K–€100K</td>
+              <td><span class="badge p0">🔴 P0</span></td>
+              <td><strong><span class="badge open">✅ Open</span></strong></td>
+              <td><span class="new-tag">Requirements updated 🆕</span><br /><span class="new-tag">New seniority (Senior) 🆕</span><br /><span class="new-tag">New brief coming soon 🆕</span></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>AI Cinematic Video Editor</strong><br />
+                &nbsp;&nbsp;• Candy Shorts<br />
+                &nbsp;&nbsp;• Cam<br />
+                &nbsp;&nbsp;• Roulette
+              </td>
+              <td>Mid - Senior</td>
+              <td class="num">20</td>
+              <td>US / Worldwide</td>
+              <td>
+                Mid:<br />
+                &nbsp;&nbsp;• LATAM $28K–$42K<br />
+                &nbsp;&nbsp;• Europe €42K–€65K<br />
+                &nbsp;&nbsp;• US/Canada $60K–$80K<br /><br />
+                Senior:<br />
+                &nbsp;&nbsp;• LATAM $42K–$58K<br />
+                &nbsp;&nbsp;• Europe €65K–€80K<br />
+                &nbsp;&nbsp;• US/Canada $80K–$100K
+              </td>
+              <td><span class="badge p0">🔴 P0</span></td>
+              <td><strong><span class="badge open">✅ Open</span></strong></td>
+              <td><span class="new-tag">New role 🆕</span><br /><span class="new-tag">New brief 🆕</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warn">
+        <span class="glyph">💰</span>
+        <div class="content">
+          <p><strong>Salary ranges are published — current salary questions are off the table.</strong></p>
+          <p style="margin-bottom:0">All of our budget ranges are listed above and in the role briefs and JDs. Since the range is already public, <strong>we can no longer ask candidates about their current or past salary</strong> — anchor the conversation on our published range and their expectations against it instead.</p>
+        </div>
+      </div>
+
+      <h3>➡️ Role Briefs</h3>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">These briefs cover everything you need to source and screen candidates correctly before submission. Read it in full before sending profiles.</p></div>
+      </div>
+      <ul class="brief-list">
+        <li><a href="roles.html#performance-marketer"><strong>Performance Marketer</strong><span class="arrow">↗</span></a></li>
+        <li><a href="roles.html#ai-cinematic-video-editor"><strong>AI Cinematic Video Editor</strong><span class="arrow">↗</span></a></li>
+        <li><a href="roles.html#ruby-engineer"><strong>Ruby Engineer</strong><span class="arrow">↗</span></a></li>
+        <li><a href="past-briefs.html"><strong>Past Briefs</strong> <span class="dim" style="font-size:12.5px; font-weight:400">(not currently open)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </section>
+
+    <!-- 03 PROCESS -->
+    <section class="card" id="process">
+      <div class="kicker"><span class="icon">⏳</span><span class="idx">03 / 11</span></div>
+      <h2>Our Hiring Process &amp; SLAs</h2>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content">
+          <p>We move fast, and strong candidates can progress through stages quickly.</p>
+          <p style="margin-bottom:0">Your recruiter will guide you through any role-specific variations.</p>
+        </div>
+      </div>
+
+      <h3>🎯 SLA Targets</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Priority</th><th>Target time to offer</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge p0">P0</span> <em>(business-critical hires)</em></td><td>30 days</td></tr>
+            <tr><td><span class="badge p1">P1</span> <em>(important, but not urgent hires)</em></td><td>40 days</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>🔀 Hiring Process</h3>
+      <h4 style="margin-top:6px">1️⃣ Step 1 — Submission &amp; CV Review</h4>
+      <p><strong>Owner:</strong> Agency → HM or TA</p>
+      <p>All candidates must be submitted via <strong>Ashby</strong>. When adding a candidate, you <strong>must</strong> @mention <strong>Bárbara</strong> in the notes and include the following template:</p>
+      <ul>
+        <li>Location / Timezone</li>
+        <li>Visa / Right to Work</li>
+        <li>LinkedIn Profile</li>
+        <li>Portfolio or GitHub</li>
+        <li>Salary Expectations</li>
+        <li>Preferred Payment Currency</li>
+        <li>Contract Type</li>
+        <li>Availability</li>
+        <li>Notice Period</li>
+        <li>Other Active Processes</li>
+        <li>Interview Recording Link</li>
+        <li>Notes / Summary</li>
+      </ul>
+      <p>➡️ Once submitted, HM or TA will review the CV, recording, and notes in Ashby.</p>
+
+      <h4>2️⃣ Step 2 — Initial Screening</h4>
+      <p><strong>Owner:</strong> Agency or TA <em>(role dependent)</em></p>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">The screening path depends on the role. Your TA contact will confirm which applies.</p></div>
+      </div>
+      <p><strong>Path A — Recording required</strong><br />For designated roles, the agency conducts the initial screen and uploads an interview recording link directly to the Ashby profile.</p>
+      <p><strong>Path B — Internal TA screens</strong><br />For all other roles, our internal TA team picks up the screening once the CV is approved. No action needed from the agency.</p>
+      <div class="callout warn">
+        <span class="glyph">⚠️</span>
+        <div class="content"><p style="margin-bottom:0">Our long-term goal is for the in-house team to conduct all initial screenings. However, we do not currently have the capacity for us currently, which is why we have these two paths. Thanks for bearing with us! 🙏</p></div>
+      </div>
+
+      <h4>3️⃣ Step 3 — Hiring Manager Interview</h4>
+      <p><strong>Owner:</strong> HM</p>
+      <p>The first live interview with the role owner. Typically 30 minutes.</p>
+      <p>The discussion focuses on:</p>
+      <ul>
+        <li>Relevant experience</li>
+        <li>Problem-solving approach</li>
+        <li>Ownership and execution ability</li>
+        <li>Alignment with the role scope</li>
+      </ul>
+
+      <h4>4️⃣ Step 4 — Case Study / Technical Assessment</h4>
+      <p><strong>Owner:</strong> HM or team member <em>(role dependent)</em></p>
+      <p>Used to assess real-world working ability, quality of thinking, and how the candidate communicates and structures their work.</p>
+      <p>Format:</p>
+      <ol class="plain">
+        <li>Candidate receives an assignment with a deadline*
+          <ol class="plain">
+            <li>*Software Engineering roles: 2-hour live coding challenge instead</li>
+            <li>*Typically 1 week, but it can be shorter for some roles</li>
+          </ol>
+        </li>
+        <li>HM reviews the submission</li>
+        <li>A follow-up debrief may take place</li>
+      </ol>
+
+      <h4>5️⃣ Step 5 — Cultural Fit Interview</h4>
+      <p><strong>Owner:</strong> Leadership (typically CMO or CTO)</p>
+      <p>A senior-level conversation focused on:</p>
+      <ul>
+        <li>Alignment with our working style</li>
+        <li>Decision-making and ownership mindset</li>
+        <li>Communication and collaboration</li>
+      </ul>
+
+      <h4>6️⃣ Step 6 — Reference Checks</h4>
+      <p><strong>Owner:</strong> HM or TA</p>
+      <p>Before moving to offer, we request 3–4 professional references — ideally former managers, senior colleagues and/or direct reports who worked closely with the candidate.</p>
+
+      <h4>7️⃣ Step 7 — Offer</h4>
+      <p><strong>Owner:</strong> TA</p>
+      <p>Once all stages are complete:</p>
+      <ol class="plain">
+        <li>Compensation and contract terms are finalized internally</li>
+        <li>Offer is presented to the candidate</li>
+        <li>Contract and onboarding are handled through Deel, by our HR team</li>
+      </ol>
+
+      <h3>✋ Before You Submit Candidates</h3>
+      <p>Before presenting EverAI to a candidate, make sure they understand what the company does. This is not a standard tech company. <strong>Candidates who aren't genuinely excited — or who are uncomfortable with the product — will not pass our process.</strong></p>
+      <p>Please share the <a href="https://bv-1234.github.io/everai-candidate_handbook/#home" target="_blank" rel="noopener">Candidate Handbook</a> with every candidate before submission.</p>
+
+      <h4>🔴 The NSFW Conversation</h4>
+      <div class="callout danger">
+        <span class="glyph">⚠️</span>
+        <div class="content"><p style="margin-bottom:0"><strong>This must happen before every submission, without exception.</strong> <strong>Do not submit a candidate who has not been explicitly asked about this.</strong></p></div>
+      </div>
+      <p>EverAI's products involve sexually explicit AI content. <strong>Candidates will work or be exposed to NSFW material</strong> daily / weekly, depending on their role — whether in engineering, marketing, operations, or content roles. This is not incidental; it is central to the product.</p>
+      <p><strong>We are fully transparent about this from the very beginning of the process. We never hide it, and we are always upfront about it with every candidate.</strong></p>
+      <p>How to raise it:</p>
+      <p style="font-style:italic">"EverAI operates in the adult AI companionship space. This means working with explicit content. Have you thought about what that looks like in practice, and are you fully comfortable with it?"</p>
+      <p><strong>If a candidate hesitates, it's usually better not to pursue and not to submit. ❌</strong></p>
+    </section>
+
+    <!-- 04 DOS DONTS -->
+    <section class="card" id="dos-donts">
+      <div class="kicker"><span class="icon">🚦</span><span class="idx">04 / 11</span></div>
+      <h2>Do's and Don'ts</h2>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">A quick reference for how we expect agency partners to operate. Following these keeps the process fast and the relationship strong.</p></div>
+      </div>
+
+      <div class="split">
+        <div class="col do">
+          <h4>✅ Do's</h4>
+          <ul>
+            <li>Submit candidates exclusively through Ashby — never via email, LinkedIn, or WhatsApp</li>
+            <li>Complete every field in the submission template before submitting</li>
+            <li>@mention Bárbara in the notes field on every submission</li>
+            <li>Confirm NSFW comfort explicitly before submitting — every time, every candidate</li>
+            <li>Check the Open Roles page before submitting — only submit for roles marked ✅ Open</li>
+            <li>Check the country coverage table before progressing a candidate in a non-standard location</li>
+            <li>Check the Off-Limits Companies list before submitting current employees of restricted partners</li>
+            <li>Include a recording link for Path A roles, with public sharing enabled</li>
+            <li>Flag competing offers or active processes in the submission notes</li>
+            <li>Be transparent with candidates about the NSFW nature of the product from the very first conversation</li>
+            <li>Share the Candidate Handbook with every candidate before their first interview</li>
+            <li>Reference our published salary range (in the JD / role brief) when discussing compensation with a candidate</li>
+            <li>Share any feedback, ideas, market insights you have with the team, it's super helpful so we can collaborate better together!</li>
+          </ul>
+        </div>
+        <div class="col dont">
+          <h4>❌ Don'ts</h4>
+          <ul>
+            <li>Don't ask candidates for their current or past salary — our ranges are already published in the JD, so this is no longer needed and no longer allowed</li>
+            <li>Don't contact Hiring Managers directly — all communication goes through TA, unless explicitly stated otherwise</li>
+            <li>Don't submit the same candidate to multiple roles without flagging it</li>
+            <li>Don't submit speculatively for roles that are paused or not listed as open</li>
+            <li>Don't submit candidates who require visa sponsorship — we do not sponsor</li>
+            <li>Don't submit candidates from blocked countries or currently employed at off-limits companies</li>
+            <li>Don't re-submit a previously rejected candidate without checking with your TA contact first</li>
+            <li>Don't send volume over quality — three weak profiles damage your standing more than one strong one helps</li>
+            <li>Don't promise candidates a specific timeline or outcome — that's for TA to communicate</li>
+            <li>Don't hide or downplay the NSFW nature of the product to get a candidate through the door</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 PITCH -->
+    <section class="card" id="pitch">
+      <div class="kicker"><span class="icon">🗣️</span><span class="idx">05 / 11</span></div>
+      <h2>How to Pitch the Company to Candidates</h2>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content">
+          <p>Use this page to introduce EverAI to candidates clearly and honestly.</p>
+          <p style="margin-bottom:0"><strong>The goal is to attract people who are genuinely excited — not to oversell.</strong></p>
+        </div>
+      </div>
+
+      <h3>🍭 About EverAI</h3>
+      <p>Use these talking points when introducing the company to a candidate.</p>
+
+      <h4>The headline</h4>
+      <ul>
+        <li>EverAI is the company behind <a href="http://candy.ai/" target="_blank" rel="noopener">Candy.ai</a> and YumeAI — two of the leading AI companion platforms in the world.</li>
+        <li><a href="http://candy.ai/" target="_blank" rel="noopener">Candy.ai</a> is currently the 4th largest AI web product globally by unique monthly users, started in 2023.</li>
+      </ul>
+
+      <h4>The scale</h4>
+      <ul>
+        <li>50 million users and counting</li>
+        <li>Nine-figure annualized revenue</li>
+        <li>$10M in seed funding</li>
+        <li>Goal: 100M users in the next 12 months, 500M beyond that</li>
+      </ul>
+
+      <h4>The product</h4>
+      <ul>
+        <li>AI companionship: users design and interact with AI characters through text, AI phone calls, image and video generation, and a memory system that builds long-term context</li>
+        <li>The product operates in the NSFW/adult content space — this is core to the business and must be raised clearly with every candidate before they proceed</li>
+      </ul>
+
+      <h4>The team</h4>
+      <ul>
+        <li><strong>Fully remote, ~100 people, worldwide</strong>, most coming from <strong>Tier 1 tech companies</strong></li>
+        <li>Co-founded by Thomas Lacroix (CMO, ex-Curatible/MTK Digital) and Michael Monin (CTO, ex-MTK Digital/Zipchat)</li>
+        <li>The founding team has a <strong>proven track record of building and scaling products to IPO</strong></li>
+      </ul>
+
+      <h4>The opportunity</h4>
+      <ul>
+        <li>This is genuinely rare: a <strong>fast-growing, profitable, AI-first company</strong> with real traction, a category-defining product, and a founding team that has done it before</li>
+        <li>Candidates joining now will have direct impact and grow with the company as it scales to hundreds of millions of users</li>
+      </ul>
+
+      <h4>What's coming next</h4>
+      <ul>
+        <li>Scaling YumeAI to the same heights as <a href="http://candy.ai/" target="_blank" rel="noopener">Candy.ai</a></li>
+        <li>AI Live Streaming — an industry first, currently in development</li>
+        <li>AI chat in 16+ languages</li>
+        <li>AR/VR integration</li>
+        <li>Improved AI-generated video (currently 10s, with significant room to grow)</li>
+        <li>Global expansion and reaching 100M users, just with CandyAI</li>
+      </ul>
+
+      <h4>Why candidates join</h4>
+      <ul>
+        <li>Real ownership and impact from day one — no layers, no bureaucracy, and a flat hierarchy</li>
+        <li>Fast career progression as the company scales aggressively</li>
+        <li>Fully remote, 4 weeks PTO, learning budget, co-working allowance, health &amp; wellness support, and other benefits</li>
+        <li>Access to top-tier AI tools (ChatGPT, Cursor, Hugging Face, Gemini, and more)</li>
+        <li>Work alongside seasoned founders with a proven track record</li>
+      </ul>
+
+      <h3>⁉️ Other Questions Candidates Might Have</h3>
+      <h4>🛡️ On Safety &amp; Ethics</h4>
+      <p>Some candidates will have questions about working in the adult AI space. Here's how to address it honestly:</p>
+      <ul>
+        <li>EverAI built EverGuard — a proprietary AI-powered moderation system designed to prevent prohibited content and ensure a safe environment for users</li>
+        <li>The company is independently audited by a trusted external audit firm and overseen by a Board of Directors</li>
+        <li>Payment providers, banks, and partners regularly audit EverAI to meet strict compliance standards</li>
+        <li>The company has raised $10M from investors who conducted rigorous due diligence before investing</li>
+      </ul>
+      <p>This is not a grey-area operation. It is a compliance-first, investor-backed company that takes its responsibilities seriously.</p>
+
+      <h4>🏆 Our Values</h4>
+      <p>These are the six values EverAI operates by:</p>
+      <ol class="plain">
+        <li>Aim Bigger, Go Faster</li>
+        <li>Enjoy The Journey</li>
+        <li>Make It Happen</li>
+        <li>Stay Hungry, Stay Curious</li>
+        <li>Own It, All of It</li>
+        <li>Conquer Together</li>
+      </ol>
+
+      <h4>🎁 Our Benefits &amp; Perks</h4>
+      <ul>
+        <li><strong>Flexible contract:</strong> regular employment or contractor, depending on location and preference</li>
+        <li><strong>Fully remote:</strong> work from anywhere in the world</li>
+        <li><strong>4 weeks PTO</strong> (20 days annually)</li>
+        <li><strong>Health &amp; wellness:</strong> $100/month allowance toward health insurance, plus unlimited 1:1 sessions with psychologists and lifestyle coaches via OpenUp (available to up to 3 family members too)</li>
+        <li><strong>Learning budget:</strong> for courses, books, conferences, or any resource that supports growth</li>
+        <li><strong>Co-working budget:</strong> up to 2 visits/month at €35/$40 per visit</li>
+        <li><strong>Company laptop &amp; equipment:</strong> laptop provided, plus a monitor budget of up to $250 and a keyboard/mouse/mic/headphones budget of up to $150</li>
+        <li><strong>Top-tier AI tools:</strong> ChatGPT, Gemini, Cursor, Hugging Face, and more</li>
+        <li><strong>Annual team gatherings:</strong> including CandyCon, our flagship company event</li>
+        <li><strong>Annual performance reviews:</strong> collaborative, two-way, tied to growth and career progression</li>
+      </ul>
+
+      <div class="callout warn">
+        <span class="glyph">⚠️</span>
+        <div class="content">
+          <p><strong>Reality Check: Who EverAI is NOT For</strong></p>
+          <p>Setting the right expectations upfront saves everyone time. Be direct with candidates about this before they go further in the process.</p>
+          <p>EverAI is high-performance and fast-paced.</p>
+          <p><strong>We are NOT a fit for candidates who:</strong></p>
+          <ul style="margin-bottom:0">
+            <li>Need fixed processes and clear playbooks to do their best work</li>
+            <li>Take weeks to plan before executing — we move fast, sometimes shipping in hours</li>
+            <li>Want a role with a narrow, defined scope and no expectation to go beyond it</li>
+            <li>Only want to manage or oversee — <strong>everyone at EverAI is hands-on, always</strong></li>
+            <li>Struggle with accountability and ownership — we give a lot of trust, and we expect people to own their outcomes and raise their hand when something goes wrong</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 PREP -->
+    <section class="card" id="prep">
+      <div class="kicker"><span class="icon">🆘</span><span class="idx">06 / 11</span></div>
+      <h2>How to Prepare Candidates for Interview(s)</h2>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">This page gives you everything you need to brief candidates before they enter our process. A well-prepared candidate performs better, drops out less, and reflects well on you and us, increasing our chances of success together.</p></div>
+      </div>
+
+      <h3>☑️ How to Prepare Candidates Per Stage</h3>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">This applies to every candidate, at every level, for every role. Numbers and clarity are what separate the strong candidates in our process.</p></div>
+      </div>
+      <p>We are a data-driven company, and we expect candidates to speak the same language. Interviewers will probe for specifics — candidates who rely on vague or general answers will not progress.</p>
+      <p><strong>Prepare every candidate to:</strong></p>
+      <ul>
+        <li><strong>Back everything with numbers:</strong> Growth percentages, budget sizes, timelines, user numbers, revenue impact. <em>"I improved conversion"</em> is not enough. <em>"I improved conversion from 1.2% to 2.8% over 3 months by testing X"</em> is what we expect.</li>
+        <li><strong>Show their specific individual impact:</strong> Not what the team did, but what they personally owned, decided, or built. Interviewers will ask "what was your role specifically?" for every example.</li>
+        <li><strong>Talk about achievements, not just responsibilities:</strong> What did <em>they</em> actually accomplish? What changed because of <em>them</em>? What would not have happened if <em>they</em> hadn't been there?</li>
+        <li><strong>Prepare 2–3 strong success stories:</strong> With a clear situation, their specific action, and a measurable outcome. These should be ready to use across multiple stages.</li>
+        <li><strong>Be honest about failures too:</strong> We value self-awareness and humility. They should also have an example of something that didn't work, what they learned, and what they'd do differently.</li>
+      </ul>
+
+      <h4>➡️ Before the HM Screening Call</h4>
+      <p class="dim">Ask the candidate to:</p>
+      <ul>
+        <li>Read the Candidate Handbook</li>
+        <li>Explore Candy.ai and YumeAI, as they should understand the product firsthand</li>
+        <li>Be ready to speak clearly to why they want to work in this space specifically</li>
+        <li>Prepare examples of ownership and impact: times they executed without being told what to do, made a decision under pressure, or built something from scratch</li>
+      </ul>
+
+      <h4>➡️ Before the Case Study / Technical Assessment</h4>
+      <ul>
+        <li>Remind them that quality and structure matter more than speed</li>
+        <li>Encourage them to ask clarifying questions upfront rather than making assumptions</li>
+        <li>For technical roles: they should be prepared to justify decisions they make / made</li>
+      </ul>
+
+      <h4>➡️ Before the Cultural Fit Interview</h4>
+      <p class="dim">This is with a founder (typically CMO or CTO). Prepare candidates for:</p>
+      <ul>
+        <li>A direct, fast-paced conversation</li>
+        <li>Questions about ownership, decision-making, and how they handle failure</li>
+        <li>Being honest about what they don't know — humility is valued</li>
+        <li>Sharing concrete examples, not hypotheticals</li>
+      </ul>
+    </section>
+
+    <!-- 07 INTERNATIONAL -->
+    <section class="card" id="international">
+      <div class="kicker"><span class="icon">🌐</span><span class="idx">07 / 11</span></div>
+      <h2>How and Where We Hire Internationally</h2>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">This page covers everything you need to know about how we engage talent globally — contract types, country coverage, blocked regions, and what to expect once an offer is accepted.</p></div>
+      </div>
+
+      <h3>🌍 Types of Contracts for International Hiring</h3>
+      <p>We use <strong>Deel</strong> (deel.com) as our global hiring platform, allowing us to engage top talent in over 160 countries without requiring a local legal entity in every market.</p>
+      <p>Depending on the country, we can engage candidates in one of two ways:</p>
+      <p><strong>EOR — Employer of Record</strong><br />Deel employs the candidate on our behalf. We cover employer social security contributions and statutory benefits as required by local law. Best for candidates who want or require local employment status.</p>
+      <p><strong>B2B — Contractor</strong> ➡️ <span class="badge open">Preferred</span><br />The candidate operates as an independent contractor or through their own legal entity. No employer social security cost on our side. Best for candidates who are set up to work this way and where local regulations allow it.</p>
+      <p><strong>Our preference by default is B2B.</strong> Where costs are low or negligible, EOR or B2B are both viable.</p>
+
+      <h3>🗺️ Our Hiring Preferences by Country</h3>
+      <p>The interactive table below shows every country where Deel operates, the type of contracts available, the employer social security cost, and our hiring preference for each.</p>
+      <p><strong>You can:</strong></p>
+      <ul>
+        <li>🔍 Search by country name</li>
+        <li>🔽 Filter by coverage type (EOR + Contractors / Contractors Only / EOR Only)</li>
+        <li>🔽 Filter by our preference (B2B Only / EOR or B2B / EOR)</li>
+      </ul>
+      <div class="embed-wrap">
+        <iframe src="https://bv-1234.github.io/deel-coverage/" title="Deel country coverage tool" loading="lazy"></iframe>
+      </div>
+
+      <h4>❌ Quick Reference — Blocked Countries</h4>
+      <p>Deel explicitly cannot operate in the following regions. <strong>Do not submit candidates based in these locations:</strong></p>
+      <div class="callout danger">
+        <span class="glyph">🚫</span>
+        <div class="content"><p style="margin-bottom:0">Afghanistan · Belarus · Cuba · Crimea (Ukraine) · Democratic Republic of Congo · Donetsk PR (Ukraine) · Iran · Iraq · Kherson Oblast (Ukraine) · Libya · Luhansk PR (Ukraine) · Myanmar · North Korea · Russia · Somalia · South Sudan · Sudan · Syria · Venezuela · Yemen · Zaporizhzhia Oblast (Ukraine)</p></div>
+      </div>
+      <p>If a candidate is based in one of these regions, please flag it to your TA contact before investing time in the process.</p>
+
+      <h4>‼️ Special Cases</h4>
+      <ul>
+        <li><strong>Malta:</strong> We have our own legal entity in Malta, so we operate <strong>EOR only</strong> through our own internal structure rather than a Deel EOR.</li>
+      </ul>
+
+      <h3>➡️ What You Need to Know</h3>
+      <p><strong style="text-decoration:underline">Salary currency</strong><br />Candidates can receive payment in their local currency or USD/EUR, depending on their contract type and location. Confirm currency preference during screening and include it in the submission form — it helps us move faster at offer stage.</p>
+      <p><strong style="text-decoration:underline">Contract and onboarding</strong><br />Agencies are not involved in the contract or Deel setup. Once an offer is accepted, our TA and HR teams handle everything directly with the candidate through Deel. Typical onboarding setup takes 3–5 business days, so please set expectations with candidates accordingly — same-week starts are rarely possible.</p>
+      <p><strong style="text-decoration:underline">Right to work</strong><br />Always confirm a candidate's right to work and visa status before submission. Deel handles compliance in-country, but if a candidate requires sponsorship or has restrictions, flag it to your TA contact early.</p>
+      <div class="callout danger">
+        <span class="glyph">🚫</span>
+        <div class="content"><p style="margin-bottom:0"><strong>For clarity: usually, we do not sponsor visas.</strong></p></div>
+      </div>
+    </section>
+
+    <!-- 08 JURISDICTION -->
+    <section class="card" id="jurisdiction">
+      <div class="kicker"><span class="icon">⚖️</span><span class="idx">08 / 11</span></div>
+      <h2>Jurisdiction Risk Guide</h2>
+
+      <h3>🎯 Purpose</h3>
+      <p>This document outlines the legal risks that candidates may face depending on their country of residence when working for an adult content platform. We do <strong>not</strong> refuse to hire from any location — but we believe candidates deserve full transparency about the legal landscape so they can make an informed decision.</p>
+      <p>The guide covers both traditional and AI-generated adult content, maps open positions to risk levels, and categorizes countries into three risk tiers.</p>
+      <div class="callout warn">
+        <span class="glyph">⚠️</span>
+        <div class="content"><p style="margin-bottom:0"><em>Important: This document does not constitute legal advice. It is a risk-flagging tool. Candidates in higher-risk jurisdictions should be encouraged to seek independent local legal counsel before accepting an offer. All parties should share the relevant risk information with candidates during the hiring process.</em></p></div>
+      </div>
+
+      <h3>🪜 Tier Overview</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tier</th><th>Risk Level</th><th>Candidate Disclosure Required</th><th>Applies To</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="badge tier-red">🔴 RED</span></td>
+              <td><strong>High criminal risk.</strong> Candidate must be informed that working for an adult content platform may expose them to criminal liability in their jurisdiction.</td>
+              <td><strong>Mandatory — full written risk disclosure before offer.</strong></td>
+              <td>All positions</td>
+            </tr>
+            <tr>
+              <td><span class="badge tier-yellow">🟡 YELLOW</span></td>
+              <td><strong>Partial or evolving risk.</strong> Laws may create exposure depending on role type. Enforcement varies.</td>
+              <td><strong>Mandatory — role-specific risk briefing before offer.</strong></td>
+              <td>Primarily content-facing roles</td>
+            </tr>
+            <tr>
+              <td><span class="badge tier-green">🟢 GREEN</span></td>
+              <td><strong>Low risk.</strong> Adult content is legal with standard regulatory compliance.</td>
+              <td>Standard onboarding information.</td>
+              <td>All positions</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>🔴 Red Tier Countries — High Risk (Mandatory Disclosure)</h3>
+      <p>These countries have outright bans on pornographic content (production, distribution, and/or possession). The laws typically cover all pornographic material regardless of medium, meaning <strong>AI-generated content is treated identically to filmed content</strong>. Candidates from these countries — even for non-content roles — may face criminal exposure simply by being employed by an adult content company.</p>
+      <div class="callout danger">
+        <span class="glyph">⚠️</span>
+        <div class="content"><p style="margin-bottom:0"><em>Action required: Before progressing any candidate from a Red tier country, you <strong>must</strong> provide them with a written risk disclosure (via email) explaining that employment with our platform could expose them to criminal liability under their local laws. Candidates must acknowledge this risk in writing (confirming via email) before an offer is extended.</em></p></div>
+      </div>
+
+      <h5>Middle East &amp; Central Asia</h5>
+      <ul><li>Saudi Arabia</li><li>Iran</li><li>Iraq</li><li>Syria</li><li>United Arab Emirates</li><li>Qatar</li><li>Kuwait</li><li>Oman</li><li>Bahrain</li><li>Yemen</li><li>Afghanistan</li><li>Uzbekistan</li><li>Turkmenistan</li><li>Kazakhstan</li></ul>
+      <h5>East &amp; Southeast Asia</h5>
+      <ul><li>China</li><li>North Korea</li><li>Indonesia</li><li>Malaysia</li><li>Thailand</li><li>Cambodia</li><li>Vietnam</li><li>Laos</li><li>Myanmar</li><li>Brunei</li></ul>
+      <h5>South Asia</h5>
+      <ul><li>Pakistan</li><li>Bangladesh</li><li>Nepal</li><li>Bhutan</li><li>Maldives</li></ul>
+      <h5>Africa</h5>
+      <ul><li>Egypt</li><li>Libya</li><li>Somalia</li><li>Sudan</li><li>Ethiopia</li><li>Eritrea</li><li>Uganda</li><li>Tanzania</li><li>Burkina Faso</li><li>Botswana</li><li>Algeria</li><li>Equatorial Guinea</li></ul>
+      <h5>Europe &amp; Eurasia</h5>
+      <ul>
+        <li><strong>Belarus</strong> — Production, distribution, and promotion of pornographic materials punishable by up to 4 years imprisonment</li>
+        <li>Armenia</li>
+      </ul>
+
+      <h3>🟡 Yellow Tier Countries — Moderate Risk (Role-Specific Disclosure)</h3>
+      <p>These countries have partial restrictions, evolving legislation, or broadly worded facilitation/promotion laws that may create risk depending on the specific role. Non-content roles generally carry lower exposure, but candidates should still be informed of the legal landscape.</p>
+      <div class="callout warn">
+        <span class="glyph">⚠️</span>
+        <div class="content"><p style="margin-bottom:0"><em>Action required: Provide candidates from Yellow tier countries with a role-specific risk briefing. For content-facing roles, the briefing should be equivalent to a Red tier disclosure. For non-content roles, a verbal briefing with written acknowledgment is sufficient.</em></p></div>
+      </div>
+
+      <h5>Europe</h5>
+      <ul>
+        <li><strong>Sweden</strong> — As of July 2025, purchasing live sexual content online is criminal (up to 1 year in prison). The law extends liability to anyone who facilitates or profits from such services. Pre-recorded content remains legal, but the broad "facilitation" language could potentially reach platform employees.</li>
+        <li><strong>Norway &amp; Finland</strong> — Actively exploring legislation similar to Sweden's digital sex work ban. Monitor closely.</li>
+        <li><strong>Lithuania</strong> — Distribution and production of pornographic material is prohibited under criminal code.</li>
+        <li><strong>Ukraine</strong> — Production and distribution illegal; restrictions actively enforced.</li>
+        <li><strong>Turkey</strong> — Heavy internet censorship; pornography restricted and monitored.</li>
+        <li><strong>Bulgaria</strong> — Production and distribution of pornography is illegal.</li>
+      </ul>
+      <h5>Asia</h5>
+      <ul>
+        <li><strong>South Korea</strong> — Online pornography is banned, though enforcement varies. Distribution is criminal.</li>
+        <li><strong>India</strong> — Complex obscenity laws; pornography distribution is illegal, but personal viewing is not explicitly banned. Publishing/transmitting obscene material online carries criminal penalties.</li>
+        <li><strong>Singapore</strong> — Viewing pornography online is technically illegal.</li>
+      </ul>
+      <h5>Other</h5>
+      <ul>
+        <li><strong>Russia</strong> — Personal consumption allowed but unlicensed distribution is restricted. Morality laws are tightening.</li>
+        <li><strong>Papua New Guinea</strong> — Possession of pornography is illegal.</li>
+      </ul>
+
+      <h3>🟢 Green Tier Countries — Generally Safe</h3>
+      <p>These countries allow legal production and distribution of adult content involving consenting adults, subject to regulations such as age verification, record-keeping, and obscenity standards. All listed roles can generally be filled from these jurisdictions.</p>
+      <ul>
+        <li>United States (subject to federal and state regulations, including the TAKE IT DOWN Act and state-level age verification laws)</li>
+        <li>Canada</li>
+        <li>United Kingdom (Online Safety Act compliance required for platform operations)</li>
+        <li>Germany</li>
+        <li>France (age verification requirements enforced by ARCOM)</li>
+        <li>Netherlands</li>
+        <li>Spain</li>
+        <li>Italy</li>
+        <li>Portugal</li>
+        <li>Czech Republic</li>
+        <li>Hungary</li>
+        <li>Romania</li>
+        <li>Poland</li>
+        <li>Austria</li>
+        <li>Belgium</li>
+        <li>Ireland</li>
+        <li>Denmark</li>
+        <li>Australia (age verification for social media; adult content regulated but legal)</li>
+        <li>New Zealand</li>
+        <li>Japan (legal with censorship requirements)</li>
+        <li>Israel</li>
+        <li>Taiwan</li>
+        <li>Most of Latin America (Argentina, Brazil, Mexico, Colombia, Chile, Peru, etc.)</li>
+      </ul>
+
+      <h3>🤖 AI-Generated Content — Special Considerations</h3>
+      <p>Since the platform produces AI-generated adult content, the following legal distinctions are important.</p>
+      <h5>AI content does NOT change country-level bans</h5>
+      <p>Countries that ban pornography ban all pornographic material regardless of production method. AI-generated content is treated identically to filmed content in ban countries. The "no real people involved" argument provides zero legal protection in Red tier jurisdictions.</p>
+      <h5>Non-consensual deepfakes are rapidly becoming illegal everywhere</h5>
+      <p>The US TAKE IT DOWN Act (May 2025) makes non-consensual AI-generated intimate images a federal felony. The UK Data (Use and Access) Act 2025 criminalizes even creating such images. The EU violence against women directive addresses this at the European level. This applies even in Green tier countries.</p>
+      <h5>AI-generated CSAM is universally illegal</h5>
+      <p>Illegal under US federal law and the laws of 45+ states, with massive increases in enforcement. Universally criminal across the EU, UK, and virtually all jurisdictions. Internal CSAM prevention guidelines are essential for compliance.</p>
+      <h5>Fully synthetic content (fictional characters) is a legal gray area</h5>
+      <p>In most US states, fully synthetic AI adult content depicting no real person is not explicitly illegal but may be subject to general obscenity laws. However, this space is evolving rapidly — in 2026, legislators are expected to broaden laws to cover AI platforms, payment processors, and hosting providers. The Compliance Associate should monitor this actively.</p>
+      <h5>Platform compliance obligations in Green countries</h5>
+      <p>Even in permissive jurisdictions, AI adult content platforms face growing requirements around age verification (UK, France, Germany, Italy, Spain, multiple US states), content labeling (EU AI Act transparency obligations), takedown procedures (TAKE IT DOWN Act — 48-hour removal requirement by May 2026), and record-keeping.</p>
+
+      <h3>✅ Our Recommendations</h3>
+      <ol class="plain">
+        <li><strong>Always disclose jurisdiction risk to candidates*.</strong> We do not block hiring from any location, but transparency is non-negotiable. Candidates deserve to understand the legal environment before they commit.</li>
+        <li><strong>For Red tier countries, provide a full written risk disclosure</strong> and obtain written acknowledgment from the candidate before progressing to offer stage. We strongly recommend that candidates in these jurisdictions seek independent legal advice at their own discretion.</li>
+        <li><strong>For Yellow tier countries, tailor the disclosure to the role.</strong> Content-facing roles warrant a full written disclosure. Non-content roles warrant at minimum a verbal briefing with written acknowledgment.</li>
+        <li><strong>Prioritize candidates from Green tier countries when possible.</strong> These jurisdictions have established legal frameworks for the adult content industry, which reduces friction for both the candidate and the company.</li>
+        <li><strong>Monitor Sweden, Norway, and Finland closely.</strong> Sweden's 2025 law set a precedent that others may follow; the "facilitation" language is broad enough to potentially affect platform employees. Flag this proactively to candidates from these countries.</li>
+        <li><strong>Engage our Compliance Associate early</strong> if you're unsure about a specific jurisdiction or role combination. They can provide additional guidance.</li>
+        <li><strong>Keep records of all risk disclosures and candidate acknowledgments.</strong> This protects the candidate, the agency, and our company.</li>
+      </ol>
+      <p class="dim"><em>*This disclosure applies at time of hire; candidates should notify HR if they relocate.</em></p>
+
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0"><em>This document was prepared in April 2026 and updated in May 2026 based on publicly available legal information. Laws in this space change rapidly. All parties should always encourage candidates in restricted jurisdictions to verify current regulations with qualified local legal counsel. This guide is a risk-flagging tool, not a legal opinion.</em></p></div>
+      </div>
+    </section>
+
+    <!-- 09 RED FLAGS -->
+    <section class="card" id="red-flags">
+      <div class="kicker"><span class="icon">🚩</span><span class="idx">09 / 11</span></div>
+      <h2>Candidate Quality: Red Flags &amp; "No-Go" Signals</h2>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">This guide is for agencies and interviewers conducting early-stage screening. Red flags don't automatically disqualify a candidate — they're <strong>signals to explore</strong>. Where noted, <strong>always ask before drawing conclusions.</strong> If a red flag is confirmed, include it in your notes in Ashby.</p></div>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title">
+          <span class="line"><span class="glyph">🚩</span>Lack of enthusiasm and passion for the role, company and product</span>
+          <span class="line"><span class="glyph">🚩</span>Someone who didn't prepare for the interview and doesn't ask any questions</span>
+        </p>
+        <p>A lack of energy or excitement shows disinterest in the company and role, which are critical for success in our fast-paced, innovative environment. Candidates who don't prepare for interviews or fail to ask questions signal a lack of engagement.</p>
+        <p class="ask">⚠️ Explore: What excites them about this role? Did they research the company? What questions do they have for us?</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title"><span class="glyph">🚩</span>A series of short tenure experiences</p>
+        <p>Multiple experiences of less than 1.5-2 years may suggest instability or difficulty in long-term commitment. However, given the global layoffs, it's important to ask and understand the reasons behind these short tenures. Make sure to explore whether external factors, such as layoffs, influenced their job changes before making assumptions.</p>
+        <p class="ask">✅ Be fair: Given global layoffs and market shifts, always ask directly: What led to each move? Were exits voluntary, performance-related, or market-driven?</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title"><span class="glyph">🚩</span>Inability to admit to and learn from past mistakes and failures</p>
+        <p>Candidates who are unable to acknowledge their failures, or who demonstrate a fear of taking risks, may hinder their personal development and the overall progress of the company.</p>
+        <p class="ask">⚠️ Ask: Tell me about a decision that didn't work out - what did you learn? What would you do differently?</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title"><span class="glyph">🚩</span>Fear of challenges, not able to work in fast paced environment</p>
+        <p>It's important for us to have team members who thrive in fast-paced, high-pressure environments and can adapt quickly to change.</p>
+        <p class="ask">⚠️ Watch for: Excessive need for structure, fear of ownership, or avoidance of fast-moving roles.</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title"><span class="glyph">🚩</span>Discomfort with NSFW content</p>
+        <p>Discomfort with this type of content would be a significant red flag, as it indicates a mismatch with the company's values and product focus.</p>
+        <p class="ask">✅ Always ask: Have you considered what it means to work with sexually explicit content daily? Have you considered how this might affect you?</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title"><span class="glyph">🚩</span>Someone who complains a lot about previous experiences or has an overall negative attitude</p>
+        <p>We aim to foster a positive and collaborative culture. Candidates who frequently complain or focus on negative past experiences are unlikely to contribute to this environment.</p>
+        <p class="ask">⚠️ Dig deeper: Can they articulate what they did enjoy? What they learned, even in tough roles?</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title"><span class="glyph">🚩</span>Lack of interest in AI</p>
+        <p>As an AI-focused company, an interest in artificial intelligence is essential. However, it should not be the only motivator.</p>
+        <p class="ask">✅ Ask: What excites you about AI? How do you see its impact on our industry?</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title">
+          <span class="line"><span class="glyph">🚩</span>Focus on salary and benefits over the role itself</span>
+          <span class="line"><span class="glyph">🚩</span>Unrealistic expectations or mismatch of expectations</span>
+        </p>
+        <p>While compensation matters, we're looking for candidates who are passionate about the role and mission. Those focused primarily on salary or with unrealistic expectations may not align with our company's long-term vision.</p>
+        <p class="ask">⚠️ Look for: Unrealistic expectations, misalignment regarding the role, negotiation-before-fit, or questions solely about perks and working hours.</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title"><span class="glyph">🚩</span>Someone who shows disrespect, rudeness, or a lack of empathy</p>
+        <p>A positive, solution-oriented mindset is crucial to fostering a collaborative work environment. Candidates who consistently complain or focus on negatives are unlikely to contribute positively to our culture.</p>
+        <p class="ask">❌ Immediate concerns: Rudeness to recruiters/agencies/coordinators, dismissive comments, or an unwillingness to receive feedback.</p>
+      </div>
+    </section>
+
+    <!-- 10 OFF-LIMITS -->
+    <section class="card" id="off-limits">
+      <div class="kicker"><span class="icon">🚫</span><span class="idx">10 / 11</span></div>
+      <h2>Off-Limits Companies</h2>
+      <div class="callout danger">
+        <span class="glyph">ℹ️</span>
+        <div class="content">
+          <p>Due to ongoing partnerships and relationships, certain companies are <strong>off-limits for active recruitment.</strong></p>
+          <p>This <strong>applies to current employees only</strong> — past employees who no longer work at these companies can be contacted freely.</p>
+          <p style="margin-bottom:0"><strong>Any exception requires explicit approval from Alexis (CEO) before outreach.</strong></p>
+        </div>
+      </div>
+
+      <h3>🛑 Do Not Recruit From</h3>
+      <p class="dim">Current employees at the following companies <strong>must not be approached</strong>:</p>
+      <ul>
+        <li><em>Aylo</em></li>
+        <li><em>Nutaku</em></li>
+        <li><em>Mindgeek</em></li>
+        <li><em>Traffic Stars</em></li>
+        <li><em>Advidi</em></li>
+        <li><em>Ovation (related to Advidi)</em></li>
+        <li><em>XVideos</em></li>
+        <li><em>xHamster</em></li>
+        <li><em>Traffic Junky</em></li>
+        <li><em>Twinred</em></li>
+        <li><em>Pika</em></li>
+        <li><em>KlingAI</em></li>
+        <li><em>Admaze</em></li>
+      </ul>
+
+      <div class="callout warn">
+        <span class="glyph">🚨</span>
+        <div class="content">
+          <p><strong>Docler / Byborg / LiveJasmin</strong> — handle with care</p>
+          <p>Targeted outreach to specific individuals is permitted, particularly those we have previously confirmed interest in. <strong>Do not broadly contact or send bulk outreach to people from these organizations.</strong> We want to maintain a positive relationship with this company.</p>
+          <p style="margin-bottom:0"><strong>If a strong candidate emerges organically, we are open to moving forward — but tread carefully.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 RESOURCES -->
+    <section class="card" id="resources">
+      <div class="kicker"><span class="icon">🔖</span><span class="idx">11 / 11</span></div>
+      <h2>Helpful Resources</h2>
+      <ul class="resource-list">
+        <li><a href="https://bv-1234.github.io/everai-candidate_handbook/#home" target="_blank" rel="noopener">Candidate Handbook <span class="arrow">↗</span></a></li>
+        <li><a href="https://jobs.ashbyhq.com/everai" target="_blank" rel="noopener">Job Board <span class="arrow">↗</span></a></li>
+        <li><a href="https://www.everai.ai/" target="_blank" rel="noopener">Website <span class="arrow">↗</span></a></li>
+        <li><a href="https://www.linkedin.com/company/everai" target="_blank" rel="noopener">LinkedIn Page <span class="arrow">↗</span></a></li>
+        <li><a href="https://www.glassdoor.com/Overview/Working-at-EverAI-EI_IE11059596.11,17.htm" target="_blank" rel="noopener">Glassdoor Page <span class="arrow">↗</span></a></li>
+      </ul>
+    </section>
+
+    <div class="callout accent" style="margin: 8px 0 0;">
+      <span class="glyph">🚧</span>
+      <div class="content"><p style="margin-bottom:0">This document is a WIP, and our TA team is working on building more resources for you. If you don't see what you're looking for, please feel free to reach out to your recruiter anytime. We're partners, and we're here to answer any questions you may have along the way! 🤝</p></div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <span>EverAI Partner Hiring Wiki · TA + Partner use only</span>
+    <span>Contact our TA team for anything not covered here</span>
+  </div>
+</footer>
+
+<script>
+  // Highlight the active TOC entry as sections scroll into view.
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+    var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+    function onScroll(){
+      var y = window.scrollY + 120;
+      var activeIndex = 0;
+      for (var i = 0; i < sections.length; i++){
+        if (sections[i] && sections[i].offsetTop <= y) activeIndex = i;
+      }
+      links.forEach(function(a, i){ a.classList.toggle('active', i === activeIndex); });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>
