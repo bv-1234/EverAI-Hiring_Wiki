@@ -163,7 +163,7 @@
   .media-chip:hover{ border-color: var(--accent); transform: translateY(-1px); }
   .media-note{ font-size: 13px; color: var(--ink-faint); font-style: italic; margin: 4px 0 16px; }
   .embed-wrap{ margin: 10px 0 18px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-  .embed-wrap iframe{ width: 100%; height: 560px; border: none; display: block; }
+  .embed-wrap iframe{ width: 100%; height: 900px; border: none; display: block; }
 
   .callout{ display: flex; gap: 12px; border-radius: var(--radius); padding: 14px 16px; margin: 18px 0; border: 1px solid var(--line); background: var(--surface-2); }
   .callout .glyph{ font-size: 17px; flex-shrink: 0; line-height: 1.5; }
@@ -306,7 +306,7 @@
   @media (max-width: 880px){
     .page-body{ padding-top: 28px; }
     .topnav a{ font-size: 13px; padding: 13px 10px 11px; }
-    .embed-wrap iframe{ height: 420px; }
+    .embed-wrap iframe{ height: 640px; }
     .page-nav{ flex-direction: column; }
     .page-nav a{ max-width: 100%; }
     .back-to-top{ right: 14px; bottom: 14px; width: 40px; height: 40px; }
@@ -358,41 +358,41 @@
       <p><em>Scaling AI companionship — under the hood of a 10B request monolith</em></p>
       <h4>💎 Why We Use Rails</h4>
       <p>Garry Tan recently noted that the world is "sleeping" on the combination of Ruby on Rails and AI-augmented coding. Because Rails is built on "Convention Over Configuration," AI models like Claude can act autonomously within the codebase, resulting in massive productivity gains.</p>
-      <figure class="shot"><img src="assets/handbook/eng-rails.png" alt="Garry Tan on Rails + AI" /></figure>
+      <figure class="shot"><img src="assets/handbook/eng-rails.png" alt="Garry Tan on Rails + AI" loading="lazy" /></figure>
       <p>At EverAI, we've turned that "unlock" into a reality at massive scale. We aren't just building an app; we are running a global infrastructure that handles:</p>
       <div class="stat-row">
         <div class="stat"><span class="num">28M</span><span class="lbl">Monthly Active Users</span></div>
         <div class="stat"><span class="num">10B+</span><span class="lbl">HTTP requests / 30 days</span></div>
         <div class="stat"><span class="num">1 PB</span><span class="lbl">Monthly data traffic</span></div>
       </div>
-      <figure class="shot"><img src="assets/handbook/eng-users-over-time.png" alt="Active users over time" /></figure>
+      <figure class="shot"><img src="assets/handbook/eng-users-over-time.png" alt="Active users over time" loading="lazy" /></figure>
 
       <h4>📊 The raw numbers</h4>
       <p>10–12 billion HTTP requests in a typical 30-day window. Peaks push well north of 400M/day. 80M+ visits, 41M+ uniques, and we're serving a full petabyte of data (mostly images/videos — they're heavy).</p>
       <h5>Last 30 days - Requests</h5>
-      <figure class="shot"><img src="assets/handbook/eng-requests-last-month.png" alt="Requests, last 30 days" /></figure>
+      <figure class="shot"><img src="assets/handbook/eng-requests-last-month.png" alt="Requests, last 30 days" loading="lazy" /></figure>
 
       <h4>⚒️ Keeping the queues happy</h4>
       <p>Everything non-trivial is async: image, messages, notifications, ML inference queues, analytics events etc.. All flowing through Sidekiq.</p>
       <p>We process billions of jobs with basically zero backlog. On Rails.</p>
       <h5>Sidekiq Jobs</h5>
-      <figure class="shot"><img src="assets/handbook/eng-sidekiq.png" alt="Sidekiq jobs processed" /></figure>
+      <figure class="shot"><img src="assets/handbook/eng-sidekiq.png" alt="Sidekiq jobs processed" loading="lazy" /></figure>
       <h5>Throughput</h5>
-      <figure class="shot"><img src="assets/handbook/eng-throughput.png" alt="Throughput, last 3 months" /></figure>
+      <figure class="shot"><img src="assets/handbook/eng-throughput.png" alt="Throughput, last 3 months" loading="lazy" /></figure>
 
       <h4>💥 The database is... not small</h4>
       <p>Single primary Postgres (plus read replicas) holding billions of messages, conversation, user profiles and more.</p>
       <p>Total size ~1.81TB and growing fast. Indexing and query optimization never sleep.</p>
       <h5>Database</h5>
       <div class="cols">
-        <img src="assets/handbook/eng-db-1.png" alt="Database screenshot 1" />
-        <img src="assets/handbook/eng-db-2.png" alt="Database screenshot 2" />
+        <img src="assets/handbook/eng-db-1.png" alt="Database screenshot 1" loading="lazy" />
+        <img src="assets/handbook/eng-db-2.png" alt="Database screenshot 2" loading="lazy" />
       </div>
 
       <h4>We ship fast 🚀</h4>
       <p>Reviews typically land in under an hour. Engineers spend the vast majority of their time on new features, not firefighting.</p>
       <p>Heavy AI tool adoption in the codebase itself. PR velocity has been climbing steadily, with recent months routinely hitting 400–500+ merged PRs.</p>
-      <figure class="shot"><img src="assets/handbook/eng-code-changes.png" alt="Code changes over time" /></figure>
+      <figure class="shot"><img src="assets/handbook/eng-code-changes.png" alt="Code changes over time" loading="lazy" /></figure>
 
       <h4>Join Our Team</h4>
       <p>We're still early in the journey to 500M+ users. The fun problems ahead: real-time WebSocket scaling for millions of concurrent chats, smarter caching of personalized conversation context, cost-efficient image/video generation at extreme volume, thoughtful monolith sharding, and making the whole system bulletproof under viral traffic spikes.</p>
