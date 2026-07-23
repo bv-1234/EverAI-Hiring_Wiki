@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Under the Hood — EverAI Partner Hiring Wiki</title>
+<style>
+:root{
+    --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
+    --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
+    --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
+    --radius: 10px;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3;
+      --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733;
+      --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3;
+    --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733;
+    --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
+  }
+  :root[data-theme="light"]{
+    --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
+    --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
+    --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg); color: var(--ink); font-family: var(--sans);
+    font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  a{ color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 2px; }
+  a:hover{ text-decoration-color: var(--accent-ink); }
+  a:focus-visible, button:focus-visible, summary:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  .masthead{
+    background: linear-gradient(180deg, var(--surface-2), var(--bg));
+    border-bottom: 1px solid var(--line);
+    padding: 40px max(24px, calc((100vw - 1180px)/2)) 26px;
+  }
+  .back-link{
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; color: var(--ink-soft);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px;
+  }
+  .back-link:hover{ color: var(--accent-ink); }
+  .masthead-eyebrow{
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--accent-ink); display: flex; align-items: center; gap: 8px; margin: 0 0 14px;
+  }
+  .masthead-eyebrow::before{ content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .masthead h1{
+    font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.01em; margin: 0 0 10px; text-wrap: balance;
+  }
+  .masthead p.lede{ max-width: 640px; color: var(--ink-soft); font-size: 16.5px; margin: 0 0 18px; }
+  .masthead-contact{ font-size: 14px; color: var(--ink-soft); }
+  .masthead-contact a{ color: var(--accent-ink); font-weight: 600; text-decoration: none; }
+  .masthead-contact a:hover{ text-decoration: underline; }
+
+  .confidential-strip{
+    margin-top: 22px; display: flex; gap: 12px; align-items: flex-start;
+    background: var(--danger-soft); border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+    border-radius: var(--radius); padding: 13px 16px; max-width: 780px;
+  }
+  .confidential-strip .glyph{ font-size: 17px; line-height: 1.4; }
+  .confidential-strip strong{ color: var(--danger); }
+  .confidential-strip span.body{ color: var(--ink); font-size: 14px; }
+
+  .layout{
+    display: grid; grid-template-columns: 252px minmax(0,1fr); gap: 48px;
+    max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px; align-items: start;
+  }
+  nav.toc{ position: sticky; top: 24px; align-self: start; max-height: calc(100vh - 48px); overflow-y: auto; }
+  nav.toc .toc-label{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-faint); margin: 0 0 12px 4px;
+  }
+  nav.toc ol{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  nav.toc a{
+    display: flex; align-items: baseline; gap: 10px; padding: 7px 10px; border-radius: 7px;
+    text-decoration: none; color: var(--ink-soft); font-size: 14.5px; line-height: 1.35;
+  }
+  nav.toc a .num{ font-family: var(--mono); font-size: 11px; color: var(--ink-faint); flex-shrink: 0; width: 16px; }
+  nav.toc a:hover{ background: var(--surface); color: var(--ink); }
+  nav.toc a.active{ background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
+
+  main{ min-width: 0; }
+
+  section.card{
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 36px clamp(20px, 4vw, 44px); margin-bottom: 28px; scroll-margin-top: 24px;
+  }
+  section.card > .kicker{ display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  section.card .kicker .icon{ font-size: 24px; line-height: 1; }
+  section.card .kicker .idx{ font-family: var(--mono); font-size: 12px; color: var(--ink-faint); letter-spacing: 0.06em; }
+  section.card h2{
+    font-family: var(--serif); font-weight: 400; font-size: 26px; letter-spacing: -0.005em;
+    margin: 2px 0 6px; text-wrap: balance;
+  }
+  section.card p.subtitle{ font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 15px; margin: 0 0 22px; }
+  section.card h3{ font-family: var(--sans); font-weight: 700; font-size: 15.5px; margin: 30px 0 10px; color: var(--ink); }
+  section.card h3.numbered{ display:flex; align-items:center; gap:8px; }
+  section.card h3 .step-dot{
+    display:inline-flex; align-items:center; justify-content:center; width: 20px; height:20px; border-radius:50%;
+    background: var(--accent-soft); color: var(--accent-ink); font-family: var(--mono); font-size: 11px; font-weight:700; flex-shrink:0;
+  }
+  section.card h4{
+    font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint);
+    font-weight: 700; margin: 22px 0 8px;
+  }
+  section.card h5{ font-size: 14.5px; font-weight: 700; color: var(--ink); margin: 16px 0 6px; }
+  section.card p{ margin: 0 0 14px; color: var(--ink); }
+  section.card p.dim{ color: var(--ink-soft); }
+  section.card ul, section.card ol, section.card ol.plain{ margin: 0 0 14px; padding-left: 22px; }
+  section.card li{ margin-bottom: 7px; }
+  section.card li::marker{ color: var(--ink-faint); }
+  section.card ul ul, section.card ol.plain ul, section.card ul ol, section.card ol ol{ margin: 6px 0 6px; }
+  section.card .step-list{ padding-left: 20px; margin: 0 0 6px; }
+  section.card .step-list > li{ margin-bottom: 16px; }
+
+  figure.shot{ margin: 12px 0 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); padding: 8px; }
+  figure.shot img{ display: block; width: 100%; border-radius: 6px; border: 1px solid var(--line); }
+  figure.shot figcaption{ font-family: var(--mono); font-size: 11px; color: var(--ink-faint); padding: 8px 4px 2px; }
+  .cols{ display:grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap:10px; margin: 12px 0; }
+  .cols img{ width:100%; border-radius:8px; border:1px solid var(--line); }
+
+  .media-chip{
+    display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--line);
+    border-radius: 8px; background: var(--surface-2); text-decoration: none; font-size: 13.5px; font-weight: 600;
+    color: var(--accent-ink); margin: 4px 0 16px;
+  }
+  .media-chip:hover{ border-color: var(--accent); }
+  .media-note{ font-size: 13px; color: var(--ink-faint); font-style: italic; margin: 4px 0 16px; }
+  .embed-wrap{ margin: 10px 0 18px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .embed-wrap iframe{ width: 100%; height: 560px; border: none; display: block; }
+
+  .callout{ display: flex; gap: 12px; border-radius: var(--radius); padding: 14px 16px; margin: 18px 0; border: 1px solid var(--line); background: var(--surface-2); }
+  .callout .glyph{ font-size: 17px; flex-shrink: 0; line-height: 1.5; }
+  .callout .content > *:last-child{ margin-bottom: 0; }
+  .callout.warn{ background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, transparent); }
+  .callout.danger{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 35%, transparent); }
+  .callout.good{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 35%, transparent); }
+  .callout.accent{ background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+
+  .badge{ display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.03em; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; }
+  .badge.p0{ background: var(--danger-soft); color: var(--danger); }
+  .badge.p1{ background: var(--warn-soft); color: var(--warn); }
+  .badge.open{ background: var(--good-soft); color: var(--good); }
+  .badge.soon{ background: var(--accent-soft); color: var(--accent-ink); }
+  .badge.closed{ background: var(--surface-2); color: var(--ink-faint); border: 1px solid var(--line); }
+  .badge.tier-red{ background: var(--danger-soft); color: var(--danger); }
+  .badge.tier-yellow{ background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-green{ background: var(--good-soft); color: var(--good); }
+  .tag{ display:inline-block; font-size: 12.5px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: var(--mono); }
+  .new-tag{ display:inline-block; font-size: 11px; color: var(--danger); font-weight: 700; }
+
+  .table-wrap{ overflow-x: auto; margin: 6px 0 22px; border: 1px solid var(--line); border-radius: 10px; }
+  table{ width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+  table caption{ text-align:left; padding: 10px 16px 0; font-size: 12px; color: var(--ink-faint); }
+  thead th{
+    text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-faint); background: var(--surface-2); padding: 11px 16px; border-bottom: 1px solid var(--line); white-space: nowrap;
+  }
+  tbody td{ padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink); }
+  tbody tr:last-child td{ border-bottom: none; }
+  tbody td.num, thead th.num{ font-variant-numeric: tabular-nums; }
+  tbody td strong{ font-weight: 700; }
+
+  .split{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 8px 0 10px; }
+  @media (max-width: 720px){ .split{ grid-template-columns: 1fr; } }
+  .split .col{ border-radius: var(--radius); padding: 18px 20px; border: 1px solid var(--line); }
+  .split .col.do{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 30%, transparent); }
+  .split .col.dont{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 30%, transparent); }
+  .split h4{ margin-top: 0; color: inherit; }
+  .split .col.do h4{ color: var(--good); }
+  .split .col.dont h4{ color: var(--danger); }
+  .split ul{ margin: 0; padding-left: 20px; }
+  .split li{ font-size: 14.5px; }
+
+  .flag{ border: 1px solid var(--line); border-left: 3px solid var(--danger); border-radius: 8px; padding: 14px 18px; margin: 0 0 14px; background: var(--surface-2); }
+  .flag .flag-title{ font-weight: 700; margin: 0 0 6px; }
+  .flag .flag-title .glyph{ margin-right: 6px; }
+  .flag .flag-title span.line{ display:block; }
+  .flag p{ margin: 0 0 8px; font-size: 14.5px; color: var(--ink-soft); }
+  .flag p.ask{ margin: 0; font-size: 13.5px; color: var(--accent-ink); font-style: italic; }
+
+  .pills{ display:flex; flex-wrap:wrap; gap:6px; margin: 6px 0 18px; }
+  .pills .pill{ font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-soft); }
+  .pills.red .pill{ border-color: color-mix(in srgb, var(--danger) 30%, transparent); color: var(--danger); background: var(--danger-soft); }
+  .pills.green .pill{ border-color: color-mix(in srgb, var(--good) 30%, transparent); color: var(--good); background: var(--good-soft); }
+
+  .resource-list{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .resource-list li{ margin: 0; }
+  .resource-list a{
+    display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border: 1px solid var(--line);
+    border-radius: 10px; background: var(--surface-2); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 15px;
+  }
+  .resource-list a:hover{ border-color: var(--accent); background: var(--accent-soft); }
+  .resource-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); }
+
+  .brief-list{ list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .brief-list a{
+    display: flex; align-items: center; gap: 8px; padding: 11px 15px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--surface-2); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 14.5px;
+  }
+  .brief-list a:hover{ border-color: var(--accent); background: var(--accent-soft); }
+  .brief-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); margin-left: auto; }
+  .brief-list a .sub{ font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+  .role-meta{ display:grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap:10px 20px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; margin: 10px 0 18px; font-size:13.5px; }
+  .role-meta div span.label{ display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px; }
+
+  .nn-list{ list-style:none; margin:0 0 16px; padding:0; counter-reset: nn; }
+  .nn-list li{ counter-increment: nn; position:relative; padding-left:30px; margin-bottom:10px; }
+  .nn-list li::before{ content: counter(nn); position:absolute; left:0; top:1px; width:20px; height:20px; border-radius:50%; background:var(--danger-soft); color:var(--danger); font-family:var(--mono); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .nn-list li::marker{ content:none; }
+
+  .filter-line{ font-size:13.5px; color:var(--danger); margin: 4px 0 14px; padding-left: 22px; }
+  .filter-line::before{ content:"❌ "; }
+
+  .eval-cat{ border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-bottom:12px; background:var(--surface-2); }
+  .eval-cat .pct{ font-family:var(--mono); color:var(--accent-ink); font-weight:700; }
+
+  .tool-tier{ margin: 4px 0 6px; }
+  .tool-tier .tier-label{ font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--accent-ink); font-weight:700; }
+
+  details.faq{ border:1px solid var(--line); border-radius:8px; margin-bottom:8px; background:var(--surface-2); }
+  details.faq summary{ padding:10px 14px; font-weight:600; font-size:13.5px; cursor:pointer; }
+  details.faq .faq-body{ padding: 0 14px 14px; font-size:13.5px; color:var(--ink-soft); }
+  details.faq .faq-body p{ margin: 0 0 10px; }
+
+  .value-card{ border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:10px; background:var(--surface-2); }
+  .value-card strong{ display:block; margin-bottom:4px; }
+
+  .stat-row{ display:flex; flex-wrap:wrap; gap:12px; margin: 10px 0 18px; }
+  .stat{ flex:1; min-width:140px; border:1px solid var(--line); border-radius:10px; padding:14px 16px; background:var(--surface-2); text-align:center; }
+  .stat .num{ font-family:var(--mono); font-size:20px; font-weight:700; color:var(--accent-ink); display:block; }
+  .stat .lbl{ font-size:11.5px; color:var(--ink-faint); }
+
+  .page-nav{ display:flex; justify-content:space-between; gap:16px; margin: 4px 0 28px; }
+  .page-nav a{
+    flex: 1; max-width: 48%; display:flex; flex-direction:column; gap:4px; padding:14px 18px; border:1px solid var(--line);
+    border-radius:10px; background:var(--surface-2); text-decoration:none; color:var(--ink);
+  }
+  .page-nav a:hover{ border-color:var(--accent); background:var(--accent-soft); }
+  .page-nav a.next{ text-align:right; margin-left:auto; }
+  .page-nav .dir{ font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+  .page-nav .label{ font-weight:600; font-size:14.5px; }
+
+  hr.rule{ border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+
+  footer{ max-width: 1180px; margin: 0 auto; padding: 0 24px 60px; color: var(--ink-faint); font-size: 13px; }
+  footer .foot-inner{ border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 880px){
+    .layout{ grid-template-columns: 1fr; padding-top: 24px; }
+    nav.toc{ position: static; max-height: none; overflow: visible; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 8px; }
+    nav.toc ol{ flex-direction: row; flex-wrap: wrap; }
+    nav.toc a{ font-size: 13.5px; }
+    .embed-wrap iframe{ height: 420px; }
+    .page-nav{ flex-direction: column; }
+    .page-nav a{ max-width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <a class="back-link" href="handbook.html">&larr; Back to the Candidate Handbook</a>
+  <h1>🚧 Under the Hood</h1>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">Candidate Handbook</p>
+    <ol>
+      <li><a href="who-we-are.html"><span class="num">01</span> Who We Are</a></li>
+      <li><a href="what-we-do.html"><span class="num">02</span> What We Do</a></li>
+      <li><a href="safety-and-ethics.html"><span class="num">03</span> Safety and Ethics</a></li>
+      <li><a href="engineering.html" class="active"><span class="num">04</span> Engineering at EverAI</a></li>
+      <li><a href="why-join-us.html"><span class="num">05</span> Why Join Us?</a></li>
+      <li><a href="recruitment-process.html"><span class="num">06</span> Our Recruitment Process</a></li>
+      <li><a href="get-in-touch.html"><span class="num">07</span> Get in Touch</a></li>
+      <li><a href="privacy-notice.html"><span class="num">08</span> Applicant Privacy Notice</a></li>
+    </ol>
+  </nav>
+
+  <main>
+<section class="card" id="under-the-hood">
+      <div class="kicker"><span class="icon">🚧</span></div>
+      <h2>Under the Hood</h2>
+🚧 Under the Hood</h3>
+      <p class="dim"><em>This article was written by our CTO &amp; Co-founder, Michael Monin.</em></p>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0"><strong>Why this matters for candidates</strong><br />We're not a prototype. We run one of the most active AI companionship platforms in the world, on a lean, fast-moving Engineering team. If you care about scale, ownership, and shipping, read on.</p></div>
+      </div>
+      <p><em>Scaling AI companionship — under the hood of a 10B request monolith</em></p>
+      <h4>💎 Why We Use Rails</h4>
+      <p>Garry Tan recently noted that the world is "sleeping" on the combination of Ruby on Rails and AI-augmented coding. Because Rails is built on "Convention Over Configuration," AI models like Claude can act autonomously within the codebase, resulting in massive productivity gains.</p>
+      <figure class="shot"><img src="assets/handbook/eng-rails.png" alt="Garry Tan on Rails + AI" /></figure>
+      <p>At EverAI, we've turned that "unlock" into a reality at massive scale. We aren't just building an app; we are running a global infrastructure that handles:</p>
+      <div class="stat-row">
+        <div class="stat"><span class="num">28M</span><span class="lbl">Monthly Active Users</span></div>
+        <div class="stat"><span class="num">10B+</span><span class="lbl">HTTP requests / 30 days</span></div>
+        <div class="stat"><span class="num">1 PB</span><span class="lbl">Monthly data traffic</span></div>
+      </div>
+      <figure class="shot"><img src="assets/handbook/eng-users-over-time.png" alt="Active users over time" /></figure>
+
+      <h4>📊 The raw numbers</h4>
+      <p>10–12 billion HTTP requests in a typical 30-day window. Peaks push well north of 400M/day. 80M+ visits, 41M+ uniques, and we're serving a full petabyte of data (mostly images/videos — they're heavy).</p>
+      <h5>Last 30 days - Requests</h5>
+      <figure class="shot"><img src="assets/handbook/eng-requests-last-month.png" alt="Requests, last 30 days" /></figure>
+
+      <h4>⚒️ Keeping the queues happy</h4>
+      <p>Everything non-trivial is async: image, messages, notifications, ML inference queues, analytics events etc.. All flowing through Sidekiq.</p>
+      <p>We process billions of jobs with basically zero backlog. On Rails.</p>
+      <h5>Sidekiq Jobs</h5>
+      <figure class="shot"><img src="assets/handbook/eng-sidekiq.png" alt="Sidekiq jobs processed" /></figure>
+      <h5>Throughput</h5>
+      <figure class="shot"><img src="assets/handbook/eng-throughput.png" alt="Throughput, last 3 months" /></figure>
+
+      <h4>💥 The database is... not small</h4>
+      <p>Single primary Postgres (plus read replicas) holding billions of messages, conversation, user profiles and more.</p>
+      <p>Total size ~1.81TB and growing fast. Indexing and query optimization never sleep.</p>
+      <h5>Database</h5>
+      <div class="cols">
+        <img src="assets/handbook/eng-db-1.png" alt="Database screenshot 1" />
+        <img src="assets/handbook/eng-db-2.png" alt="Database screenshot 2" />
+      </div>
+
+      <h4>We ship fast 🚀</h4>
+      <p>Reviews typically land in under an hour. Engineers spend the vast majority of their time on new features, not firefighting.</p>
+      <p>Heavy AI tool adoption in the codebase itself. PR velocity has been climbing steadily, with recent months routinely hitting 400–500+ merged PRs.</p>
+      <figure class="shot"><img src="assets/handbook/eng-code-changes.png" alt="Code changes over time" /></figure>
+
+      <h4>Join Our Team</h4>
+      <p>We're still early in the journey to 500M+ users. The fun problems ahead: real-time WebSocket scaling for millions of concurrent chats, smarter caching of personalized conversation context, cost-efficient image/video generation at extreme volume, thoughtful monolith sharding, and making the whole system bulletproof under viral traffic spikes.</p>
+      <p>The core stack is Ruby on Rails + Postgres + Redis + Sidekiq, but we're language-agnostic, strong modern backend/web experience matters way more than specific Rails years.</p>
+      <p>If any of this sounds like the kind of scale you want to tackle every day, we're hiring senior backend engineers (full remote, Europe time zones preferred).</p>
+
+      <hr class="rule" />
+      
+    </section>
+<div class="page-nav"><a class="prev" href="engineering.html"><span class="dir">&larr; Previous</span><span class="label">Engineering at EverAI</span></a><a class="next" href="everai-way.html"><span class="dir">Next &rarr;</span><span class="label">The EverAI Way</span></a></div>
+  </main>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <span>EverAI Partner Hiring Wiki · Under the Hood</span>
+    <span>Contact our TA team for anything not covered here</span>
+  </div>
+</footer>
+</body>
+</html>
