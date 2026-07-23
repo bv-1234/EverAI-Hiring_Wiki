@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Applicant Privacy Notice — EverAI Partner Hiring Wiki</title>
+<style>
+:root{
+    --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
+    --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
+    --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
+    --radius: 10px;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3;
+      --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733;
+      --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3;
+    --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733;
+    --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
+  }
+  :root[data-theme="light"]{
+    --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
+    --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
+    --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg); color: var(--ink); font-family: var(--sans);
+    font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  a{ color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 2px; }
+  a:hover{ text-decoration-color: var(--accent-ink); }
+  a:focus-visible, button:focus-visible, summary:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  .masthead{
+    background: linear-gradient(180deg, var(--surface-2), var(--bg));
+    border-bottom: 1px solid var(--line);
+    padding: 40px max(24px, calc((100vw - 1180px)/2)) 26px;
+  }
+  .back-link{
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; color: var(--ink-soft);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px;
+  }
+  .back-link:hover{ color: var(--accent-ink); }
+  .masthead-eyebrow{
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--accent-ink); display: flex; align-items: center; gap: 8px; margin: 0 0 14px;
+  }
+  .masthead-eyebrow::before{ content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .masthead h1{
+    font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.01em; margin: 0 0 10px; text-wrap: balance;
+  }
+  .masthead p.lede{ max-width: 640px; color: var(--ink-soft); font-size: 16.5px; margin: 0 0 18px; }
+  .masthead-contact{ font-size: 14px; color: var(--ink-soft); }
+  .masthead-contact a{ color: var(--accent-ink); font-weight: 600; text-decoration: none; }
+  .masthead-contact a:hover{ text-decoration: underline; }
+
+  .confidential-strip{
+    margin-top: 22px; display: flex; gap: 12px; align-items: flex-start;
+    background: var(--danger-soft); border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+    border-radius: var(--radius); padding: 13px 16px; max-width: 780px;
+  }
+  .confidential-strip .glyph{ font-size: 17px; line-height: 1.4; }
+  .confidential-strip strong{ color: var(--danger); }
+  .confidential-strip span.body{ color: var(--ink); font-size: 14px; }
+
+  .layout{
+    display: grid; grid-template-columns: 252px minmax(0,1fr); gap: 48px;
+    max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px; align-items: start;
+  }
+  nav.toc{ position: sticky; top: 24px; align-self: start; max-height: calc(100vh - 48px); overflow-y: auto; }
+  nav.toc .toc-label{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-faint); margin: 0 0 12px 4px;
+  }
+  nav.toc ol{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  nav.toc a{
+    display: flex; align-items: baseline; gap: 10px; padding: 7px 10px; border-radius: 7px;
+    text-decoration: none; color: var(--ink-soft); font-size: 14.5px; line-height: 1.35;
+  }
+  nav.toc a .num{ font-family: var(--mono); font-size: 11px; color: var(--ink-faint); flex-shrink: 0; width: 16px; }
+  nav.toc a:hover{ background: var(--surface); color: var(--ink); }
+  nav.toc a.active{ background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
+
+  main{ min-width: 0; }
+
+  section.card{
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 36px clamp(20px, 4vw, 44px); margin-bottom: 28px; scroll-margin-top: 24px;
+  }
+  section.card > .kicker{ display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  section.card .kicker .icon{ font-size: 24px; line-height: 1; }
+  section.card .kicker .idx{ font-family: var(--mono); font-size: 12px; color: var(--ink-faint); letter-spacing: 0.06em; }
+  section.card h2{
+    font-family: var(--serif); font-weight: 400; font-size: 26px; letter-spacing: -0.005em;
+    margin: 2px 0 6px; text-wrap: balance;
+  }
+  section.card p.subtitle{ font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 15px; margin: 0 0 22px; }
+  section.card h3{ font-family: var(--sans); font-weight: 700; font-size: 15.5px; margin: 30px 0 10px; color: var(--ink); }
+  section.card h3.numbered{ display:flex; align-items:center; gap:8px; }
+  section.card h3 .step-dot{
+    display:inline-flex; align-items:center; justify-content:center; width: 20px; height:20px; border-radius:50%;
+    background: var(--accent-soft); color: var(--accent-ink); font-family: var(--mono); font-size: 11px; font-weight:700; flex-shrink:0;
+  }
+  section.card h4{
+    font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint);
+    font-weight: 700; margin: 22px 0 8px;
+  }
+  section.card h5{ font-size: 14.5px; font-weight: 700; color: var(--ink); margin: 16px 0 6px; }
+  section.card p{ margin: 0 0 14px; color: var(--ink); }
+  section.card p.dim{ color: var(--ink-soft); }
+  section.card ul, section.card ol, section.card ol.plain{ margin: 0 0 14px; padding-left: 22px; }
+  section.card li{ margin-bottom: 7px; }
+  section.card li::marker{ color: var(--ink-faint); }
+  section.card ul ul, section.card ol.plain ul, section.card ul ol, section.card ol ol{ margin: 6px 0 6px; }
+  section.card .step-list{ padding-left: 20px; margin: 0 0 6px; }
+  section.card .step-list > li{ margin-bottom: 16px; }
+
+  figure.shot{ margin: 12px 0 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); padding: 8px; }
+  figure.shot img{ display: block; width: 100%; border-radius: 6px; border: 1px solid var(--line); }
+  figure.shot figcaption{ font-family: var(--mono); font-size: 11px; color: var(--ink-faint); padding: 8px 4px 2px; }
+  .cols{ display:grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap:10px; margin: 12px 0; }
+  .cols img{ width:100%; border-radius:8px; border:1px solid var(--line); }
+
+  .media-chip{
+    display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--line);
+    border-radius: 8px; background: var(--surface-2); text-decoration: none; font-size: 13.5px; font-weight: 600;
+    color: var(--accent-ink); margin: 4px 0 16px;
+  }
+  .media-chip:hover{ border-color: var(--accent); }
+  .media-note{ font-size: 13px; color: var(--ink-faint); font-style: italic; margin: 4px 0 16px; }
+  .embed-wrap{ margin: 10px 0 18px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .embed-wrap iframe{ width: 100%; height: 560px; border: none; display: block; }
+
+  .callout{ display: flex; gap: 12px; border-radius: var(--radius); padding: 14px 16px; margin: 18px 0; border: 1px solid var(--line); background: var(--surface-2); }
+  .callout .glyph{ font-size: 17px; flex-shrink: 0; line-height: 1.5; }
+  .callout .content > *:last-child{ margin-bottom: 0; }
+  .callout.warn{ background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, transparent); }
+  .callout.danger{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 35%, transparent); }
+  .callout.good{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 35%, transparent); }
+  .callout.accent{ background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+
+  .badge{ display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.03em; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; }
+  .badge.p0{ background: var(--danger-soft); color: var(--danger); }
+  .badge.p1{ background: var(--warn-soft); color: var(--warn); }
+  .badge.open{ background: var(--good-soft); color: var(--good); }
+  .badge.soon{ background: var(--accent-soft); color: var(--accent-ink); }
+  .badge.closed{ background: var(--surface-2); color: var(--ink-faint); border: 1px solid var(--line); }
+  .badge.tier-red{ background: var(--danger-soft); color: var(--danger); }
+  .badge.tier-yellow{ background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-green{ background: var(--good-soft); color: var(--good); }
+  .tag{ display:inline-block; font-size: 12.5px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: var(--mono); }
+  .new-tag{ display:inline-block; font-size: 11px; color: var(--danger); font-weight: 700; }
+
+  .table-wrap{ overflow-x: auto; margin: 6px 0 22px; border: 1px solid var(--line); border-radius: 10px; }
+  table{ width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+  table caption{ text-align:left; padding: 10px 16px 0; font-size: 12px; color: var(--ink-faint); }
+  thead th{
+    text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-faint); background: var(--surface-2); padding: 11px 16px; border-bottom: 1px solid var(--line); white-space: nowrap;
+  }
+  tbody td{ padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink); }
+  tbody tr:last-child td{ border-bottom: none; }
+  tbody td.num, thead th.num{ font-variant-numeric: tabular-nums; }
+  tbody td strong{ font-weight: 700; }
+
+  .split{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 8px 0 10px; }
+  @media (max-width: 720px){ .split{ grid-template-columns: 1fr; } }
+  .split .col{ border-radius: var(--radius); padding: 18px 20px; border: 1px solid var(--line); }
+  .split .col.do{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 30%, transparent); }
+  .split .col.dont{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 30%, transparent); }
+  .split h4{ margin-top: 0; color: inherit; }
+  .split .col.do h4{ color: var(--good); }
+  .split .col.dont h4{ color: var(--danger); }
+  .split ul{ margin: 0; padding-left: 20px; }
+  .split li{ font-size: 14.5px; }
+
+  .flag{ border: 1px solid var(--line); border-left: 3px solid var(--danger); border-radius: 8px; padding: 14px 18px; margin: 0 0 14px; background: var(--surface-2); }
+  .flag .flag-title{ font-weight: 700; margin: 0 0 6px; }
+  .flag .flag-title .glyph{ margin-right: 6px; }
+  .flag .flag-title span.line{ display:block; }
+  .flag p{ margin: 0 0 8px; font-size: 14.5px; color: var(--ink-soft); }
+  .flag p.ask{ margin: 0; font-size: 13.5px; color: var(--accent-ink); font-style: italic; }
+
+  .pills{ display:flex; flex-wrap:wrap; gap:6px; margin: 6px 0 18px; }
+  .pills .pill{ font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-soft); }
+  .pills.red .pill{ border-color: color-mix(in srgb, var(--danger) 30%, transparent); color: var(--danger); background: var(--danger-soft); }
+  .pills.green .pill{ border-color: color-mix(in srgb, var(--good) 30%, transparent); color: var(--good); background: var(--good-soft); }
+
+  .resource-list{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .resource-list li{ margin: 0; }
+  .resource-list a{
+    display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border: 1px solid var(--line);
+    border-radius: 10px; background: var(--surface-2); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 15px;
+  }
+  .resource-list a:hover{ border-color: var(--accent); background: var(--accent-soft); }
+  .resource-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); }
+
+  .brief-list{ list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .brief-list a{
+    display: flex; align-items: center; gap: 8px; padding: 11px 15px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--surface-2); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 14.5px;
+  }
+  .brief-list a:hover{ border-color: var(--accent); background: var(--accent-soft); }
+  .brief-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); margin-left: auto; }
+  .brief-list a .sub{ font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+  .role-meta{ display:grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap:10px 20px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; margin: 10px 0 18px; font-size:13.5px; }
+  .role-meta div span.label{ display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px; }
+
+  .nn-list{ list-style:none; margin:0 0 16px; padding:0; counter-reset: nn; }
+  .nn-list li{ counter-increment: nn; position:relative; padding-left:30px; margin-bottom:10px; }
+  .nn-list li::before{ content: counter(nn); position:absolute; left:0; top:1px; width:20px; height:20px; border-radius:50%; background:var(--danger-soft); color:var(--danger); font-family:var(--mono); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .nn-list li::marker{ content:none; }
+
+  .filter-line{ font-size:13.5px; color:var(--danger); margin: 4px 0 14px; padding-left: 22px; }
+  .filter-line::before{ content:"❌ "; }
+
+  .eval-cat{ border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-bottom:12px; background:var(--surface-2); }
+  .eval-cat .pct{ font-family:var(--mono); color:var(--accent-ink); font-weight:700; }
+
+  .tool-tier{ margin: 4px 0 6px; }
+  .tool-tier .tier-label{ font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--accent-ink); font-weight:700; }
+
+  details.faq{ border:1px solid var(--line); border-radius:8px; margin-bottom:8px; background:var(--surface-2); }
+  details.faq summary{ padding:10px 14px; font-weight:600; font-size:13.5px; cursor:pointer; }
+  details.faq .faq-body{ padding: 0 14px 14px; font-size:13.5px; color:var(--ink-soft); }
+  details.faq .faq-body p{ margin: 0 0 10px; }
+
+  .value-card{ border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:10px; background:var(--surface-2); }
+  .value-card strong{ display:block; margin-bottom:4px; }
+
+  .stat-row{ display:flex; flex-wrap:wrap; gap:12px; margin: 10px 0 18px; }
+  .stat{ flex:1; min-width:140px; border:1px solid var(--line); border-radius:10px; padding:14px 16px; background:var(--surface-2); text-align:center; }
+  .stat .num{ font-family:var(--mono); font-size:20px; font-weight:700; color:var(--accent-ink); display:block; }
+  .stat .lbl{ font-size:11.5px; color:var(--ink-faint); }
+
+  .page-nav{ display:flex; justify-content:space-between; gap:16px; margin: 4px 0 28px; }
+  .page-nav a{
+    flex: 1; max-width: 48%; display:flex; flex-direction:column; gap:4px; padding:14px 18px; border:1px solid var(--line);
+    border-radius:10px; background:var(--surface-2); text-decoration:none; color:var(--ink);
+  }
+  .page-nav a:hover{ border-color:var(--accent); background:var(--accent-soft); }
+  .page-nav a.next{ text-align:right; margin-left:auto; }
+  .page-nav .dir{ font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+  .page-nav .label{ font-weight:600; font-size:14.5px; }
+
+  hr.rule{ border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+
+  footer{ max-width: 1180px; margin: 0 auto; padding: 0 24px 60px; color: var(--ink-faint); font-size: 13px; }
+  footer .foot-inner{ border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 880px){
+    .layout{ grid-template-columns: 1fr; padding-top: 24px; }
+    nav.toc{ position: static; max-height: none; overflow: visible; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 8px; }
+    nav.toc ol{ flex-direction: row; flex-wrap: wrap; }
+    nav.toc a{ font-size: 13.5px; }
+    .embed-wrap iframe{ height: 420px; }
+    .page-nav{ flex-direction: column; }
+    .page-nav a{ max-width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <a class="back-link" href="handbook.html">&larr; Back to the Candidate Handbook</a>
+  <h1>🔐 Applicant Privacy Notice</h1>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">Candidate Handbook</p>
+    <ol>
+      <li><a href="who-we-are.html"><span class="num">01</span> Who We Are</a></li>
+      <li><a href="what-we-do.html"><span class="num">02</span> What We Do</a></li>
+      <li><a href="safety-and-ethics.html"><span class="num">03</span> Safety and Ethics</a></li>
+      <li><a href="engineering.html"><span class="num">04</span> Engineering at EverAI</a></li>
+      <li><a href="why-join-us.html"><span class="num">05</span> Why Join Us?</a></li>
+      <li><a href="recruitment-process.html"><span class="num">06</span> Our Recruitment Process</a></li>
+      <li><a href="get-in-touch.html"><span class="num">07</span> Get in Touch</a></li>
+      <li><a href="privacy-notice.html" class="active"><span class="num">08</span> Applicant Privacy Notice</a></li>
+    </ol>
+  </nav>
+
+  <main>
+<section class="card" id="privacy-notice">
+      <div class="kicker"><span class="icon">🔐</span></div>
+      <h2>EverAI Applicant Privacy Notice</h2>
+      <p class="dim">Last updated: 07 April 2026</p>
+
+      <h3>1. Introduction</h3>
+      <p>EverAI Limited ("EverAI", "we", "us", or "our") respects your privacy and is committed to protecting the personal data you share with us during the recruitment and/or application process. EverAI is a "controller" in relation to such personal data. This means that we are responsible for deciding how we hold and use personal information about you.</p>
+      <p>This EverAI Applicant Privacy Notice is intended to inform you about how and why your personal data will be used and stored during the recruitment and application process.</p>
+
+      <h3>2. Data protection principles</h3>
+      <p>We will comply with data protection law and principles, which means that your data will be:</p>
+      <ul>
+        <li>Used lawfully, fairly and in a transparent way.</li>
+        <li>Collected only for valid purposes that we have clearly explained and not used in any way that is incompatible with those purposes.</li>
+        <li>Relevant to the purposes we have told you about and limited only to those purposes.</li>
+        <li>Accurate and kept up to date.</li>
+        <li>Kept only as long as necessary for the purposes we have told you about.</li>
+        <li>Kept securely.</li>
+      </ul>
+
+      <h3>3. Who is your personal information collected from?</h3>
+      <p>We collect personal information about job candidates from the following sources:</p>
+      <ul>
+        <li>You, the applicant, when you apply for employment (e.g., directly through our website or through a job board) or respond to a proactive contact from us.</li>
+        <li>Publicly accessible sources, e.g., professional profiles like LinkedIn or platforms that showcase your work or experience relevant to a role.</li>
+        <li>Third parties with whom you have a pre-existing relationship and/or whom you authorize to provide us with information about you, including: referrers; recruitment agencies (for information on the data protection practices of recruitment agencies, please contact them directly); and your named references.</li>
+      </ul>
+
+      <h3>4. The kind of information we hold about you</h3>
+      <p>In connection with recruitment and/or your application for work with us, we will collect, store, and use the following categories of personal information about you:</p>
+      <ul>
+        <li>Information in our standard application form (name, email, contact information, link to LinkedIn profile, location, work authorization confirmation for your location (yes/no), timezone information, salary expectations, answers to other role-specific questions, portfolios or other documents needed to consider you for a particular role, and answers to any free fields in the application form).</li>
+        <li>The information you have provided to us in your CV and/or additional documents that form part of your application.</li>
+        <li>Any information you provide to us during your interview(s) or during the recruitment, interview, and hiring process.</li>
+        <li>To facilitate hiring in our remote-first environment and accommodate varying timezones on the hiring team, we may ask to record interviews, so that all members of the hiring team can properly review the application. We will always ask for your consent before doing so, and it will always be clear in the call interface that a recording is in progress. We adhere to strict data deletion periods for any recordings (see Section 10 below).</li>
+        <li>Automatically generated transcripts of any recorded interviews.</li>
+        <li>Performance/results of any case study. We use this information solely to evaluate your fitness for the role.</li>
+        <li>Information obtained from sources other than yourself previously referred to in this notice.</li>
+        <li>Any legally mandated information per local requirements.</li>
+      </ul>
+      <p>You do not need to reveal, nor will we base our recruitment decisions on, any type of more sensitive information. However, if you voluntarily share this type of information (e.g., on your CV or in an interview), we may collect, store and process:</p>
+      <ul>
+        <li>Information about your race or ethnicity, religious or philosophical beliefs, trade union membership, sexual orientation and political opinions.</li>
+        <li>Information about your gender identity and/or pronouns.</li>
+        <li>Information about your health, including information necessary to accommodate any disability.</li>
+        <li>Information about criminal convictions and offences.</li>
+      </ul>
+
+      <h3>5. How we will use information about you</h3>
+      <p>We will use the personal information we collect about you to:</p>
+      <ul>
+        <li>Assess your skills, qualifications, and suitability for the role.</li>
+        <li>Carry out reference checks.</li>
+        <li>Communicate with you and (as applicable) referring recruitment agencies about the recruitment process.</li>
+        <li>Keep records related to our hiring processes.</li>
+        <li>Comply with legal or regulatory requirements.</li>
+      </ul>
+      <p>Once we receive your application materials, we will process that information to decide whether you meet the basic requirements to be shortlisted for the role. If you do, we will decide whether your application is strong enough to invite you for an interview. If so, we will use the information you provide to us during your interview(s) to decide whether to make an offer of employment. If we decide to make such an offer, we will contact your references and/or perform any role-specific preliminary checks before making a final offer. You are responsible for informing your named references that you are giving us their contact information and obtaining any necessary consent for same.</p>
+      <p>If you fail to provide requested information that is necessary for us to consider your application (such as evidence of qualifications or work history), we will not be able to process your application.</p>
+      <p>As part of our recruitment process, we may use artificial intelligence ("AI") tools to assist in reviewing and summarizing application materials, parsing CV information, and transcribing interviews. These tools support human decision-making and are used to help organize and analyze information for the hiring team(s). AI systems used in this context do not materially influence employment decisions or make final hiring decisions, and candidates are never auto advanced or auto-rejected via AI tools. All recruitment- and application-relevant decisions are made by humans.</p>
+
+      <h3>6. Legal bases for processing under European data protection law (e.g., GDPR, UK GDPR)</h3>
+      <p>To the extent required by applicable law, we process your personal information only according to the following legal bases:</p>
+      <ul>
+        <li><strong>Legitimate interests</strong>: It is in our legitimate interests to determine applicants' fitness for a particular role, and to ultimately make hiring decisions, so as to appropriately staff the company; to engage appropriate third parties (e.g., a centralized recruitment management platform) to assist in same; and to record interviews and store them for a limited period of time, to facilitate hiring in a remote-first environment and accommodate varying timezones on the hiring team.</li>
+        <li><strong>Contractual necessity</strong>: We need to process your personal information to decide whether to enter into a contract (of employment) with you.</li>
+        <li><strong>Legal obligation</strong>: Where a relevant legal obligation applies (e.g., confirming your right to work from your location), our processing is based on the same.</li>
+        <li><strong>Consent</strong>: In limited circumstances, we may base processing activities on your informed consent, for example, when processing information that you voluntarily offer and (in the event we do not move forward with your application) retaining your application materials for future roles.</li>
+      </ul>
+      <p>Where we rely on consent as our legal basis for processing your data, you may withdraw your consent at any time with effect for the future. If we process any special category data provided as part of your application (e.g., health, religious, or ethnicity information), this is based on Art. 9(2)(b) of the GDPR, which relates to our obligations in employment. Depending on the circumstances, we may rely on different legal bases when processing the same information for different purposes. If you reside outside the EEA, UK, or Switzerland, the legal bases on which we rely may differ from those listed above.</p>
+
+      <h3>7. Automated decision-making</h3>
+      <p>You will not be subject to decisions that will have a significant impact on you based solely on automated decision-making.</p>
+      <p>While EverAI may use AI tools for purposes consistent with this Applicant Privacy Notice, these tools operate only as decision-support systems and do not materially influence or independently determine application- or hiring-relevant decisions.</p>
+
+      <h3>8. Disclosure of your personal information</h3>
+      <p>We will only share your personal information with third parties where necessary for us to process your application. The parties to whom we may disclose your personal information include:</p>
+      <ul>
+        <li><strong>EverAI staff on the applicable hiring team</strong>: Internal staff receive information about your application on a need-to-know basis and are subject to confidentiality obligations. Generally, only members of the hiring team for a given role and top-level management have access to your application information.</li>
+        <li><strong>Service providers</strong>: We use service providers to facilitate our hiring processes, including office tools and a centralized recruitment management platform. These service providers may only use your information to perform certain tasks on our behalf and have access only to the information needed to perform such tasks that we define. All third-party service providers or other recipients are required to take appropriate security measures to protect your personal information in line with applicable law.</li>
+        <li><strong>Recruitment agencies</strong>: If your application came in through a recruitment agency, we share limited information regarding the status of your application with them upon request.</li>
+        <li><strong>Other third parties required by law</strong>: We take our legal obligations seriously, and may access, preserve, and share personal information with regulators, public authorities, law enforcement, government agencies, or others, where we reasonably believe such disclosure is necessary to comply with valid legal process, court orders, applicable law, regulations, or official requests; address illegal or suspected illegal activities, security, or technical issues; protect against harm to the rights, property or safety of our company, users, staff, or other third parties; or maintain and protect the security and integrity of our infrastructure.</li>
+      </ul>
+      <p>Your personal information may also be transferred outside the EEA or UK in connection with the application and recruitment process. As a remote-first environment, our staff (and members of the hiring team and management) are located and may access your information from outside the EEA or UK. Some of our service providers, including our centralized recruitment platform (Ashby), are also located outside the EEA or UK, including in the United States of America.</p>
+      <p>When we transfer personal information outside the EEA or UK, we ensure that the transfer complies with this privacy notice and applicable law. Where an appropriate safeguard for transfers of personal information outside the EEA or UK is required, we generally rely on adequacy decisions published by, and/or Standard Contractual Clauses approved by, the European Commission and/or UK Information Commissioner's Office.</p>
+
+      <h3>9. Data security</h3>
+      <p>We have put in place appropriate security measures to prevent your personal information from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed. In addition, we limit access to your personal information to those employees, agents, contractors and other third parties who have a need to know. They will only process your personal information on our instructions and they are subject to a duty of confidentiality.</p>
+      <p>We have put in place procedures to deal with any suspected data security breach and will notify you and any applicable regulator of a suspected breach where we are legally required to do so.</p>
+
+      <h3>10. Data retention</h3>
+      <p><strong>General retention period</strong>: We will retain your personal information for the duration of your application/recruitment process, and for two years after communicating the outcome of your application. We retain your personal information for that period so that: if you apply for another role, we have a record of previous decisions taken on your application; with your consent, we can consider you for future roles for which you may be a good fit; and, for applications coming through a recruitment agency, to fulfill our obligations under our contracts with them (e.g., when we are required to pay a commission for rejected applicants who are later hired within a specified period after the initial referral).</p>
+      <p><strong>Specific retention periods:</strong></p>
+      <ul>
+        <li>Any recorded interviews are deleted 4 months after recording.</li>
+        <li>Information relating to successful applicants will be transferred to their employment records, insofar as the information is necessary to establish an employment relationship or comply with legal obligations. In this case, retention periods are subject to our separate EverAI Staff Privacy Notice.</li>
+      </ul>
+
+      <h3>11. Your rights related to your personal information</h3>
+      <p>Depending on your location, applicable legal requirements, and applicable exemptions, you have certain rights with respect to your personal information:</p>
+      <ul>
+        <li><strong>Right of access</strong>: You have the right to request access to your personal information, namely, receive a copy of the personal information we hold about you and to check that we are lawfully processing it.</li>
+        <li><strong>Right to rectification</strong>: You have the right to request rectification of the personal information that we hold about you, namely, have any incomplete or inaccurate information we hold about you corrected.</li>
+        <li><strong>Right to deletion</strong>: You have the right to request deletion of your personal information.</li>
+        <li><strong>Right to object</strong>: In some cases, you have the right to object to us processing your personal information where we are relying on our or a third party's legitimate interest.</li>
+        <li><strong>Right to restrict processing</strong>: In some cases, you have the right to request restriction of processing of your personal information.</li>
+        <li><strong>Right to file a complaint</strong>: If you are in the EEA or the UK, you also have a right to file a complaint with your local data protection authority.</li>
+      </ul>
+      <p>You can exercise the above rights by contacting us at <a href="mailto:hello@everai.ai">hello@everai.ai</a>. We will respond to any data-related request as soon as practicable, and in any event within 30 days of receipt. We may require further information from you to verify the request, i.e., to ensure that it is really you making the request, or that any third-party requester has authority to act on your behalf.</p>
+
+      <h3>12. California Applicants</h3>
+      <p>In addition to the rights explained in this Applicant Privacy Notice, California residents also have rights under The California Consumer Privacy Act of 2018 ("CCPA"), as amended by the California Privacy Rights Act, subject to the exceptions therein. Applicants residing in California additionally have the right to:</p>
+      <ul>
+        <li>Certain information concerning our collection and use of their personal information;</li>
+        <li>Request that we delete certain personal information we collected from them;</li>
+        <li>Appoint an agent to exercise their rights provided for by the CCPA, provided that we are able to verify the request from a third-party via a duly executed notarized power of attorney and sufficient information to allow us to verify your identity and locate your information in our systems;</li>
+        <li>Not be subjected to discrimination for the exercise of these rights.</li>
+      </ul>
+      <p>We do not sell (and have not sold in the past 12 months) your personal information to third parties. We do not share (and have not shared in the past 12 months) your personal information with third parties for cross-context behavioral advertising purposes.</p>
+
+      <h3>13. Additional inquiries</h3>
+      <p style="margin-bottom:0">If you have any additional questions not addressed in this Applicant Privacy Notice, please contact us at <a href="mailto:hello@everai.ai">hello@everai.ai</a>.</p>
+    </section>
+<div class="page-nav"><a class="prev" href="get-in-touch.html"><span class="dir">&larr; Previous</span><span class="label">Get in Touch</span></a><span></span></div>
+  </main>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <span>EverAI Partner Hiring Wiki · Applicant Privacy Notice</span>
+    <span>Contact our TA team for anything not covered here</span>
+  </div>
+</footer>
+</body>
+</html>

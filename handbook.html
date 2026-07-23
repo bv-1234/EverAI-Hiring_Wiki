@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>EverAI Candidate Handbook</title>
 <style>
-  :root{
+:root{
     --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
     --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
     --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
@@ -21,61 +21,222 @@
       --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
     }
   }
-  :root[data-theme="dark"]{ --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3; --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733; --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422; }
-  :root[data-theme="light"]{ --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560; --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC; --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1; }
+  :root[data-theme="dark"]{
+    --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3;
+    --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733;
+    --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
+  }
+  :root[data-theme="light"]{
+    --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
+    --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
+    --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
+  }
 
   *{ box-sizing: border-box; }
   html,body{ margin:0; padding:0; }
-  body{ background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body{
+    background: var(--bg); color: var(--ink); font-family: var(--sans);
+    font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
   a{ color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 2px; }
   a:hover{ text-decoration-color: var(--accent-ink); }
-  a:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 
-  .masthead{ background: linear-gradient(180deg, var(--surface-2), var(--bg)); border-bottom: 1px solid var(--line); padding: 40px max(24px, calc((100vw - 1000px)/2)) 26px; }
-  .back-link{ font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; color: var(--ink-soft); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px; }
+  .masthead{
+    background: linear-gradient(180deg, var(--surface-2), var(--bg));
+    border-bottom: 1px solid var(--line);
+    padding: 40px max(24px, calc((100vw - 1180px)/2)) 26px;
+  }
+  .back-link{
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; color: var(--ink-soft);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px;
+  }
   .back-link:hover{ color: var(--accent-ink); }
-  .masthead h1{ font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 4vw, 36px); margin: 0 0 8px; text-wrap: balance; }
-  .masthead p{ color: var(--ink-soft); font-size: 15.5px; margin: 0; max-width: 640px; }
+  .masthead-eyebrow{
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--accent-ink); display: flex; align-items: center; gap: 8px; margin: 0 0 14px;
+  }
+  .masthead-eyebrow::before{ content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .masthead h1{
+    font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.01em; margin: 0 0 10px; text-wrap: balance;
+  }
+  .masthead p.lede{ max-width: 640px; color: var(--ink-soft); font-size: 16.5px; margin: 0 0 18px; }
+  .masthead-contact{ font-size: 14px; color: var(--ink-soft); }
+  .masthead-contact a{ color: var(--accent-ink); font-weight: 600; text-decoration: none; }
+  .masthead-contact a:hover{ text-decoration: underline; }
 
-  .layout{ max-width: 1000px; margin: 0 auto; padding: 36px 24px 100px; display: grid; grid-template-columns: 220px minmax(0,1fr); gap: 40px; align-items: start; }
-  nav.toc{ position: sticky; top: 24px; }
-  nav.toc .toc-label{ font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 12px 4px; }
+  .confidential-strip{
+    margin-top: 22px; display: flex; gap: 12px; align-items: flex-start;
+    background: var(--danger-soft); border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+    border-radius: var(--radius); padding: 13px 16px; max-width: 780px;
+  }
+  .confidential-strip .glyph{ font-size: 17px; line-height: 1.4; }
+  .confidential-strip strong{ color: var(--danger); }
+  .confidential-strip span.body{ color: var(--ink); font-size: 14px; }
+
+  .layout{
+    display: grid; grid-template-columns: 252px minmax(0,1fr); gap: 48px;
+    max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px; align-items: start;
+  }
+  nav.toc{ position: sticky; top: 24px; align-self: start; max-height: calc(100vh - 48px); overflow-y: auto; }
+  nav.toc .toc-label{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-faint); margin: 0 0 12px 4px;
+  }
   nav.toc ol{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
-  nav.toc a{ display: block; padding: 8px 10px; border-radius: 7px; text-decoration: none; color: var(--ink-soft); font-size: 14px; line-height: 1.3; }
+  nav.toc a{
+    display: flex; align-items: baseline; gap: 10px; padding: 7px 10px; border-radius: 7px;
+    text-decoration: none; color: var(--ink-soft); font-size: 14.5px; line-height: 1.35;
+  }
+  nav.toc a .num{ font-family: var(--mono); font-size: 11px; color: var(--ink-faint); flex-shrink: 0; width: 16px; }
   nav.toc a:hover{ background: var(--surface); color: var(--ink); }
+  nav.toc a.active{ background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
 
   main{ min-width: 0; }
-  section.card{ background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 34px clamp(18px,4vw,40px); margin-bottom: 28px; scroll-margin-top: 24px; }
-  section.card .kicker{ display:flex; align-items:center; gap:10px; margin-bottom:4px; }
-  section.card .kicker .icon{ font-size:22px; }
-  section.card h2{ font-family: var(--serif); font-weight:400; font-size:26px; letter-spacing: -0.005em; margin: 2px 0 18px; text-wrap: balance; }
-  section.card h3{ font-family: var(--sans); font-size:15.5px; font-weight:700; margin: 26px 0 10px; }
-  section.card h4{ font-size:13.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); font-weight:700; margin: 20px 0 8px; }
-  section.card h5{ font-family: var(--sans); font-size:14.5px; font-weight:700; margin: 16px 0 6px; }
-  section.card p{ margin:0 0 14px; }
-  section.card p.dim{ color:var(--ink-soft); }
-  section.card ul, section.card ol{ margin:0 0 14px; padding-left:20px; }
-  section.card li{ margin-bottom:6px; }
-  section.card li::marker{ color: var(--ink-faint); }
 
-  .callout{ display:flex; gap:12px; border-radius:var(--radius); padding:14px 16px; margin:16px 0; border:1px solid var(--line); background:var(--surface-2); }
-  .callout .glyph{ font-size:16px; flex-shrink:0; }
-  .callout .content > *:last-child{ margin-bottom:0; }
-  .callout.accent{ background:var(--accent-soft); border-color:color-mix(in srgb, var(--accent) 35%, transparent); }
-  .callout.warn{ background:var(--warn-soft); border-color:color-mix(in srgb, var(--warn) 35%, transparent); }
-  .callout.good{ background:var(--good-soft); border-color:color-mix(in srgb, var(--good) 35%, transparent); }
+  section.card{
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 36px clamp(20px, 4vw, 44px); margin-bottom: 28px; scroll-margin-top: 24px;
+  }
+  section.card > .kicker{ display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  section.card .kicker .icon{ font-size: 24px; line-height: 1; }
+  section.card .kicker .idx{ font-family: var(--mono); font-size: 12px; color: var(--ink-faint); letter-spacing: 0.06em; }
+  section.card h2{
+    font-family: var(--serif); font-weight: 400; font-size: 26px; letter-spacing: -0.005em;
+    margin: 2px 0 6px; text-wrap: balance;
+  }
+  section.card p.subtitle{ font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 15px; margin: 0 0 22px; }
+  section.card h3{ font-family: var(--sans); font-weight: 700; font-size: 15.5px; margin: 30px 0 10px; color: var(--ink); }
+  section.card h3.numbered{ display:flex; align-items:center; gap:8px; }
+  section.card h3 .step-dot{
+    display:inline-flex; align-items:center; justify-content:center; width: 20px; height:20px; border-radius:50%;
+    background: var(--accent-soft); color: var(--accent-ink); font-family: var(--mono); font-size: 11px; font-weight:700; flex-shrink:0;
+  }
+  section.card h4{
+    font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint);
+    font-weight: 700; margin: 22px 0 8px;
+  }
+  section.card h5{ font-size: 14.5px; font-weight: 700; color: var(--ink); margin: 16px 0 6px; }
+  section.card p{ margin: 0 0 14px; color: var(--ink); }
+  section.card p.dim{ color: var(--ink-soft); }
+  section.card ul, section.card ol, section.card ol.plain{ margin: 0 0 14px; padding-left: 22px; }
+  section.card li{ margin-bottom: 7px; }
+  section.card li::marker{ color: var(--ink-faint); }
+  section.card ul ul, section.card ol.plain ul, section.card ul ol, section.card ol ol{ margin: 6px 0 6px; }
+  section.card .step-list{ padding-left: 20px; margin: 0 0 6px; }
+  section.card .step-list > li{ margin-bottom: 16px; }
 
   figure.shot{ margin: 12px 0 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); padding: 8px; }
-  figure.shot img{ display:block; width:100%; border-radius:6px; border:1px solid var(--line); }
+  figure.shot img{ display: block; width: 100%; border-radius: 6px; border: 1px solid var(--line); }
   figure.shot figcaption{ font-family: var(--mono); font-size: 11px; color: var(--ink-faint); padding: 8px 4px 2px; }
   .cols{ display:grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap:10px; margin: 12px 0; }
   .cols img{ width:100%; border-radius:8px; border:1px solid var(--line); }
 
-  .table-wrap{ overflow-x:auto; margin:8px 0 20px; border:1px solid var(--line); border-radius:10px; }
-  table{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:600px; }
-  thead th{ text-align:left; font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); background:var(--surface-2); padding:10px 14px; border-bottom:1px solid var(--line); }
-  tbody td{ padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
-  tbody tr:last-child td{ border-bottom:none; }
+  .media-chip{
+    display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--line);
+    border-radius: 8px; background: var(--surface-2); text-decoration: none; font-size: 13.5px; font-weight: 600;
+    color: var(--accent-ink); margin: 4px 0 16px;
+  }
+  .media-chip:hover{ border-color: var(--accent); }
+  .media-note{ font-size: 13px; color: var(--ink-faint); font-style: italic; margin: 4px 0 16px; }
+  .embed-wrap{ margin: 10px 0 18px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .embed-wrap iframe{ width: 100%; height: 560px; border: none; display: block; }
+
+  .callout{ display: flex; gap: 12px; border-radius: var(--radius); padding: 14px 16px; margin: 18px 0; border: 1px solid var(--line); background: var(--surface-2); }
+  .callout .glyph{ font-size: 17px; flex-shrink: 0; line-height: 1.5; }
+  .callout .content > *:last-child{ margin-bottom: 0; }
+  .callout.warn{ background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, transparent); }
+  .callout.danger{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 35%, transparent); }
+  .callout.good{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 35%, transparent); }
+  .callout.accent{ background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+
+  .badge{ display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.03em; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; }
+  .badge.p0{ background: var(--danger-soft); color: var(--danger); }
+  .badge.p1{ background: var(--warn-soft); color: var(--warn); }
+  .badge.open{ background: var(--good-soft); color: var(--good); }
+  .badge.soon{ background: var(--accent-soft); color: var(--accent-ink); }
+  .badge.closed{ background: var(--surface-2); color: var(--ink-faint); border: 1px solid var(--line); }
+  .badge.tier-red{ background: var(--danger-soft); color: var(--danger); }
+  .badge.tier-yellow{ background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-green{ background: var(--good-soft); color: var(--good); }
+  .tag{ display:inline-block; font-size: 12.5px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: var(--mono); }
+  .new-tag{ display:inline-block; font-size: 11px; color: var(--danger); font-weight: 700; }
+
+  .table-wrap{ overflow-x: auto; margin: 6px 0 22px; border: 1px solid var(--line); border-radius: 10px; }
+  table{ width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+  table caption{ text-align:left; padding: 10px 16px 0; font-size: 12px; color: var(--ink-faint); }
+  thead th{
+    text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-faint); background: var(--surface-2); padding: 11px 16px; border-bottom: 1px solid var(--line); white-space: nowrap;
+  }
+  tbody td{ padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink); }
+  tbody tr:last-child td{ border-bottom: none; }
+  tbody td.num, thead th.num{ font-variant-numeric: tabular-nums; }
+  tbody td strong{ font-weight: 700; }
+
+  .split{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 8px 0 10px; }
+  @media (max-width: 720px){ .split{ grid-template-columns: 1fr; } }
+  .split .col{ border-radius: var(--radius); padding: 18px 20px; border: 1px solid var(--line); }
+  .split .col.do{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 30%, transparent); }
+  .split .col.dont{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 30%, transparent); }
+  .split h4{ margin-top: 0; color: inherit; }
+  .split .col.do h4{ color: var(--good); }
+  .split .col.dont h4{ color: var(--danger); }
+  .split ul{ margin: 0; padding-left: 20px; }
+  .split li{ font-size: 14.5px; }
+
+  .flag{ border: 1px solid var(--line); border-left: 3px solid var(--danger); border-radius: 8px; padding: 14px 18px; margin: 0 0 14px; background: var(--surface-2); }
+  .flag .flag-title{ font-weight: 700; margin: 0 0 6px; }
+  .flag .flag-title .glyph{ margin-right: 6px; }
+  .flag .flag-title span.line{ display:block; }
+  .flag p{ margin: 0 0 8px; font-size: 14.5px; color: var(--ink-soft); }
+  .flag p.ask{ margin: 0; font-size: 13.5px; color: var(--accent-ink); font-style: italic; }
+
+  .pills{ display:flex; flex-wrap:wrap; gap:6px; margin: 6px 0 18px; }
+  .pills .pill{ font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-soft); }
+  .pills.red .pill{ border-color: color-mix(in srgb, var(--danger) 30%, transparent); color: var(--danger); background: var(--danger-soft); }
+  .pills.green .pill{ border-color: color-mix(in srgb, var(--good) 30%, transparent); color: var(--good); background: var(--good-soft); }
+
+  .resource-list{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .resource-list li{ margin: 0; }
+  .resource-list a{
+    display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border: 1px solid var(--line);
+    border-radius: 10px; background: var(--surface-2); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 15px;
+  }
+  .resource-list a:hover{ border-color: var(--accent); background: var(--accent-soft); }
+  .resource-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); }
+
+  .brief-list{ list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .brief-list a{
+    display: flex; align-items: center; gap: 8px; padding: 11px 15px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--surface-2); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 14.5px;
+  }
+  .brief-list a:hover{ border-color: var(--accent); background: var(--accent-soft); }
+  .brief-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); margin-left: auto; }
+  .brief-list a .sub{ font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+  .role-meta{ display:grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap:10px 20px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; margin: 10px 0 18px; font-size:13.5px; }
+  .role-meta div span.label{ display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px; }
+
+  .nn-list{ list-style:none; margin:0 0 16px; padding:0; counter-reset: nn; }
+  .nn-list li{ counter-increment: nn; position:relative; padding-left:30px; margin-bottom:10px; }
+  .nn-list li::before{ content: counter(nn); position:absolute; left:0; top:1px; width:20px; height:20px; border-radius:50%; background:var(--danger-soft); color:var(--danger); font-family:var(--mono); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .nn-list li::marker{ content:none; }
+
+  .filter-line{ font-size:13.5px; color:var(--danger); margin: 4px 0 14px; padding-left: 22px; }
+  .filter-line::before{ content:"❌ "; }
+
+  .eval-cat{ border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-bottom:12px; background:var(--surface-2); }
+  .eval-cat .pct{ font-family:var(--mono); color:var(--accent-ink); font-weight:700; }
+
+  .tool-tier{ margin: 4px 0 6px; }
+  .tool-tier .tier-label{ font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--accent-ink); font-weight:700; }
+
+  details.faq{ border:1px solid var(--line); border-radius:8px; margin-bottom:8px; background:var(--surface-2); }
+  details.faq summary{ padding:10px 14px; font-weight:600; font-size:13.5px; cursor:pointer; }
+  details.faq .faq-body{ padding: 0 14px 14px; font-size:13.5px; color:var(--ink-soft); }
+  details.faq .faq-body p{ margin: 0 0 10px; }
 
   .value-card{ border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:10px; background:var(--surface-2); }
   .value-card strong{ display:block; margin-bottom:4px; }
@@ -85,44 +246,43 @@
   .stat .num{ font-family:var(--mono); font-size:20px; font-weight:700; color:var(--accent-ink); display:block; }
   .stat .lbl{ font-size:11.5px; color:var(--ink-faint); }
 
-  hr.rule{ border:none; border-top:1px solid var(--line); margin:24px 0; }
-  footer{ max-width:1000px; margin:0 auto; padding:0 24px 60px; color:var(--ink-faint); font-size:13px; border-top:1px solid var(--line); padding-top:20px; }
-
-  @media (max-width: 800px){
-    .layout{ grid-template-columns: 1fr; }
-    nav.toc{ position:static; border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:6px; }
-    nav.toc ol{ flex-direction:row; flex-wrap:wrap; }
+  .page-nav{ display:flex; justify-content:space-between; gap:16px; margin: 4px 0 28px; }
+  .page-nav a{
+    flex: 1; max-width: 48%; display:flex; flex-direction:column; gap:4px; padding:14px 18px; border:1px solid var(--line);
+    border-radius:10px; background:var(--surface-2); text-decoration:none; color:var(--ink);
   }
+  .page-nav a:hover{ border-color:var(--accent); background:var(--accent-soft); }
+  .page-nav a.next{ text-align:right; margin-left:auto; }
+  .page-nav .dir{ font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+  .page-nav .label{ font-weight:600; font-size:14.5px; }
+
+  hr.rule{ border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+
+  footer{ max-width: 1180px; margin: 0 auto; padding: 0 24px 60px; color: var(--ink-faint); font-size: 13px; }
+  footer .foot-inner{ border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 880px){
+    .layout{ grid-template-columns: 1fr; padding-top: 24px; }
+    nav.toc{ position: static; max-height: none; overflow: visible; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 8px; }
+    nav.toc ol{ flex-direction: row; flex-wrap: wrap; }
+    nav.toc a{ font-size: 13.5px; }
+    .embed-wrap iframe{ height: 420px; }
+    .page-nav{ flex-direction: column; }
+    .page-nav a{ max-width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ transition: none !important; } }
 </style>
 </head>
 <body>
-
 <header class="masthead">
-  <a class="back-link" href="index.html">← Back to the Partner Hiring Wiki</a>
+  <a class="back-link" href="index.html">&larr; Back to the Partner Hiring Wiki</a>
   <h1>EverAI Candidate Handbook</h1>
-  <p>Share this with every candidate before submission. It gives them a full, honest picture of who EverAI is, what the product does, and what to expect from the process — so nobody moves forward without genuinely knowing what they're signing up for.</p>
+  <p class="lede">Share this with every candidate before submission. It gives them a full, honest picture of who EverAI is, what the product does, and what to expect from the process — so nobody moves forward without genuinely knowing what they're signing up for.</p>
 </header>
 
-<div class="layout">
-  <nav class="toc" aria-label="Table of contents">
-    <p class="toc-label">Contents</p>
-    <ol>
-      <li><a href="#welcome">👋 Welcome</a></li>
-      <li><a href="#who-we-are">👥 Who We Are</a></li>
-      <li><a href="#what-we-do">💻 What We Do</a></li>
-      <li><a href="#safety-and-ethics">🛡️ Safety and Ethics</a></li>
-      <li><a href="#engineering">⚙️ Engineering at EverAI</a></li>
-      <li><a href="#why-join-us">🤔 Why Join Us?</a></li>
-      <li><a href="#recruitment-process">🏁 Our Recruitment Process</a></li>
-      <li><a href="#get-in-touch">💬 Get in Touch</a></li>
-      <li><a href="#privacy-notice">🔐 Applicant Privacy Notice</a></li>
-    </ol>
-  </nav>
-
-  <main>
-
-    <!-- WELCOME -->
-    <section class="card" id="welcome">
+<div class="layout" style="grid-template-columns: 1fr;">
+  <main style="max-width: 760px;">
+<section class="card" id="welcome">
       <div class="callout accent">
         <span class="glyph">👋</span>
         <div class="content">
@@ -142,486 +302,29 @@
         <div class="content"><p style="margin-bottom:0">Our team is working on building more candidate resources. If you don't see what you're looking for, please feel free to reach out to your recruiter anytime. We're your partners in this journey, and we're here to answer any questions you may have along the way! :)</p></div>
       </div>
     </section>
-
-    <!-- WHO WE ARE -->
-    <section class="card" id="who-we-are">
-      <div class="kicker"><span class="icon">👥</span></div>
-      <h2>Who We Are</h2>
-
-      <h3>Our Vision</h3>
-      <p><em>EverAI - Building the future of AI Companionship.</em></p>
-      <p>At <a href="https://www.everai.ai/" target="_blank" rel="noopener">EverAI</a>, we're shaping what it means to connect with AI. With <strong>50 Million users and counting</strong>, we're not just building products, we're creating entirely new categories.</p>
-      <p>Our vision is clear: <em>"To combat loneliness and boredom through immersive and lifelike AI experiences."</em></p>
-      <p>We are the team behind:</p>
-      <ul>
-        <li><a href="https://candy.ai/" target="_blank" rel="noopener"><strong>Candy.ai</strong></a>: The <strong>world's largest AI companionship platform</strong>, redefining companionship for millions.</li>
-        <li><a href="https://yumeai.com/" target="_blank" rel="noopener"><strong>YumeAI</strong></a>: Our newest product expansion, catering to stylized and anime aesthetics, pushing the boundaries of visual creativity.</li>
-      </ul>
-      <p><strong>Up next?</strong> We are doubling down on our <strong>multi-brand strategy</strong>. By operating distinct products like Candy and Yume, we can tailor experiences to specific user preferences, ensuring we dominate every niche of the AI companionship market.</p>
-      <p>All of this is governed by our proprietary moderation system, <strong>EverGuard</strong>: an internal AI designed to ensure everything we build is <strong>safe, ethical, and human-first</strong>.</p>
-      <div class="callout accent">
-        <span class="glyph">🪄</span>
-        <div class="content"><p style="margin-bottom:0">As part of the team, you'll help bring these stories to life, building the future of AI companionship, where imagination knows no limits.</p></div>
-      </div>
-
-      <h3>Our Values</h3>
-      <figure class="shot"><img src="assets/handbook/who-values.png" alt="EverAI values" /></figure>
-
-      <h3>Meet the Team</h3>
-      <p>Our team is made up of a fully remote group of <strong>A-players from Tier 1 tech.</strong> We move fast, and care deeply about what we build, and who we build it with.</p>
-      <p><strong>Leading our journey</strong> is a founding team with deep entrepreneurial roots and a proven track record of success. Having <strong>built and scaled multiple web products from the ground up, all the way to IPO</strong>, they bring the kind of expertise and leadership that transforms ambitious ideas into reality.</p>
-      <div class="cols">
-        <img src="assets/handbook/who-team-1.png" alt="Thomas Lacroix" />
-        <img src="assets/handbook/who-team-2.png" alt="Michael Monin" />
-        <img src="assets/handbook/who-team-3.png" alt="Alexis Soulopoulos" />
-        <img src="assets/handbook/who-team-4.png" alt="Dr. Maruša Fasano" />
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Thomas Lacroix<br />Co-founder &amp; CMO</th><th>Michael Monin<br />Co-founder &amp; CTO</th><th>Alexis Soulopoulos<br />CEO</th><th>Dr. Maruša Fasano<br />CFO/Legal</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>• 8+ years in Customer Acquisition &amp; E-commerce Growth<br />• Serial-entrepreneur: Curatible (sold to Blackstone) and MTK Digital (exited / 0→$20m revenue)</td>
-              <td>• 9+ years as CTO / COO, 1+ year in AI, LLM<br />• Serial-entrepreneur: MTK Digital (exited / 0→$20m revenue) and Zipchat (exited / AI Chatbot for E-commerce brands)</td>
-              <td>• 10+ years in Tech Executive Leadership<br />• Co-Founder Mad Paws Holdings (from 0 to IPO)<br />• Forbes 30U30 + Deloitte TechFast50 '22 &amp; '23</td>
-              <td>• 25+ years in Finance, Strategy, M&amp;A<br />• Ex-CFO/M&amp;A @Curatible (exited to Blackstone)<br />• Ex-President of the Board @SotremoSA (exited)<br />• Co-founder/CFO @SoftOne (exited)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p>At <strong>EverAI</strong>, we are lucky to have an incredible group of people who bring their expertise from world-renowned companies, such as:</p>
-      <figure class="shot"><img src="assets/handbook/who-logos.png" alt="Companies our team comes from" /></figure>
-      <p>We're a mix of smart, passionate people who love solving problems and pushing the boundaries of AI. When you join us, you'll work alongside colleagues who are not just experts in what they do, but are also excited to share, learn, and have fun building something incredible together.</p>
-
-      <h3>What Sets Us Apart</h3>
-      <p>Besides our Team described in the above section, EverAI is a unique opportunity because:</p>
-      <ul>
-        <li>📈 <strong>Exponential Growth</strong>: From 50M users in 2 years, to 100M next, and 500M beyond.</li>
-        <li>🚀 <strong>Track Record of Category-Creating Innovation</strong>: We consistently launch <strong>world-first AI applications.</strong> We are setting the pace, not following it.</li>
-        <li>🌍 <strong>Global Impact</strong>: Top-tier user growth, real-world adoption, and cultural relevance.</li>
-        <li>🛡️ <strong>Ethical Core</strong>: Finally, we built the world's most advanced AI Content Moderation, it's for users, technology &amp; financial partners, and for attracting the right talent.</li>
-      </ul>
-      <p>Our dedicated Compliance team, led by our Ethics &amp; Compliance Officer and working closely with our AI teams, ensures that ethics and compliance are embedded in everything we build and do:</p>
-      <div class="callout accent"><span class="glyph">🛡️</span><div class="content"><p style="margin-bottom:0"><strong>EverGuard, our proprietary AI-Powered Moderation Technology</strong><br />Our advanced AI technology protects against any prohibited content, ensuring a safe environment for all users.</p></div></div>
-      <div class="callout good"><span class="glyph">✅</span><div class="content"><p style="margin-bottom:0"><strong>Audited and Transparent</strong><br />We're independently audited by a trusted audit firm and overseen by our Board of Directors, guaranteeing accountability. Payment providers, banks, and other partners regularly audit us to meet strict compliance standards.</p></div></div>
-      <div class="callout accent"><span class="glyph">🏦</span><div class="content"><p style="margin-bottom:0"><strong>Investor-Backed Stability</strong><br />We've raised a $10M seed round from prominent investors who conducted rigorous due diligence before investing.</p></div></div>
-      <p><strong>By joining EverAI, you'll be part of a team that values integrity, innovation, and trust at every level.</strong></p>
-      <div class="cols" style="grid-template-columns: 1fr 1fr;">
-        <img src="assets/handbook/who-candycon-1.png" alt="CandyCon26 team photo" />
-        <img src="assets/handbook/who-candycon-2.png" alt="CandyCon26 team photo" />
-      </div>
-      <p class="dim" style="font-size:13px"><em>The team at our annual company gathering - CandyCon26 in Buenos Aires!</em></p>
-    </section>
-
-    <!-- WHAT WE DO -->
-    <section class="card" id="what-we-do">
-      <div class="kicker"><span class="icon">💻</span></div>
-      <h2>What We Do</h2>
-
-      <h3>How It Started 🚀</h3>
-      <p><strong>It all started when our co-founders, Michael and Thomas, set out to create a WhatsApp chatbot assistant.</strong> But as they dove deeper into analyzing how users were interacting with it, they stumbled upon something surprising: people weren't just using it for assistance, they were using it <em>romantically</em>! 💘</p>
-      <p>That "aha" moment sparked a bold new direction. Instead of sticking with the original plan, Michael and Thomas took a leap and decided to build something unique: Candy.ai, a platform that helps people foster deeper, more meaningful connections.</p>
-
-      <h3>Our Product & Technology</h3>
-      <p>We believe that AI isn't just about answering questions, it's about creating experiences that feel alive. We're focused on developing technology that allows users to step into stories, create characters, and explore their fantasies in a safe, fun, and judgment-free environment.</p>
-      <h4>Candy.ai & YumeAI</h4>
-      <p>Our journey began with <a href="https://candy.ai/" target="_blank" rel="noopener">Candy🍬</a>, the world's leading realistic AI companion platform, and has now expanded with <a href="https://yumeai.com/" target="_blank" rel="noopener">YumeAI</a>, our dedicated platform for stylized and anime aesthetics.</p>
-      <p>Across both platforms, we provide users with an array of tools to design and engage with AI companions in ways that reflect their personal vision.</p>
-      <p><strong>Here is what our technology allows users to do:</strong></p>
-      <ul>
-        <li><strong>Design & Customize:</strong> Users can design their own AI companions from the ground up, customizing appearance, personality traits, and voice, making each character truly unique.</li>
-        <li><strong>Chat through Text & AI Phone Calls:</strong> We take immersion to the next level. With just one tap, users can connect through a phone call and experience the full power of the AI they created, like talking to an old friend or meeting an exciting new one.</li>
-        <li><strong>Generate High-Fidelity Visuals:</strong> Users can describe a scene or idea, and our engine brings it to life. Whether they want a picture or a short video, a simple prompt generates a unique visual tailored to their imagination.</li>
-      </ul>
-      <h4>Pushing the Boundaries of Immersion 🚀</h4>
-      <p>We don't just settle for "standard" features. We are constantly shipping industry-first innovations to make the experience deeper and more engaging:</p>
-      <ul>
-        <li><strong>Advanced Image & Video Tech:</strong> We've enabled users to turn static images (including Anime styles) into motion with 5-second and 10-second animations.</li>
-        <li><strong>Group Chat:</strong> Users can now step into multi-character dynamics, where companions interact not just with the user, but with each other! 🤯</li>
-        <li><strong>Hyper-Realistic "Live Action":</strong> We have introduced <strong>Live Action</strong> models that blur the line between AI and reality, offering a level of visual detail that feels completely authentic.</li>
-        <li><strong>The Explore Feed:</strong> We created an engaging <strong>Feed</strong> where users can discover high-quality content and characters created by our world-class content teams, providing endless inspiration and entertainment.</li>
-        <li><strong>Memory System:</strong> It's not just a chat bot; it remembers. Users can now build <strong>long-term context</strong> with their companions, who recall specific details and shared moments to build a genuine bond.</li>
-        <li><strong>Creative Mode (New! 🎨):</strong> We recently launched Creative Mode, giving users a "sandbox" to generate images and videos freely from prompts without being tied to a specific character. It's pure generative freedom.</li>
-      </ul>
-
-      <h3>How It's Going 🔥</h3>
-      <p>Since our launch in <strong>September 2023</strong>, <a href="https://candy.ai/" target="_blank" rel="noopener">Candy AI</a> has absolutely taken off, <strong>becoming the largest platform of its kind worldwide</strong> in record time!</p>
-      <p>With <strong>20 million unique users per month</strong>, we've earned our place among the <strong>top 4 Generative AI web products</strong> globally, standing shoulder-to-shoulder with the biggest names in the industry.</p>
-      <figure class="shot"><img src="assets/handbook/what-revenue-chart.png" alt="Candy.ai growth chart" /></figure>
-      <p>In under a year, we've hit <strong>eight-figure annualized revenue</strong>, a milestone that speaks to the incredible growth of our platform. Now, over 18 months in, we have scaled significantly past that milestone.</p>
-      <p>And we're not the only ones who've noticed: investors have too! We've successfully raised <strong>$10 million in funding</strong>, cementing <strong>Candy.ai</strong> as one of the <strong>fastest-growing companies</strong> in the space.</p>
-      <p>Our community of <strong>50 Million users</strong> is a testament to the platform's incredible appeal and impact, particularly in two of the <strong>fastest-growing Gen AI categories: content generation and companion</strong>.</p>
-      <figure class="shot">
-        <img src="assets/handbook/what-a16z.png" alt="a16z: How Are Consumers Using Generative AI" />
-        <figcaption>To read the full article, visit <a href="https://a16z.com/how-are-consumers-using-generative-ai/" target="_blank" rel="noopener">this page</a>.</figcaption>
-      </figure>
-      <p>According to Harvard Business Review, <strong>Generative AI in 2025</strong> has shifted from technical use cases to <strong>emotional, personal, and human-centric applications</strong>.</p>
-      <figure class="shot">
-        <img src="assets/handbook/what-hbr.png" alt="HBR: How People Are Really Using Gen AI in 2025" />
-        <figcaption>To read the full article, visit <a href="https://hbr.org/2025/04/how-people-are-really-using-gen-ai-in-2025" target="_blank" rel="noopener">this page</a>.</figcaption>
-      </figure>
-      <h4>🧠 Bottom Line</h4>
-      <p><strong>CandyAI isn't just riding the wave, it's shaping it.</strong></p>
-      <p>In a world where users are actively turning to GenAI for companionship, intimacy, and purpose, <strong>CandyAI is building exactly what people are asking for</strong>, and doing it earlier and better than most.</p>
-      <p>We couldn't be prouder of how far we've come, and can't wait to see what the future holds for us! <strong>And the best part? We're just getting started!</strong></p>
-
-      <h3>Our Future (And Your Role in It)</h3>
-      <p>We're not stopping here; and we need your help writing the next chapter. <strong>Coming soon, we're working on:</strong></p>
-      <ul>
-        <li><strong>Scaling YumeAI</strong>: We are applying our growth playbooks to take our new anime product to the same heights as Candy.ai.</li>
-        <li><strong>AI Chat in Local Languages</strong>: We are actively expanding our language capabilities to 16+ languages to make global interaction easier.</li>
-        <li><strong>Improved AI-generated videos</strong>: Users' stories will come to life in moving pictures, turning words into vivid animations. Currently we offer 10 second videos, with ample improvement opportunities.</li>
-        <li><strong>AI Live Streaming:</strong> We've set ourselves an ambitious goal: <strong>to be the first in the world to launch AI Live Streaming</strong> for our industry. We believe adoption will be <strong>off the charts</strong>, with use cases spanning far and wide.</li>
-        <li><strong>AR/VR integration</strong>: Soon, users will step <strong>into their stories</strong>, living their fantasies through immersive AR/VR experiences.</li>
-      </ul>
-      <div class="callout accent">
-        <span class="glyph">👑</span>
-        <div class="content">
-          <p>We acquired 50M users in 2 years, <strong>our goal is to reach 100M users</strong> in the next 12 months, and <strong>500M after.</strong></p>
-          <p><strong>To achieve that, we're looking for exceptional talent</strong> ready to ship &amp; scale world-first AI products fast, and co-create with us this category defining business.</p>
-          <p style="margin-bottom:0"><strong>The next few years will be transformative, and we're inviting you to be part of that journey.</strong></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SAFETY AND ETHICS -->
-    <section class="card" id="safety-and-ethics">
-      <div class="kicker"><span class="icon">🛡️</span></div>
-      <h2>Safety and Ethics</h2>
-
-      <h3>Overview 🚀</h3>
-      <ul>
-        <li>Safety and ethics are at the core of our product and mission. We recognize our unique responsibility as an adults-only AI platform, and we take a safety-by-design approach, embedding safety into all aspects of our operation and all stages of the development lifecycle.</li>
-        <li>We know that you're reading this because safety is important to you, too. This document aims to strike a balance between providing meaningful information on our moderation controls while not compromising security by giving bad actors information on how to evade them. If you have specific questions about safety that aren't addressed here, we're happy to answer them during your interviews.</li>
-      </ul>
-
-      <h3>Technical and organizational measures</h3>
-      <h4>Technical measures</h4>
-      <ul>
-        <li>Users cannot upload or import external visual media to the platform. This prevents, for example, non-consensual intimate imagery and "nudification."</li>
-        <li>All text and images are subject to moderation. We incorporate layered safeguards on the platform, continuous monitoring, and dedicated oversight to maintain safety and integrity.</li>
-        <li>Through ongoing collaboration between our Trust &amp; Safety and AI teams, we are constantly improving and refining our proprietary moderation LLM (EverGuard), the top adult moderation tool worldwide.</li>
-        <li>Because our moderation technology is proprietary and security-sensitive, we can't share detailed implementation or infrastructure information publicly. You are invited to ask more specific questions during any interviews, and your interviewers will be happy to share more detailed information.</li>
-      </ul>
-      <h4>Organizational measures</h4>
-      <p>Ensuring safety and ethics in our products is not a one-and-done or "check the box" exercise. It requires a culture of compliance, buy-in from top-level management, and an organizational commitment to safety.</p>
-      <p>The following gives an overview of how we've built a culture of compliance at EverAI:</p>
-      <ul>
-        <li>We have a zero-tolerance policy for Child Sexual Abuse Material (CSAM) and are committed to fully complying with valid requests from law enforcement. In addition to our other content moderation and removal controls, human moderators review flagged accounts and permanently block users that attempt to create CSAM. We are a registered reporter with and report known CSAM to the National Center for Missing and Exploited Children (or other local authorities as appropriate).</li>
-        <li>We have an in-house Ethics and Compliance Officer (ECO) who owns safety and compliance issues. This is not simply a title given to someone in the company; the position was specifically recruited-for. Our ECO works with all teams on an ongoing basis to address compliance and/or safety topics that come up in their work, for example, reviewing new features and characters before they are published on the platform.</li>
-        <li>All EverAI team members' onboarding includes safety/compliance trainings. Additional company-wide and department-specific trainings on safety and broader compliance topics (e.g., data protection) are also provided on an ongoing basis.</li>
-      </ul>
-      <div class="callout accent">
-        <span class="glyph">ℹ️</span>
-        <div class="content"><p style="margin-bottom:0">You can access our Trust &amp; Safety hub <a href="https://helloeverai.zendesk.com/hc/en-us" target="_blank" rel="noopener">here</a>.</p></div>
-      </div>
-    </section>
-
-    <!-- ENGINEERING -->
-    <section class="card" id="engineering">
-      <div class="kicker"><span class="icon">⚙️</span></div>
-      <h2>Engineering at EverAI</h2>
-      <p>If you're evaluating a role here, <strong>you deserve a clear picture of what you'd actually be working on</strong>.</p>
-      <p>This section gives you a direct, honest look at what Engineering at EverAI actually looks like:</p>
-      <ul>
-        <li><strong>Under the Hood</strong> covers our infrastructure, stack, and scale — the technical reality of what you'd be working on from day one.</li>
-        <li><strong>The EverAI Way: What Shipping Fast Really Means</strong> covers how we work — our engineering culture, decision-making principles, and what we expect from everyone on the team.</li>
-      </ul>
-
-      <hr class="rule" />
-      <h3 id="under-the-hood" style="margin-top:0">🚧 Under the Hood</h3>
-      <p class="dim"><em>This article was written by our CTO &amp; Co-founder, Michael Monin.</em></p>
-      <div class="callout accent">
-        <span class="glyph">ℹ️</span>
-        <div class="content"><p style="margin-bottom:0"><strong>Why this matters for candidates</strong><br />We're not a prototype. We run one of the most active AI companionship platforms in the world, on a lean, fast-moving Engineering team. If you care about scale, ownership, and shipping, read on.</p></div>
-      </div>
-      <p><em>Scaling AI companionship — under the hood of a 10B request monolith</em></p>
-      <h4>💎 Why We Use Rails</h4>
-      <p>Garry Tan recently noted that the world is "sleeping" on the combination of Ruby on Rails and AI-augmented coding. Because Rails is built on "Convention Over Configuration," AI models like Claude can act autonomously within the codebase, resulting in massive productivity gains.</p>
-      <figure class="shot"><img src="assets/handbook/eng-rails.png" alt="Garry Tan on Rails + AI" /></figure>
-      <p>At EverAI, we've turned that "unlock" into a reality at massive scale. We aren't just building an app; we are running a global infrastructure that handles:</p>
-      <div class="stat-row">
-        <div class="stat"><span class="num">28M</span><span class="lbl">Monthly Active Users</span></div>
-        <div class="stat"><span class="num">10B+</span><span class="lbl">HTTP requests / 30 days</span></div>
-        <div class="stat"><span class="num">1 PB</span><span class="lbl">Monthly data traffic</span></div>
-      </div>
-      <figure class="shot"><img src="assets/handbook/eng-users-over-time.png" alt="Active users over time" /></figure>
-
-      <h4>📊 The raw numbers</h4>
-      <p>10–12 billion HTTP requests in a typical 30-day window. Peaks push well north of 400M/day. 80M+ visits, 41M+ uniques, and we're serving a full petabyte of data (mostly images/videos — they're heavy).</p>
-      <h5>Last 30 days - Requests</h5>
-      <figure class="shot"><img src="assets/handbook/eng-requests-last-month.png" alt="Requests, last 30 days" /></figure>
-
-      <h4>⚒️ Keeping the queues happy</h4>
-      <p>Everything non-trivial is async: image, messages, notifications, ML inference queues, analytics events etc.. All flowing through Sidekiq.</p>
-      <p>We process billions of jobs with basically zero backlog. On Rails.</p>
-      <h5>Sidekiq Jobs</h5>
-      <figure class="shot"><img src="assets/handbook/eng-sidekiq.png" alt="Sidekiq jobs processed" /></figure>
-      <h5>Throughput</h5>
-      <figure class="shot"><img src="assets/handbook/eng-throughput.png" alt="Throughput, last 3 months" /></figure>
-
-      <h4>💥 The database is... not small</h4>
-      <p>Single primary Postgres (plus read replicas) holding billions of messages, conversation, user profiles and more.</p>
-      <p>Total size ~1.81TB and growing fast. Indexing and query optimization never sleep.</p>
-      <h5>Database</h5>
-      <div class="cols">
-        <img src="assets/handbook/eng-db-1.png" alt="Database screenshot 1" />
-        <img src="assets/handbook/eng-db-2.png" alt="Database screenshot 2" />
-      </div>
-
-      <h4>We ship fast 🚀</h4>
-      <p>Reviews typically land in under an hour. Engineers spend the vast majority of their time on new features, not firefighting.</p>
-      <p>Heavy AI tool adoption in the codebase itself. PR velocity has been climbing steadily, with recent months routinely hitting 400–500+ merged PRs.</p>
-      <figure class="shot"><img src="assets/handbook/eng-code-changes.png" alt="Code changes over time" /></figure>
-
-      <h4>Join Our Team</h4>
-      <p>We're still early in the journey to 500M+ users. The fun problems ahead: real-time WebSocket scaling for millions of concurrent chats, smarter caching of personalized conversation context, cost-efficient image/video generation at extreme volume, thoughtful monolith sharding, and making the whole system bulletproof under viral traffic spikes.</p>
-      <p>The core stack is Ruby on Rails + Postgres + Redis + Sidekiq, but we're language-agnostic, strong modern backend/web experience matters way more than specific Rails years.</p>
-      <p>If any of this sounds like the kind of scale you want to tackle every day, we're hiring senior backend engineers (full remote, Europe time zones preferred).</p>
-
-      <hr class="rule" />
-      <h3 id="everai-way">The EverAI Way: What Shipping Fast Really Means</h3>
-      <p>At EverAI, speed matters. We move fast because it helps us learn faster, validate ideas earlier, and stay ahead. We move fast because speed is a competitive advantage.</p>
-      <p>Shipping fast does <strong>not</strong> mean rushing or lowering the bar. It means focusing on the right problem, keeping solutions simple, and reducing wasted time. We value small, safe, high-leverage changes that are easy to review, test, and improve.</p>
-      <p>We care more about proving something that works than overbuilding too early. The goal is to find the simplest way to create value now, then iterate from there.</p>
-      <p>Speed also comes from communication. Strong teams flag risks early, ask for help quickly, and keep others informed so work keeps moving.</p>
-      <p>In practice, shipping fast at EverAI means:</p>
-      <ul>
-        <li>solving the right problem first</li>
-        <li>starting with the simplest effective solution</li>
-        <li>keeping scope tight</li>
-        <li>communicating early and clearly</li>
-        <li>improving quality as we go</li>
-      </ul>
-      <p style="margin-bottom:0"><strong>That's how we move with urgency without losing quality.</strong></p>
-    </section>
-
-    <!-- WHY JOIN US -->
-    <section class="card" id="why-join-us">
-      <div class="kicker"><span class="icon">🤔</span></div>
-      <h2>Why Join Us?</h2>
-
-      <h3>Why Work at EverAI</h3>
-      <div class="callout accent"><span class="glyph">🔥</span><div class="content"><p style="margin-bottom:0"><strong>Ambitious AI Project</strong><br />We're only scratching the surface of what AI can do. With a multi-product ecosystem and new features like <strong>Live Streaming</strong> on the horizon, <strong>your contributions will have a direct and visible impact</strong> on shaping the future of our product.</p></div></div>
-      <div class="callout accent"><span class="glyph">⭐</span><div class="content"><p style="margin-bottom:0"><strong>A 5-Star International Team</strong><br /><strong>Elite 100% Remote Team</strong> from <strong>Tier 1 tech companies</strong>, with a culture of ownership, velocity, and radical creativity. Our founding team has a proven track record, taking startups from zero to millions of users, all the way to IPO. <strong>Work alongside seasoned entrepreneurs</strong>, learn from the best, and build a product that reaches hundreds of millions.</p></div></div>
-      <div class="callout accent"><span class="glyph">🚀</span><div class="content"><p style="margin-bottom:0"><strong>Huge Traction</strong><br />Since our product launch in September 2023, we've grown to <strong>50 Million Users</strong> and expanded into new product lines. You'll be joining a company that's already proving its potential and scaling rapidly.</p></div></div>
-      <div class="callout accent"><span class="glyph">💬</span><div class="content"><p style="margin-bottom:0"><strong>Annual Performance Reviews</strong><br />We see this as a collaborative process, where feedback flows both ways. Through collaborative <strong>annual performance reviews</strong>, regular check-ins, and open communication and feedback, we ensure your goals align with our mission. Your growth is immensely important to us.</p></div></div>
-      <div class="callout accent"><span class="glyph">🪴</span><div class="content"><p style="margin-bottom:0"><strong>Career Progression and Growth Opportunities</strong><br />As we scale rapidly, so will your growth. Whether it's mastering new tools, exploring emerging technologies, or tackling ambitious projects, we'll give you the resources and freedom to grow your expertise and <strong>take your career to the next level.</strong></p></div></div>
-
-      <h3>Our Benefits and Perks</h3>
-      <div class="callout accent"><span class="glyph">💥</span><div class="content"><p style="margin-bottom:0"><strong>Choose Your Path</strong><br />Whether you're looking for a <strong>regular contract</strong> or prefer <strong>being a contractor</strong>, we've got you covered. As long as you're committed to the journey, we're excited to have you on board!</p></div></div>
-      <div class="callout accent"><span class="glyph">📍</span><div class="content"><p style="margin-bottom:0"><strong>Work From Anywhere</strong><br /><strong>Full remote</strong>, no strings attached. Whether it's your home office or a beachside bungalow, <strong>you can choose where you do your best work</strong>. We trust you to create the environment that fuels you.</p></div></div>
-      <div class="callout accent"><span class="glyph">🌴</span><div class="content"><p style="margin-bottom:0"><strong>4 Weeks of Paid Time Off</strong><br />We know the best ideas come when you're well-rested and recharged. Enjoy <strong>20 days of PTO annually</strong> to reset, explore, or simply unwind.</p></div></div>
-      <div class="callout accent"><span class="glyph">👩‍👩‍👦‍👦</span><div class="content"><p style="margin-bottom:0"><strong>Annual Team Gatherings</strong><br />While we thrive as a remote-first team, we know nothing beats face-to-face connections. That's why we organize <strong>yearly meet-ups to bring everyone together</strong>, brainstorm, and strengthen the bonds that make us a powerful team.</p></div></div>
-      <div class="callout accent"><span class="glyph">❤️‍🩹</span><div class="content"><p style="margin-bottom:0"><strong>Health & Wellness Support</strong><br />All contractors receive a <strong>$100 monthly allowance</strong> to support health insurance costs + Access to unlimited 1:1 sessions with psychologists and lifestyle experts through <strong>OpenUp</strong> (also available to up to three of your family members).</p></div></div>
-      <div class="callout accent"><span class="glyph">📚</span><div class="content"><p style="margin-bottom:0"><strong>Learning Budget</strong><br />Fuel your growth with a <strong>learning budget</strong>, which you can use for courses, books, conferences, or any resource that helps you sharpen your skills and stay ahead.</p></div></div>
-      <div class="callout accent"><span class="glyph">🏢</span><div class="content"><p style="margin-bottom:0"><strong>Co-Working Space Budget</strong><br />To make remote work more engaging and social, every team member can <strong>work from a co-working space up to twice per month</strong>, with a <strong>budget of €35 / $40 per visit</strong>. It's a simple way to connect with others, stay inspired, and enjoy a change of scenery whenever you need it.</p></div></div>
-      <div class="callout accent"><span class="glyph">💻</span><div class="content"><p style="margin-bottom:0"><strong>Company Laptop &amp; Equipment</strong><br />You'll be equipped for success with a <strong>company laptop</strong>, plus a <strong>monitor budget of up to $250</strong> and a <strong>keyboard/mouse/mic/headphones budget of up to $150</strong>.</p></div></div>
-      <div class="callout accent"><span class="glyph">⚡</span><div class="content"><p style="margin-bottom:0"><strong>Top-Tier AI Tools for the Best Talent</strong><br />You'll get access to tools like <strong>ChatGPT, Gemini, Cursor, Hugging Face, and others</strong>, to experiment, push boundaries, and bring your boldest ideas to life.</p></div></div>
-
-      <figure class="shot"><img src="assets/handbook/why-values-candycon.png" alt="EverAI values at CandyCon 2025" /></figure>
-      <p class="dim" style="font-size:13px"><em>Some of our values displayed at CandyCon 2025.</em></p>
-      <p><em>EverAI values:</em></p>
-      <ol>
-        <li><em>Aim Bigger, Go Faster</em></li>
-        <li><em>Enjoy The Journey</em></li>
-        <li><em>Make It Happen</em></li>
-        <li><em>Stay Hungry, Stay Curious</em></li>
-        <li><em>Own It, All of It</em></li>
-        <li><em>Conquer Together through Teamwork</em></li>
-      </ol>
-
-      <h3>Reality Check: Is EverAI Right For You?</h3>
-      <p>We value transparency above all else. EverAI is an incredible place to grow, but it is <strong>not for everyone</strong>. We are a high-performance team moving at breakneck speed.</p>
-      <p>We want all our team members to be happy and motivated at work, so to save your time and ours, please read the following.</p>
-      <p><strong>You might not enjoy working here if:</strong></p>
-      <div class="callout warn"><span class="glyph">🚧</span><div class="content"><p style="margin-bottom:0"><strong>You prefer heavy structure and fixed processes</strong><br />We build the plane while flying it. Processes change, priorities shift, and we often have to figure things out on the fly. If you need a strict playbook or a manager to tell you exactly what to do every day, this probably won't be a good place for you.</p></div></div>
-      <div class="callout warn"><span class="glyph">🐌</span><div class="content"><p style="margin-bottom:0"><strong>You have a low tolerance for fast iteration</strong><br />We ship features fast (sometimes in hours, not weeks). We test constantly. If you need 100% certainty or prefer to spend weeks perfecting a plan before executing, our pace will feel uncomfortable.</p></div></div>
-      <div class="callout warn"><span class="glyph">🙅</span><div class="content"><p style="margin-bottom:0"><strong>You expect a rigid role without ownership</strong><br />We value "Own It, All of It". We operate with clear ownership. If something is broken, we fix it. We trust A-players to step outside their lane to fix problems and make decisions without waiting for approval. If you prefer strict job descriptions or rely on getting everyone to agree before moving forward, this isn't the environment for you.</p></div></div>
-      <div class="callout warn"><span class="glyph">🫣</span><div class="content"><p style="margin-bottom:0"><strong>You dislike being accountable and humble</strong><br />With great freedom comes great responsibility. We trust you to work from anywhere, but we expect you to own your outcomes. If things go wrong, we expect you to raise your hand, learn, and fix it, not hide it.</p></div></div>
-      <div class="callout warn"><span class="glyph">🧪</span><div class="content"><p style="margin-bottom:0"><strong>You are uncomfortable with experimentation, ambiguity, or frequent change</strong><br />We take risks. We try different things constantly to see what happens. Some things work; some don't. You need to be resilient enough to fail, learn, and try again immediately.</p></div></div>
-    </section>
-
-    <!-- RECRUITMENT PROCESS -->
-    <section class="card" id="recruitment-process">
-      <div class="kicker"><span class="icon">🏁</span></div>
-      <h2>Our Recruitment Process</h2>
-
-      <h3>What You Can Expect</h3>
-      <p>We respect your time and energy. Our recruitment process is designed to be rigorous yet efficient, ensuring we find the best <strong>A-players</strong> while giving you a transparent look into how we work.</p>
-      <p>While the specific steps may vary slightly depending on the role, here is the general roadmap of your journey with <strong>EverAI</strong>:</p>
-
-      <div class="callout accent"><span class="glyph">📄</span><div class="content"><p style="margin-bottom:0"><strong>Step 1: Application Review</strong><br />After your application, a member of our team will review your application personally. We look for impact, speed, and alignment with our values.</p></div></div>
-      <div class="callout accent"><span class="glyph">🤝</span><div class="content"><p><strong>Step 2: Culture & Discovery Call</strong></p><p><strong>Who:</strong> A member of our Talent Acquisition team.</p><p style="margin-bottom:0"><strong>Goal:</strong> To get to know you! We'll discuss your background, your interest in EverAI, and answer your initial questions about the company. We want to ensure our culture of speed and ownership is a match for what you are looking for.</p></div></div>
-      <div class="callout accent"><span class="glyph">🧠</span><div class="content"><p><strong>Step 3: Hiring Manager(s) Deep Dive</strong></p><p><strong>Who:</strong> Your potential future manager or a colleague from the team.</p><p style="margin-bottom:0"><strong>Goal:</strong> A deeper conversation about your expertise. We'll dig into your past projects, the challenges you've solved, and the "wins" you are most proud of. This is your chance to geek out on your craft.</p></div></div>
-      <div class="callout accent"><span class="glyph">💻</span><div class="content"><p><strong>Step 4: The Challenge / Case Study</strong></p><p><strong>What:</strong> A practical assessment or take-home task.</p><p style="margin-bottom:0"><strong>Goal:</strong> We believe in "Show, Don't Tell." Whether it's a coding challenge, a design task, or a strategic case study, this step allows you to showcase your skills in a real-world context similar to the work you'd do here.</p></div></div>
-      <div class="callout accent"><span class="glyph">🚀</span><div class="content"><p><strong>Step 5: Founder Round / Cultural Fit Interview</strong></p><p><strong>Who:</strong> Key stakeholders, cross-functional peers, or our Co-Founders.</p><p style="margin-bottom:0"><strong>Goal:</strong> The final sanity check. We assess "Culture Add": how you will raise the bar for the team, and alignment on our long-term vision.</p></div></div>
-      <div class="callout accent"><span class="glyph">🎉</span><div class="content"><p style="margin-bottom:0"><strong>Step 6: Reference Check & Offer</strong><br /><strong>Goal:</strong> We speak to your former peers/managers to understand how to set you up for success (don't worry, we will never contact anyone without your permission). Then, if it's a match, we roll out the red carpet with an offer to join the rocket ship!</p></div></div>
-
-      <div class="callout warn">
-        <span class="glyph">📹</span>
-        <div class="content"><p style="margin-bottom:0"><strong>A Note on AI Interview Recordings</strong><br />To support a consistent and fair hiring process in our remote-first environment, we use <strong>AI note-taking tools</strong> during interviews so interviewers can focus on the conversation rather than manual note-taking. <strong>Consent is requested where required, and recording is always visible during the interview.</strong> Rest assured, these recordings are <strong>strictly confidential</strong>, used solely for hiring decisions, and are <strong>permanently deleted after 4 months</strong>, in accordance with our <a href="#privacy-notice">Applicant Privacy Notice</a>.</p></div>
-      </div>
-
-      <h3>How to Ace the Interview</h3>
-      <p>Most candidates don't fail interviews because they lack intelligence or relevant experience; they fail because they lack <strong>precision</strong>. In a high-velocity environment, we don't just value talent; we value <strong>reliability</strong>.</p>
-      <p><strong>The candidates who perform best communicate clearly, focus on outcomes, and remove unnecessary detail.</strong></p>
-      <p><strong>Here is how to stand out in your interview process:</strong></p>
-
-      <div class="callout accent"><span class="glyph">🎯</span><div class="content"><p><strong>Prioritize Precision over Explanation</strong></p><p>Don't just tell us what you did; <strong>tell us why it mattered</strong>. When using the <strong>STAR Method</strong>, keep the "Situation" brief and spend 80% of your time on <strong>Actions and Results</strong>.</p><ul style="margin-bottom:0"><li><strong>Stay Objective:</strong> Focus on outcomes, not emotions.</li><li><strong>Quantify Everything:</strong> Did you increase retention by 15%? Did you cut latency by 200ms? Numbers are the language of trust.</li></ul></div></div>
-      <div class="callout accent"><span class="glyph">⚡</span><div class="content"><p style="margin-bottom:0"><strong>Show Your Velocity</strong><br />One of our core values is <strong>"Aim Bigger, Go Faster."</strong> We look for a bias toward action. Share examples of when you chose "done" over "perfect" or iterated on a project in record time. Show us you can handle the speed of a remote, high-growth team.</p></div></div>
-      <div class="callout accent"><span class="glyph">📢</span><div class="content"><p><strong>Be Concise & Direct</strong></p><p>In a remote, high-speed environment, clear communication is a superpower.</p><ul style="margin-bottom:0"><li><strong>Be Concise:</strong> If your answer feels long, it is. Keep it sharp.</li><li><strong>Kill the Acronyms:</strong> Speak plainly. Clarity is more impressive than sounding technical.</li><li><strong>The "I Don't Know" Rule:</strong> If you're stuck, don't ramble. Say: <em>"I don't know the answer to that yet, but here is exactly how I would find out."</em></li></ul></div></div>
-      <div class="callout accent"><span class="glyph">🕵️</span><div class="content"><p style="margin-bottom:0"><strong>Ask Genuine & High-Signal Questions</strong><br />Skip the generic, ChatGPT-generated questions. We want to see real curiosity about <strong>Candy.ai</strong> or <strong>YumeAI</strong>. Ask us about our roadmap, our specific technical debt, or the biggest bottleneck we're facing this quarter. Show us you've already started thinking like an employee.</p></div></div>
-      <div class="callout accent"><span class="glyph">✨</span><div class="content"><p style="margin-bottom:0"><strong>Be Authentic & Grounded</strong><br /><strong>We hire people, not resumes.</strong> You don't need to be a "perfect" candidate; you need to be a precise one. Bring your unique perspective, your real challenges, and your honest experiences; failures included.</p></div></div>
-      <div class="callout accent"><span class="glyph">😮‍💨</span><div class="content"><p style="margin-bottom:0"><strong>Take a Breath, You've Got This!</strong><br />If you encounter a tricky question, take a moment to gather your thoughts. <strong>Thoughtfulness and confidence</strong> always leave a good impression.</p></div></div>
-    </section>
-
-    <!-- GET IN TOUCH -->
-    <section class="card" id="get-in-touch">
-      <div class="kicker"><span class="icon">💬</span></div>
-      <h2>Get in Touch</h2>
-      <p><strong>We're looking for exceptional talent</strong> ready to ship &amp; scale world-first AI products fast, and co-create with us this category defining business.</p>
-      <p><strong>Explore our open roles</strong> and see where you can make an impact. If you're passionate about creating the future of AI and want to join our team, we want to meet you!</p>
-      <p>👉 <a href="https://jobs.ashbyhq.com/everai" target="_blank" rel="noopener"><strong>Check out here our open roles and apply</strong></a></p>
-      <p>Or, if you're curious about <strong>what we're up to</strong>, visit our socials:</p>
-      <ul>
-        <li>Our <a href="https://www.everai.ai/" target="_blank" rel="noopener">Website</a></li>
-        <li>Our <a href="https://www.linkedin.com/company/everai" target="_blank" rel="noopener">LinkedIn</a> Page</li>
-        <li>Our <a href="https://www.glassdoor.com/Overview/Working-at-EverAI-EI_IE11059596.11,17.htm" target="_blank" rel="noopener">Glassdoor</a> Page</li>
+    <section class="card">
+      <h2 style="margin-top:2px">Table of contents</h2>
+      <ul class="resource-list">
+        <li><a href="who-we-are.html"><strong>👥 Who We Are</strong><span class="arrow">↗</span></a></li>
+        <li><a href="what-we-do.html"><strong>💻 What We Do</strong><span class="arrow">↗</span></a></li>
+        <li><a href="safety-and-ethics.html"><strong>🛡️ Safety and Ethics</strong><span class="arrow">↗</span></a></li>
+        <li><a href="engineering.html"><strong>⚙️ Engineering at EverAI</strong><span class="arrow">↗</span></a></li>
+        <li><a href="under-the-hood.html"><strong>🚧 Under the Hood</strong> <span class="sub">(part of Engineering at EverAI)</span><span class="arrow">↗</span></a></li>
+        <li><a href="everai-way.html"><strong>⚡ The EverAI Way</strong> <span class="sub">(part of Engineering at EverAI)</span><span class="arrow">↗</span></a></li>
+        <li><a href="why-join-us.html"><strong>🤔 Why Join Us?</strong><span class="arrow">↗</span></a></li>
+        <li><a href="recruitment-process.html"><strong>🏁 Our Recruitment Process</strong><span class="arrow">↗</span></a></li>
+        <li><a href="get-in-touch.html"><strong>💬 Get in Touch</strong><span class="arrow">↗</span></a></li>
+        <li><a href="privacy-notice.html"><strong>🔐 Applicant Privacy Notice</strong><span class="arrow">↗</span></a></li>
       </ul>
     </section>
-
-    <!-- PRIVACY NOTICE -->
-    <section class="card" id="privacy-notice">
-      <div class="kicker"><span class="icon">🔐</span></div>
-      <h2>EverAI Applicant Privacy Notice</h2>
-      <p class="dim">Last updated: 07 April 2026</p>
-
-      <h3>1. Introduction</h3>
-      <p>EverAI Limited ("EverAI", "we", "us", or "our") respects your privacy and is committed to protecting the personal data you share with us during the recruitment and/or application process. EverAI is a "controller" in relation to such personal data. This means that we are responsible for deciding how we hold and use personal information about you.</p>
-      <p>This EverAI Applicant Privacy Notice is intended to inform you about how and why your personal data will be used and stored during the recruitment and application process.</p>
-
-      <h3>2. Data protection principles</h3>
-      <p>We will comply with data protection law and principles, which means that your data will be:</p>
-      <ul>
-        <li>Used lawfully, fairly and in a transparent way.</li>
-        <li>Collected only for valid purposes that we have clearly explained and not used in any way that is incompatible with those purposes.</li>
-        <li>Relevant to the purposes we have told you about and limited only to those purposes.</li>
-        <li>Accurate and kept up to date.</li>
-        <li>Kept only as long as necessary for the purposes we have told you about.</li>
-        <li>Kept securely.</li>
-      </ul>
-
-      <h3>3. Who is your personal information collected from?</h3>
-      <p>We collect personal information about job candidates from the following sources:</p>
-      <ul>
-        <li>You, the applicant, when you apply for employment (e.g., directly through our website or through a job board) or respond to a proactive contact from us.</li>
-        <li>Publicly accessible sources, e.g., professional profiles like LinkedIn or platforms that showcase your work or experience relevant to a role.</li>
-        <li>Third parties with whom you have a pre-existing relationship and/or whom you authorize to provide us with information about you, including: referrers; recruitment agencies (for information on the data protection practices of recruitment agencies, please contact them directly); and your named references.</li>
-      </ul>
-
-      <h3>4. The kind of information we hold about you</h3>
-      <p>In connection with recruitment and/or your application for work with us, we will collect, store, and use the following categories of personal information about you:</p>
-      <ul>
-        <li>Information in our standard application form (name, email, contact information, link to LinkedIn profile, location, work authorization confirmation for your location (yes/no), timezone information, salary expectations, answers to other role-specific questions, portfolios or other documents needed to consider you for a particular role, and answers to any free fields in the application form).</li>
-        <li>The information you have provided to us in your CV and/or additional documents that form part of your application.</li>
-        <li>Any information you provide to us during your interview(s) or during the recruitment, interview, and hiring process.</li>
-        <li>To facilitate hiring in our remote-first environment and accommodate varying timezones on the hiring team, we may ask to record interviews, so that all members of the hiring team can properly review the application. We will always ask for your consent before doing so, and it will always be clear in the call interface that a recording is in progress. We adhere to strict data deletion periods for any recordings (see Section 10 below).</li>
-        <li>Automatically generated transcripts of any recorded interviews.</li>
-        <li>Performance/results of any case study. We use this information solely to evaluate your fitness for the role.</li>
-        <li>Information obtained from sources other than yourself previously referred to in this notice.</li>
-        <li>Any legally mandated information per local requirements.</li>
-      </ul>
-      <p>You do not need to reveal, nor will we base our recruitment decisions on, any type of more sensitive information. However, if you voluntarily share this type of information (e.g., on your CV or in an interview), we may collect, store and process:</p>
-      <ul>
-        <li>Information about your race or ethnicity, religious or philosophical beliefs, trade union membership, sexual orientation and political opinions.</li>
-        <li>Information about your gender identity and/or pronouns.</li>
-        <li>Information about your health, including information necessary to accommodate any disability.</li>
-        <li>Information about criminal convictions and offences.</li>
-      </ul>
-
-      <h3>5. How we will use information about you</h3>
-      <p>We will use the personal information we collect about you to:</p>
-      <ul>
-        <li>Assess your skills, qualifications, and suitability for the role.</li>
-        <li>Carry out reference checks.</li>
-        <li>Communicate with you and (as applicable) referring recruitment agencies about the recruitment process.</li>
-        <li>Keep records related to our hiring processes.</li>
-        <li>Comply with legal or regulatory requirements.</li>
-      </ul>
-      <p>Once we receive your application materials, we will process that information to decide whether you meet the basic requirements to be shortlisted for the role. If you do, we will decide whether your application is strong enough to invite you for an interview. If so, we will use the information you provide to us during your interview(s) to decide whether to make an offer of employment. If we decide to make such an offer, we will contact your references and/or perform any role-specific preliminary checks before making a final offer. You are responsible for informing your named references that you are giving us their contact information and obtaining any necessary consent for same.</p>
-      <p>If you fail to provide requested information that is necessary for us to consider your application (such as evidence of qualifications or work history), we will not be able to process your application.</p>
-      <p>As part of our recruitment process, we may use artificial intelligence ("AI") tools to assist in reviewing and summarizing application materials, parsing CV information, and transcribing interviews. These tools support human decision-making and are used to help organize and analyze information for the hiring team(s). AI systems used in this context do not materially influence employment decisions or make final hiring decisions, and candidates are never auto advanced or auto-rejected via AI tools. All recruitment- and application-relevant decisions are made by humans.</p>
-
-      <h3>6. Legal bases for processing under European data protection law (e.g., GDPR, UK GDPR)</h3>
-      <p>To the extent required by applicable law, we process your personal information only according to the following legal bases:</p>
-      <ul>
-        <li><strong>Legitimate interests</strong>: It is in our legitimate interests to determine applicants' fitness for a particular role, and to ultimately make hiring decisions, so as to appropriately staff the company; to engage appropriate third parties (e.g., a centralized recruitment management platform) to assist in same; and to record interviews and store them for a limited period of time, to facilitate hiring in a remote-first environment and accommodate varying timezones on the hiring team.</li>
-        <li><strong>Contractual necessity</strong>: We need to process your personal information to decide whether to enter into a contract (of employment) with you.</li>
-        <li><strong>Legal obligation</strong>: Where a relevant legal obligation applies (e.g., confirming your right to work from your location), our processing is based on the same.</li>
-        <li><strong>Consent</strong>: In limited circumstances, we may base processing activities on your informed consent, for example, when processing information that you voluntarily offer and (in the event we do not move forward with your application) retaining your application materials for future roles.</li>
-      </ul>
-      <p>Where we rely on consent as our legal basis for processing your data, you may withdraw your consent at any time with effect for the future. If we process any special category data provided as part of your application (e.g., health, religious, or ethnicity information), this is based on Art. 9(2)(b) of the GDPR, which relates to our obligations in employment. Depending on the circumstances, we may rely on different legal bases when processing the same information for different purposes. If you reside outside the EEA, UK, or Switzerland, the legal bases on which we rely may differ from those listed above.</p>
-
-      <h3>7. Automated decision-making</h3>
-      <p>You will not be subject to decisions that will have a significant impact on you based solely on automated decision-making.</p>
-      <p>While EverAI may use AI tools for purposes consistent with this Applicant Privacy Notice, these tools operate only as decision-support systems and do not materially influence or independently determine application- or hiring-relevant decisions.</p>
-
-      <h3>8. Disclosure of your personal information</h3>
-      <p>We will only share your personal information with third parties where necessary for us to process your application. The parties to whom we may disclose your personal information include:</p>
-      <ul>
-        <li><strong>EverAI staff on the applicable hiring team</strong>: Internal staff receive information about your application on a need-to-know basis and are subject to confidentiality obligations. Generally, only members of the hiring team for a given role and top-level management have access to your application information.</li>
-        <li><strong>Service providers</strong>: We use service providers to facilitate our hiring processes, including office tools and a centralized recruitment management platform. These service providers may only use your information to perform certain tasks on our behalf and have access only to the information needed to perform such tasks that we define. All third-party service providers or other recipients are required to take appropriate security measures to protect your personal information in line with applicable law.</li>
-        <li><strong>Recruitment agencies</strong>: If your application came in through a recruitment agency, we share limited information regarding the status of your application with them upon request.</li>
-        <li><strong>Other third parties required by law</strong>: We take our legal obligations seriously, and may access, preserve, and share personal information with regulators, public authorities, law enforcement, government agencies, or others, where we reasonably believe such disclosure is necessary to comply with valid legal process, court orders, applicable law, regulations, or official requests; address illegal or suspected illegal activities, security, or technical issues; protect against harm to the rights, property or safety of our company, users, staff, or other third parties; or maintain and protect the security and integrity of our infrastructure.</li>
-      </ul>
-      <p>Your personal information may also be transferred outside the EEA or UK in connection with the application and recruitment process. As a remote-first environment, our staff (and members of the hiring team and management) are located and may access your information from outside the EEA or UK. Some of our service providers, including our centralized recruitment platform (Ashby), are also located outside the EEA or UK, including in the United States of America.</p>
-      <p>When we transfer personal information outside the EEA or UK, we ensure that the transfer complies with this privacy notice and applicable law. Where an appropriate safeguard for transfers of personal information outside the EEA or UK is required, we generally rely on adequacy decisions published by, and/or Standard Contractual Clauses approved by, the European Commission and/or UK Information Commissioner's Office.</p>
-
-      <h3>9. Data security</h3>
-      <p>We have put in place appropriate security measures to prevent your personal information from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed. In addition, we limit access to your personal information to those employees, agents, contractors and other third parties who have a need to know. They will only process your personal information on our instructions and they are subject to a duty of confidentiality.</p>
-      <p>We have put in place procedures to deal with any suspected data security breach and will notify you and any applicable regulator of a suspected breach where we are legally required to do so.</p>
-
-      <h3>10. Data retention</h3>
-      <p><strong>General retention period</strong>: We will retain your personal information for the duration of your application/recruitment process, and for two years after communicating the outcome of your application. We retain your personal information for that period so that: if you apply for another role, we have a record of previous decisions taken on your application; with your consent, we can consider you for future roles for which you may be a good fit; and, for applications coming through a recruitment agency, to fulfill our obligations under our contracts with them (e.g., when we are required to pay a commission for rejected applicants who are later hired within a specified period after the initial referral).</p>
-      <p><strong>Specific retention periods:</strong></p>
-      <ul>
-        <li>Any recorded interviews are deleted 4 months after recording.</li>
-        <li>Information relating to successful applicants will be transferred to their employment records, insofar as the information is necessary to establish an employment relationship or comply with legal obligations. In this case, retention periods are subject to our separate EverAI Staff Privacy Notice.</li>
-      </ul>
-
-      <h3>11. Your rights related to your personal information</h3>
-      <p>Depending on your location, applicable legal requirements, and applicable exemptions, you have certain rights with respect to your personal information:</p>
-      <ul>
-        <li><strong>Right of access</strong>: You have the right to request access to your personal information, namely, receive a copy of the personal information we hold about you and to check that we are lawfully processing it.</li>
-        <li><strong>Right to rectification</strong>: You have the right to request rectification of the personal information that we hold about you, namely, have any incomplete or inaccurate information we hold about you corrected.</li>
-        <li><strong>Right to deletion</strong>: You have the right to request deletion of your personal information.</li>
-        <li><strong>Right to object</strong>: In some cases, you have the right to object to us processing your personal information where we are relying on our or a third party's legitimate interest.</li>
-        <li><strong>Right to restrict processing</strong>: In some cases, you have the right to request restriction of processing of your personal information.</li>
-        <li><strong>Right to file a complaint</strong>: If you are in the EEA or the UK, you also have a right to file a complaint with your local data protection authority.</li>
-      </ul>
-      <p>You can exercise the above rights by contacting us at <a href="mailto:hello@everai.ai">hello@everai.ai</a>. We will respond to any data-related request as soon as practicable, and in any event within 30 days of receipt. We may require further information from you to verify the request, i.e., to ensure that it is really you making the request, or that any third-party requester has authority to act on your behalf.</p>
-
-      <h3>12. California Applicants</h3>
-      <p>In addition to the rights explained in this Applicant Privacy Notice, California residents also have rights under The California Consumer Privacy Act of 2018 ("CCPA"), as amended by the California Privacy Rights Act, subject to the exceptions therein. Applicants residing in California additionally have the right to:</p>
-      <ul>
-        <li>Certain information concerning our collection and use of their personal information;</li>
-        <li>Request that we delete certain personal information we collected from them;</li>
-        <li>Appoint an agent to exercise their rights provided for by the CCPA, provided that we are able to verify the request from a third-party via a duly executed notarized power of attorney and sufficient information to allow us to verify your identity and locate your information in our systems;</li>
-        <li>Not be subjected to discrimination for the exercise of these rights.</li>
-      </ul>
-      <p>We do not sell (and have not sold in the past 12 months) your personal information to third parties. We do not share (and have not shared in the past 12 months) your personal information with third parties for cross-context behavioral advertising purposes.</p>
-
-      <h3>13. Additional inquiries</h3>
-      <p style="margin-bottom:0">If you have any additional questions not addressed in this Applicant Privacy Notice, please contact us at <a href="mailto:hello@everai.ai">hello@everai.ai</a>.</p>
-    </section>
-
   </main>
 </div>
 
 <footer>
-  EverAI Candidate Handbook · <a href="index.html">← Back to the wiki</a>
+  <div class="foot-inner">
+    <span>EverAI Candidate Handbook</span>
+    <span>Contact our TA team for anything not covered here</span>
+  </div>
 </footer>
-
 </body>
 </html>

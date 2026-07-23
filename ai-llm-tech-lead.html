@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI LLM Tech Lead — EverAI Partner Hiring Wiki</title>
+<style>
+:root{
+    --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
+    --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
+    --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
+    --radius: 10px;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3;
+      --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733;
+      --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3;
+    --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733;
+    --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
+  }
+  :root[data-theme="light"]{
+    --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
+    --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
+    --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg); color: var(--ink); font-family: var(--sans);
+    font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  a{ color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 2px; }
+  a:hover{ text-decoration-color: var(--accent-ink); }
+  a:focus-visible, button:focus-visible, summary:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  .masthead{
+    background: linear-gradient(180deg, var(--surface-2), var(--bg));
+    border-bottom: 1px solid var(--line);
+    padding: 40px max(24px, calc((100vw - 1180px)/2)) 26px;
+  }
+  .back-link{
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; color: var(--ink-soft);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px;
+  }
+  .back-link:hover{ color: var(--accent-ink); }
+  .masthead-eyebrow{
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--accent-ink); display: flex; align-items: center; gap: 8px; margin: 0 0 14px;
+  }
+  .masthead-eyebrow::before{ content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .masthead h1{
+    font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.01em; margin: 0 0 10px; text-wrap: balance;
+  }
+  .masthead p.lede{ max-width: 640px; color: var(--ink-soft); font-size: 16.5px; margin: 0 0 18px; }
+  .masthead-contact{ font-size: 14px; color: var(--ink-soft); }
+  .masthead-contact a{ color: var(--accent-ink); font-weight: 600; text-decoration: none; }
+  .masthead-contact a:hover{ text-decoration: underline; }
+
+  .confidential-strip{
+    margin-top: 22px; display: flex; gap: 12px; align-items: flex-start;
+    background: var(--danger-soft); border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+    border-radius: var(--radius); padding: 13px 16px; max-width: 780px;
+  }
+  .confidential-strip .glyph{ font-size: 17px; line-height: 1.4; }
+  .confidential-strip strong{ color: var(--danger); }
+  .confidential-strip span.body{ color: var(--ink); font-size: 14px; }
+
+  .layout{
+    display: grid; grid-template-columns: 252px minmax(0,1fr); gap: 48px;
+    max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px; align-items: start;
+  }
+  nav.toc{ position: sticky; top: 24px; align-self: start; max-height: calc(100vh - 48px); overflow-y: auto; }
+  nav.toc .toc-label{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-faint); margin: 0 0 12px 4px;
+  }
+  nav.toc ol{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  nav.toc a{
+    display: flex; align-items: baseline; gap: 10px; padding: 7px 10px; border-radius: 7px;
+    text-decoration: none; color: var(--ink-soft); font-size: 14.5px; line-height: 1.35;
+  }
+  nav.toc a .num{ font-family: var(--mono); font-size: 11px; color: var(--ink-faint); flex-shrink: 0; width: 16px; }
+  nav.toc a:hover{ background: var(--surface); color: var(--ink); }
+  nav.toc a.active{ background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
+
+  main{ min-width: 0; }
+
+  section.card{
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 36px clamp(20px, 4vw, 44px); margin-bottom: 28px; scroll-margin-top: 24px;
+  }
+  section.card > .kicker{ display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  section.card .kicker .icon{ font-size: 24px; line-height: 1; }
+  section.card .kicker .idx{ font-family: var(--mono); font-size: 12px; color: var(--ink-faint); letter-spacing: 0.06em; }
+  section.card h2{
+    font-family: var(--serif); font-weight: 400; font-size: 26px; letter-spacing: -0.005em;
+    margin: 2px 0 6px; text-wrap: balance;
+  }
+  section.card p.subtitle{ font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 15px; margin: 0 0 22px; }
+  section.card h3{ font-family: var(--sans); font-weight: 700; font-size: 15.5px; margin: 30px 0 10px; color: var(--ink); }
+  section.card h3.numbered{ display:flex; align-items:center; gap:8px; }
+  section.card h3 .step-dot{
+    display:inline-flex; align-items:center; justify-content:center; width: 20px; height:20px; border-radius:50%;
+    background: var(--accent-soft); color: var(--accent-ink); font-family: var(--mono); font-size: 11px; font-weight:700; flex-shrink:0;
+  }
+  section.card h4{
+    font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint);
+    font-weight: 700; margin: 22px 0 8px;
+  }
+  section.card h5{ font-size: 14.5px; font-weight: 700; color: var(--ink); margin: 16px 0 6px; }
+  section.card p{ margin: 0 0 14px; color: var(--ink); }
+  section.card p.dim{ color: var(--ink-soft); }
+  section.card ul, section.card ol, section.card ol.plain{ margin: 0 0 14px; padding-left: 22px; }
+  section.card li{ margin-bottom: 7px; }
+  section.card li::marker{ color: var(--ink-faint); }
+  section.card ul ul, section.card ol.plain ul, section.card ul ol, section.card ol ol{ margin: 6px 0 6px; }
+  section.card .step-list{ padding-left: 20px; margin: 0 0 6px; }
+  section.card .step-list > li{ margin-bottom: 16px; }
+
+  figure.shot{ margin: 12px 0 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); padding: 8px; }
+  figure.shot img{ display: block; width: 100%; border-radius: 6px; border: 1px solid var(--line); }
+  figure.shot figcaption{ font-family: var(--mono); font-size: 11px; color: var(--ink-faint); padding: 8px 4px 2px; }
+  .cols{ display:grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap:10px; margin: 12px 0; }
+  .cols img{ width:100%; border-radius:8px; border:1px solid var(--line); }
+
+  .media-chip{
+    display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--line);
+    border-radius: 8px; background: var(--surface-2); text-decoration: none; font-size: 13.5px; font-weight: 600;
+    color: var(--accent-ink); margin: 4px 0 16px;
+  }
+  .media-chip:hover{ border-color: var(--accent); }
+  .media-note{ font-size: 13px; color: var(--ink-faint); font-style: italic; margin: 4px 0 16px; }
+  .embed-wrap{ margin: 10px 0 18px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .embed-wrap iframe{ width: 100%; height: 560px; border: none; display: block; }
+
+  .callout{ display: flex; gap: 12px; border-radius: var(--radius); padding: 14px 16px; margin: 18px 0; border: 1px solid var(--line); background: var(--surface-2); }
+  .callout .glyph{ font-size: 17px; flex-shrink: 0; line-height: 1.5; }
+  .callout .content > *:last-child{ margin-bottom: 0; }
+  .callout.warn{ background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, transparent); }
+  .callout.danger{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 35%, transparent); }
+  .callout.good{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 35%, transparent); }
+  .callout.accent{ background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+
+  .badge{ display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.03em; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; }
+  .badge.p0{ background: var(--danger-soft); color: var(--danger); }
+  .badge.p1{ background: var(--warn-soft); color: var(--warn); }
+  .badge.open{ background: var(--good-soft); color: var(--good); }
+  .badge.soon{ background: var(--accent-soft); color: var(--accent-ink); }
+  .badge.closed{ background: var(--surface-2); color: var(--ink-faint); border: 1px solid var(--line); }
+  .badge.tier-red{ background: var(--danger-soft); color: var(--danger); }
+  .badge.tier-yellow{ background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-green{ background: var(--good-soft); color: var(--good); }
+  .tag{ display:inline-block; font-size: 12.5px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: var(--mono); }
+  .new-tag{ display:inline-block; font-size: 11px; color: var(--danger); font-weight: 700; }
+
+  .table-wrap{ overflow-x: auto; margin: 6px 0 22px; border: 1px solid var(--line); border-radius: 10px; }
+  table{ width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+  table caption{ text-align:left; padding: 10px 16px 0; font-size: 12px; color: var(--ink-faint); }
+  thead th{
+    text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-faint); background: var(--surface-2); padding: 11px 16px; border-bottom: 1px solid var(--line); white-space: nowrap;
+  }
+  tbody td{ padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink); }
+  tbody tr:last-child td{ border-bottom: none; }
+  tbody td.num, thead th.num{ font-variant-numeric: tabular-nums; }
+  tbody td strong{ font-weight: 700; }
+
+  .split{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 8px 0 10px; }
+  @media (max-width: 720px){ .split{ grid-template-columns: 1fr; } }
+  .split .col{ border-radius: var(--radius); padding: 18px 20px; border: 1px solid var(--line); }
+  .split .col.do{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 30%, transparent); }
+  .split .col.dont{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 30%, transparent); }
+  .split h4{ margin-top: 0; color: inherit; }
+  .split .col.do h4{ color: var(--good); }
+  .split .col.dont h4{ color: var(--danger); }
+  .split ul{ margin: 0; padding-left: 20px; }
+  .split li{ font-size: 14.5px; }
+
+  .flag{ border: 1px solid var(--line); border-left: 3px solid var(--danger); border-radius: 8px; padding: 14px 18px; margin: 0 0 14px; background: var(--surface-2); }
+  .flag .flag-title{ font-weight: 700; margin: 0 0 6px; }
+  .flag .flag-title .glyph{ margin-right: 6px; }
+  .flag .flag-title span.line{ display:block; }
+  .flag p{ margin: 0 0 8px; font-size: 14.5px; color: var(--ink-soft); }
+  .flag p.ask{ margin: 0; font-size: 13.5px; color: var(--accent-ink); font-style: italic; }
+
+  .pills{ display:flex; flex-wrap:wrap; gap:6px; margin: 6px 0 18px; }
+  .pills .pill{ font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-soft); }
+  .pills.red .pill{ border-color: color-mix(in srgb, var(--danger) 30%, transparent); color: var(--danger); background: var(--danger-soft); }
+  .pills.green .pill{ border-color: color-mix(in srgb, var(--good) 30%, transparent); color: var(--good); background: var(--good-soft); }
+
+  .resource-list{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .resource-list li{ margin: 0; }
+  .resource-list a{
+    display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border: 1px solid var(--line);
+    border-radius: 10px; background: var(--surface-2); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 15px;
+  }
+  .resource-list a:hover{ border-color: var(--accent); background: var(--accent-soft); }
+  .resource-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); }
+
+  .brief-list{ list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .brief-list a{
+    display: flex; align-items: center; gap: 8px; padding: 11px 15px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--surface-2); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 14.5px;
+  }
+  .brief-list a:hover{ border-color: var(--accent); background: var(--accent-soft); }
+  .brief-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); margin-left: auto; }
+  .brief-list a .sub{ font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+  .role-meta{ display:grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap:10px 20px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; margin: 10px 0 18px; font-size:13.5px; }
+  .role-meta div span.label{ display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px; }
+
+  .nn-list{ list-style:none; margin:0 0 16px; padding:0; counter-reset: nn; }
+  .nn-list li{ counter-increment: nn; position:relative; padding-left:30px; margin-bottom:10px; }
+  .nn-list li::before{ content: counter(nn); position:absolute; left:0; top:1px; width:20px; height:20px; border-radius:50%; background:var(--danger-soft); color:var(--danger); font-family:var(--mono); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .nn-list li::marker{ content:none; }
+
+  .filter-line{ font-size:13.5px; color:var(--danger); margin: 4px 0 14px; padding-left: 22px; }
+  .filter-line::before{ content:"❌ "; }
+
+  .eval-cat{ border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-bottom:12px; background:var(--surface-2); }
+  .eval-cat .pct{ font-family:var(--mono); color:var(--accent-ink); font-weight:700; }
+
+  .tool-tier{ margin: 4px 0 6px; }
+  .tool-tier .tier-label{ font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--accent-ink); font-weight:700; }
+
+  details.faq{ border:1px solid var(--line); border-radius:8px; margin-bottom:8px; background:var(--surface-2); }
+  details.faq summary{ padding:10px 14px; font-weight:600; font-size:13.5px; cursor:pointer; }
+  details.faq .faq-body{ padding: 0 14px 14px; font-size:13.5px; color:var(--ink-soft); }
+  details.faq .faq-body p{ margin: 0 0 10px; }
+
+  .value-card{ border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:10px; background:var(--surface-2); }
+  .value-card strong{ display:block; margin-bottom:4px; }
+
+  .stat-row{ display:flex; flex-wrap:wrap; gap:12px; margin: 10px 0 18px; }
+  .stat{ flex:1; min-width:140px; border:1px solid var(--line); border-radius:10px; padding:14px 16px; background:var(--surface-2); text-align:center; }
+  .stat .num{ font-family:var(--mono); font-size:20px; font-weight:700; color:var(--accent-ink); display:block; }
+  .stat .lbl{ font-size:11.5px; color:var(--ink-faint); }
+
+  .page-nav{ display:flex; justify-content:space-between; gap:16px; margin: 4px 0 28px; }
+  .page-nav a{
+    flex: 1; max-width: 48%; display:flex; flex-direction:column; gap:4px; padding:14px 18px; border:1px solid var(--line);
+    border-radius:10px; background:var(--surface-2); text-decoration:none; color:var(--ink);
+  }
+  .page-nav a:hover{ border-color:var(--accent); background:var(--accent-soft); }
+  .page-nav a.next{ text-align:right; margin-left:auto; }
+  .page-nav .dir{ font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+  .page-nav .label{ font-weight:600; font-size:14.5px; }
+
+  hr.rule{ border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+
+  footer{ max-width: 1180px; margin: 0 auto; padding: 0 24px 60px; color: var(--ink-faint); font-size: 13px; }
+  footer .foot-inner{ border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 880px){
+    .layout{ grid-template-columns: 1fr; padding-top: 24px; }
+    nav.toc{ position: static; max-height: none; overflow: visible; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 8px; }
+    nav.toc ol{ flex-direction: row; flex-wrap: wrap; }
+    nav.toc a{ font-size: 13.5px; }
+    .embed-wrap iframe{ height: 420px; }
+    .page-nav{ flex-direction: column; }
+    .page-nav a{ max-width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <a class="back-link" href="past-briefs.html">&larr; Back to Past Briefs</a>
+  <h1>🤖 AI LLM Tech Lead</h1>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">Past Briefs</p>
+    <ol>
+      <li><a href="ai-llm-tech-lead.html" class="active"><span class="num">01</span> AI LLM Tech Lead</a></li>
+      <li><a href="ai-marketing-video-editor.html"><span class="num">02</span> AI Marketing Video Editor</a></li>
+    </ol>
+  </nav>
+
+  <main>
+<section class="card" id="ai-llm-tech-lead">
+      <div class="kicker"><span class="icon">🤖</span></div>
+      <h2>AI LLM Tech Lead</h2>
+      <div class="callout warn">
+        <span class="glyph">🗄️</span>
+        <div class="content"><p style="margin-bottom:0"><strong>Not currently open.</strong> Kept for reference — do not submit against this role.</p></div>
+      </div>
+
+      <div class="role-meta">
+        <div><span class="label">Department</span>R&amp;D</div>
+        <div><span class="label">Hiring Manager</span>Michael Monin (CTO & Co-founder)</div>
+        <div><span class="label">Location</span>Worldwide</div>
+        <div><span class="label">Budget</span>$200K + $150K equity OR $250K + $80K equity</div>
+        <div><span class="label">Contract</span>B2B preferred</div>
+        <div><span class="label">Openings</span>1</div>
+        <div><span class="label">Seniorities</span>Lead</div>
+        <div><span class="label">Priority</span><span class="badge closed">Closed</span></div>
+      </div>
+
+      <h3>🧑‍🧑‍🧒‍🧒 Team & Environment Context</h3>
+      <ul>
+        <li>This is not a research role and not a pure people-management role. We want a builder who has done the hard technical work themselves — and can also lead a small team of AI engineers from the front.</li>
+        <li>The mission: own the "brain" and architecture of our core product at EverAI / Candy.ai — the conversational AI experience that is central to everything we do.</li>
+        <li>The Lead will not have time to learn hard skills on the job. They need to arrive with <strong>hands-on fine-tuning experience</strong> already behind them.</li>
+        <li>The Content: Primarily Candy.ai and YumeAI.com. Candidates must be 100% comfortable working with NSFW/explicit training data and building moderation for it. NSFW background is a plus, not a requirement.</li>
+        <li>Remote, fast-paced scale-up environment. No bureaucracy, no long feedback loops.</li>
+      </ul>
+      <div class="callout danger">
+        <span class="glyph">⚠️</span>
+        <div class="content"><p style="margin-bottom:0"><strong>Critical Context:</strong> The most important thing is not the scale of tokens or infrastructure — it's whether the <strong>AI/chatbot product</strong> they worked on was <strong>core to the business</strong>. A candidate who built a central, user-facing conversational product at a company of 500K+ users is more relevant than someone who optimized inference at a large company where AI was a side feature.</p></div>
+      </div>
+
+      <h3>🎯 Calibration Anchors & Target Profiles</h3>
+      <p>We are looking for candidates where the conversational AI or chatbot <strong>was the product</strong> — not a feature.</p>
+      <ul>
+        <li>Consumer AI &amp; Companion Platforms</li>
+        <li>Creative &amp; Roleplay AI</li>
+        <li>High-Scale Conversational Products</li>
+        <li>LLM-first startups where the chat experience is the core value proposition</li>
+      </ul>
+      <p class="dim">Minimum size guidance: the AI should have been the central revenue-generating and/or impactful feature of the business (it does not matter if it's B2B or B2C).</p>
+      <h4>⛔️ Non-Negotiables</h4>
+      <ol class="nn-list">
+        <li><strong>Hands-on fine-tuning experience</strong> — must have done it themselves, for external user-facing products (not internal tooling). Key question: <em>what did you fine-tune, and why?</em> Fine-tuning must represent ~60%+ of their AI experience (agentic AI / RAG / prompt engineering alone is not a fit). Post-training experience is mandatory; pre-training is a nice-to-have.</li>
+        <li><strong>The AI product was core / critical to the business</strong> — not a side project, not an internal tool. It's about ownership, impact and risk. Scope includes LLMs and Computer Vision — both are valid.</li>
+        <li><strong>Leadership experience is a must</strong> — being senior is not enough. Minimum 1–2 years of hands-on leadership experience required. Must still be technically hands-on.</li>
+        <li><strong>Strong English communication skills</strong> — this role requires clear technical and cross-functional communication.</li>
+        <li><strong>NSFW comfort</strong> — must be comfortable with explicit training data and content moderation in this context.</li>
+      </ol>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content">
+          <p><strong>Good Keywords to Look out for</strong></p>
+          <p><strong>Models &amp; frameworks — core:</strong> Mistral · Llama · DeepSeek · Qwen · Hugging Face</p>
+          <p><strong>Production &amp; inference — strong signal:</strong> vLLM · PyTorch · inference optimization · open-source LLM</p>
+          <p><strong>Fine-tuning techniques — high signal:</strong> SFT · RLHF · DPO · LoRA · QLoRA · PEFT</p>
+          <p style="margin-bottom:0"><strong>Fine-tuning frameworks — niche, very high signal:</strong> Axolotl · Unsloth · LitGPT</p>
+        </div>
+      </div>
+
+      <h3>📋 Evaluation Framework</h3>
+      <div class="eval-cat"><p style="margin-bottom:6px"><strong>1. Fine-Tuning & Model Alignment</strong> — <span class="pct">40%</span></p><p style="margin-bottom:6px">Has personally fine-tuned models for external, user-facing products. Understands SFT, RLHF, and DPO not just in theory but from direct experience. Can speak concretely to what they fine-tuned, why, and what the outcome was. Familiar with data engineering — curating, cleaning, and synthetic data generation.</p><p class="filter-line" style="margin-bottom:0">Hard Filters: Fine-tuning experience limited to internal tooling or demos; cannot describe a specific fine-tuning project and its business impact; prompt engineering only.</p></div>
+      <div class="eval-cat"><p style="margin-bottom:6px"><strong>2. Technical Leadership</strong> — <span class="pct">25%</span></p><p style="margin-bottom:6px">Player/coach profile. Sets technical direction and owns the architecture while remaining hands-on in the codebase. Has led small teams of senior engineers, conducted code reviews, and maintained a technical roadmap. Does not delegate everything — writes code.</p><p class="filter-line" style="margin-bottom:0">Hard Filters: Pure managers who no longer code; pure ICs with no leadership experience.</p></div>
+      <div class="eval-cat"><p style="margin-bottom:6px"><strong>3. Production Engineering</strong> — <span class="pct">25%</span></p><p style="margin-bottom:6px">Has shipped conversational AI to real users at scale. Comfortable with the modern LLM stack: PyTorch, Hugging Face, vLLM or equivalent inference engines. Understands latency, throughput, and cost trade-offs in production — not just in benchmarks.</p><p class="filter-line" style="margin-bottom:0">Hard Filters: Academic or research-only profiles; no production deployment experience.</p></div>
+      <div class="eval-cat"><p style="margin-bottom:6px"><strong>4. Content Moderation Architecture</strong> — <span class="pct">10%</span></p><p style="margin-bottom:6px">Understands how to build nuanced, context-aware moderation — not binary safe/unsafe filters. Knows the difference between lazy safety filtering and intelligent classifier-based moderation. NSFW experience is a plus, not a hard requirement.</p><p class="filter-line" style="margin-bottom:0">Hard Filters: Strong ideological objection to working with NSFW content or explicit training data.</p></div>
+
+      <h3>💬 Pre-Screen Questions</h3>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">Use these questions during your screening call. Include a summary of the candidate's answers in your submission notes in Ashby.</p></div>
+      </div>
+      <ol>
+        <li>What is your current situation, and why are you considering leaving?</li>
+        <li>Why did you leave your last 2 workplaces?</li>
+        <li>Are you comfortable working on a product that involves NSFW content — including working with explicit training data and building moderation for it?</li>
+        <li>Tell me about a model you fine-tuned for a live, user-facing product. What was the goal, what did you actually do, and what was the outcome?</li>
+        <li>Was the AI/chatbot product you worked on the core of the business, or a feature within a larger product?</li>
+        <li>What is your philosophy on model alignment (SFT vs. RLHF/DPO) for a creative, roleplay-centric product? How do you balance safety with steerability?</li>
+        <li>Which open-source models (e.g. Llama 3, Mistral) have you been working with recently? What are their strengths and limitations for conversational use cases?</li>
+      </ol>
+
+      <h3>⁉️ FAQs</h3>
+      <h4>Technical</h4>
+      <details class="faq"><summary>1. Model Strategy & Ownership</summary><div class="faq-body">
+        <p><strong>Are you building proprietary models, or fine-tuning open-source / API models?</strong> We fine-tune open-source models and also use some APIs. The majority of our traffic — roughly 80–90% — runs on self-hosted fine-tuned open-source models.</p>
+        <p><strong>What % of usage is OpenAI / Anthropic APIs vs self-hosted?</strong> 10–20% third-party API, 80–90% self-hosted fine-tuned models.</p>
+        <p><strong>What is your long-term model strategy?</strong> Our strategy is to stay on top of the frontier of open-source models and fine-tune them to match our user preferences. We've tested very large open-source models, and our smaller in-house fine-tuned model still outperforms them on our roleplay evaluation metrics. Roleplay is a highly specific use case, and we believe owning the fine-tuning loop is a durable edge.</p>
+        <p style="margin-bottom:0"><strong>How differentiated is your model vs competitors?</strong> On our internal roleplay evals, our fine-tuned smaller model outperforms significantly larger out-of-the-box open-source and closed-source models. We haven't run a formal head-to-head benchmark against competitor products, but our qualitative signal — user retention, session length, and like rates — suggests a meaningful quality gap in our favor for this specific use case.</p>
+      </div></details>
+      <details class="faq"><summary>2. Infrastructure & Scale</summary><div class="faq-body">
+        <p><strong>What is the infra stack (cloud, orchestration, serving)?</strong> Everything runs on GKE, managed by a 5-person DevOps team.</p>
+        <p><strong>How are you handling your token volume technically?</strong> We serve multi-billion tokens/day of combined input/output on GKE, running across a mix of GPU types.</p>
+        <p><strong>Latency benchmarks?</strong> Kept private. We target sub-2 second P50 latency on self-hosted models for the chat experience.</p>
+        <p><strong>Cost per request?</strong> Kept private, but cost-efficiency is a core optimization axis given our scale.</p>
+        <p><strong>GPU setup / budget?</strong> Budget kept private. Stack runs on modern datacenter GPUs on GKE, e.g. H100s/A100s, RTX PRO.</p>
+        <p style="margin-bottom:0"><strong>Any bottlenecks today (infra vs model vs product)?</strong> On the infra side, the main challenge is serving larger models (32B+) at efficient speed and cost. But the bigger challenge is on the modeling side — training a state-of-the-art roleplay model. That's precisely where this hire comes in.</p>
+      </div></details>
+      <details class="faq"><summary>3. Data & Training Pipelines</summary><div class="faq-body">
+        <p><strong>What is the source of training data?</strong> A mix of sources including curated internal data and synthetic generation. Specific breakdowns are kept private, but the candidate would have meaningful data to work with from day one.</p>
+        <p><strong>User conversations? Synthetic generation?</strong> Yes, synthetic generation is part of the mix. Details on both kept private.</p>
+        <p><strong>How do you handle data labeling?</strong> We have an internal process in place. Specifics kept private, but scaling and improving the labeling pipeline is one of the areas we expect this hire to help evaluate.</p>
+        <p><strong>Preference data for RLHF/DPO?</strong> Yes, we run preference-based post-training. The maturity of this pipeline and how to scale it is one of the concrete areas the new hire would help shape.</p>
+        <p><strong>What tooling exists for experiment tracking / evaluation?</strong> We have tooling in place for both. Specifics kept private, but improving experimentation velocity and evaluation maturity are part of the scope.</p>
+        <p style="margin-bottom:0"><strong>How mature is your eval framework (offline + online)?</strong> Offline: solid and roleplay-specific. Online: earlier stage — this is explicitly part of the 90-day scope.</p>
+      </div></details>
+      <details class="faq"><summary>4. Moderation & Safety</summary><div class="faq-body">
+        <p><strong>How does EverGuard actually work?</strong> It's a hybrid approach combining model-based classifiers and rules. Specific architecture details are kept private.</p>
+        <p><strong>What % of engineering effort is moderation vs core product?</strong> Around 25% moderation, 75% core product.</p>
+        <p><strong>What are the hardest unsolved moderation problems today?</strong> The hardest ongoing challenges are around context-dependent nuance — staying permissive enough for legitimate creative/roleplay use cases while catching genuinely harmful patterns, and keeping false-positive rates low so the experience doesn't feel over-censored. These are active areas of work rather than blockers.</p>
+        <p style="margin-bottom:0"><strong>Any regulatory exposure? (EU AI Act risk, etc.)</strong> No material exposure at this time. We monitor the regulatory landscape proactively.</p>
+      </div></details>
+      <details class="faq"><summary>5. Architecture & Engineering Reality</summary><div class="faq-body">
+        <p><strong>What does the current system architecture look like end-to-end?</strong> Specifics kept private, but the stack is GKE-based with self-hosted inference, a fine-tuning pipeline, moderation layer, and the product surface.</p>
+        <p><strong>Where is the biggest technical debt?</strong> Our training pipeline could be more automated and easier to iterate on — today, running a new fine-tuning cycle takes more manual orchestration than we'd like. Our online eval infrastructure is also less mature than our offline side. Both are explicitly part of the scope for this hire.</p>
+        <p><strong>How mature is CI/CD? Monitoring? Incident handling?</strong> CI/CD and monitoring are functional but have room to improve — solid foundation on core infra, less mature on model-level observability. Incident handling is strong, with clear on-call rotations and a good uptime track record.</p>
+        <p style="margin-bottom:0"><strong>How often are models deployed to production?</strong> Every 2–3 months depending on cycles and team focus. A faster release cadence is something we want to move toward.</p>
+      </div></details>
+      <details class="faq"><summary>6. Product Performance & Metrics</summary><div class="faq-body">
+        <p><strong>What are the core success metrics for AI quality?</strong> Retention, revenue per user, session length, and like rates.</p>
+        <p><strong>What are current failure modes in user experience?</strong> The biggest one is personalization — we serve a user base with very different preferences (short messages vs long narrative, different content styles, different roleplay patterns) and our current model doesn't yet adapt dynamically enough to each user. There are also the usual roleplay-model failure modes: occasional consistency drift over long sessions, and edge cases where the model doesn't quite hit the desired tone.</p>
+        <p style="margin-bottom:0"><strong>Where is the biggest gap — Intelligence / Latency / Safety?</strong> Primarily intelligence and personalization. Latency and safety are in a good place today, though we keep investing in both.</p>
+      </div></details>
+      <details class="faq"><summary>7. Immediate Scope for This Hire</summary><div class="faq-body">
+        <p><strong>What are the top 3 problems this person must solve in 90 days?</strong> (1) Deeply understand our current training pipeline, identify bottlenecks, and propose concrete improvements. (2) Work closely with the engineering team to upgrade our fine-tuning pipeline, and partner with the CTO and leadership to define the success metrics and KPIs that define what "a better model" actually means for us. (3) Bring product-minded ideas for how to push the roleplay chat experience to the next level, in close collaboration with the product team. By the end of 90 days, the expectation is a clear plan for what a better model looks like, plus concrete initiatives to improve the in-chat user experience.</p>
+        <p><strong>What is currently blocking growth that this hire unlocks?</strong> Two things. First, it frees up significant CTO bandwidth. Second, and more importantly, it brings dedicated ML leadership into the room. Our CTO's background is in web engineering, and we want a peer who owns the ML depth — someone who can partner with him on technical direction and push our AI engineers on the modeling decisions that will define the next phase of the product.</p>
+        <p style="margin-bottom:0"><strong>How much freedom vs alignment with CTO?</strong> Trust is earned, and ownership is granted as soon as trust is established. We value people who take real ownership and move fast.</p>
+      </div></details>
+      <h4>Non-Technical / Commercial</h4>
+      <details class="faq"><summary>1. Business Model & Monetisation</summary><div class="faq-body">
+        <p><strong>How do you make money today?</strong> Subscriptions and token-based monetization.</p>
+        <p style="margin-bottom:0"><strong>What % of users are active (DAU/MAU) / paying? ARPU / LTV?</strong> All specific numbers kept private at this stage. Happy to share more context with candidates who reach the later interview stages under NDA.</p>
+      </div></details>
+      <details class="faq"><summary>2. Growth Quality</summary><div class="faq-body">
+        <p><strong>"50M users" → how many are real vs bots?</strong> We have captcha plus email confirmation, so bot contamination is low. The vast majority are real users.</p>
+        <p><strong>Retained after 30 days?</strong> Kept private. Happy to discuss ranges with candidates in later stages.</p>
+        <p style="margin-bottom:0"><strong>What channels drove growth? (viral vs paid)</strong> Kept private at this stage.</p>
+      </div></details>
+      <details class="faq"><summary>3. Competitive Landscape</summary><div class="faq-body">
+        <p style="margin-bottom:0"><strong>Who do you see as direct competitors?</strong> Character.ai and Replika in the mainstream roleplay space. In the NSFW-oriented segment, Ourdream.ai and Lovescape. We view ourselves as differentiated on model quality for the roleplay use case specifically.</p>
+      </div></details>
+      <details class="faq"><summary>4. Team & Hiring Plan</summary><div class="faq-body">
+        <p><strong>What is the target team size in 6–12 months?</strong> Depends on needs and the business trajectory — we hire based on clear impact, not headcount targets.</p>
+        <p><strong>Will this hire become Head of AI, or stay as senior IC / player-coach?</strong> We're still a small company, so everything is possible. Anyone who shows extreme dedication, motivation, and business impact can grow into larger responsibilities. The initial framing is senior IC / player-coach with a clear path upward.</p>
+        <p style="margin-bottom:0"><strong>What other hires are planned around them?</strong> None currently planned for the next 3–6 months, unless a specific project with high business impact justifies it.</p>
+      </div></details>
+      <details class="faq"><summary>5. Culture Reality Check</summary><div class="faq-body">
+        <p><strong>What does "high performance" actually mean here?</strong> Ownership, curiosity, strong motivation, good attitude, and measurable business impact.</p>
+        <p><strong>Hours / output expectations?</strong> We optimize for output and impact, not hours. That said, we move fast and expect people to match that energy.</p>
+        <p><strong>Any recent attrition?</strong> No material attrition issues.</p>
+        <p style="margin-bottom:0"><strong>How are disagreements handled?</strong> A quick 1:1 or a focused call with the relevant stakeholders to align on direction. We value speed of decision-making.</p>
+      </div></details>
+      <details class="faq"><summary>6. Risk & Controversy</summary><div class="faq-body">
+        <p><strong>Past platform bans? Payment provider issues? PR issues due to NSFW positioning?</strong> None on all three.</p>
+        <p style="margin-bottom:0"><strong>How do you mitigate platform risk (Apple/Google policies)?</strong> No issues today. Our positioning and compliance posture keep us clear of platform problems.</p>
+      </div></details>
+      <details class="faq"><summary>7. Compensation Clarity</summary><div class="faq-body">
+        <p><strong>Equity = $80k total or annual?</strong> Total. Package is competitive and structured for the long term.</p>
+        <p><strong>Flexibility on base?</strong> The package is competitive and we can structure it for the right profile. Specifics to be discussed with Bárbara.</p>
+        <p style="margin-bottom:0"><strong>Any upside tied to growth milestones?</strong> Not part of the current structure.</p>
+      </div></details>
+    </section>
+<div class="page-nav"><span></span><a class="next" href="ai-marketing-video-editor.html"><span class="dir">Next &rarr;</span><span class="label">AI Marketing Video Editor</span></a></div>
+  </main>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <span>EverAI Partner Hiring Wiki · AI LLM Tech Lead</span>
+    <span>Contact our TA team for anything not covered here</span>
+  </div>
+</footer>
+</body>
+</html>
