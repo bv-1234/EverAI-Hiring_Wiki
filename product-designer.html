@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Product Designer — EverAI Partner Hiring Wiki</title>
+<meta name="description" content="EverAI Partner Hiring Wiki · Product Designer" />
+<meta property="og:title" content="Product Designer — EverAI Partner Hiring Wiki" />
+<meta property="og:description" content="EverAI Partner Hiring Wiki · Product Designer" />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%A4%9D%3C/text%3E%3C/svg%3E" />
+<style>
+:root{
+    --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
+    --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
+    --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
+    --radius: 10px;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3;
+      --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733;
+      --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #16121A; --surface: #1E1822; --surface-2: #241C29; --ink: #ECE6EA; --ink-soft: #B3A9B3;
+    --ink-faint: #7C7480; --line: #332C39; --accent: #D08CBB; --accent-ink: #E7B4D5; --accent-soft: #3A2733;
+    --good: #6BC79A; --good-soft: #1F332B; --warn: #E3B25A; --warn-soft: #3A2F1B; --danger: #E28A87; --danger-soft: #3A2422;
+  }
+  :root[data-theme="light"]{
+    --bg: #F7F4F5; --surface: #FFFFFF; --surface-2: #FBF8F9; --ink: #211B22; --ink-soft: #5B5560;
+    --ink-faint: #948D93; --line: #E6E0E2; --accent: #7A3B69; --accent-ink: #5C2C4F; --accent-soft: #F1E3EC;
+    --good: #2E7D5B; --good-soft: #E3F1EA; --warn: #A16A17; --warn-soft: #F7EDD9; --danger: #B23A3A; --danger-soft: #F6E2E1;
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg); color: var(--ink); font-family: var(--sans);
+    font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  a{ color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 2px; }
+  a:hover{ text-decoration-color: var(--accent-ink); }
+  a:focus-visible, button:focus-visible, summary:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  .masthead{
+    background: linear-gradient(180deg, var(--surface-2), var(--bg));
+    border-bottom: 1px solid var(--line);
+    padding: 40px max(24px, calc((100vw - 1180px)/2)) 26px;
+  }
+  .back-link{
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; color: var(--ink-soft);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px;
+    transition: color .15s, transform .15s;
+  }
+  .back-link:hover{ color: var(--accent-ink); transform: translateX(-2px); }
+
+  .skip-link{
+    position: absolute; left: -999px; top: 0; background: var(--accent); color: #fff; padding: 10px 16px;
+    border-radius: 0 0 8px 0; font-size: 13px; font-weight: 600; z-index: 50; text-decoration: none;
+  }
+  .skip-link:focus{ left: 0; }
+  .masthead-eyebrow{
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--accent-ink); display: flex; align-items: center; gap: 8px; margin: 0 0 14px;
+  }
+  .masthead-eyebrow::before{ content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .masthead h1{
+    font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.01em; margin: 0 0 10px; text-wrap: balance;
+  }
+  .masthead p.lede{ max-width: 640px; color: var(--ink-soft); font-size: 16.5px; margin: 0 0 18px; }
+  .masthead-contact{ font-size: 14px; color: var(--ink-soft); }
+  .masthead-contact a{ color: var(--accent-ink); font-weight: 600; text-decoration: none; }
+  .masthead-contact a:hover{ text-decoration: underline; }
+
+  .confidential-strip{
+    margin-top: 22px; display: flex; gap: 12px; align-items: flex-start;
+    background: var(--danger-soft); border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+    border-radius: var(--radius); padding: 13px 16px; max-width: 780px;
+  }
+  .confidential-strip .glyph{ font-size: 17px; line-height: 1.4; }
+  .confidential-strip strong{ color: var(--danger); }
+  .confidential-strip span.body{ color: var(--ink); font-size: 14px; }
+
+  section.card.whats-new{
+    background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  section.card.whats-new .kicker .date{
+    font-family: var(--mono); font-size: 12px; color: var(--accent-ink); letter-spacing: 0.04em;
+  }
+  section.card.whats-new ul{ margin: 0; padding-left: 20px; }
+  section.card.whats-new li{ margin-bottom: 7px; }
+  section.card.whats-new li:last-child{ margin-bottom: 0; }
+
+  .topnav{
+    position: sticky; top: 0; z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line);
+    transition: box-shadow .2s;
+  }
+  .topnav.is-scrolled{ box-shadow: 0 8px 20px -12px rgba(0,0,0,.3); }
+  .topnav::before, .topnav::after{
+    content: ""; position: absolute; top: 0; bottom: 0; width: 44px; pointer-events: none;
+    opacity: 0; transition: opacity .2s; z-index: 1;
+  }
+  .topnav::before{ left: 0; background: linear-gradient(90deg, var(--surface), transparent); }
+  .topnav::after{ right: 0; background: linear-gradient(270deg, var(--surface), transparent); }
+  .topnav.has-overflow-left::before{ opacity: 1; }
+  .topnav.has-overflow-right::after{ opacity: 1; }
+  .topnav-inner{
+    position: relative; max-width: 1180px; margin: 0 auto; padding: 0 max(24px, calc((100vw - 1180px)/2));
+    display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin;
+  }
+  .topnav-inner::-webkit-scrollbar{ height: 4px; }
+  .topnav a{
+    flex-shrink: 0; padding: 15px 13px 13px; font-size: 13.5px; font-weight: 600; text-decoration: none;
+    color: var(--ink-soft); border-bottom: 2px solid transparent; white-space: nowrap;
+    transition: color .15s, border-color .15s;
+  }
+  .topnav a:hover{ color: var(--ink); }
+  .topnav a.active{ color: var(--accent-ink); border-bottom-color: var(--accent); }
+
+  .page-body{ max-width: 880px; margin: 0 auto; padding: 40px 24px 100px; }
+  main{ min-width: 0; }
+
+  section.card{
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 36px clamp(20px, 4vw, 44px); margin-bottom: 28px; scroll-margin-top: 24px;
+  }
+  section.card > .kicker{ display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  section.card .kicker .icon{ font-size: 24px; line-height: 1; }
+  section.card .kicker .idx{ font-family: var(--mono); font-size: 12px; color: var(--ink-faint); letter-spacing: 0.06em; }
+  section.card h2{
+    font-family: var(--serif); font-weight: 400; font-size: 26px; letter-spacing: -0.005em;
+    margin: 2px 0 6px; text-wrap: balance;
+  }
+  section.card p.subtitle{ font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 15px; margin: 0 0 22px; }
+  section.card h3{ font-family: var(--sans); font-weight: 700; font-size: 15.5px; margin: 30px 0 10px; color: var(--ink); }
+  section.card h3.numbered{ display:flex; align-items:center; gap:8px; }
+  section.card h3 .step-dot{
+    display:inline-flex; align-items:center; justify-content:center; width: 20px; height:20px; border-radius:50%;
+    background: var(--accent-soft); color: var(--accent-ink); font-family: var(--mono); font-size: 11px; font-weight:700; flex-shrink:0;
+  }
+  section.card h4{
+    font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint);
+    font-weight: 700; margin: 22px 0 8px;
+  }
+  section.card h5{ font-size: 14.5px; font-weight: 700; color: var(--ink); margin: 16px 0 6px; }
+  section.card p{ margin: 0 0 14px; color: var(--ink); }
+  section.card p.dim{ color: var(--ink-soft); }
+  section.card ul, section.card ol, section.card ol.plain{ margin: 0 0 14px; padding-left: 22px; }
+  section.card li{ margin-bottom: 7px; }
+  section.card li::marker{ color: var(--ink-faint); }
+  section.card ul ul, section.card ol.plain ul, section.card ul ol, section.card ol ol{ margin: 6px 0 6px; }
+  section.card .step-list{ padding-left: 20px; margin: 0 0 6px; }
+  section.card .step-list > li{ margin-bottom: 16px; }
+
+  figure.shot{ margin: 12px 0 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); padding: 8px; }
+  figure.shot img{ display: block; width: 100%; border-radius: 6px; border: 1px solid var(--line); }
+  figure.shot figcaption{ font-family: var(--mono); font-size: 11px; color: var(--ink-faint); padding: 8px 4px 2px; }
+  .cols{ display:grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap:10px; margin: 12px 0; }
+  .cols img{ width:100%; border-radius:8px; border:1px solid var(--line); }
+
+  .media-chip{
+    display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--line);
+    border-radius: 8px; background: var(--surface-2); text-decoration: none; font-size: 13.5px; font-weight: 600;
+    color: var(--accent-ink); margin: 4px 0 16px; transition: border-color .15s, transform .15s;
+  }
+  .media-chip:hover{ border-color: var(--accent); transform: translateY(-1px); }
+  .media-note{ font-size: 13px; color: var(--ink-faint); font-style: italic; margin: 4px 0 16px; }
+  .embed-wrap{ margin: 10px 0 18px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .embed-wrap iframe{ width: 100%; height: 900px; border: none; display: block; }
+
+  .callout{ display: flex; gap: 12px; border-radius: var(--radius); padding: 14px 16px; margin: 18px 0; border: 1px solid var(--line); background: var(--surface-2); }
+  .callout .glyph{ font-size: 17px; flex-shrink: 0; line-height: 1.5; }
+  .callout .content > *:last-child{ margin-bottom: 0; }
+  .callout.warn{ background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, transparent); }
+  .callout.danger{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 35%, transparent); }
+  .callout.good{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 35%, transparent); }
+  .callout.accent{ background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+
+  .badge{ display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.03em; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; }
+  .badge.p0{ background: var(--danger-soft); color: var(--danger); }
+  .badge.p1{ background: var(--warn-soft); color: var(--warn); }
+  .badge.open{ background: var(--good-soft); color: var(--good); }
+  .badge.soon{ background: var(--accent-soft); color: var(--accent-ink); }
+  .badge.closed{ background: var(--surface-2); color: var(--ink-faint); border: 1px solid var(--line); }
+  .badge.tier-red{ background: var(--danger-soft); color: var(--danger); }
+  .badge.tier-yellow{ background: var(--warn-soft); color: var(--warn); }
+  .badge.tier-green{ background: var(--good-soft); color: var(--good); }
+  .tag{ display:inline-block; font-size: 12.5px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: var(--mono); }
+  .new-tag{ display:inline-block; font-size: 11px; color: var(--danger); font-weight: 700; }
+
+  .table-wrap{ overflow-x: auto; margin: 6px 0 22px; border: 1px solid var(--line); border-radius: 10px; }
+  table{ width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+  table caption{ text-align:left; padding: 10px 16px 0; font-size: 12px; color: var(--ink-faint); }
+  thead th{
+    text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-faint); background: var(--surface-2); padding: 11px 16px; border-bottom: 1px solid var(--line); white-space: nowrap;
+  }
+  tbody td{ padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink); transition: background .12s; }
+  tbody tr:last-child td{ border-bottom: none; }
+  tbody tr:hover td{ background: var(--surface-2); }
+  tbody td.num, thead th.num{ font-variant-numeric: tabular-nums; }
+  tbody td strong{ font-weight: 700; }
+
+  .split{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 8px 0 10px; }
+  @media (max-width: 720px){ .split{ grid-template-columns: 1fr; } }
+  .split .col{ border-radius: var(--radius); padding: 18px 20px; border: 1px solid var(--line); }
+  .split .col.do{ background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 30%, transparent); }
+  .split .col.dont{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 30%, transparent); }
+  .split h4{ margin-top: 0; color: inherit; }
+  .split .col.do h4{ color: var(--good); }
+  .split .col.dont h4{ color: var(--danger); }
+  .split ul{ margin: 0; padding-left: 20px; }
+  .split li{ font-size: 14.5px; }
+
+  .flag{ border: 1px solid var(--line); border-left: 3px solid var(--danger); border-radius: 8px; padding: 14px 18px; margin: 0 0 14px; background: var(--surface-2); }
+  .flag .flag-title{ font-weight: 700; margin: 0 0 6px; }
+  .flag .flag-title .glyph{ margin-right: 6px; }
+  .flag .flag-title span.line{ display:block; }
+  .flag p{ margin: 0 0 8px; font-size: 14.5px; color: var(--ink-soft); }
+  .flag p.ask{ margin: 0; font-size: 13.5px; color: var(--accent-ink); font-style: italic; }
+
+  .pills{ display:flex; flex-wrap:wrap; gap:6px; margin: 6px 0 18px; }
+  .pills .pill{ font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-soft); }
+  .pills.red .pill{ border-color: color-mix(in srgb, var(--danger) 30%, transparent); color: var(--danger); background: var(--danger-soft); }
+  .pills.green .pill{ border-color: color-mix(in srgb, var(--good) 30%, transparent); color: var(--good); background: var(--good-soft); }
+
+  .resource-list{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .resource-list li{ margin: 0; }
+  .resource-list a{
+    display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border: 1px solid var(--line);
+    border-radius: 10px; background: var(--surface-2); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 15px;
+    transition: border-color .15s, background .15s, transform .15s, box-shadow .15s;
+  }
+  .resource-list a:hover{ border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); box-shadow: 0 10px 22px -14px rgba(0,0,0,.35); }
+  .resource-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); transition: transform .15s; }
+  .resource-list a:hover .arrow{ transform: translateX(3px); color: var(--accent-ink); }
+
+  .brief-list{ list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .brief-list a{
+    display: flex; align-items: center; gap: 8px; padding: 11px 15px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--surface-2); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 14.5px;
+    transition: border-color .15s, background .15s, transform .15s, box-shadow .15s;
+  }
+  .brief-list a:hover{ border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); box-shadow: 0 10px 22px -14px rgba(0,0,0,.35); }
+  .brief-list a .arrow{ color: var(--ink-faint); font-family: var(--mono); margin-left: auto; transition: transform .15s; }
+  .brief-list a:hover .arrow{ transform: translateX(3px); color: var(--accent-ink); }
+  .brief-list a .sub{ font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+  .role-meta{ display:grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap:10px 20px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; margin: 10px 0 18px; font-size:13.5px; }
+  .role-meta div span.label{ display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px; }
+
+  .nn-list{ list-style:none; margin:0 0 16px; padding:0; counter-reset: nn; }
+  .nn-list li{ counter-increment: nn; position:relative; padding-left:30px; margin-bottom:10px; }
+  .nn-list li::before{ content: counter(nn); position:absolute; left:0; top:1px; width:20px; height:20px; border-radius:50%; background:var(--danger-soft); color:var(--danger); font-family:var(--mono); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .nn-list li::marker{ content:none; }
+
+  .filter-line{ font-size:13.5px; color:var(--danger); margin: 4px 0 14px; padding-left: 22px; }
+  .filter-line::before{ content:"❌ "; }
+
+  .eval-cat{ border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-bottom:12px; background:var(--surface-2); }
+  .eval-cat .pct{ font-family:var(--mono); color:var(--accent-ink); font-weight:700; }
+
+  .tool-tier{ margin: 4px 0 6px; }
+  .tool-tier .tier-label{ font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--accent-ink); font-weight:700; }
+
+  details.faq{ border:1px solid var(--line); border-radius:8px; margin-bottom:8px; background:var(--surface-2); }
+  details.faq summary{ padding:10px 14px; font-weight:600; font-size:13.5px; cursor:pointer; transition: background .15s; }
+  details.faq summary:hover{ background: var(--surface); }
+  details.faq .faq-body{ padding: 0 14px 14px; font-size:13.5px; color:var(--ink-soft); }
+  details.faq .faq-body p{ margin: 0 0 10px; }
+
+  .value-card{ border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:10px; background:var(--surface-2); }
+  .value-card strong{ display:block; margin-bottom:4px; }
+
+  .stat-row{ display:flex; flex-wrap:wrap; gap:12px; margin: 10px 0 18px; }
+  .stat{ flex:1; min-width:140px; border:1px solid var(--line); border-radius:10px; padding:14px 16px; background:var(--surface-2); text-align:center; }
+  .stat .num{ font-family:var(--mono); font-size:20px; font-weight:700; color:var(--accent-ink); display:block; }
+  .stat .lbl{ font-size:11.5px; color:var(--ink-faint); }
+
+  .page-nav{ display:flex; justify-content:space-between; gap:16px; margin: 4px 0 28px; }
+  .page-nav a{
+    flex: 1; max-width: 48%; display:flex; flex-direction:column; gap:4px; padding:14px 18px; border:1px solid var(--line);
+    border-radius:10px; background:var(--surface-2); text-decoration:none; color:var(--ink);
+    transition: border-color .15s, background .15s, transform .15s, box-shadow .15s;
+  }
+  .page-nav a:hover{ border-color:var(--accent); background:var(--accent-soft); transform: translateY(-2px); box-shadow: 0 10px 22px -14px rgba(0,0,0,.35); }
+  .page-nav a.next{ text-align:right; margin-left:auto; }
+  .page-nav .dir{ font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+  .page-nav .label{ font-weight:600; font-size:14.5px; }
+
+  hr.rule{ border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+
+  footer{ max-width: 1180px; margin: 0 auto; padding: 0 24px 60px; color: var(--ink-faint); font-size: 13px; }
+  footer .foot-inner{ border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  .reveal{ opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal-visible{ opacity: 1; transform: none; }
+
+  .back-to-top{
+    position: fixed; right: 20px; bottom: 20px; width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink-soft); font-size: 19px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 24px -10px rgba(0,0,0,.35); opacity: 0; transform: translateY(10px); pointer-events: none;
+    transition: opacity .2s, transform .2s, border-color .15s, color .15s; z-index: 30;
+  }
+  .back-to-top.visible{ opacity: 1; transform: none; pointer-events: auto; }
+  .back-to-top:hover{ border-color: var(--accent); color: var(--accent-ink); }
+
+  @media (max-width: 880px){
+    .page-body{ padding-top: 28px; }
+    .topnav a{ font-size: 13px; padding: 13px 10px 11px; }
+    .embed-wrap iframe{ height: 640px; }
+    .page-nav{ flex-direction: column; }
+    .page-nav a{ max-width: 100%; }
+    .back-to-top{ right: 14px; bottom: 14px; width: 40px; height: 40px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; }
+    .reveal{ opacity: 1 !important; transform: none !important; }
+  }
+  @media print{
+    .topnav, .back-to-top, .back-link, .page-nav, footer, .skip-link{ display: none !important; }
+    body{ background: #fff; color: #000; }
+    .masthead{ background: none; border-bottom: 1px solid #ccc; }
+    section.card{ border: none; box-shadow: none; padding: 0 0 24px; }
+    a{ color: #000; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="masthead">
+  <a class="back-link" href="open-roles.html">&larr; Back to Our Open Roles</a>
+  <h1>🎨 Product Designer</h1>
+</header>
+
+<nav class="topnav" aria-label="Section navigation">
+  <div class="topnav-inner">
+    <a href="performance-marketer.html">Performance Marketer</a>
+    <a href="ruby-engineer.html">Ruby Engineer</a>
+    <a href="product-designer.html" class="active" aria-current="page">Product Designer</a>
+  </div>
+</nav>
+
+<div class="page-body">
+  <main id="main-content">
+<section class="card" id="product-designer">
+      <div class="kicker"><span class="icon">🎨</span></div>
+      <h2>Product Designer</h2>
+
+      <div class="role-meta">
+        <div><span class="label">Department</span>R&amp;D</div>
+        <div><span class="label">Hiring Manager</span>Arni Lochner (Design Lead)</div>
+        <div><span class="label">TA Contact</span>Bárbara Veloso</div>
+        <div><span class="label">Location</span>Remote / Worldwide</div>
+        <div><span class="label">Contract</span>B2B / contractor to start, potential transition to full-time</div>
+        <div><span class="label">Openings</span>1</div>
+        <div><span class="label">Seniorities</span>Senior</div>
+        <div><span class="label">Priority</span><span class="badge p0">🔴 P0</span></div>
+        <div style="grid-column: 1 / -1"><span class="label">Budget</span>€80,000–€120,000 (total package)</div>
+      </div>
+      <div class="callout warn">
+        <span class="glyph">📣</span>
+        <div class="content"><p style="margin-bottom:0"><strong>Status: Active — agency-led sourcing.</strong> This role is not publicly posted; you're sourcing from your own network and pipeline.</p></div>
+      </div>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">A separate, candidate-facing version of this JD exists for sharing externally. Ask your TA contact for it.</p></div>
+      </div>
+
+      <h3>🏢 The Company &amp; Role in 60 Seconds</h3>
+      <p>EverAI / <a href="https://candy.ai/" target="_blank" rel="noopener">Candy.ai</a> — one of the fastest-growing AI companies globally: 50M+ users in 3 years, ~70 people, fully remote, founders with multiple exits/IPO. Flagship product is the world's largest AI companion platform. This is an adult-content product — candidates must be genuinely comfortable with that from the first conversation.</p>
+      <p>The role: <strong>Senior Product Designer</strong> — hands-on, end-to-end, across chat experiences, character creation, monetisation and growth flows, and emerging surfaces (live/interactive features, AI video). Works directly with the Design Lead (Arni), PMs, and founders. High autonomy — often the only designer on a surface. Mobile-first.</p>
+      <p><strong>Engagement:</strong> B2B / contractor to start, potential transition to full-time. Fully remote, work from anywhere. 4 weeks PTO, health allowance, learning budget, premium AI tooling provided.</p>
+      <div class="callout accent">
+        <span class="glyph">💰</span>
+        <div class="content">
+          <p><strong>Compensation: €80,000–€120,000.</strong> The range is real and recently benchmarked, but the top of the band is reserved for genuinely exceptional candidates — expect founder scrutiny above ~€100k.</p>
+          <p style="margin-bottom:0">Log exact current comp and expectations in the first screen.</p>
+        </div>
+      </div>
+
+      <h4>⛔️ Non-Negotiables — screen hard on all six</h4>
+      <ol class="nn-list">
+        <li><strong>5+ years end-to-end consumer product design</strong> — mobile-first, shipped at real scale.</li>
+        <li><strong>A portfolio that wins on craft</strong> — polished, modern, high-taste UI on real shipped consumer products. If the visuals don't impress in 30 seconds, stop there.</li>
+        <li><strong>AI-native workflow</strong> — mandatory, not a bonus. Uses AI tools daily for design, prototyping, or content generation (Claude, Cursor, image/video gen, code-based prototyping). Can talk specifics, not aspirations. Candidates who don't use AI in their workflow are not a fit, regardless of seniority.</li>
+        <li><strong>Advanced Figma + strong prototyping</strong> (design-tool and/or code-based).</li>
+        <li><strong>B2B/contractor engagement accepted</strong> — confirmed explicitly, in the first call, logged in writing.</li>
+        <li><strong>Comfortable with NSFW / adult product experiences</strong> — asked directly, early.</li>
+      </ol>
+      <p><strong>Nice-to-haves:</strong></p>
+      <div class="pills">
+        <span class="pill">NSFW/dating/AI-companionship domain experience</span>
+        <span class="pill">Motion, 3D, illustration</span>
+        <span class="pill">Subscription/monetisation products</span>
+        <span class="pill">Gamification</span>
+        <span class="pill">Front-end fluency (HTML/CSS/JS)</span>
+      </div>
+      <div class="callout danger">
+        <span class="glyph">🎯</span>
+        <div class="content"><p style="margin-bottom:0"><strong>The profile shape we will hire:</strong> a full-stack product designer — strategic product thinking AND elite visual execution. We recently ran a full process with a strategically brilliant candidate whose visual craft missed our bar; we will not make that trade again. The founders' bar, verbatim: they want to be <strong>"blown away instantly from visuals."</strong></p></div>
+      </div>
+
+      <h3>📋 Screening Protocol — Non-Negotiable Process Rules</h3>
+      <p class="dim">Each rule exists because skipping it has cost us real time.</p>
+      <ol>
+        <li><strong>Confirm B2B/contractor in the FIRST screen</strong> and record the exact Q&amp;A in the ATS. This has burned late-stage processes 5+ times. Also verify the candidate's country of residence (tax/contract setup varies — don't assume from nationality).</li>
+        <li><strong>Log exact current compensation and expectations</strong> against €80–120k in the first screen. Note whether comp is their primary motivator.</li>
+        <li><strong>Set the full process in writing up front:</strong> recruiter screen → hiring-manager interview (Arni) → scoped case study (~4–5 hrs, clear written brief, includes a ≤5-minute Loom walkthrough with working audio) → founder calls (Thomas, Mike) → references. Everyone goes through the full process — no fast-tracks, no skipped steps, regardless of seniority, referral, or counter-offer pressure. A candidate repeatedly probing to shorten or skip steps is a culture-fit flag: log it, don't accommodate it.</li>
+        <li><strong>Ask about notice periods and counter-offer risk early.</strong> External deadlines do not compress our process; if a candidate's timeline can't survive our normal pace, we'd rather know in the screen.</li>
+        <li><strong>Referrers stay fully outside the process</strong> — no involvement in task selection, feedback, or candidate communication. Route all candidate questions to Arni/your TA contact only.</li>
+        <li><strong>Assess async communication quality throughout</strong> — concise writing, brief-following, respect for stated formats. It predicts how they'll operate on a fully remote team.</li>
+      </ol>
+
+      <h3>💬 Pre-Screen Questions</h3>
+      <div class="callout accent">
+        <span class="glyph">ℹ️</span>
+        <div class="content"><p style="margin-bottom:0">Use these questions during your screening call. Include a summary of the candidate's answers in your submission notes in Ashby.</p></div>
+      </div>
+      <ol>
+        <li>What's your current situation, and why are you exploring? <em>(Listen for counter-offer dynamics.)</em></li>
+        <li>Which product areas did you fully own, concept → launch, in your last role?</li>
+        <li>Walk me through the single screen or flow you're proudest of — why does it work? <em>(Craft probe.)</em></li>
+        <li>How do AI tools sit in your day-to-day design workflow — which ones, for what, concretely? <em>(Must-have probe.)</em></li>
+        <li>Have you designed for sensitive/NSFW categories? What was your hands-on involvement?</li>
+        <li>You'd be engaged B2B/contractor initially — does that work for you? <em>(Record answer verbatim.)</em></li>
+        <li>How do you keep design consistency across multiple surfaces while moving fast?</li>
+        <li>What draws you to AI companionship as a space?</li>
+      </ol>
+
+      <h3>🎨 How to Assess Portfolios (Even If You're Not a Designer)</h3>
+      <p>Candy is an extremely visual, mobile-first product — the portfolio review is the highest-signal step you control.</p>
+      <div class="split">
+        <div class="col do">
+          <h4>✅ Green Flags</h4>
+          <ul>
+            <li>Custom domain, built on Framer or Webflow — signals modern web fluency and care.</li>
+            <li>Animation &amp; interaction shown in case studies — demonstrates how the design works, not just how it looks.</li>
+            <li>Strong visual and written communication — convey personality and conciseness; say less, say it well.</li>
+            <li>Clean, modern, premium aesthetic — sleek, often dark, bold visuals first; sans-serif type; intentional color. Visuals should grab attention before any text does.</li>
+            <li>At least one strong, relevant case study plus a second meaningfully related one (B2C, AI-driven, social/entertainment) — a pattern, not a one-off.</li>
+            <li>Demonstrated impact — outcomes, results, or clear rationale behind decisions.</li>
+          </ul>
+        </div>
+        <div class="col dont">
+          <h4>🚩 Red Flags</h4>
+          <ul>
+            <li>Text-heavy, visual-light — walls of description before any work appears.</li>
+            <li>Messy typography — inconsistent sizes, busy layouts; sloppy hierarchy signals sloppy thinking.</li>
+            <li>Overly academic UX process — sticky-note walls, double-diamond diagrams, survey documentation, endless wireframe journeys before any design. We do light competitive research, then design; process-heavy designers struggle at our velocity.</li>
+            <li>Not mobile-optimised — broken or cropped on a phone. Mobile is our primary platform.</li>
+            <li>Outdated device mockups (old iMacs, iPhone 7/X frames, cluttered desk scenes).</li>
+            <li>Wrong work mix — dominated by branding/logos, marketing pages, Web3, dashboards, templated SaaS, or corporate B2B. These rely on established patterns; Candy routinely invents interaction models that don't exist anywhere else.</li>
+            <li>Vague ownership — unclear what they did vs. their team.</li>
+            <li>Over-animated portfolio theatrics — spectacle compensating for weak core work.</li>
+            <li>WordPress / Squarespace / Canva hosting — signals dated taste.</li>
+            <li>Spelling mistakes or broken links — instant confidence killer.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>🎯 Calibration Anchors &amp; Target Profiles</h3>
+      <p class="dim">Non-exhaustive; these reflect the product culture, complexity, and velocity we value.</p>
+      <p><strong>💘 Dating, relationship &amp; social platforms</strong> <span class="dim">(sensitive verticals, retention + monetisation UX)</span>: Feeld, Grindr, Tinder, Hily, HUD, Bumble, Telegram.</p>
+      <p><strong>🤖 AI companionship apps</strong> <span class="dim">(closest to our category)</span>: Eva AI, Lovescape, Our Dream, JOI, Replika.</p>
+      <p><strong>🎬 Content-generation tools</strong> <span class="dim">(adjacent signal)</span>: Higgsfield, Leonardo AI, Krea, Runway.</p>
+      <p><strong>📱 Subscription consumer apps</strong> <span class="dim">(onboarding, conversion, retention)</span>: Headspace, Blinkist, Duolingo, Calm.</p>
+      <p><strong>🎮 Live-interactive / gamified products</strong> <span class="dim">(engagement mechanics)</span>: IMVU, Tango, StripChat.</p>
+      <div class="callout warn">
+        <span class="glyph">⚠️</span>
+        <div class="content"><p style="margin-bottom:0">Design quality at live-interactive/gamified companies (IMVU, Tango, StripChat) is generally weak — domain experience here only counts if paired with a strong, modern portfolio. Domain alone is not enough.</p></div>
+      </div>
+      <p><strong>🏷️ Titles candidates may hold:</strong> Senior Product Designer, Lead Product Designer, Senior UI/UX Designer, Senior Interaction Designer, Product Design Lead (smaller companies), UX/UI Lead, Product Designer II, Digital/Creative Designer.</p>
+      <div class="callout warn">
+        <span class="glyph">⚠️</span>
+        <div class="content"><p style="margin-bottom:0">Be cautious with freelancers or studio owners with little in-house experience — probe commitment and ability to operate inside a team. Don't rule them out; pressure-test them.</p></div>
+      </div>
+
+      <h4>Calibration — Example Profiles That Fit</h4>
+      <p>Use these as the taste benchmark: if a submitted profile wouldn't sit comfortably next to these two, it's a pass.</p>
+      <ul>
+        <li><a href="https://antonblinkov.com/" target="_blank" rel="noopener">Anton Blinkov</a> — Apple Design Award (Loona); multiple shipped consumer apps; motion/interaction-savvy; clear problem→solution→results case studies.</li>
+        <li><a href="https://readymag.website/kristinalenberg/4330252/" target="_blank" rel="noopener">Kristina Lenberg</a> — motion-led storytelling; shipped at Snapchat and Tabby; outcome-focused case studies; strong systems thinking with visual innovation.</li>
+      </ul>
+    </section>
+<div class="page-nav"><a class="prev" href="ruby-engineer.html"><span class="dir">&larr; Previous</span><span class="label">Ruby Engineer</span></a><a class="next" href="past-briefs.html"><span class="dir">Next &rarr;</span><span class="label">Past Briefs</span></a></div>
+  </main>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <span>EverAI Partner Hiring Wiki · Product Designer</span>
+    <span>Contact our TA team for anything not covered here</span>
+  </div>
+</footer>
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var sel = '.masthead h1, .masthead p.lede, .masthead-contact, .confidential-strip, ' +
+      'main h2, main h3, main h4, main p, main ul, main ol, main table, main .callout, main .split, ' +
+      'main .stat-row, main .role-meta, main figure.shot, main .flag, main .value-card, main .eval-cat, ' +
+      'main details.faq, main .resource-list li, main .brief-list li, main .page-nav, main .cols';
+    var targets = Array.prototype.slice.call(document.querySelectorAll(sel));
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+    targets.forEach(function(el, i){
+      el.classList.add('reveal');
+      el.style.transitionDelay = (Math.min(i % 6, 5) * 0.05) + 's';
+      io.observe(el);
+    });
+    // Safety net: a fast flick, Page Down, or End-key jump can move a whole
+    // screenful in one paint, so an element never gets a mid-flight intersection
+    // check. Sweep past-viewport targets and reveal them so nothing is stuck hidden.
+    var sweepTimer = null;
+    var sweep = function(){
+      sweepTimer = null;
+      targets.forEach(function(el){
+        if (!el.classList.contains('reveal-visible') && el.getBoundingClientRect().top < window.innerHeight + 200) {
+          el.classList.add('reveal-visible');
+          io.unobserve(el);
+        }
+      });
+    };
+    window.addEventListener('scroll', function(){
+      if (sweepTimer) clearTimeout(sweepTimer);
+      sweepTimer = setTimeout(sweep, 120);
+    }, {passive:true});
+  }
+
+  var topnav = document.querySelector('.topnav');
+  var inner = document.querySelector('.topnav-inner');
+  if (topnav && inner) {
+    var onScroll = function(){ topnav.classList.toggle('is-scrolled', window.scrollY > 4); };
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+    var active = inner.querySelector('a.active');
+    if (active) { active.scrollIntoView({block:'nearest', inline:'center'}); }
+    var updateFade = function(){
+      topnav.classList.toggle('has-overflow-left', inner.scrollLeft > 2);
+      topnav.classList.toggle('has-overflow-right', inner.scrollLeft + inner.clientWidth < inner.scrollWidth - 2);
+    };
+    inner.addEventListener('scroll', updateFade, {passive:true});
+    window.addEventListener('resize', updateFade);
+    updateFade();
+  }
+
+  var btt = document.createElement('button');
+  btt.className = 'back-to-top';
+  btt.type = 'button';
+  btt.setAttribute('aria-label', 'Back to top');
+  btt.textContent = '\u2191';
+  btt.addEventListener('click', function(){
+    window.scrollTo({top: 0, behavior: reduceMotion ? 'auto' : 'smooth'});
+  });
+  document.body.appendChild(btt);
+  var toggleBtt = function(){ btt.classList.toggle('visible', window.scrollY > 480); };
+  window.addEventListener('scroll', toggleBtt, {passive:true});
+  toggleBtt();
+})();
+</script>
+</body>
+</html>
