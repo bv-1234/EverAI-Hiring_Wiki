@@ -103,16 +103,20 @@
     transition: box-shadow .2s;
   }
   .topnav.is-scrolled{ box-shadow: 0 8px 20px -12px rgba(0,0,0,.3); }
-  .topnav::before, .topnav::after{
-    content: ""; position: absolute; top: 0; bottom: 0; width: 44px; pointer-events: none;
+  .topnav-row{
+    max-width: 1180px; margin: 0 auto; padding: 0 max(24px, calc((100vw - 1180px)/2));
+    display: flex; align-items: stretch; gap: 10px;
+  }
+  .topnav-scroll{ position: relative; flex: 1; min-width: 0; }
+  .topnav-scroll::before, .topnav-scroll::after{
+    content: ""; position: absolute; top: 0; bottom: 0; width: 32px; pointer-events: none;
     opacity: 0; transition: opacity .2s; z-index: 1;
   }
-  .topnav::before{ left: 0; background: linear-gradient(90deg, var(--surface), transparent); }
-  .topnav::after{ right: 0; background: linear-gradient(270deg, var(--surface), transparent); }
-  .topnav.has-overflow-left::before{ opacity: 1; }
-  .topnav.has-overflow-right::after{ opacity: 1; }
+  .topnav-scroll::before{ left: 0; background: linear-gradient(90deg, var(--surface), transparent); }
+  .topnav-scroll::after{ right: 0; background: linear-gradient(270deg, var(--surface), transparent); }
+  .topnav.has-overflow-left .topnav-scroll::before{ opacity: 1; }
+  .topnav.has-overflow-right .topnav-scroll::after{ opacity: 1; }
   .topnav-inner{
-    position: relative; max-width: 1180px; margin: 0 auto; padding: 0 max(24px, calc((100vw - 1180px)/2));
     display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin;
   }
   .topnav-inner::-webkit-scrollbar{ height: 4px; }
@@ -123,6 +127,34 @@
   }
   .topnav a:hover{ color: var(--ink); }
   .topnav a.active{ color: var(--accent-ink); border-bottom-color: var(--accent); }
+
+  .nav-more{ flex-shrink: 0; display: flex; align-items: center; position: relative; }
+  .nav-more summary{
+    list-style: none; cursor: pointer; display: flex; align-items: center; gap: 6px;
+    padding: 7px 13px; font-size: 12.5px; font-weight: 700; color: var(--ink-soft);
+    border: 1px solid var(--line); border-radius: 999px; background: var(--surface-2);
+    white-space: nowrap; user-select: none; transition: color .15s, border-color .15s, background .15s;
+  }
+  .nav-more summary::-webkit-details-marker{ display: none; }
+  .nav-more summary::before{ content: "☰"; font-size: 10.5px; }
+  .nav-more summary:hover{ color: var(--ink); border-color: var(--accent); }
+  .nav-more[open] summary{ color: var(--accent-ink); border-color: var(--accent); background: var(--accent-soft); }
+  .nav-more-panel{
+    position: absolute; top: calc(100% + 8px); right: 0; width: min(300px, 82vw);
+    max-height: min(70vh, 520px); overflow-y: auto; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; box-shadow: 0 20px 40px -16px rgba(0,0,0,.4); padding: 10px; z-index: 25;
+  }
+  .nav-more-group + .nav-more-group{ margin-top: 12px; }
+  .nav-more-group-label{
+    display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--ink-faint); padding: 6px 10px 4px;
+  }
+  .nav-more-panel a{
+    display: block; padding: 8px 10px; border-radius: 7px; font-size: 13.5px; font-weight: 600;
+    color: var(--ink); text-decoration: none; white-space: normal;
+  }
+  .nav-more-panel a:hover{ background: var(--surface-2); }
+  .nav-more-panel a.active{ color: var(--accent-ink); background: var(--accent-soft); }
 
   .page-body{ max-width: 880px; margin: 0 auto; padding: 40px 24px 100px; }
   main{ min-width: 0; }
@@ -378,27 +410,52 @@
 </header>
 
 <nav class="topnav" aria-label="Section navigation">
-  <div class="topnav-inner">
+  <div class="topnav-row">
+    <div class="topnav-scroll">
+      <div class="topnav-inner">
     <a href="ashby.html">How to Use Ashby</a>
     <a href="open-roles.html">Our Open Roles</a>
     <a href="hiring-process.html">Hiring Process & SLAs</a>
     <a href="dos-donts.html">Do's and Don'ts</a>
     <a href="pitch.html">Pitching the Company</a>
     <a href="prepare-candidates.html">Preparing Candidates</a>
+    <a href="red-flags.html">Candidate Red Flags</a>
     <a href="international.html">Hiring Internationally</a>
     <a href="jurisdiction.html" class="active" aria-current="page">Jurisdiction Risk Guide</a>
-    <a href="red-flags.html">Candidate Red Flags</a>
     <a href="off-limits.html">Off-Limits Companies</a>
     <a href="resources.html">Helpful Resources</a>
+      </div>
+    </div>
+    <details class="nav-more">
+      <summary>All</summary>
+      <div class="nav-more-panel">
+        <div class="nav-more-group"><span class="nav-more-group-label">Getting Started</span>
+          <a href="ashby.html">👋 How to Use Ashby</a>
+          <a href="open-roles.html">📌 Our Open Roles</a>
+          <a href="hiring-process.html">⏳ Hiring Process & SLAs</a>
+        </div>
+        <div class="nav-more-group"><span class="nav-more-group-label">Sourcing & Screening</span>
+          <a href="dos-donts.html">🚦 Do's and Don'ts</a>
+          <a href="pitch.html">🗣️ Pitching the Company</a>
+          <a href="prepare-candidates.html">🆘 Preparing Candidates</a>
+          <a href="red-flags.html">🚩 Candidate Red Flags</a>
+        </div>
+        <div class="nav-more-group"><span class="nav-more-group-label">Compliance & Risk</span>
+          <a href="international.html">🌐 Hiring Internationally</a>
+          <a href="jurisdiction.html" class="active">⚖️ Jurisdiction Risk Guide</a>
+          <a href="off-limits.html">🚫 Off-Limits Companies</a>
+        </div>
+        <div class="nav-more-group"><span class="nav-more-group-label">Reference</span>
+          <a href="resources.html">🔖 Helpful Resources</a>
+        </div>
+      </div>
+    </details>
   </div>
 </nav>
 
 <div class="page-body">
   <main id="main-content">
 <section class="card" id="jurisdiction">
-      <div class="kicker"><span class="icon">⚖️</span><span class="idx">08 / 11</span></div>
-      <h2>Jurisdiction Risk Guide</h2>
-
       <h3>🎯 Purpose</h3>
       <p>This page is designed to help us distinguish in which countries it is legal vs. illegal to work for an adult content platform, and how that can impact candidates depending on where they live. We do <strong>not</strong> refuse to hire from any location — but we believe candidates deserve full transparency about the legal landscape so they can make an informed decision.</p>
       <p>The guide covers both traditional and AI-generated adult content, maps open positions to risk levels, and categorizes countries into three risk tiers.</p>
@@ -541,7 +598,7 @@
         <div class="content"><p style="margin-bottom:0"><em>This document was prepared in April 2026 and updated in May 2026 based on publicly available legal information. Laws in this space change rapidly. All parties should always encourage candidates in restricted jurisdictions to verify current regulations with qualified local legal counsel. This guide is a risk-flagging tool, not a legal opinion.</em></p></div>
       </div>
     </section>
-<div class="page-nav"><a class="prev" href="international.html"><span class="dir">&larr; Previous</span><span class="label">Hiring Internationally</span></a><a class="next" href="red-flags.html"><span class="dir">Next &rarr;</span><span class="label">Candidate Red Flags</span></a></div>
+<div class="page-nav"><a class="prev" href="international.html"><span class="dir">&larr; Previous</span><span class="label">Hiring Internationally</span></a><a class="next" href="off-limits.html"><span class="dir">Next &rarr;</span><span class="label">Off-Limits Companies</span></a></div>
   </main>
 </div>
 
@@ -609,6 +666,17 @@
     window.addEventListener('resize', updateFade);
     updateFade();
   }
+
+  document.addEventListener('click', function(e){
+    document.querySelectorAll('.nav-more[open]').forEach(function(d){
+      if (!d.contains(e.target)) d.removeAttribute('open');
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-more[open]').forEach(function(d){ d.removeAttribute('open'); });
+    }
+  });
 
   var btt = document.createElement('button');
   btt.className = 'back-to-top';

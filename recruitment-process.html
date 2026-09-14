@@ -103,16 +103,20 @@
     transition: box-shadow .2s;
   }
   .topnav.is-scrolled{ box-shadow: 0 8px 20px -12px rgba(0,0,0,.3); }
-  .topnav::before, .topnav::after{
-    content: ""; position: absolute; top: 0; bottom: 0; width: 44px; pointer-events: none;
+  .topnav-row{
+    max-width: 1180px; margin: 0 auto; padding: 0 max(24px, calc((100vw - 1180px)/2));
+    display: flex; align-items: stretch; gap: 10px;
+  }
+  .topnav-scroll{ position: relative; flex: 1; min-width: 0; }
+  .topnav-scroll::before, .topnav-scroll::after{
+    content: ""; position: absolute; top: 0; bottom: 0; width: 32px; pointer-events: none;
     opacity: 0; transition: opacity .2s; z-index: 1;
   }
-  .topnav::before{ left: 0; background: linear-gradient(90deg, var(--surface), transparent); }
-  .topnav::after{ right: 0; background: linear-gradient(270deg, var(--surface), transparent); }
-  .topnav.has-overflow-left::before{ opacity: 1; }
-  .topnav.has-overflow-right::after{ opacity: 1; }
+  .topnav-scroll::before{ left: 0; background: linear-gradient(90deg, var(--surface), transparent); }
+  .topnav-scroll::after{ right: 0; background: linear-gradient(270deg, var(--surface), transparent); }
+  .topnav.has-overflow-left .topnav-scroll::before{ opacity: 1; }
+  .topnav.has-overflow-right .topnav-scroll::after{ opacity: 1; }
   .topnav-inner{
-    position: relative; max-width: 1180px; margin: 0 auto; padding: 0 max(24px, calc((100vw - 1180px)/2));
     display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin;
   }
   .topnav-inner::-webkit-scrollbar{ height: 4px; }
@@ -123,6 +127,34 @@
   }
   .topnav a:hover{ color: var(--ink); }
   .topnav a.active{ color: var(--accent-ink); border-bottom-color: var(--accent); }
+
+  .nav-more{ flex-shrink: 0; display: flex; align-items: center; position: relative; }
+  .nav-more summary{
+    list-style: none; cursor: pointer; display: flex; align-items: center; gap: 6px;
+    padding: 7px 13px; font-size: 12.5px; font-weight: 700; color: var(--ink-soft);
+    border: 1px solid var(--line); border-radius: 999px; background: var(--surface-2);
+    white-space: nowrap; user-select: none; transition: color .15s, border-color .15s, background .15s;
+  }
+  .nav-more summary::-webkit-details-marker{ display: none; }
+  .nav-more summary::before{ content: "☰"; font-size: 10.5px; }
+  .nav-more summary:hover{ color: var(--ink); border-color: var(--accent); }
+  .nav-more[open] summary{ color: var(--accent-ink); border-color: var(--accent); background: var(--accent-soft); }
+  .nav-more-panel{
+    position: absolute; top: calc(100% + 8px); right: 0; width: min(300px, 82vw);
+    max-height: min(70vh, 520px); overflow-y: auto; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; box-shadow: 0 20px 40px -16px rgba(0,0,0,.4); padding: 10px; z-index: 25;
+  }
+  .nav-more-group + .nav-more-group{ margin-top: 12px; }
+  .nav-more-group-label{
+    display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--ink-faint); padding: 6px 10px 4px;
+  }
+  .nav-more-panel a{
+    display: block; padding: 8px 10px; border-radius: 7px; font-size: 13.5px; font-weight: 600;
+    color: var(--ink); text-decoration: none; white-space: normal;
+  }
+  .nav-more-panel a:hover{ background: var(--surface-2); }
+  .nav-more-panel a.active{ color: var(--accent-ink); background: var(--accent-soft); }
 
   .page-body{ max-width: 880px; margin: 0 auto; padding: 40px 24px 100px; }
   main{ min-width: 0; }
@@ -378,7 +410,9 @@
 </header>
 
 <nav class="topnav" aria-label="Section navigation">
-  <div class="topnav-inner">
+  <div class="topnav-row">
+    <div class="topnav-scroll">
+      <div class="topnav-inner">
     <a href="who-we-are.html">Who We Are</a>
     <a href="what-we-do.html">What We Do</a>
     <a href="safety-and-ethics.html">Safety and Ethics</a>
@@ -387,15 +421,29 @@
     <a href="recruitment-process.html" class="active" aria-current="page">Our Recruitment Process</a>
     <a href="get-in-touch.html">Get in Touch</a>
     <a href="privacy-notice.html">Applicant Privacy Notice</a>
+      </div>
+    </div>
+    <details class="nav-more">
+      <summary>All</summary>
+      <div class="nav-more-panel">
+        <div class="nav-more-group">
+          <a href="who-we-are.html">👥 Who We Are</a>
+          <a href="what-we-do.html">💻 What We Do</a>
+          <a href="safety-and-ethics.html">🛡️ Safety and Ethics</a>
+          <a href="engineering.html">⚙️ Engineering at EverAI</a>
+          <a href="why-join-us.html">🤔 Why Join Us?</a>
+          <a href="recruitment-process.html" class="active">🏁 Our Recruitment Process</a>
+          <a href="get-in-touch.html">💬 Get in Touch</a>
+          <a href="privacy-notice.html">🔐 Applicant Privacy Notice</a>
+        </div>
+      </div>
+    </details>
   </div>
 </nav>
 
 <div class="page-body">
   <main id="main-content">
 <section class="card" id="recruitment-process">
-      <div class="kicker"><span class="icon">🏁</span></div>
-      <h2>Our Recruitment Process</h2>
-
       <h3>What You Can Expect</h3>
       <p>We respect your time and energy. Our recruitment process is designed to be rigorous yet efficient, ensuring we find the best <strong>A-players</strong> while giving you a transparent look into how we work.</p>
       <p>While the specific steps may vary slightly depending on the role, here is the general roadmap of your journey with <strong>EverAI</strong>:</p>
@@ -492,6 +540,17 @@
     window.addEventListener('resize', updateFade);
     updateFade();
   }
+
+  document.addEventListener('click', function(e){
+    document.querySelectorAll('.nav-more[open]').forEach(function(d){
+      if (!d.contains(e.target)) d.removeAttribute('open');
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-more[open]').forEach(function(d){ d.removeAttribute('open'); });
+    }
+  });
 
   var btt = document.createElement('button');
   btt.className = 'back-to-top';
