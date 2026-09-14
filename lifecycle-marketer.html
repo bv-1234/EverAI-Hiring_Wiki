@@ -159,6 +159,32 @@
   .page-body{ max-width: 880px; margin: 0 auto; padding: 40px 24px 100px; }
   main{ min-width: 0; }
 
+  .page-shell{
+    max-width: 1180px; margin: 0 auto; padding: 0 max(24px, calc((100vw - 1180px)/2));
+    display: flex; align-items: flex-start; gap: 40px;
+  }
+  .side-nav{ display: none; }
+  @media (min-width: 900px){
+    .topnav{ display: none; }
+    .page-shell{ padding-top: 40px; padding-bottom: 100px; }
+    .page-shell .page-body{ max-width: 800px; margin: 0; padding: 0; flex: 1; min-width: 0; }
+    .side-nav{
+      display: flex; flex-direction: column; flex-shrink: 0; width: 220px;
+      position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow-y: auto;
+    }
+    .side-nav-group + .side-nav-group{ margin-top: 22px; }
+    .side-nav-group-label{
+      display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--ink-faint); margin: 0 0 8px 12px;
+    }
+    .side-nav a{
+      display: block; padding: 9px 12px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      color: var(--ink-soft); text-decoration: none; transition: background .15s, color .15s;
+    }
+    .side-nav a:hover{ background: var(--surface-2); color: var(--ink); }
+    .side-nav a.active{ background: var(--accent-soft); color: var(--accent-ink); }
+  }
+
   section.card{
     background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
     padding: 36px clamp(20px, 4vw, 44px); margin-bottom: 28px; scroll-margin-top: 24px;
@@ -431,7 +457,7 @@
         <div class="nav-more-group"><span class="nav-more-group-label">Growth</span>
           <a href="performance-marketer.html">📈 Performance Marketer</a>
           <a href="affiliate-manager.html">🤝 Affiliate Manager</a>
-          <a href="lifecycle-marketer.html" class="active">📬 Senior Lifecycle Marketing Manager</a>
+          <a href="lifecycle-marketer.html" class="active" aria-current="page">📬 Senior Lifecycle Marketing Manager</a>
         </div>
         <div class="nav-more-group"><span class="nav-more-group-label">R&D</span>
           <a href="ruby-engineer.html">👩‍💻 Ruby Engineer</a>
@@ -449,8 +475,27 @@
   </div>
 </nav>
 
-<div class="page-body">
-  <main id="main-content">
+<div class="page-shell">
+<aside class="side-nav" aria-label="Section navigation">
+    <div class="side-nav-group"><span class="side-nav-group-label">Growth</span>
+      <a href="performance-marketer.html">📈 Performance Marketer</a>
+      <a href="affiliate-manager.html">🤝 Affiliate Manager</a>
+      <a href="lifecycle-marketer.html" class="active" aria-current="page">📬 Senior Lifecycle Marketing Manager</a>
+    </div>
+    <div class="side-nav-group"><span class="side-nav-group-label">R&D</span>
+      <a href="ruby-engineer.html">👩‍💻 Ruby Engineer</a>
+      <a href="ai-cinematic-video-editor.html">🎥 AI Cinematic Video Editor</a>
+      <a href="product-designer.html">🎨 Product Designer</a>
+      <a href="security-engineer.html">🔒 Security Engineer</a>
+      <a href="ai-product-manager.html">🧭 Senior Product Manager</a>
+    </div>
+    <div class="side-nav-group"><span class="side-nav-group-label">Operations</span>
+      <a href="content-moderator.html">🛡️ Content Moderator</a>
+      <a href="business-analyst.html">📊 Business Analyst</a>
+    </div>
+  </aside>
+  <div class="page-body">
+    <main id="main-content">
 <section class="card" id="lifecycle-marketer">
       <div class="role-meta">
         <div><span class="label">Department</span>Growth</div>
@@ -590,7 +635,8 @@
 
     </section>
 <div class="page-nav"><a class="prev" href="affiliate-manager.html"><span class="dir">&larr; Previous</span><span class="label">Affiliate Manager</span></a><a class="next" href="ai-product-manager.html"><span class="dir">Next &rarr;</span><span class="label">Senior Product Manager</span></a></div>
-  </main>
+    </main>
+  </div>
 </div>
 
 <footer>

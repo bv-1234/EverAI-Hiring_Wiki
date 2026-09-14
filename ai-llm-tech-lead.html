@@ -159,6 +159,32 @@
   .page-body{ max-width: 880px; margin: 0 auto; padding: 40px 24px 100px; }
   main{ min-width: 0; }
 
+  .page-shell{
+    max-width: 1180px; margin: 0 auto; padding: 0 max(24px, calc((100vw - 1180px)/2));
+    display: flex; align-items: flex-start; gap: 40px;
+  }
+  .side-nav{ display: none; }
+  @media (min-width: 900px){
+    .topnav{ display: none; }
+    .page-shell{ padding-top: 40px; padding-bottom: 100px; }
+    .page-shell .page-body{ max-width: 800px; margin: 0; padding: 0; flex: 1; min-width: 0; }
+    .side-nav{
+      display: flex; flex-direction: column; flex-shrink: 0; width: 220px;
+      position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow-y: auto;
+    }
+    .side-nav-group + .side-nav-group{ margin-top: 22px; }
+    .side-nav-group-label{
+      display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--ink-faint); margin: 0 0 8px 12px;
+    }
+    .side-nav a{
+      display: block; padding: 9px 12px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      color: var(--ink-soft); text-decoration: none; transition: background .15s, color .15s;
+    }
+    .side-nav a:hover{ background: var(--surface-2); color: var(--ink); }
+    .side-nav a.active{ background: var(--accent-soft); color: var(--accent-ink); }
+  }
+
   section.card{
     background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
     padding: 36px clamp(20px, 4vw, 44px); margin-bottom: 28px; scroll-margin-top: 24px;
@@ -422,7 +448,7 @@
       <summary>All</summary>
       <div class="nav-more-panel">
         <div class="nav-more-group">
-          <a href="ai-llm-tech-lead.html" class="active">🤖 AI LLM Tech Lead</a>
+          <a href="ai-llm-tech-lead.html" class="active" aria-current="page">🤖 AI LLM Tech Lead</a>
           <a href="ai-marketing-video-editor.html">📹 AI Marketing Video Editor</a>
           <a href="ai-legal-specialist.html">⚖️ AI Legal Specialist</a>
         </div>
@@ -431,8 +457,16 @@
   </div>
 </nav>
 
-<div class="page-body">
-  <main id="main-content">
+<div class="page-shell">
+<aside class="side-nav" aria-label="Section navigation">
+    <div class="side-nav-group">
+      <a href="ai-llm-tech-lead.html" class="active" aria-current="page">🤖 AI LLM Tech Lead</a>
+      <a href="ai-marketing-video-editor.html">📹 AI Marketing Video Editor</a>
+      <a href="ai-legal-specialist.html">⚖️ AI Legal Specialist</a>
+    </div>
+  </aside>
+  <div class="page-body">
+    <main id="main-content">
 <section class="card" id="ai-llm-tech-lead">
       <div class="callout warn">
         <span class="glyph">🗄️</span>
@@ -593,7 +627,8 @@
       </div></details>
     </section>
 <div class="page-nav"><span></span><a class="next" href="ai-marketing-video-editor.html"><span class="dir">Next &rarr;</span><span class="label">AI Marketing Video Editor</span></a></div>
-  </main>
+    </main>
+  </div>
 </div>
 
 <footer>
