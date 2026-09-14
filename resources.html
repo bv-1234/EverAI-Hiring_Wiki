@@ -159,32 +159,6 @@
   .page-body{ max-width: 880px; margin: 0 auto; padding: 40px 24px 100px; }
   main{ min-width: 0; }
 
-  .page-shell{
-    max-width: 1180px; margin: 0 auto; padding: 0 max(24px, calc((100vw - 1180px)/2));
-    display: flex; align-items: flex-start; gap: 40px;
-  }
-  .side-nav{ display: none; }
-  @media (min-width: 900px){
-    .topnav{ display: none; }
-    .page-shell{ padding-top: 40px; padding-bottom: 100px; }
-    .page-shell .page-body{ max-width: 800px; margin: 0; padding: 0; flex: 1; min-width: 0; }
-    .side-nav{
-      display: flex; flex-direction: column; flex-shrink: 0; width: 220px;
-      position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow-y: auto;
-    }
-    .side-nav-group + .side-nav-group{ margin-top: 22px; }
-    .side-nav-group-label{
-      display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase;
-      color: var(--ink-faint); margin: 0 0 8px 12px;
-    }
-    .side-nav a{
-      display: block; padding: 9px 12px; border-radius: 8px; font-size: 14px; font-weight: 600;
-      color: var(--ink-soft); text-decoration: none; transition: background .15s, color .15s;
-    }
-    .side-nav a:hover{ background: var(--surface-2); color: var(--ink); }
-    .side-nav a.active{ background: var(--accent-soft); color: var(--accent-ink); }
-  }
-
   section.card{
     background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
     padding: 36px clamp(20px, 4vw, 44px); margin-bottom: 28px; scroll-margin-top: 24px;
@@ -479,30 +453,8 @@
   </div>
 </nav>
 
-<div class="page-shell">
-<aside class="side-nav" aria-label="Section navigation">
-    <div class="side-nav-group"><span class="side-nav-group-label">Getting Started</span>
-      <a href="ashby.html">👋 How to Use Ashby</a>
-      <a href="open-roles.html">📌 Our Open Roles</a>
-      <a href="hiring-process.html">⏳ Hiring Process & SLAs</a>
-    </div>
-    <div class="side-nav-group"><span class="side-nav-group-label">Sourcing & Screening</span>
-      <a href="dos-donts.html">🚦 Do's and Don'ts</a>
-      <a href="pitch.html">🗣️ Pitching the Company</a>
-      <a href="prepare-candidates.html">🆘 Preparing Candidates</a>
-      <a href="red-flags.html">🚩 Candidate Red Flags</a>
-    </div>
-    <div class="side-nav-group"><span class="side-nav-group-label">Compliance & Risk</span>
-      <a href="international.html">🌐 Hiring Internationally</a>
-      <a href="jurisdiction.html">⚖️ Jurisdiction Risk Guide</a>
-      <a href="off-limits.html">🚫 Off-Limits Companies</a>
-    </div>
-    <div class="side-nav-group"><span class="side-nav-group-label">Reference</span>
-      <a href="resources.html" class="active" aria-current="page">🔖 Helpful Resources</a>
-    </div>
-  </aside>
-  <div class="page-body">
-    <main id="main-content">
+<div class="page-body">
+  <main id="main-content">
 <section class="card" id="resources">
       <ul class="resource-list">
         <li><a href="https://bv-1234.github.io/everai-candidate_handbook/#home" target="_blank" rel="noopener">Candidate Handbook <span class="arrow">↗</span></a></li>
@@ -517,8 +469,7 @@
       <div class="content"><p style="margin-bottom:0">This document is a WIP, and our TA team is working on building more resources for you. If you don't see what you're looking for, please feel free to reach out to your recruiter anytime. We're partners, and we're here to answer any questions you may have along the way! 🤝</p></div>
     </div>
 <div class="page-nav"><a class="prev" href="off-limits.html"><span class="dir">&larr; Previous</span><span class="label">Off-Limits Companies</span></a><span></span></div>
-    </main>
-  </div>
+  </main>
 </div>
 
 <footer>
