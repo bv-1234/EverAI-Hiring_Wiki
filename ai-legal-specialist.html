@@ -51,7 +51,7 @@
   .masthead{
     background: linear-gradient(180deg, var(--surface-2), var(--bg));
     border-bottom: 1px solid var(--line);
-    padding: 40px clamp(24px, 4vw, 64px) 26px;
+    padding: 40px max(24px, calc((100vw - 1440px)/2)) 26px;
   }
   .back-link{
     font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; color: var(--ink-soft);
@@ -104,7 +104,7 @@
   }
   .topnav.is-scrolled{ box-shadow: 0 8px 20px -12px rgba(0,0,0,.3); }
   .topnav-row{
-    width: 100%; padding: 0 clamp(24px, 4vw, 64px);
+    max-width: 1440px; margin: 0 auto; padding: 0 max(24px, calc((100vw - 1440px)/2));
     display: flex; align-items: stretch; gap: 10px;
   }
   .topnav-scroll{ position: relative; flex: 1; min-width: 0; }
@@ -156,7 +156,7 @@
   .nav-more-panel a:hover{ background: var(--surface-2); }
   .nav-more-panel a.active{ color: var(--accent-ink); background: var(--accent-soft); }
 
-  .page-body{ width: 100%; padding: 40px clamp(24px, 4vw, 64px) 100px; }
+  .page-body{ max-width: 1100px; margin: 0 auto; padding: 40px 24px 100px; }
   main{ min-width: 0; }
 
   section.card{
@@ -329,7 +329,7 @@
 
   hr.rule{ border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 
-  footer{ width: 100%; padding: 0 clamp(24px, 4vw, 64px) 60px; color: var(--ink-faint); font-size: 13px; }
+  footer{ max-width: 1440px; margin: 0 auto; padding: 0 24px 60px; color: var(--ink-faint); font-size: 13px; }
   footer .foot-inner{ border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
   .reveal{ opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
