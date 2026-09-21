@@ -263,6 +263,20 @@
   .pills.red .pill{ border-color: color-mix(in srgb, var(--danger) 30%, transparent); color: var(--danger); background: var(--danger-soft); }
   .pills.green .pill{ border-color: color-mix(in srgb, var(--good) 30%, transparent); color: var(--good); background: var(--good-soft); }
 
+  .legend-row{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 0; }
+  .split.three{ grid-template-columns: repeat(3,1fr); }
+  @media (max-width: 720px){ .split.three{ grid-template-columns: 1fr; } }
+  .split .col.stop{ background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 30%, transparent); }
+  .split .col.stop h4{ color: var(--danger); }
+  .split .col.gap{ background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 30%, transparent); }
+  .split .col.gap h4{ color: var(--warn); }
+  .split .col p.hint{ margin:0 0 10px; font-size:13px; color:var(--ink-faint); }
+  .flag p.note, .value-card p.note{ margin:6px 0 0; font-size:13px; color:var(--ink-faint); }
+  .value-card p.check{ margin:6px 0 0; font-size:14px; color:var(--ink-soft); }
+  .value-card .level{ margin:10px 0 0; }
+  .value-card .level p.check{ margin-top:0; }
+  .value-card .level-label{ font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); display:block; margin-bottom:4px; }
+
   .resource-list{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
   .resource-list li{ margin: 0; }
   .resource-list a{
@@ -407,6 +421,12 @@
 <header class="masthead">
   <a class="back-link" href="index.html">&larr; Back to the Wiki Home</a>
   <h1>🚩 Candidate Hard Gates & Red Flags</h1>
+  <p class="lede"><strong>Shared screening baseline for every EverAI role.</strong> Check hard stops first, then role-specific evidence, then softer signals. Role briefs define the exact technical bar.</p>
+  <div class="legend-row">
+    <span class="badge tier-red">⛔ Hard Stop</span>
+    <span class="badge tier-yellow">🚩 Evidence Gap</span>
+    <span class="badge closed">⚠️ Explore</span>
+  </div>
 </header>
 
 <nav class="topnav" aria-label="Section navigation">
@@ -455,241 +475,223 @@
 
 <div class="page-body">
   <main id="main-content">
-<section class="card" id="red-flags">
-      <div class="callout accent">
-        <span class="glyph">ℹ️</span>
-        <div class="content">
-          <p><strong>How to use this guide</strong></p>
-          <p>This guide applies across EverAI roles unless a role-specific brief explicitly says otherwise.</p>
-          <p>We separate concerns into three categories:</p>
+<section class="card" id="quick-guide">
+      <h2>Quick Decision Guide</h2>
+      <p class="subtitle">Scan this first. Full detail and probes are below.</p>
+      <div class="split three">
+        <div class="col stop">
+          <h4>⛔ Hard Stop</h4>
+          <p class="hint">Do not progress when confirmed.</p>
           <ul>
-            <li><strong>Admin / Eligibility</strong> — objective requirements that can make a candidate ineligible.</li>
-            <li><strong>Hard Skills / Evidence</strong> — whether the candidate can demonstrate the level of ownership and capability required for the role.</li>
-            <li><strong>Cultural Fit / Soft Skills</strong> — behavioral signals to explore before making a decision.</li>
+            <li>NSFW / explicit-content refusal</li>
+            <li>Contract / working-model incompatibility</li>
+            <li>Location / timezone incompatibility</li>
+            <li>Compensation materially outside range, no flexibility</li>
+            <li>Conflicting full-time commitment where full-time is required</li>
           </ul>
-          <p><strong>Important:</strong> not every red flag is an automatic rejection. Where something is marked as a <strong>Hard Stop</strong>, do not progress unless the role brief explicitly allows an exception. For softer signals, <strong>ask before concluding</strong>. If a concern is confirmed, document the evidence in Ashby.</p>
-          <p style="margin-bottom:0">Role-specific briefs always take precedence for technical requirements, seniority thresholds, target companies, compensation, location, and process details.</p>
+        </div>
+        <div class="col gap">
+          <h4>🚩 Evidence Gap</h4>
+          <p class="hint">Do not submit until clarified.</p>
+          <ul>
+            <li>Cannot separate personal ownership from team results</li>
+            <li>Claims scale without evidence</li>
+            <li>Cannot show measurable impact</li>
+            <li>Required hands-on experience is stale / delegated</li>
+            <li>Adjacent experience presented as direct experience</li>
+          </ul>
+        </div>
+        <div class="col explore">
+          <h4>⚠️ Explore</h4>
+          <p class="hint">Not an automatic rejection.</p>
+          <ul>
+            <li>Poor preparation / low engagement</li>
+            <li>Difficulty operating with ambiguity</li>
+            <li>Cannot discuss mistakes constructively</li>
+            <li>Persistent negativity / blame</li>
+            <li>Repeated short tenures</li>
+            <li>Communication prevents assessment</li>
+            <li>Expectation mismatch — only for a genuine role mismatch</li>
+          </ul>
         </div>
       </div>
+    </section>
 
-      <h3 style="margin-top:28px">1️⃣ Admin / Eligibility</h3>
-      <p class="dim">These should be checked early. They are objective requirements rather than subjective culture judgments.</p>
-
-      <h4 style="margin-top:20px">NSFW / Explicit-Content Discomfort</h4>
-      <p>EverAI operates products that can include explicit sexual content and adult themes. Candidates must understand the reality of the product and be comfortable working with it at the level required by their role.</p>
-      <div class="callout danger">
-        <span class="glyph">🛑</span>
-        <div class="content">
-          <p><strong>Hard Stop when</strong></p>
-          <ul style="margin-bottom:0">
-            <li>Candidate states they are uncomfortable working for an adult-content product.</li>
-            <li>Candidate is unwilling to work with explicit content where the role requires direct exposure.</li>
-            <li>Candidate becomes hesitant or changes their answer after the nature of the product is explained.</li>
-          </ul>
-        </div>
+    <section class="card" id="admin-eligibility">
+      <h2>⛔ Admin / Eligibility</h2>
+      <p class="subtitle">Objective requirements. Check these early.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Requirement</th><th>Hard stop when</th><th>Confirm</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>NSFW / explicit content</strong></td>
+              <td>Not comfortable working for an adult / explicit-content product, or unwilling to handle explicit content where the role requires direct exposure.</td>
+              <td>Comfort working in an explicit-content environment (script below).</td>
+            </tr>
+            <tr>
+              <td><strong>B2B / working model</strong></td>
+              <td>Refuses the required contractor setup, or cannot practically work under it.</td>
+              <td>B2B acceptance, country of residence.</td>
+            </tr>
+            <tr>
+              <td><strong>Location / timezone</strong></td>
+              <td>Cannot meet the role's location requirement or working overlap, or needs relocation/visa support the role doesn't provide.</td>
+              <td>Against the role brief's exact requirement.</td>
+            </tr>
+            <tr>
+              <td><strong>Compensation</strong></td>
+              <td>Expectations materially outside the approved range, and not flexible.</td>
+              <td>Expectations against the published range.</td>
+            </tr>
+            <tr>
+              <td><strong>Availability / commitment</strong></td>
+              <td>Timing genuinely doesn't work, or candidate intends to retain another full-time job where full-time is required.</td>
+              <td>Notice period, earliest start date, competing commitments.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="callout accent">
-        <span class="glyph">ℹ️</span>
-        <div class="content">
-          <p><strong>Always ask clearly.</strong> Use this wording:</p>
-          <p>"Our product operates in the AI companionship space and can include explicit / NSFW content. Are you fully comfortable working in this environment as part of your day-to-day role?"</p>
-          <p style="margin-bottom:0">For roles involving direct exposure to explicit content, make that clear before asking for confirmation. Do not infer comfort from previous industries — confirm it directly.</p>
-        </div>
+        <span class="glyph">💬</span>
+        <div class="content"><p style="margin-bottom:0"><strong>NSFW confirmation script:</strong> "Our product operates in AI companionship and can include explicit / NSFW content. Are you fully comfortable working in this environment as part of your day-to-day role?"</p></div>
       </div>
-
-      <h4 style="margin-top:20px">Contract / Working-Model Mismatch</h4>
-      <p>EverAI roles are generally offered through a B2B contractor arrangement unless the specific role says otherwise.</p>
-      <div class="callout danger">
-        <span class="glyph">🛑</span>
-        <div class="content">
-          <p><strong>Hard Stop when</strong></p>
-          <ul style="margin-bottom:0">
-            <li>Candidate will only accept permanent employment and the role is B2B-only.</li>
-            <li>Candidate cannot legally or practically work under the required setup.</li>
-            <li>Candidate expects an employment structure the role cannot support.</li>
-          </ul>
-        </div>
-      </div>
-      <p><strong>Confirm:</strong> B2B acceptance, country of residence, and relevant contracting constraints where applicable.</p>
-      <p class="dim">Do not assume eligibility from nationality alone.</p>
-
-      <h4 style="margin-top:20px">Location / Timezone Mismatch</h4>
-      <p>Each role has its own geographic and timezone requirements.</p>
-      <div class="callout danger">
-        <span class="glyph">🛑</span>
-        <div class="content">
-          <p><strong>Hard Stop when</strong></p>
-          <ul style="margin-bottom:0">
-            <li>Candidate cannot meet the stated location requirement.</li>
-            <li>Candidate cannot provide the required working-hours overlap.</li>
-            <li>Candidate expects relocation or visa sponsorship when the role does not provide it.</li>
-          </ul>
-        </div>
-      </div>
-      <p class="dim">Use the role brief for the exact requirement.</p>
-
-      <h4 style="margin-top:20px">Compensation Mismatch</h4>
-      <p>Compensation should be discussed against the published range for the role.</p>
-      <div class="callout danger">
-        <span class="glyph">🛑</span>
-        <div class="content">
-          <p><strong>Hard Stop when</strong></p>
-          <ul style="margin-bottom:0">
-            <li>Candidate's expectations are materially outside the approved range and they are not flexible.</li>
-            <li>Candidate expects a package structure that the role does not offer.</li>
-          </ul>
-        </div>
-      </div>
-      <p><strong>Do:</strong> ask for compensation expectations.</p>
-      <p><strong>Do not:</strong> ask for current or previous compensation where this is not required or appropriate.</p>
-      <p class="dim">A candidate asking about compensation is not a cultural red flag.</p>
-
-      <h4 style="margin-top:20px">Notice Period / Availability Mismatch</h4>
-      <p>Confirm notice period, earliest start date, and any known constraints.</p>
-      <p class="dim">A longer notice period is not automatically a rejection. It becomes a problem only where the role has a genuine start-date requirement.</p>
-
-      <h4 style="margin-top:20px">Conflicting Full-Time Commitments</h4>
-      <p>Where the role requires full-time commitment:</p>
-      <div class="callout danger">
-        <span class="glyph">🛑</span>
-        <div class="content">
-          <p><strong>Hard Stop when</strong></p>
-          <ul style="margin-bottom:0">
-            <li>Candidate intends to retain another full-time job.</li>
-            <li>Candidate cannot commit the required working capacity.</li>
-            <li>Candidate's external work materially conflicts with the expected role.</li>
-          </ul>
-        </div>
-      </div>
-      <p class="dim">Side projects or advisory work should not automatically be treated as a problem. Assess the actual conflict.</p>
-
-      <h3 style="margin-top:28px">2️⃣ Hard Skills / Evidence</h3>
-      <p class="dim">The exact technical bar varies by role. This section covers the common evidence standards we expect across EverAI.</p>
-
-      <h4 style="margin-top:20px">Cannot Separate Personal Ownership from Team Results</h4>
-      <p>Candidates should be able to explain what they personally did, what decisions they personally made, what they changed, what the wider team owned, and what the measurable outcome was.</p>
-      <p class="dim">Red flag language: "We increased revenue...", "The team managed...", "We launched...", "Our budget was..." — without being able to identify their own contribution.</p>
-      <p><strong>Probe:</strong> What part of that was specifically yours? Which decisions did you personally make? What was owned by someone else?</p>
-
-      <h4 style="margin-top:20px">Claims Scale Without Evidence</h4>
-      <p>Large numbers alone are not evidence of seniority or ownership. Company revenue, total team budget, agency portfolio value, customer volume, total users, and department results must not be presented as if the candidate personally controlled them.</p>
-      <p><strong>Probe:</strong> What part of that number was directly under your control? What did you personally change? Which metric changed because of your work?</p>
-
-      <h4 style="margin-top:20px">No Measurable Impact</h4>
-      <p>Strong candidates should be able to connect their work to an outcome relevant to the role — depending on the role, this may include revenue, CAC/CPA, ROAS, LTV, retention, conversion, purchase rate, product usage, speed, reliability, scale, quality, risk reduction, or operational efficiency.</p>
-      <p class="dim">Red flag: candidate repeatedly describes responsibilities but cannot explain results.</p>
-
-      <h4 style="margin-top:20px">Current Role Is Too Far from Execution</h4>
-      <p>Many EverAI roles require people who still do the work, not only manage it.</p>
-      <p><strong>Explore when:</strong> senior title, large team, heavy management scope, agency oversight, strategic-only role, or execution delegated elsewhere.</p>
-      <p><strong>Probe:</strong> What did you personally execute in the last week or month? Which tools/platforms/code/workflows do you still use yourself?</p>
-      <p class="dim">Do not reject someone because they are senior. Reject only when the required hands-on capability is no longer current.</p>
-
-      <h4 style="margin-top:20px">Relevant Experience Is Stale</h4>
-      <p>Previous experience can still be valuable, but some roles require current familiarity with fast-changing tools, platforms, or markets.</p>
-      <p><strong>Explore:</strong> How recently did they do the relevant work? What are they doing now? Are they still current with the relevant tools/processes?</p>
-      <p class="dim">The role brief should define where recency is a hard requirement.</p>
-
-      <h4 style="margin-top:20px">Strong Company or Title, Weak Actual Depth</h4>
-      <p>A target company is only a sourcing signal. A prestigious company, senior title, or recognizable brand does not override role-specific requirements.</p>
-      <p class="dim">Always qualify: actual responsibilities, personal ownership, hands-on depth, scale, and results.</p>
-
-      <h4 style="margin-top:20px">Cannot Explain Decisions or Trade-Offs</h4>
-      <p>We expect candidates to explain why they made a decision, not only what happened.</p>
-      <p><strong>Probe:</strong> What alternatives did you consider? Why did you choose that approach? What information changed your decision? What would you do differently now?</p>
-
-      <h4 style="margin-top:20px">Adjacent Experience Presented as Direct Experience</h4>
-      <p>Examples vary by role: management presented as execution, strategy presented as delivery, account management presented as acquisition, reporting presented as analysis ownership, advisory work presented as operating ownership.</p>
-      <p class="dim">Role-specific briefs define what counts.</p>
-
-      <h3 style="margin-top:28px">3️⃣ Cultural Fit / Soft Skills</h3>
-      <p class="dim">These are generally signals to explore, not automatic rejection criteria. Use observable behavior and evidence rather than subjective impressions.</p>
-
-      <h4 style="margin-top:20px">Poor Preparation / Low Engagement</h4>
-      <p>Possible signals: did not review the company or role despite having the opportunity, cannot explain why the role interests them, asks no meaningful questions, demonstrates very little curiosity about the product or work.</p>
-      <p><strong>Ask:</strong> What attracted you to this opportunity? What did you review before the call? What stood out to you about the product?</p>
-      <p class="dim">Avoid judging based on personality style or visible "energy." The concern is preparation and genuine interest, not whether someone is extroverted.</p>
-
-      <h4 style="margin-top:20px">Low Curiosity About AI / Product</h4>
-      <p>EverAI is an AI company. Candidates do not all need the same technical AI depth, but they should show reasonable curiosity about the product and category.</p>
-      <p><strong>Explore:</strong> What interests you about AI in this space? Have you experimented with any AI tools relevant to your work?</p>
-      <p class="dim">For roles where AI-tool usage is a hard skill, follow the role-specific brief rather than this general guidance.</p>
-
-      <h4 style="margin-top:20px">Difficulty Taking Ownership in Ambiguity</h4>
-      <p>EverAI operates in a fast-moving environment. Explore when a candidate appears to require highly detailed instructions for every task, extensive approval before acting, fixed processes before making progress, or unusually narrow role boundaries.</p>
-      <p><strong>Ask:</strong> Tell me about a time you had to solve something without a clear playbook. What did you decide yourself?</p>
-      <p class="dim">Do not equate preference for structure with lack of ability. Look for actual evidence.</p>
-
-      <h4 style="margin-top:20px">Cannot Discuss Mistakes Constructively</h4>
-      <p>We value candidates who can examine decisions that did not work.</p>
-      <p><strong>Ask:</strong> Tell me about a decision that didn't work. What did you learn? What would you do differently now?</p>
-      <p class="dim">The issue is not whether they have failed. The concern is an inability to recognize or learn from mistakes.</p>
-
-      <h4 style="margin-top:20px">Persistent Negativity About Previous Employers</h4>
-      <p>Leaving a poor environment is not a red flag. Complaints about legitimate issues are not automatically a concern.</p>
-      <p><strong>Explore when a candidate:</strong> blames every previous team or manager, takes no ownership of any conflict, speaks disrespectfully about colleagues, or cannot articulate anything they learned from difficult experiences.</p>
-      <p><strong>Ask:</strong> What worked well in that environment? What would you have handled differently?</p>
-
-      <h4 style="margin-top:20px">Repeated Short Tenures</h4>
-      <p>Multiple short roles are a question, not a rejection criterion. There may be legitimate reasons: layoffs, company closures, contract roles, acquisitions, restructures, project-based engagements, or poor role fit.</p>
-      <p><strong>Always ask:</strong> What led to each move?</p>
-      <p class="dim">Document the explanation rather than making assumptions.</p>
-
-      <h4 style="margin-top:20px">Disrespectful or Inappropriate Behavior</h4>
-      <p>This is one of the few behavioral areas that can become an immediate concern when clearly demonstrated: disrespect toward recruiters, coordinators, candidates, or interviewers; discriminatory or degrading comments; hostility when challenged; repeated dismissiveness; or inability to receive reasonable feedback professionally.</p>
-      <p class="dim">Assess actual behavior, not communication style or personality preference.</p>
-
-      <h4 style="margin-top:20px">Communication Prevents Assessment</h4>
-      <p>Perfect communication is not required. The concern is when the candidate cannot communicate clearly enough for us to understand what they did, what they owned, why they made decisions, and what the result was.</p>
-      <p class="dim">For roles requiring strong external or executive communication, the role brief may set a higher standard.</p>
-
-      <h4 style="margin-top:20px">Expectation Mismatch</h4>
-      <p>Explore whether the candidate's expectations align with scope, seniority, level of ownership, pace, working model, compensation, and career direction.</p>
-      <p class="dim">Do not treat questions about salary, benefits, workload, working hours, or process as negative signals by themselves. The concern is a material mismatch after the role has been explained.</p>
-
-      <h3 style="margin-top:28px">4️⃣ What Is NOT a Red Flag by Itself</h3>
-      <p>The following should <strong>not</strong> be treated as automatic negative signals:</p>
+      <h4>Notes</h4>
       <ul>
-        <li>Asking about salary or benefits</li>
-        <li>Asking about working hours or workload</li>
-        <li>Asking detailed questions about the hiring process</li>
-        <li>Having been laid off</li>
-        <li>A career break</li>
-        <li>Contract/freelance experience</li>
-        <li>Multiple jobs where there is a reasonable explanation</li>
-        <li>Not having worked in adult/NSFW before</li>
-        <li>Being introverted or less visibly enthusiastic</li>
-        <li>Challenging an assumption respectfully</li>
-        <li>Wanting clarity before making a decision</li>
-        <li>Coming from a company outside our target-company lists</li>
-        <li>Having a non-traditional career path</li>
-        <li>Not matching a preferred title exactly</li>
+        <li>Previous adult-industry experience is not required unless the role brief says otherwise.</li>
+        <li>Use the role brief for the exact location/timezone requirement.</li>
+        <li>Asking about compensation is not a red flag.</li>
+        <li>A long notice period or side project is not automatically a rejection.</li>
       </ul>
-      <p class="dim">Always assess against the actual role requirements.</p>
+    </section>
 
-      <h3 style="margin-top:28px">5️⃣ Agency / Recruiter Screening Rule</h3>
-      <p><strong>Before submitting a candidate</strong>, you should be able to answer:</p>
+    <section class="card" id="hard-skills">
+      <h2>🚩 Hard Skills / Evidence</h2>
+      <p class="subtitle">These are evidence problems. The role brief defines the exact technical bar.</p>
+
+      <div class="flag">
+        <p class="flag-title">1. Ownership is unclear</p>
+        <p>Relies on "we", "the team", or company-level outcomes; can't isolate their own contribution.</p>
+        <p class="ask">Probe: What was specifically yours? Which decisions did you personally make? What did someone else own?</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title">2. Scale is presented without personal control</p>
+        <p>Company revenue, team budgets, agency portfolio value, or user counts are presented as personal achievements.</p>
+        <p class="ask">Probe: What part was directly under your control? What did you personally change? What metric moved because of your work?</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title">3. No measurable impact</p>
+        <p>Describes responsibilities but can't explain outcomes — e.g. revenue, CAC/CPA, ROAS, LTV, retention, conversion, product usage, reliability, quality, risk reduction, or operational efficiency.</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title">4. Hands-on capability is no longer current</p>
+        <p>Now mainly manages, coordinates, advises, or delegates work that the role requires them to execute personally.</p>
+        <p class="ask">Probe: What did you personally execute recently? Which relevant tools/platforms/workflows do you still use yourself? When did you last do this work hands-on?</p>
+        <p class="note">Seniority itself is not a red flag.</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title">5. Adjacent experience is presented as direct experience</p>
+        <p>Examples: management as execution, strategy as delivery, account management as acquisition, reporting as analysis ownership, advisory work as operating ownership.</p>
+        <p class="note">The role brief defines what counts as relevant experience.</p>
+      </div>
+
+      <div class="callout accent">
+        <span class="glyph">🎯</span>
+        <div class="content"><p style="margin-bottom:0"><strong>Company and title are sourcing signals, not proof of fit.</strong> Always validate ownership, hands-on depth, scale, results, and decision-making.</p></div>
+      </div>
+    </section>
+
+    <section class="card" id="cultural-fit">
+      <h2>⚠️ Cultural Fit / Soft Skills</h2>
+      <p class="subtitle">Signals to explore. Do not reject on these alone without evidence.</p>
+
+      <div class="value-card">
+        <strong>Poor preparation / low engagement</strong>
+        <p class="check">Did they review the company/role? Can they explain why they're interested? Do they show useful curiosity?</p>
+        <p class="note">Do not judge based on visible energy or extroversion.</p>
+      </div>
+
+      <div class="value-card">
+        <strong>Low ownership in ambiguity</strong>
+        <p class="check">Can they move forward without a complete playbook? Can they make reasonable decisions independently?</p>
+      </div>
+
+      <div class="value-card">
+        <strong>Cannot discuss mistakes constructively</strong>
+        <p class="check">Can they identify something that failed? Can they explain what they learned or would change?</p>
+      </div>
+
+      <div class="value-card">
+        <strong>Persistent blame / disrespect</strong>
+        <div class="level">
+          <span class="level-label">Immediate concern when clearly demonstrated</span>
+          <p class="check">Discriminatory/degrading comments, disrespect toward recruiters/interviewers, hostility or repeated dismissiveness.</p>
+        </div>
+        <div class="level">
+          <span class="level-label">Explore when</span>
+          <p class="check">Every previous employer/manager is blamed; candidate takes no ownership in conflicts.</p>
+        </div>
+      </div>
+
+      <div class="value-card">
+        <strong>Repeated short tenures</strong>
+        <p class="check"><em>A question, not a rejection criterion.</em> Check: layoffs, contracts, acquisitions, restructuring, project-based work, role mismatch.</p>
+        <p class="note">Ask: what led to each move?</p>
+      </div>
+
+      <div class="value-card">
+        <strong>Communication prevents assessment</strong>
+        <p class="check">Can you understand what they did, what they owned, why they made decisions, and what happened?</p>
+        <p class="note">Perfect English, charisma, or presentation style are not the standard unless the role explicitly requires them.</p>
+      </div>
+
+      <div class="callout accent">
+        <span class="glyph">🤖</span>
+        <div class="content"><p style="margin-bottom:0"><strong>AI fluency is role-specific.</strong> General curiosity about EverAI's product is useful, but only treat AI-tool usage as a hard requirement when the role brief says so.</p></div>
+      </div>
+    </section>
+
+    <section class="card" id="not-a-red-flag">
+      <h2>✅ Not a Red Flag by Itself</h2>
+      <div class="pills green">
+        <span class="pill">Asking about compensation or benefits</span>
+        <span class="pill">Asking about workload / working hours</span>
+        <span class="pill">Asking detailed process questions</span>
+        <span class="pill">Being laid off</span>
+        <span class="pill">Career break</span>
+        <span class="pill">Contract / freelance experience</span>
+        <span class="pill">Short tenures with reasonable explanation</span>
+        <span class="pill">No previous adult/NSFW industry experience</span>
+        <span class="pill">Introverted / lower-energy communication style</span>
+        <span class="pill">Respectfully challenging assumptions</span>
+        <span class="pill">Asking for clarity</span>
+        <span class="pill">Coming from outside target-company lists</span>
+        <span class="pill">Non-traditional career path</span>
+        <span class="pill">Different job title than the preferred title</span>
+      </div>
+      <p class="dim">Assess evidence against the role brief, not proxies.</p>
+    </section>
+
+    <section class="card" id="before-you-submit">
+      <h2>Before You Submit</h2>
       <ul>
-        <li>Are they eligible for the role?</li>
-        <li>Do they meet the role-specific hard-skill bar?</li>
-        <li>What did they personally own?</li>
-        <li>What measurable evidence supports the submission?</li>
-        <li>Is there any confirmed red flag or unresolved concern?</li>
+        <li><strong>Eligibility:</strong> Are all admin hard gates cleared?</li>
+        <li><strong>Role fit:</strong> Do they meet the role-specific hard-skill bar?</li>
+        <li><strong>Ownership:</strong> What did they personally own?</li>
+        <li><strong>Evidence:</strong> What measurable evidence supports the submission?</li>
+        <li><strong>Concerns:</strong> Is any meaningful concern still unresolved?</li>
       </ul>
       <div class="callout warn">
         <span class="glyph">⚠️</span>
-        <div class="content"><p style="margin-bottom:0">If you cannot answer those questions, <strong>do not submit the candidate yet</strong>. Complete the relevant screening before sending the profile.</p></div>
+        <div class="content"><p style="margin-bottom:0"><strong>If you cannot answer these five questions, do not submit the candidate yet.</strong></p></div>
       </div>
-
-      <h3 style="margin-top:28px">6️⃣ Final Reminder</h3>
-      <div class="callout accent">
-        <span class="glyph">ℹ️</span>
-        <div class="content">
-          <p><strong>This page is the shared EverAI baseline.</strong></p>
-          <p>The role-specific brief defines the exact technical bar, target-company guidance, seniority requirements, screening questions, and rejection criteria for that role.</p>
-          <p style="margin-bottom:0">Never progress or reject a candidate based only on a single generic red flag without understanding the context, unless the requirement is explicitly marked as a Hard Stop.</p>
-        </div>
-      </div>
+      <p class="dim">Role-specific briefs override this shared page for technical requirements, seniority thresholds, target companies, location, compensation, and screening questions.</p>
     </section>
 <div class="page-nav"><a class="prev" href="ashby.html"><span class="dir">&larr; Previous</span><span class="label">How to Use Ashby</span></a><a class="next" href="open-roles.html"><span class="dir">Next &rarr;</span><span class="label">Our Open Roles</span></a></div>
   </main>
