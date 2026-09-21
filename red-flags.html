@@ -262,6 +262,7 @@
   .pills .pill{ font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-soft); }
   .pills.red .pill{ border-color: color-mix(in srgb, var(--danger) 30%, transparent); color: var(--danger); background: var(--danger-soft); }
   .pills.green .pill{ border-color: color-mix(in srgb, var(--good) 30%, transparent); color: var(--good); background: var(--good-soft); }
+  .pills.accent .pill{ border-color: color-mix(in srgb, var(--accent) 30%, transparent); color: var(--accent-ink); background: var(--accent-soft); }
 
   .legend-row{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 0; }
   .split.three{ grid-template-columns: repeat(3,1fr); }
@@ -423,9 +424,9 @@
   <h1>🚩 Candidate Hard Gates & Red Flags</h1>
   <p class="lede"><strong>Shared screening baseline for every EverAI role.</strong> Check eligibility first, then role-specific evidence, then softer signals. The relevant role brief defines the exact technical and functional bar.</p>
   <div class="legend-row">
-    <span class="badge tier-red">⛔ Hard Stop</span>
-    <span class="badge tier-yellow">🚩 Evidence Gap</span>
-    <span class="badge closed">⚠️ Explore</span>
+    <span class="badge tier-red">⛔ Stop / Do Not Progress</span>
+    <span class="badge tier-yellow">🔍 Explore / Verify</span>
+    <span class="badge tier-green">✅ Positive Signal</span>
   </div>
 </header>
 
@@ -480,38 +481,40 @@
       <p class="subtitle">Scan this first. Full detail and probes are below.</p>
       <div class="split three">
         <div class="col stop">
-          <h4>⛔ Hard Stop</h4>
-          <p class="hint">Do not progress when confirmed.</p>
+          <h4>⛔ Stop / Do Not Progress</h4>
+          <p class="hint">Clear hard-gate failures.</p>
           <ul>
-            <li>NSFW / explicit-content refusal</li>
+            <li>NSFW / explicit-content refusal where the role requires exposure</li>
             <li>Contract / working-model incompatibility</li>
-            <li>Location / timezone incompatibility</li>
-            <li>Compensation materially outside range, no flexibility</li>
-            <li>Conflicting full-time commitment where full-time is required</li>
+            <li>Location / timezone incompatibility with the role's requirement</li>
+            <li>Compensation materially outside approved range, no flexibility</li>
+            <li>Conflicting full-time employment where the role requires full-time commitment</li>
+            <li>English insufficient to perform the role's actual responsibilities</li>
           </ul>
         </div>
         <div class="col gap">
-          <h4>🚩 Evidence Gap</h4>
-          <p class="hint">Do not submit until clarified.</p>
+          <h4>🔍 Explore / Verify</h4>
+          <p class="hint">Needs evidence or clarification before you decide.</p>
           <ul>
             <li>Cannot separate personal ownership from team results</li>
             <li>Claims scale or seniority without evidence</li>
             <li>Cannot show measurable impact</li>
-            <li>Required hands-on capability is stale or delegated</li>
+            <li>Hands-on capability is stale or delegated</li>
             <li>Adjacent experience presented as direct experience</li>
+            <li>Answers too unclear to assess competence</li>
+            <li>Excessive negativity/blame, or repeated short tenures without a coherent explanation</li>
           </ul>
         </div>
         <div class="col explore">
-          <h4>⚠️ Explore</h4>
-          <p class="hint">Not an automatic rejection.</p>
+          <h4>✅ Positive Signal</h4>
+          <p class="hint">Strengthens a candidate — not automatically required.</p>
           <ul>
-            <li>Poor preparation / low engagement</li>
-            <li>Difficulty operating with ambiguity</li>
-            <li>Cannot discuss mistakes constructively</li>
-            <li>Persistent negativity / blame</li>
-            <li>Repeated short tenures</li>
-            <li>Communication prevents assessment</li>
-            <li>Expectation mismatch after clarification</li>
+            <li>Strong career progression / increasing scope</li>
+            <li>Specific, credible examples with measurable outcomes</li>
+            <li>Clear personal-vs-team distinction</li>
+            <li>Practical AI usage with good judgment</li>
+            <li>Operating independently; building tools/workflows</li>
+            <li>Admits mistakes and explains what changed after</li>
           </ul>
         </div>
       </div>
@@ -551,6 +554,11 @@
               <td>Timing genuinely doesn't work, or candidate intends to retain another full-time job where full-time is required.</td>
               <td>Notice period, earliest start date, competing commitments.</td>
             </tr>
+            <tr>
+              <td><strong>English</strong></td>
+              <td>Insufficient to perform the actual responsibilities of the role.</td>
+              <td>Ability to work and communicate in the role's required language, in context.</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -558,11 +566,15 @@
         <span class="glyph">💬</span>
         <div class="content"><p style="margin-bottom:0"><strong>NSFW confirmation script:</strong> "Our products can include explicit / NSFW content. Are you fully comfortable working in this environment as part of your day-to-day role?"</p></div>
       </div>
+      <div class="callout accent">
+        <span class="glyph">🌍</span>
+        <div class="content"><p style="margin-bottom:0"><strong>Location default:</strong> Europe, or a nearby timezone with strong overlap with European working hours, unless the individual role brief explicitly says otherwise. The role-specific rule always wins over this default.</p></div>
+      </div>
       <h4>Notes</h4>
       <ul>
         <li>Previous adult-industry experience is not required unless the role brief says otherwise.</li>
         <li>Use the role brief for the exact location/timezone requirement.</li>
-        <li>Asking about compensation is not a red flag.</li>
+        <li>Asking about compensation is not a red flag — ask for expectations and range alignment, never current or previous salary.</li>
         <li>A long notice period or side project is not automatically a rejection.</li>
       </ul>
     </section>
@@ -584,26 +596,45 @@
       </div>
 
       <div class="flag">
-        <p class="flag-title">3. No measurable impact</p>
-        <p>Describes responsibilities but can't explain outcomes — e.g. revenue, growth, conversion, retention, quality, reliability, delivery speed, product usage, risk reduction, operational efficiency, cost reduction, or other role-relevant KPIs.</p>
+        <p class="flag-title">3. No concrete, measurable impact</p>
+        <p>Describes responsibilities but can't explain outcomes, even when repeatedly asked — e.g. revenue, growth, conversion, retention, quality, reliability, delivery speed, product usage, risk reduction, operational efficiency, cost reduction, or other role-relevant KPIs.</p>
+        <p class="note">A senior candidate who repeatedly avoids measurable outcomes is a stronger version of this same gap.</p>
       </div>
 
       <div class="flag">
-        <p class="flag-title">4. Hands-on capability is no longer current</p>
+        <p class="flag-title">4. Claims don't reconcile, or numbers don't add up</p>
+        <p>Facts shift across CV, application, and interview, or figures don't make sense when examined (timelines, team size, budget, scope).</p>
+        <p class="ask">Probe: Walk me through this timeline again. How does that number break down?</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title">5. "NDA" used as a blanket excuse</p>
+        <p>Confidentiality is real, but it shouldn't prevent describing their own role, decisions, and approach in general terms.</p>
+        <p class="ask">Probe: Without naming the client/product, what did you personally decide, build, or change?</p>
+      </div>
+
+      <div class="flag">
+        <p class="flag-title">6. Hands-on capability is no longer current</p>
         <p>Now mainly manages, coordinates, advises, or delegates work that the role requires them to execute personally.</p>
         <p class="ask">Probe: What did you personally execute recently? Which relevant tools/workflows/processes do you still use yourself? When did you last do this work hands-on?</p>
         <p class="note">Seniority itself is not a red flag.</p>
       </div>
 
       <div class="flag">
-        <p class="flag-title">5. Adjacent experience is presented as direct experience</p>
+        <p class="flag-title">7. Adjacent experience is presented as direct experience</p>
         <p>Examples: management presented as execution, strategy presented as delivery, reporting presented as analysis ownership, advisory work presented as operational ownership, coordination presented as functional expertise.</p>
         <p class="note">The role brief defines what counts as relevant experience.</p>
       </div>
 
+      <div class="flag">
+        <p class="flag-title">8. Overlapping or stacked roles</p>
+        <p>Multiple concurrent roles/employers on the timeline without a clear explanation of how each was handled.</p>
+        <p class="ask">Probe: How did you manage both at once? What did each one actually involve?</p>
+      </div>
+
       <div class="callout accent">
         <span class="glyph">🎯</span>
-        <div class="content"><p style="margin-bottom:0"><strong>Company name, title, or pedigree are sourcing signals — not proof of fit.</strong> Always validate ownership, depth, recency, scale, results, and decision-making.</p></div>
+        <div class="content"><p style="margin-bottom:0"><strong>Company name, title, or pedigree are sourcing signals — not proof of fit.</strong> Always validate ownership, depth, recency, scale, results, and decision-making. Use evidence and context — don't automatically reject on any single item above.</p></div>
       </div>
     </section>
 
@@ -624,7 +655,7 @@
 
       <div class="value-card">
         <strong>Cannot discuss mistakes constructively</strong>
-        <p class="check">Can they identify something that failed? Can they explain what they learned or would change?</p>
+        <p class="check">Can they identify something that failed? Can they explain what they learned or would change? Do they get defensive when challenged?</p>
       </div>
 
       <div class="value-card">
@@ -647,14 +678,35 @@
 
       <div class="value-card">
         <strong>Communication prevents assessment</strong>
-        <p class="check">Can you understand what they did, what they owned, why they made decisions, and what happened?</p>
+        <p class="check">Can you understand what they did, what they owned, why they made decisions, and what happened? Do they repeatedly avoid answering the actual question asked?</p>
         <p class="note">Perfect English, charisma, or presentation style are not the standard unless the role explicitly requires them.</p>
       </div>
 
       <div class="callout accent">
         <span class="glyph">🤖</span>
-        <div class="content"><p style="margin-bottom:0"><strong>AI fluency is role-specific.</strong> General curiosity about EverAI's product is useful, but only treat AI-tool usage as a hard requirement when the role brief says so.</p></div>
+        <div class="content"><p style="margin-bottom:0"><strong>AI usage is generally a positive signal, not a company-wide hard gate.</strong> Only treat it as mandatory when the individual role brief explicitly says so.</p></div>
       </div>
+    </section>
+
+    <section class="card" id="positive-signals">
+      <h2>✅ Positive Signals</h2>
+      <p class="subtitle">Useful evidence that strengthens a candidate — not automatically required.</p>
+      <div class="pills accent">
+        <span class="pill">Strong career progression / increasing scope</span>
+        <span class="pill">Specific and credible examples</span>
+        <span class="pill">Clear personal-vs-team distinction</span>
+        <span class="pill">Recent achievements with measurable outcomes</span>
+        <span class="pill">Strong ownership</span>
+        <span class="pill">Explains decisions and trade-offs</span>
+        <span class="pill">Learns quickly</span>
+        <span class="pill">Good product/company preparation</span>
+        <span class="pill">Strong questions</span>
+        <span class="pill">Practical AI usage with good judgment</span>
+        <span class="pill">Builds tools/workflows to solve problems</span>
+        <span class="pill">Evidence of operating independently</span>
+        <span class="pill">Admits mistakes and explains what changed after</span>
+      </div>
+      <p class="dim">None of these are hard requirements — they're what makes an eligible, evidence-backed candidate stand out.</p>
     </section>
 
     <section class="card" id="not-a-red-flag">
@@ -666,14 +718,17 @@
         <span class="pill">Being laid off</span>
         <span class="pill">Career break</span>
         <span class="pill">Contract / freelance experience</span>
+        <span class="pill">Consulting background</span>
         <span class="pill">Short tenures with reasonable explanation</span>
-        <span class="pill">No previous adult/NSFW industry experience</span>
+        <span class="pill">No previous adult/NSFW industry experience unless the role requires it</span>
+        <span class="pill">No AI background unless the role requires it</span>
         <span class="pill">Introverted / lower-energy communication style</span>
         <span class="pill">Respectfully challenging assumptions</span>
         <span class="pill">Asking for clarity</span>
         <span class="pill">Coming from outside target-company lists</span>
         <span class="pill">Non-traditional career path</span>
-        <span class="pill">Different title than the preferred title</span>
+        <span class="pill">Different job title with equivalent responsibilities</span>
+        <span class="pill">No promotion / lack of career progression</span>
       </div>
       <p class="dim">Assess evidence against the role brief, not proxies.</p>
     </section>
@@ -691,7 +746,7 @@
         <span class="glyph">⚠️</span>
         <div class="content"><p style="margin-bottom:0"><strong>If you cannot answer these five questions, do not submit the candidate yet.</strong></p></div>
       </div>
-      <p class="dim">Role-specific briefs override this shared page for technical requirements, seniority thresholds, target companies, location, compensation, and screening questions.</p>
+      <p class="dim"><strong>Individual role briefs override this page</strong> for technical requirements, level, compensation, location, mandatory domain experience, and role-specific hard gates.</p>
     </section>
 <div class="page-nav"><a class="prev" href="ashby.html"><span class="dir">&larr; Previous</span><span class="label">How to Use Ashby</span></a><a class="next" href="open-roles.html"><span class="dir">Next &rarr;</span><span class="label">Our Open Roles</span></a></div>
   </main>
