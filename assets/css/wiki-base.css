@@ -388,6 +388,43 @@
     .process-arrow{ transform: rotate(90deg); padding: 2px 0; align-self: center; }
   }
 
+  /* ============ Brief v2 — condensed 5-part role-brief model (pilot) ============
+     Opt-in via `.brief-v2` on section.card, plus `.compact` on role-meta.
+     Everything here is additive/scoped so pages NOT using these classes are unaffected. */
+  section.card.brief-v2 h3{
+    font-family: var(--serif); font-weight: 400; font-size: 21px; letter-spacing: -0.005em;
+    margin: 40px 0 16px; padding-top: 0; border-top: none; color: var(--ink);
+    display: flex; align-items: center; gap: 10px;
+  }
+  section.card.brief-v2 h3:first-of-type{ margin-top: 2px; }
+  section.card.brief-v2 h3::after{ content:""; flex:1; height:1px; background: var(--line); margin-left: 6px; }
+
+  .role-meta.compact{
+    display:flex; flex-wrap:wrap; gap: 14px 28px; background: var(--surface-2); border:1px solid var(--line);
+    border-radius: var(--radius-lg); border-top: 3px solid var(--accent); padding: 18px 22px; margin: 8px 0 22px;
+    font-size: 13.5px;
+  }
+  .role-meta.compact div{ padding:0; border:none; }
+  .role-meta.compact div span.label{ display:block; font-family:var(--mono); font-size:10px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:4px; }
+
+  .requirements-panel{
+    background: var(--accent-soft); border-radius: var(--radius-lg); padding: 20px 24px 4px; margin: 6px 0 22px;
+  }
+  .requirements-panel .nn-list{ margin-bottom: 12px; }
+
+  section.card ol.q-list{ counter-reset: qn; list-style:none; padding-left:0; margin: 0 0 8px; }
+  section.card ol.q-list > li{ counter-increment: qn; position:relative; padding-left:32px; margin-bottom:18px; font-weight:600; max-width: 74ch; }
+  section.card ol.q-list > li::before{
+    content: counter(qn) "."; position:absolute; left:0; top:0; font-family:var(--mono); font-size: 13px; color:var(--accent-ink); font-weight:700;
+  }
+  section.card ol.q-list > li > ul{ margin: 8px 0 0; padding-left: 18px; }
+  section.card ol.q-list > li > ul li{ font-size:13.5px; font-weight:400; color:var(--ink-soft); margin-bottom: 4px; }
+
+  @media (max-width: 880px){
+    section.card.brief-v2 h3{ margin: 32px 0 14px; font-size: 19px; }
+    .role-meta.compact{ padding: 16px 18px; gap: 12px 20px; }
+  }
+
   footer{ max-width: 1440px; margin: 0 auto; padding: 0 24px 60px; color: var(--ink-faint); font-size: 13px; }
   footer .foot-inner{ border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
