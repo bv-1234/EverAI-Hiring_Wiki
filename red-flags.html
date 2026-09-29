@@ -12,6 +12,30 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%A4%9D%3C/text%3E%3C/svg%3E" />
 <link rel="stylesheet" href="assets/css/wiki-base.css">
 <script src="search-index.js" defer></script>
+<style>
+  .badge.hs{ text-transform: none; margin-left: 8px; vertical-align: 2px; white-space: nowrap; }
+  table.overview{ min-width: 0; }
+  table.overview td{ padding: 9px 16px; }
+  table.overview tr.group td{ background: var(--surface-2); font-weight: 700; padding-top: 12px; }
+  table.overview td.num{ width: 36px; color: var(--ink-faint); }
+  table.overview td:last-child, table.overview th:last-child{ width: 1%; white-space: nowrap; }
+  table.overview .badge.hs{ margin-left: 0; }
+  h3.gate-title{ margin: 28px 0 10px; padding-left: 12px; border-left: 3px solid var(--danger); }
+  h3.gate-title.soft{ border-left-color: var(--warn); }
+  table.gate{ min-width: 0; table-layout: fixed; }
+  table.gate th{ width: 170px; text-align: left; vertical-align: top; padding: 14px 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); background: var(--surface-2); border-bottom: 1px solid var(--line); }
+  table.gate tr:last-child th{ border-bottom: none; }
+  table.gate td p{ margin: 0 0 8px; max-width: none; }
+  table.gate td p:last-child{ margin-bottom: 0; }
+  table.gate tr.rf th{ color: var(--danger); background: var(--danger-soft); }
+  table.gate ul.probes{ margin: 0; padding-left: 18px; }
+  table.gate ul.probes li{ color: var(--accent-ink); font-style: italic; margin-bottom: 4px; }
+  @media (max-width: 640px){
+    table.gate, table.gate tbody, table.gate tr, table.gate th, table.gate td{ display: block; width: auto; }
+    table.gate th{ border-bottom: none; padding: 10px 14px 6px; }
+    table.gate td{ padding: 8px 14px 14px; }
+  }
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -75,278 +99,226 @@
 
 <div class="page-body">
   <main id="main-content">
-<section class="card" id="quick-guide">
-      <h2>Quick Decision Guide</h2>
-      <p class="subtitle">Scan this first. Full detail and probes are below.</p>
-      <div class="split three">
-        <div class="col stop">
-          <h4>⛔ Stop / Do Not Progress</h4>
-          <p class="hint">Clear hard-gate failures.</p>
-          <ul>
-            <li>NSFW / explicit-content refusal where the role requires exposure</li>
-            <li>Contract / working-model incompatibility</li>
-            <li>Location / timezone incompatibility with the role's requirement</li>
-            <li>Compensation materially outside approved range, no flexibility</li>
-            <li>Conflicting full-time employment where the role requires full-time commitment</li>
-            <li>English insufficient to perform the role's actual responsibilities</li>
-          </ul>
-        </div>
-        <div class="col gap">
-          <h4>🔍 Explore / Verify</h4>
-          <p class="hint">Needs evidence or clarification before you decide.</p>
-          <ul>
-            <li>Cannot separate personal ownership from team results</li>
-            <li>Claims scale or seniority without evidence</li>
-            <li>Cannot show measurable impact</li>
-            <li>Hands-on capability is stale or delegated</li>
-            <li>Adjacent experience presented as direct experience</li>
-            <li>Answers too unclear to assess competence</li>
-            <li>Excessive negativity/blame, or repeated short tenures without a coherent explanation</li>
-          </ul>
-        </div>
-        <div class="col explore">
-          <h4>✅ Positive Signal</h4>
-          <p class="hint">Strengthens a candidate — not automatically required.</p>
-          <ul>
-            <li>Strong career progression / increasing scope</li>
-            <li>Specific, credible examples with measurable outcomes</li>
-            <li>Clear personal-vs-team distinction</li>
-            <li>Practical AI usage with good judgment</li>
-            <li>Operating independently; building tools/workflows</li>
-            <li>Admits mistakes and explains what changed after</li>
-          </ul>
-        </div>
+    <section class="card" id="overview">
+      <div class="table-wrap">
+        <table class="overview">
+          <thead><tr><th class="num">#</th><th>Gate</th><th>Hard stop</th></tr></thead>
+          <tbody>
+            <tr class="group"><td colspan="3"><a href="#admin-eligibility">⛔ Admin / eligibility</a></td></tr>
+            <tr><td class="num">1</td><td><a href="#gate-1">NSFW / explicit content comfort</a></td><td><span class="badge tier-red hs">☑ Hard stop</span></td></tr>
+            <tr><td class="num">2</td><td><a href="#gate-2">B2B / contractor working model</a></td><td><span class="badge tier-red hs">☑ Hard stop</span></td></tr>
+            <tr><td class="num">3</td><td><a href="#gate-3">Location / timezone</a></td><td><span class="badge tier-red hs">☑ Hard stop</span></td></tr>
+            <tr><td class="num">4</td><td><a href="#gate-4">Compensation alignment</a></td><td><span class="badge tier-red hs">☑ Hard stop</span></td></tr>
+            <tr><td class="num">5</td><td><a href="#gate-5">Availability, commitment &amp; current employer</a></td><td><span class="badge tier-red hs">☑ Hard stop</span></td></tr>
+            <tr><td class="num">6</td><td><a href="#gate-6">English sufficiency</a></td><td><span class="badge tier-red hs">☑ Hard stop</span></td></tr>
+            <tr class="group"><td colspan="3"><a href="#common-evidence">🔍 Common evidence signals</a></td></tr>
+            <tr><td class="num">7</td><td><a href="#gate-7">Personal ownership and credible scale claims</a></td><td><span class="badge tier-yellow hs">Not a hard stop</span></td></tr>
+            <tr><td class="num">8</td><td><a href="#gate-8">Concrete, measurable impact</a></td><td><span class="badge tier-yellow hs">Not a hard stop</span></td></tr>
+            <tr><td class="num">9</td><td><a href="#gate-9">Current hands-on capability</a></td><td><span class="badge tier-yellow hs">Not a hard stop</span></td></tr>
+            <tr><td class="num">10</td><td><a href="#gate-10">Clear, direct communication</a></td><td><span class="badge tier-yellow hs">Not a hard stop</span></td></tr>
+            <tr class="group"><td colspan="3"><a href="#behavioural">🧭 Behavioural signals</a></td></tr>
+            <tr><td class="num">11</td><td><a href="#gate-11">Preparation / engagement</a></td><td><span class="badge tier-yellow hs">Not a hard stop</span></td></tr>
+            <tr><td class="num">12</td><td><a href="#gate-12">Ownership in ambiguity and learning from mistakes</a></td><td><span class="badge tier-yellow hs">Not a hard stop</span></td></tr>
+            <tr><td class="num">13</td><td><a href="#gate-13">Blame / disrespect</a></td><td><span class="badge tier-yellow hs">Not a hard stop</span></td></tr>
+            <tr><td class="num">14</td><td><a href="#gate-14">Career trajectory &amp; builder experience</a></td><td><span class="badge tier-yellow hs">Not a hard stop</span></td></tr>
+            <tr><td class="num">15</td><td><a href="#gate-15">Practical AI usage</a></td><td><span class="badge tier-yellow hs">Not a hard stop</span></td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
     <section class="card" id="admin-eligibility">
-      <h2>⛔ Admin / Eligibility</h2>
-      <p class="subtitle">Objective requirements. Check these early.</p>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Requirement</th><th>Hard stop when</th><th>Confirm</th></tr>
-          </thead>
+      <h2>⛔ Admin / eligibility</h2>
+      <h3 class="gate-title" id="gate-1">1. NSFW / explicit content comfort <span class="badge tier-red hs">☑ Hard stop</span></h3>
+      <div class="table-wrap gate-wrap">
+        <table class="gate">
           <tbody>
-            <tr>
-              <td><strong>NSFW / explicit content</strong></td>
-              <td>Not comfortable working for an adult / explicit-content product, or unwilling to handle explicit content where the role requires direct exposure.</td>
-              <td>Comfort working in an explicit-content environment (script below).</td>
-            </tr>
-            <tr>
-              <td><strong>B2B / working model</strong></td>
-              <td>Refuses the required contractor setup, or cannot practically work under it.</td>
-              <td>B2B acceptance, country of residence.</td>
-            </tr>
-            <tr>
-              <td><strong>Location / timezone</strong></td>
-              <td>Cannot meet the role's location requirement or working overlap, or needs relocation/visa support the role doesn't provide.</td>
-              <td>Against the role brief's exact requirement.</td>
-            </tr>
-            <tr>
-              <td><strong>Compensation</strong></td>
-              <td>Expectations materially outside the approved range, and not flexible.</td>
-              <td>Expectations against the published range.</td>
-            </tr>
-            <tr>
-              <td><strong>Availability / commitment</strong></td>
-              <td>Timing genuinely doesn't work, or candidate intends to retain another full-time job where full-time is required.</td>
-              <td>Notice period, earliest start date, competing commitments.</td>
-            </tr>
-            <tr>
-              <td><strong>English</strong></td>
-              <td>Insufficient to perform the actual responsibilities of the role.</td>
-              <td>Ability to work and communicate in the role's required language, in context.</td>
-            </tr>
+            <tr><th scope="row">What to check</th><td><p>Confirm the candidate is comfortable working for an adult/explicit-content product. Where the role brief states direct exposure to explicit content, also confirm they are comfortable handling it.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>An explicit yes from the candidate in any source: CV, application form, recruiter or interviewer notes, or interview. Previous adult-industry experience is not required.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>Not comfortable working for an adult/explicit-content product, or unwilling to handle explicit content where the role brief states direct exposure.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>Our products can include explicit / NSFW content. Are you fully comfortable working in this environment as part of your day-to-day role?</li></ul></td></tr>
           </tbody>
         </table>
       </div>
-      <div class="callout accent">
-        <span class="glyph">💬</span>
-        <div class="content"><p style="margin-bottom:0"><strong>NSFW confirmation script:</strong> "Our products can include explicit / NSFW content. Are you fully comfortable working in this environment as part of your day-to-day role?"</p></div>
+
+      <h3 class="gate-title" id="gate-2">2. B2B / contractor working model <span class="badge tier-red hs">☑ Hard stop</span></h3>
+      <div class="table-wrap gate-wrap">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Confirm whether the candidate accepts a B2B contractor setup. B2B is required only where the role brief states it. Where the role brief does not state it and the candidate refuses B2B, mark as Maybe for TA to confirm the contract type.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>The candidate states they accept or prefer B2B, contractor, freelance, self-employed, own company, or an invoicing platform (e.g. Deel, Mellow), in any source: CV, application form, recruiter or interviewer notes, or interview.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>The candidate refuses B2B where the role brief states B2B is required.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>This role is on a B2B contractor basis by default. Does that work for you?</li></ul></td></tr>
+          </tbody>
+        </table>
       </div>
-      <div class="callout accent">
-        <span class="glyph">🌍</span>
-        <div class="content"><p style="margin-bottom:0"><strong>Location default:</strong> Europe, or a nearby timezone with strong overlap with European working hours, unless the individual role brief explicitly says otherwise. The role-specific rule always wins over this default.</p></div>
+
+      <h3 class="gate-title" id="gate-3">3. Location / timezone <span class="badge tier-red hs">☑ Hard stop</span></h3>
+      <div class="table-wrap gate-wrap">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Check the candidate&#x27;s country and timezone of residence against the location requirement in the role brief.</p><p>Regions marked &quot;preferred&quot; are a preference, not a requirement.</p><p>Where the role brief states no requirement, the requirement is Europe or a timezone within ±3 hours of CET.</p><p>Temporary travel or working from other places for periods is not a change of residence.</p><p>Where sources state different locations, use the most recent; where they lead to different results, mark as Maybe and name both.</p><p>Where the calibration notes and the role brief/JD state different requirements, mark as Maybe and name both.</p><p>Where the candidate is based in a blocked country (Afghanistan, Belarus, Cuba, Crimea, Democratic Republic of Congo, Donetsk, Iran, Iraq, Kherson, Libya, Luhansk, Myanmar, North Korea, Russia, Somalia, South Sudan, Sudan, Syria, Venezuela, Yemen, Zaporizhzhia) or needs visa sponsorship, mark as Maybe for TA to confirm.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>The candidate&#x27;s stated country, city or timezone of residence, in any source: CV, application form, recruiter or interviewer notes, or interview.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>The candidate&#x27;s country or timezone of residence does not meet the role brief requirement, or the candidate cannot work the overlap hours the role brief requires.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>Where are you based, and which hours would you work day to day?</li><li>Do you have the right to work where you are based?</li></ul></td></tr>
+          </tbody>
+        </table>
       </div>
-      <h4>Notes</h4>
-      <ul>
-        <li>Previous adult-industry experience is not required unless the role brief says otherwise.</li>
-        <li>Use the role brief for the exact location/timezone requirement.</li>
-        <li>Asking about compensation is not a red flag — ask for expectations and range alignment, never current or previous salary.</li>
-        <li>A long notice period or side project is not automatically a rejection.</li>
-      </ul>
+
+      <h3 class="gate-title" id="gate-4">4. Compensation alignment <span class="badge tier-red hs">☑ Hard stop</span></h3>
+      <div class="table-wrap gate-wrap">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Compare the candidate&#x27;s stated expectations with the range in the role brief, on the same basis (base, base + bonus, or total package) and in the same currency (convert approximately where currencies differ).</p><p>Select the range in two steps. First the seniority: take it from the job title, or from notes stating the level the candidate is being considered for, or otherwise from the years-of-experience thresholds in the role brief. Where none of these gives a seniority, compare against every seniority range; where the result would differ between them, mark as Maybe and name them. Then the region: use the range for the region of the candidate&#x27;s country of residence; where the country is not covered by any regional range, mark as Maybe.</p><p>Name the range and seniority used.</p><p>&quot;Exceptional&quot; ceilings are not the top of the range.</p><p>Where the candidate does not state their basis, assume it is the same as the range and say so.</p><p>Where the calibration notes and the role brief/JD state different ranges, mark as Maybe and name both.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>Expectations within the range or up to 10% above its top (e.g. €80K–€100K → up to €110K), or the candidate states they would accept or are open to an offer in that band, in any source: CV, application form, recruiter or interviewer notes, or interview. Use only the candidate&#x27;s stated expectations. Ignore current or previous salary.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>Expectations more than 10% above the top of the range, and the candidate does not state they would accept or are open to an offer in that band.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>What are your compensation expectations, and in which currency?</li><li>The range for this role is X–Y. Does that work for you?</li></ul></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="gate-title" id="gate-5">5. Availability, commitment &amp; current employer <span class="badge tier-red hs">☑ Hard stop</span></h3>
+      <div class="table-wrap gate-wrap">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Confirm the candidate&#x27;s notice period or earliest start date; a candidate who is not currently employed has no notice period.</p><p>Where the role brief states the role is freelance or part-time, other work is allowed; instead, confirm the candidate can commit the hours or availability the role brief requires, and skip the only-commitment check.</p><p>Otherwise, confirm that, once they start, EverAI will be the candidate&#x27;s only professional commitment: no other job, business, freelance, consulting or advisory work. Personal projects that are not a business are not a competing commitment. The job the candidate will leave (covered by their notice period) is not a competing commitment.</p><p>Where no source mentions any other work alongside this role, treat it as none.</p><p>Where the candidate currently has other work (a business, freelance, consulting or a second role) and has not stated they will stop it, mark as Maybe.</p><p>Check the candidate&#x27;s current employer against the Off-Limits list (current employees only). Where the current employer is Docler, Byborg or LiveJasmin, mark as Maybe for TA to handle with care.</p><p>Mark Yes when no part leads to Maybe or No.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>A stated notice period or start date; a statement that the candidate will stop or has no other work; the current employer, in any source: CV, application form, recruiter or interviewer notes, or interview. A long notice period is acceptable unless it misses a required start date in the role brief.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>The candidate states they will keep another job, business, freelance, consulting or advisory work alongside EverAI, where the role brief does not state the role is freelance or part-time; the candidate cannot commit the hours the role brief requires; the earliest start date misses a required start date stated in the role brief; the candidate currently works at Aylo, Nutaku, Mindgeek, Traffic Stars, Advidi, Ovation, XVideos, xHamster, Traffic Junky, Twinred, Pika, KlingAI or Admaze.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>What&#x27;s your notice period and earliest start date?</li><li>Would EverAI be your only professional commitment, or would you keep any other work, business or projects alongside it?</li><li>For freelance roles: How many hours per week can you commit to us?</li></ul></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="gate-title" id="gate-6">6. English sufficiency <span class="badge tier-red hs">☑ Hard stop</span></h3>
+      <div class="table-wrap gate-wrap">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Confirm the candidate can work and communicate in English at the level the role&#x27;s responsibilities require.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>The English level stated in the CV (e.g. fluent, C1, C2, native, professional), written application answers, and communication in notes or interviews, in any source: CV, application form, recruiter or interviewer notes, or interview. Accent, non-native grammar, charisma and presentation style are not evidence unless the role brief requires them.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>The candidate&#x27;s English is insufficient to perform the role&#x27;s responsibilities.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>Walk me through a recent project in your own words.</li></ul></td></tr>
+          </tbody>
+        </table>
+      </div>
+
     </section>
 
-    <section class="card" id="hard-skills">
-      <h2>🚩 Hard Skills / Evidence</h2>
-      <p class="subtitle">These are evidence problems. The role brief defines the exact technical or functional bar.</p>
-
-      <div class="flag">
-        <p class="flag-title">1. Ownership is unclear</p>
-        <p>Relies on "we", "the team", or company-level outcomes; can't isolate their own contribution.</p>
-        <p class="ask">Probe: What was specifically yours? Which decisions did you personally make? What did someone else own?</p>
+    <section class="card" id="common-evidence">
+      <h2>🔍 Common evidence signals</h2>
+      <h3 class="gate-title soft" id="gate-7">7. Personal ownership and credible scale claims <span class="badge tier-yellow hs">Not a hard stop</span></h3>
+      <div class="table-wrap gate-wrap soft">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Check the candidate can isolate their own contribution from team/company results, that scale claims reflect their direct control, and that facts and numbers are consistent across sources.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>Specific decisions the candidate personally made and the parts under their direct control, in any source: CV, application form, recruiter or interviewer notes, or interview. Company name, title, pedigree and &quot;we&quot; outcomes are not proof.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>Relies on &quot;we&quot;/team/company outcomes without isolating their own contribution; large numbers presented as personal achievements without evidence of direct control; facts or figures that materially differ between sources, such as different names, amounts, dates, employers, locations or team sizes (rounding and approximations are not a difference; spelling or transcription variants of the same name, and dates differing by a few months, are not a difference); NDA used to avoid describing their own role or decisions in general terms.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>What was specifically yours? Which decisions did you personally make? What did someone else own?</li><li>What part was directly under your control, and what measurable outcome followed?</li><li>Walk me through this timeline again. How does that number break down?</li><li>Without naming the client, what did you personally decide, build, or change?</li></ul></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="flag">
-        <p class="flag-title">2. Scale is presented without personal control</p>
-        <p>Large company, team, or project numbers are presented as personal achievements without evidence of direct control or contribution.</p>
-        <p class="ask">Probe: What part was directly under your control? What did you personally change? What measurable outcome followed?</p>
+      <h3 class="gate-title soft" id="gate-8">8. Concrete, measurable impact <span class="badge tier-yellow hs">Not a hard stop</span></h3>
+      <div class="table-wrap gate-wrap soft">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Check the candidate can explain the outcomes of their work, not just responsibilities, using role-relevant KPIs.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>Outcomes such as revenue, growth, conversion, retention, quality, reliability, delivery speed, usage, risk or cost reduction, efficiency, or other role KPIs, in any source: CV, application form, recruiter or interviewer notes, or interview. Listing responsibilities alone does not count.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>The candidate cannot explain outcomes when asked two or more times in an interview.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>What changed because of your work? What measurable outcome followed?</li></ul></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="flag">
-        <p class="flag-title">3. No concrete, measurable impact</p>
-        <p>Describes responsibilities but can't explain outcomes, even when repeatedly asked — e.g. revenue, growth, conversion, retention, quality, reliability, delivery speed, product usage, risk reduction, operational efficiency, cost reduction, or other role-relevant KPIs.</p>
-        <p class="note">A senior candidate who repeatedly avoids measurable outcomes is a stronger version of this same gap.</p>
+      <h3 class="gate-title soft" id="gate-9">9. Current hands-on capability <span class="badge tier-yellow hs">Not a hard stop</span></h3>
+      <div class="table-wrap gate-wrap soft">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Check the candidate will personally execute the work the role requires. Accept either current hands-on execution, or previous hands-on experience in the required work plus a stated willingness to return to a hands-on role.</p><p>Check the candidate had been working (employed, contracting, freelancing, consulting or running a business) within the 6 months before they applied. Where the candidate states a reason for a gap of 6 months or more (e.g. parental leave, health, caregiving, relocation), note it and mark as Maybe instead of a red flag.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>Personal execution and tools/workflows/processes the candidate uses themselves, now or in previous roles; for candidates currently managing, a stated willingness to execute the work day to day; work dates, in any source: CV, application form, recruiter or interviewer notes, or interview. Seniority itself is not evidence against. The role brief defines the required work.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>No hands-on experience in the work the role requires; the candidate wants to manage, coordinate, advise or delegate work the role requires them to execute; adjacent experience presented as direct (management as execution, strategy as delivery, reporting as analysis ownership, coordination as expertise); not working for 6 months or more before they applied.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>What did you personally execute recently, and which tools do you use yourself?</li><li>This role is hands-on. Are you looking to execute the work yourself day to day?</li><li>What have you been doing since your last role?</li></ul></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="flag">
-        <p class="flag-title">4. Claims don't reconcile, or numbers don't add up</p>
-        <p>Facts shift across CV, application, and interview, or figures don't make sense when examined (timelines, team size, budget, scope).</p>
-        <p class="ask">Probe: Walk me through this timeline again. How does that number break down?</p>
+      <h3 class="gate-title soft" id="gate-10">10. Clear, direct communication <span class="badge tier-yellow hs">Not a hard stop</span></h3>
+      <div class="table-wrap gate-wrap soft">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Check the candidate communicates clearly and directly, in speech and in writing: answers the question asked, gets to the point, and makes clear what they did, what they owned, why they made decisions and what happened.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>Clear, structured, straightforward answers, in any source: CV, application form, recruiter or interviewer notes, or interview. A single misunderstanding that the candidate clarifies is not evidence against. An introverted style, perfect English, charisma and presentation style are not evidence unless the role brief requires them.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>Answers too unclear to assess competence; repeatedly avoids the question asked; long answers that do not reach the point.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>Can you give me the short version?</li><li>Can you give me one concrete example?</li></ul></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="flag">
-        <p class="flag-title">5. "NDA" used as a blanket excuse</p>
-        <p>Confidentiality is real, but it shouldn't prevent describing their own role, decisions, and approach in general terms.</p>
-        <p class="ask">Probe: Without naming the client/product, what did you personally decide, build, or change?</p>
-      </div>
-
-      <div class="flag">
-        <p class="flag-title">6. Hands-on capability is no longer current</p>
-        <p>Now mainly manages, coordinates, advises, or delegates work that the role requires them to execute personally.</p>
-        <p class="ask">Probe: What did you personally execute recently? Which relevant tools/workflows/processes do you still use yourself? When did you last do this work hands-on?</p>
-        <p class="note">Seniority itself is not a red flag.</p>
-      </div>
-
-      <div class="flag">
-        <p class="flag-title">7. Adjacent experience is presented as direct experience</p>
-        <p>Examples: management presented as execution, strategy presented as delivery, reporting presented as analysis ownership, advisory work presented as operational ownership, coordination presented as functional expertise.</p>
-        <p class="note">The role brief defines what counts as relevant experience.</p>
-      </div>
-
-      <div class="flag">
-        <p class="flag-title">8. Overlapping or stacked roles</p>
-        <p>Multiple concurrent roles/employers on the timeline without a clear explanation of how each was handled.</p>
-        <p class="ask">Probe: How did you manage both at once? What did each one actually involve?</p>
-      </div>
-
-      <div class="callout accent">
-        <span class="glyph">🎯</span>
-        <div class="content"><p style="margin-bottom:0"><strong>Company name, title, or pedigree are sourcing signals — not proof of fit.</strong> Always validate ownership, depth, recency, scale, results, and decision-making. Use evidence and context — don't automatically reject on any single item above.</p></div>
-      </div>
     </section>
 
-    <section class="card" id="cultural-fit">
-      <h2>⚠️ Cultural Fit / Soft Skills</h2>
-      <p class="subtitle">Signals to explore. Do not reject on these alone without evidence.</p>
-
-      <div class="value-card">
-        <strong>Poor preparation / low engagement</strong>
-        <p class="check">Did they review the company/role? Can they explain why they're interested? Do they show useful curiosity?</p>
-        <p class="note">Do not judge based on visible energy or extroversion.</p>
+    <section class="card" id="behavioural">
+      <h2>🧭 Behavioural signals</h2>
+      <h3 class="gate-title soft" id="gate-11">11. Preparation / engagement <span class="badge tier-yellow hs">Not a hard stop</span></h3>
+      <div class="table-wrap gate-wrap soft">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Check whether the candidate reviewed the company/role, can explain why they are interested, and shows useful curiosity.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>Specific knowledge of the company or product, a clear reason for interest, and relevant questions, in any source: CV, application form, recruiter or interviewer notes, or interview. Energy level and extroversion are not evidence.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>The candidate cannot explain what the company does or why they are interested in the role.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>What do you know about what we do?</li><li>Why this role?</li></ul></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="value-card">
-        <strong>Low ownership in ambiguity</strong>
-        <p class="check">Can they move forward without a complete playbook? Can they make reasonable decisions independently? Can they ask for clarity without becoming blocked?</p>
+      <h3 class="gate-title soft" id="gate-12">12. Ownership in ambiguity and learning from mistakes <span class="badge tier-yellow hs">Not a hard stop</span></h3>
+      <div class="table-wrap gate-wrap soft">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Check the candidate moves forward without a complete playbook, makes decisions independently, asks for clarity without becoming blocked, and discusses failures constructively. Mark Confirmed only when both ambiguity and mistakes are evidenced; otherwise mark Needs validation and name the missing part.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>Examples of independent decisions or initiatives beyond their remit; a failure, disagreement or weakness they describe with what they learned or changed, in any source: CV, application form, recruiter or interviewer notes, or interview. Asking for clarity is not evidence against.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>Blocked without a complete playbook; cannot identify any failure or lesson; defensive when challenged.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>Tell me about a time you had no clear process. What did you do?</li><li>Tell me about something that failed. What did you learn or change?</li></ul></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="value-card">
-        <strong>Cannot discuss mistakes constructively</strong>
-        <p class="check">Can they identify something that failed? Can they explain what they learned or would change? Do they get defensive when challenged?</p>
+      <h3 class="gate-title soft" id="gate-13">13. Blame / disrespect <span class="badge tier-yellow hs">Not a hard stop</span></h3>
+      <div class="table-wrap gate-wrap soft">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Check how the candidate describes others and treats recruiters and interviewers. Where interview notes show discriminatory or degrading comments, disrespect or hostility toward recruiters or interviewers, or repeated dismissiveness, mark as Needs validation and quote it as a concern. Where the candidate blames every previous employer or manager or takes no ownership in conflicts, mark as Needs validation. Mark Confirmed when accounts of others and conflicts are balanced or respectful.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>Direct quotes or described behaviour, in any source: CV, application form, recruiter or interviewer notes, or interview. Respectfully challenging assumptions and factual criticism of a past employer are not evidence against.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>Clearly demonstrated discriminatory or degrading comments, disrespect or hostility toward recruiters or interviewers, or repeated dismissiveness.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>Looking back at that conflict, what part was yours?</li></ul></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="value-card">
-        <strong>Persistent blame / disrespect</strong>
-        <div class="level">
-          <span class="level-label">Immediate concern when clearly demonstrated</span>
-          <p class="check">Discriminatory/degrading comments, disrespect toward recruiters/interviewers, hostility or repeated dismissiveness.</p>
-        </div>
-        <div class="level">
-          <span class="level-label">Explore when</span>
-          <p class="check">Every previous employer/manager is blamed; candidate takes no ownership in conflicts; cannot discuss difficult experiences constructively.</p>
-        </div>
+      <h3 class="gate-title soft" id="gate-14">14. Career trajectory &amp; builder experience <span class="badge tier-yellow hs">Not a hard stop</span></h3>
+      <div class="table-wrap gate-wrap soft">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Check the career timeline for a pattern of short tenures, and note positive signals: progression, fast-paced scale-up experience, and building something from 0 (founder, co-founder, or launching a new product, team, function or channel).</p><p>A short tenure is a role that lasted under 18 months. Do not count the current role, internships, roles held while studying, or freelance, contract and project roles, unless the candidate has never held any role for 18 months or more.</p><p>Mark Confirmed when there is no pattern of unexplained short tenures, and list any positive signals in the rationale. The absence of positive signals is not evidence against.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>Increasing scope or seniority over time; roles at fast-growing companies; founding or launching something new with the candidate&#x27;s own role made clear; personal projects the candidate built (not a business); reasonable explanations for short tenures (layoffs, contracts, acquisitions, restructuring, project-based work, role mismatch), in any source: CV, application form, recruiter or interviewer notes, or interview. Past career breaks, no promotion, a non-traditional path and no founder or scale-up experience are not evidence against.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>More than half of the candidate&#x27;s last 4 roles were short tenures without a reasonable explanation, or the candidate has never held any role for 18 months or more.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>What led to each move?</li><li>How did your scope change from one role to the next?</li><li>What did you build from 0, what was your role, and where did you take it?</li></ul></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="value-card">
-        <strong>Repeated short tenures</strong>
-        <p class="check"><em>A question, not a rejection criterion.</em> Check: layoffs, contracts, acquisitions, restructuring, project-based work, role mismatch, other reasonable explanations.</p>
-        <p class="note">Ask: what led to each move?</p>
+      <h3 class="gate-title soft" id="gate-15">15. Practical AI usage <span class="badge tier-yellow hs">Not a hard stop</span></h3>
+      <div class="table-wrap gate-wrap soft">
+        <table class="gate">
+          <tbody>
+            <tr><th scope="row">What to check</th><td><p>Check whether the candidate uses AI tools in their own work with good judgment: what they use, for which tasks, and how they check the output.</p></td></tr>
+            <tr><th scope="row">Counts as evidence</th><td><p>Named AI tools and the tasks they use them for, things they automated or built, and how they verify output, in any source: CV, application form, recruiter or interviewer notes, or interview. No AI background is not evidence against.</p></td></tr>
+            <tr class="rf"><th scope="row">Red flags</th><td><p>Claims AI usage without any specific example; relies on AI output without checking it.</p></td></tr>
+            <tr><th scope="row">Probes</th><td><ul class="probes"><li>Which AI tools do you use, and for what?</li><li>What have you automated or built with them?</li><li>How do you check the output?</li></ul></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="value-card">
-        <strong>Communication prevents assessment</strong>
-        <p class="check">Can you understand what they did, what they owned, why they made decisions, and what happened? Do they repeatedly avoid answering the actual question asked?</p>
-        <p class="note">Perfect English, charisma, or presentation style are not the standard unless the role explicitly requires them.</p>
-      </div>
-
-      <div class="callout accent">
-        <span class="glyph">🤖</span>
-        <div class="content"><p style="margin-bottom:0"><strong>AI usage is generally a positive signal, not a company-wide hard gate.</strong> Only treat it as mandatory when the individual role brief explicitly says so.</p></div>
-      </div>
     </section>
 
-    <section class="card" id="positive-signals">
-      <h2>✅ Positive Signals</h2>
-      <p class="subtitle">Useful evidence that strengthens a candidate — not automatically required.</p>
-      <div class="pills accent">
-        <span class="pill">Strong career progression / increasing scope</span>
-        <span class="pill">Specific and credible examples</span>
-        <span class="pill">Clear personal-vs-team distinction</span>
-        <span class="pill">Recent achievements with measurable outcomes</span>
-        <span class="pill">Strong ownership</span>
-        <span class="pill">Explains decisions and trade-offs</span>
-        <span class="pill">Learns quickly</span>
-        <span class="pill">Good product/company preparation</span>
-        <span class="pill">Strong questions</span>
-        <span class="pill">Practical AI usage with good judgment</span>
-        <span class="pill">Builds tools/workflows to solve problems</span>
-        <span class="pill">Evidence of operating independently</span>
-        <span class="pill">Admits mistakes and explains what changed after</span>
-      </div>
-      <p class="dim">None of these are hard requirements — they're what makes an eligible, evidence-backed candidate stand out.</p>
-    </section>
-
-    <section class="card" id="not-a-red-flag">
-      <h2>✅ Not a Red Flag by Itself</h2>
-      <div class="pills green">
-        <span class="pill">Asking about compensation or benefits</span>
-        <span class="pill">Asking about workload / working hours</span>
-        <span class="pill">Asking detailed process questions</span>
-        <span class="pill">Being laid off</span>
-        <span class="pill">Career break</span>
-        <span class="pill">Contract / freelance experience</span>
-        <span class="pill">Consulting background</span>
-        <span class="pill">Short tenures with reasonable explanation</span>
-        <span class="pill">No previous adult/NSFW industry experience unless the role requires it</span>
-        <span class="pill">No AI background unless the role requires it</span>
-        <span class="pill">Introverted / lower-energy communication style</span>
-        <span class="pill">Respectfully challenging assumptions</span>
-        <span class="pill">Asking for clarity</span>
-        <span class="pill">Coming from outside target-company lists</span>
-        <span class="pill">Non-traditional career path</span>
-        <span class="pill">Different job title with equivalent responsibilities</span>
-        <span class="pill">No promotion / lack of career progression</span>
-      </div>
-      <p class="dim">Assess evidence against the role brief, not proxies.</p>
-    </section>
-
-    <section class="card" id="before-you-submit">
-      <h2>Before You Submit</h2>
-      <ul>
-        <li><strong>Eligibility:</strong> Are all admin hard gates cleared?</li>
-        <li><strong>Role fit:</strong> Do they meet the role-specific hard-skill bar?</li>
-        <li><strong>Ownership:</strong> What did they personally own?</li>
-        <li><strong>Evidence:</strong> What concrete evidence supports the submission?</li>
-        <li><strong>Concerns:</strong> Is any meaningful concern still unresolved?</li>
-      </ul>
-      <div class="callout warn">
-        <span class="glyph">⚠️</span>
-        <div class="content"><p style="margin-bottom:0"><strong>If you cannot answer these five questions, do not submit the candidate yet.</strong></p></div>
-      </div>
-      <p class="dim"><strong>Individual role briefs override this page</strong> for technical requirements, level, compensation, location, mandatory domain experience, and role-specific hard gates.</p>
-    </section>
 <div class="page-nav"><a class="prev" href="ashby.html"><span class="dir">&larr; Previous</span><span class="label">How to Use Ashby</span></a><a class="next" href="open-roles.html"><span class="dir">Next &rarr;</span><span class="label">Our Open Roles</span></a></div>
   </main>
 </div>
