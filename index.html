@@ -7,6 +7,19 @@
 <meta name="description" content="Role briefs, screening questions and rules for EverAI recruiting partners.">
 <meta name="robots" content="noindex">
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style id="qa-fixes">
+.hl-flash{animation:hlflash 1.8s ease;border-radius:12px}
+@keyframes hlflash{0%,55%{box-shadow:0 0 0 3px var(--brand,#5b2a86)}100%{box-shadow:0 0 0 3px transparent}}
+@media (min-width:701px){body.p3wide header .w,body.p3wide footer .w,body.p3wide .tabs .w{max-width:1240px!important;padding-inline:16px!important}
+ body.wide:not(.p3wide) header .w,body.wide:not(.p3wide) footer .w,body.wide:not(.p3wide) .tabs .w{max-width:1160px!important;padding-inline:16px!important}}
+@media (max-width:700px){
+ .tabs{transition:transform .22s ease}
+ body.nav-hidden .tabs{transform:translateY(calc(-100% - 8px))}
+ .t-tabs{transition:top .22s ease}
+ body.nav-hidden .t-tabs{top:6px!important}
+ .frow.more{-webkit-mask-image:linear-gradient(to right,#000 82%,transparent);mask-image:linear-gradient(to right,#000 82%,transparent)}
+}
+</style>
 </head>
 <body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -392,7 +405,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .sc{background:#fff;border:1px solid #e1dcec;border-radius:16px;padding:22px 24px;box-shadow:0 4px 14px rgba(60,40,90,.08)}
 .sh{display:flex;align-items:center;gap:10px;font-size:19px;color:#1a1530;margin:0 0 6px}
 .bar{width:6px;height:24px;border-radius:3px;flex-shrink:0}
-.bar.go,.mk.go{background:#2e9e6a} .bar.warn,.mk.warn{background:#e0901a} .bar.stop,.mk.stop{background:#d63c3c} .bar.pur,.mk.pur{background:#5b2a86} .bar.pink{background:#5b2a86}
+.bar.go,.mk.go{background:#2e9e6a} .bar.warn,.mk.warn{background:#b86b00} .bar.stop,.mk.stop{background:#d63c3c} .bar.pur,.mk.pur{background:#5b2a86} .bar.pink{background:#5b2a86}
 .ssub{margin:0 0 14px;color:#6b6480;font-size:15px}
 .bl{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:12px}
 .bi{display:flex;gap:12px;align-items:flex-start;font-size:16.5px;line-height:1.55;color:#4a4560}
@@ -1079,13 +1092,13 @@ body.p3wide main.w{max-width:1240px}
 .v19b section.sc::before,.v19b section.sc::after{display:none}
 .v19b .sh{display:flex;gap:10px;align-items:center;margin:0 0 6px;font-size:19px;font-weight:700;color:#1a1530;line-height:1.2}
 .v19b .sh .bar{display:block!important;flex:none;width:6px;height:24px;border-radius:3px}
-.v19b .bar.pur{background:#5b2a86}.v19b .bar.go{background:#2e9e6a}.v19b .bar.warn{background:#e0901a}.v19b .bar.stop{background:#d63c3c}.v19b .bar.pink{background:var(--m)}
+.v19b .bar.pur{background:#5b2a86}.v19b .bar.go{background:#2e9e6a}.v19b .bar.warn{background:#b86b00}.v19b .bar.stop{background:#d63c3c}.v19b .bar.pink{background:var(--m)}
 .v19b .ssub{margin:0 0 14px;font-size:15px;color:#6b6480;line-height:1.7}
 .v19b .bl{display:grid;gap:12px;margin:10px 0 0;padding:0;list-style:none}
 .v19b .bi{display:flex;gap:12px;align-items:flex-start;font-size:16.5px;line-height:1.55;color:#4a4560;background:none;border:0;padding:0}
 .v19b .bi b{color:#1a1530}
 .v19b .mk{flex:none;display:grid;place-items:center;width:22px;height:22px;margin-top:2px;border-radius:6px;color:#fff;font-size:12.5px;font-weight:700;line-height:1}
-.v19b .mk.pur{background:#5b2a86}.v19b .mk.go{background:#2e9e6a}.v19b .mk.warn{background:#e0901a}.v19b .mk.stop{background:#d63c3c}
+.v19b .mk.pur{background:#5b2a86}.v19b .mk.go{background:#2e9e6a}.v19b .mk.warn{background:#b86b00}.v19b .mk.stop{background:#d63c3c}
 .v19b .never{margin:14px 0 0;font-size:14.5px;line-height:1.7;color:#4a4560}
 .v19b .ochips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
 .v19b .ochip{padding:5px 12px;border:1px solid #cfc7e2;border-radius:20px;background:#f7f5fb;color:#3a2f5c;font-size:14.5px;line-height:1.7;font-weight:400}
@@ -2462,7 +2475,7 @@ function brief8(r){const B=B8[r.id],P=PB[r.id];
   <pre id="qq-${r.id}" hidden>${esc(qq)}</pre><pre id="qs-${r.id}" hidden>${esc(qq)}</pre>
  </header>
  <section class="v8s"><div class="v8h"><h3>📸 Snapshot</h3></div><div class="v8snap">${B.snap.map(([i,l,t])=>`<div class="v8sr"><span class="v8si">${i}</span><p><b>${esc(l)}</b>${esc(t)}</p></div>`).join("")}</div></section>
- <section class="v8s v8must"><div class="v8h"><h3>✅ Must-haves</h3><span>${B.extra?`1–${B.cards.length} required · ★ compares candidates`:"All required"} · ask each question on the call</span></div>
+ <section class="v8s v8must"><div class="v8h"><h3>✅ Must-haves</h3><span>${B.extra?`Items 1–${B.cards.length} required · ★ compares candidates`:"All required"} · ask each question on the call</span></div>
   <div class="v8cards">${B.cards.map((c,i)=>card(c,i)).join("")}${B.extra?card(B.extra,0,1):""}</div>
   ${B.exc?`<p class="v8note">💡 ${esc(B.exc)}</p>`:""}</section>
  <section class="v8s v8stop"><div class="v8h"><h3>⛔ Don't submit if</h3><a class="v8lnk sm" href="#rules" data-goto="rules">+ rules for every role →</a></div><div class="v8chips">${B.stop.map(t=>`<i class="v8chip no">${esc(t)}</i>`).join("")}</div></section>
@@ -2505,7 +2518,7 @@ function brief9(r){const B=B8[r.id],P=PB[r.id];
   <pre id="qq-${r.id}" hidden>${esc(qq)}</pre><pre id="qs-${r.id}" hidden>${esc(qq)}</pre>
  </header>
  ${S("pk","📸 Snapshot",`<div class="v8snap">${B.snap.map(([i,l,t])=>`<div class="v8sr"><span class="v8si">${i}</span><p><b>${esc(l)}</b>${esc(t)}</p></div>`).join("")}</div>`)}
- ${S("gr","✅ Must have",`<div class="v9tools"><button type="button" class="v8lnk sm" data-v9all>Show all questions</button></div><ol class="v9must">${all.map((c,i)=>{const ex=i>=B.cards.length;return `<li class="${ex?"ex":""}"><span class="v9n">${ex?"★":i+1}</span><div><b>${esc(c[0])}</b>${ex?` <em class="v8opt">Not required</em>`:""}<p class="v9d">✓ ${esc(c[2])}</p><details class="v9ask"><summary>How to check</summary><blockquote class="v8q">${esc(c[1])}</blockquote>${c[5]?`<p class="v8fu"><b>Follow up:</b> ${c[5].map(esc).join(" · ")}</p>`:""}<p class="v8x">✕ Reject: ${esc(c[3])}</p>${c[4]?`<p class="v8cn">${esc(c[4])}</p>`:""}</details></div></li>`}).join("")}</ol>${B.exc?`<p class="v8note">💡 ${esc(B.exc)}</p>`:""}<div class="v9stop"><b>⛔ Don't submit if</b><div class="v8chips">${B.stop.map(t=>`<i class="v8chip no">${esc(t)}</i>`).join("")}</div><a class="v8lnk sm" href="#rules" data-goto="rules">+ rules for every role →</a></div>`,B.extra?`1–${B.cards.length} required · ★ compares candidates`:`All ${B.cards.length} required`)}
+ ${S("gr","✅ Must have",`<div class="v9tools"><button type="button" class="v8lnk sm" data-v9all>Show all questions</button></div><ol class="v9must">${all.map((c,i)=>{const ex=i>=B.cards.length;return `<li class="${ex?"ex":""}"><span class="v9n">${ex?"★":i+1}</span><div><b>${esc(c[0])}</b>${ex?` <em class="v8opt">Not required</em>`:""}<p class="v9d">✓ ${esc(c[2])}</p><details class="v9ask"><summary>How to check</summary><blockquote class="v8q">${esc(c[1])}</blockquote>${c[5]?`<p class="v8fu"><b>Follow up:</b> ${c[5].map(esc).join(" · ")}</p>`:""}<p class="v8x">✕ Reject: ${esc(c[3])}</p>${c[4]?`<p class="v8cn">${esc(c[4])}</p>`:""}</details></div></li>`}).join("")}</ol>${B.exc?`<p class="v8note">💡 ${esc(B.exc)}</p>`:""}<div class="v9stop"><b>⛔ Don't submit if</b><div class="v8chips">${B.stop.map(t=>`<i class="v8chip no">${esc(t)}</i>`).join("")}</div><a class="v8lnk sm" href="#rules" data-goto="rules">+ rules for every role →</a></div>`,B.extra?`Items 1–${B.cards.length} required · ★ compares candidates`:`All ${B.cards.length} required`)}
  ${S("gd","⭐ Nice to have",`<ul class="v9nice">${B.nice.map(([t,s])=>`<li>${s?"<b>★</b> ":""}${esc(t)}</li>`).join("")}</ul>`,"Not required · use to rank")}
  ${S("bl","🔎 Where to find them",`${r.dont?`<p class="v8bad">🚫 ${esc(r.dont)}</p>`:""}
   <div class="v9lbl">Search titles <small>click to copy</small></div><div class="v8chips">${titles.map(x=>`<button type="button" class="v8chip t" data-copytext="${esc(x)}">${esc(x)}</button>`).join("")}</div><button type="button" class="v8lnk sm v9cp" data-copytext="${esc(titles.map(x=>'"'+x.replace(/ PM$/," Product Manager")+'"').join(" OR "))}">📋 Copy as LinkedIn search</button>
@@ -2588,7 +2601,7 @@ function brief11(r){const B=B8[r.id],P=PB[r.id];const tab=BT[r.id]||"ov";
  <nav class="t-tabs" role="tablist" aria-label="Brief steps">${T.map(([k,l,s],i)=>`<button type="button" role="tab" id="tab-${k}" aria-controls="pan-${k}" aria-selected="${k===tab}" tabindex="${k===tab?0:-1}" data-tab="${k}"><span class="t-k">${i+1}</span><span class="t-l"><b>${l}</b><small>${s}</small></span></button>`).join("")}<span class="t-ind" aria-hidden="true"></span></nav>
  <div class="t-pan${tab==="ov"?" on":""}" role="tabpanel" id="pan-ov" aria-labelledby="tab-ov">
   ${blk("📸","Snapshot",`<div class="t-snap">${[["📱","The product","Candy.ai: an AI companion app with 50M+ users. People chat, talk and create images and video with AI characters."]].concat(B.snap.filter(x=>x[1]!=="Adult content")).map(([i,l,t])=>`<div><span class="t-si">${i}</span><p><b>${esc(l)}</b>${esc(t)}</p></div>`).join("")}</div>`,"","s-ov1")}
-  ${blk("✅","Must have",`<ol class="t-must">${mustList}</ol>${B.exc?`<p class="t-tip">💡 ${esc(B.exc)}</p>`:""}`,`<small>${B.extra?`1–${B.cards.length} required`:"All required"}</small>`,"s-ov2")}
+  ${blk("✅","Must have",`<ol class="t-must">${mustList}</ol>${B.exc?`<p class="t-tip">💡 ${esc(B.exc)}</p>`:""}`,`<small>${B.extra?`Items 1–${B.cards.length} required`:"All required"}</small>`,"s-ov2")}
   ${blk("⭐","Nice to have",`<div class="t-chips">${B.nice.map(([t,s])=>`<i class="${s?"star":""}">${s?"★ ":""}${esc(t)}</i>`).join("")}</div>`,`<small>use to rank, not required</small>`,"s-ov4")}
   ${blk("⛔","Don't submit if",`<ul class="t-stop">${B.stop.map(t=>`<li>${esc(t)}</li>`).join("")}</ul><a class="t-lnk" href="#rules" data-goto="rules">Plus the rules for every role →</a>`,"","s-ov3")}
   ${next("src","Next: where to find them")}
@@ -2797,7 +2810,7 @@ function verdict(qs){
   else if(fl.length){c="warn";t="🟠 Flag to TA first";b="Message your TA contact before submitting:"+li(fl.map(f=>"They "+f))}
   else{c="go";t="🟢 Ready to submit";const r=R.find(x=>x.id===$("#fitRole").value);
     const note=`Role: ${label(r)}
-Location / Timezone: 
+Location / Timezone: ${ans.loc==="y"?"In "+r.loc+" (confirmed). City / country: ":""}
 Visa / Right to Work: No sponsorship needed
 NSFW Comfort Confirmed: Yes
 Contract Type (B2B OK?): ${r.b2b?"Yes, B2B confirmed":""}
@@ -2846,7 +2859,8 @@ function pageHits(t){
     const head=el.matches(".sc,.hcard")?secHead:(((el.querySelector(".qq,b")||{}).textContent)||secHead).replace(/^\W+/u,"").trim();
     let txt=txtOf(el); if(txt.toLowerCase().startsWith(head.toLowerCase())) txt=txt.slice(head.length).replace(/^[\s:.,;-]+/,"");
     if(!txt.toLowerCase().includes(t)&&!head.toLowerCase().includes(t)) txt=txtOf(el);
-    out.push(["page",`<a href="#${v}" data-goto="${v}"><span class="hpath">${esc(names[v])}${secHead&&secHead!==head?" › "+esc(secHead):""}</span><b>${esc(head)}</b></a>${txt?`<span class="hsnip">${snip(txt,t)}</span>`:""}`,head.toLowerCase().includes(t)]);
+    const hid=el.id||(el.id="sh-"+v+"-"+(pageHits.n=(pageHits.n||0)+1));
+    out.push(["page",`<a href="#${v}" data-goto="${v}" data-jumpel="${hid}"><span class="hpath">${esc(names[v])}${secHead&&secHead!==head?" › "+esc(secHead):""}</span><b>${esc(head)}</b></a>${txt?`<span class="hsnip">${snip(txt,t)}</span>`:""}`,head.toLowerCase().includes(t)]);
   }));
   return out;
 }
@@ -2885,7 +2899,7 @@ document.addEventListener("click",e=>{
   if(g){e.preventDefault();const v=g.dataset.goto;
     if(v==="roles-grid"){show("roles",{noScroll:true});document.getElementById("roles-grid").scrollIntoView({behavior:"smooth"})}
     else {$("#q").value="";search();show(v);try{history.replaceState(null,"","#"+v)}catch(_){}
-      if(g.dataset.jumpto)setTimeout(()=>{const t=document.getElementById(g.dataset.jumpto);if(t)t.scrollIntoView({behavior:"smooth",block:"start"})},80)}
+      const jid=g.dataset.jumpto||g.dataset.jumpel;if(jid)setTimeout(()=>{const t=document.getElementById(jid);if(!t)return;for(let d=t.closest("details");d;d=d.parentElement&&d.parentElement.closest("details"))d.open=true;const nh=(document.querySelector(".tabs")||{}).offsetHeight||0;window.scrollTo({top:Math.max(0,t.getBoundingClientRect().top+scrollY-nh-16),behavior:"smooth"});if(g.dataset.jumpel){t.classList.remove("hl-flash");void t.offsetWidth;t.classList.add("hl-flash")}},80)}
     return}
   if(e.target.closest("[data-jumpend]")){e.preventDefault();$("#verdictEnd").scrollIntoView({behavior:"smooth"});return}
   const j=e.target.closest("[data-jump]"); if(j){document.getElementById(j.dataset.jump).scrollIntoView({behavior:"smooth"});return}
@@ -2947,5 +2961,23 @@ const hsh=(location.hash||"").slice(1);
 if(R.some(r=>r.id===hsh)) openBrief(hsh,false); else if(hsh==="briefs") openBrief(R.find(r=>r.pri==="P0").id,false); else show(TITLES[hsh]?hsh:"roles",{noScroll:true});
 </script>
 
+<script id="qa-fixes-js">
+(()=>{
+ /* 3. shortcut hint matches the device */
+ const q=document.getElementById("q");
+ if(q){const touch=matchMedia("(hover:none)").matches,mac=/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent);q.placeholder=touch?"🔍 Search":mac?"🔍 Search  ⌘K":"🔍 Search  Ctrl K"}
+ /* 1. on phones, hide the tab bar while scrolling down, show it on scroll up */
+ const mq=matchMedia("(max-width:700px)");let y0=scrollY;
+ addEventListener("scroll",()=>{const y=scrollY,b=document.body;
+  if(!mq.matches||y<160||document.activeElement===q){b.classList.remove("nav-hidden")}
+  else if(y>y0+6){b.classList.add("nav-hidden")}
+  else if(y<y0-6){b.classList.remove("nav-hidden")}
+  if(Math.abs(y-y0)>6)y0=y},{passive:true});
+ /* 5. fade the edge of filter rows that scroll sideways */
+ const fade=()=>document.querySelectorAll(".frow").forEach(r=>r.classList.toggle("more",r.scrollLeft+r.clientWidth<r.scrollWidth-4));
+ document.addEventListener("scroll",e=>{if(e.target.classList&&e.target.classList.contains("frow"))fade()},{capture:true,passive:true});
+ addEventListener("resize",fade);const f=document.getElementById("filters");if(f)new MutationObserver(fade).observe(f,{childList:true,subtree:true});fade();
+})();
+</script>
 </body>
 </html>
