@@ -46,6 +46,12 @@
 .sxr{display:flex;flex-wrap:wrap;gap:6px}
 .sxr i{font-style:normal;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:999px;background:#f1edf8;color:#4a3a78}
 .sxr i.on{background:#5b2a86;color:#fff}
+.sxbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:16px 0 8px}
+.sxbar .sxn{margin:0}
+.sxcp{font:inherit;font-size:13.5px;font-weight:700;color:#5b2a86;background:#f1edf8;border:1px solid #d9cdee;border-radius:999px;padding:6px 12px;cursor:pointer}
+.sxcp:hover{background:#e7def5}
+.sxli{margin-left:auto;font-size:13px;font-weight:700;color:#0a66c2;text-decoration:none;white-space:nowrap}
+.sxli:hover{text-decoration:underline}
 .sxempty{padding:18px;text-align:center;color:#6b6480;border:1px dashed #d9d2e6;border-radius:12px}
 @media (max-width:700px){.sxf{grid-template-columns:repeat(2,minmax(0,1fr))}.sxf .sxq,.sxf .sxrm{grid-column:span 2}.sxf .sxrm{padding-bottom:0}.sxc{margin-left:0;width:100%}}
 </style>
@@ -2181,6 +2187,12 @@ const SRC_REGIONS=[["","All regions"],["EMEA","EMEA"],["EU","Europe"],["MEA","Mi
 const srcIn=(reg,c)=>{const s=SRC_SUB[c]||"";return reg==="EMEA"?(s==="EU"||s==="MEA"):reg==="AM"?(s==="NA"||s==="LATAM"):s===reg};
 const srcState={role:"",reg:"",cty:"",cat:"",q:"",remote:false};
 const srcName=n=>n.replace(/\s*\(competitor: ask TA first\)$/,"");
+const srcBase=n=>srcName(n).replace(/\s*\(.*\)$/,"").trim();
+const SRC_TB={"pm-ms":["spm-ms","jpm-ms"],"pm-rtb":["spm-rtb","jpm-rtb"]};
+function srcTitles(role){if(!role)return[];const ids=SRC_TB[role]||[role];const t=[];for(const id of ids){const r=R.find(x=>x.id===id);let l=[];try{l=(B8[id]&&B8[id].titles)||(typeof PB!=="undefined"&&PB[id]&&PB[id].titles)||(r&&r.titles)||[]}catch(_){l=(r&&r.titles)||[]}l.forEach(x=>{if(!t.includes(x))t.push(x)})}return t.map(x=>x.replace(/ PM$/," Product Manager"))}
+const SRC_AKA={"Superhuman (Grammarly)":["Superhuman","Grammarly"],"Perk (ex-TravelPerk)":["Perk","TravelPerk"],"Bird (ex-MessageBird)":["Bird","MessageBird"],"Contentsquare (incl. Hotjar)":["Contentsquare","Hotjar"],"Moescape (ex-Yodayo) (competitor: ask TA first)":["Moescape","Yodayo"],"Insider One":["Insider One","useinsider"],"FreeNow by Lyft":["FreeNow","FREENOW"],"Adopte (Adopta un tío)":["Adopte","Adopta un tío"],"Joyride (Jaumo)":["Joyride","Jaumo"],"Kaizen Gaming (Betano)":["Kaizen Gaming","Betano"],"Ashley Madison (Ruby Life)":["Ashley Madison","Ruby Life"],"XING (New Work SE)":["XING","New Work SE"],"Monks (Media.Monks)":["Monks","Media.Monks"],"Athletic Greens (AG1)":["AG1","Athletic Greens"],"Kindred (FDJ United)":["Kindred Group","Unibet"],"Wellhub":["Wellhub","Gympass"]};
+const srcTerms=n=>SRC_AKA[n]||srcBase(n).split(" / ").map(s=>s.trim()).filter(Boolean);
+function srcLI(x,role){const t=srcTitles(role);const c=srcTerms(x.n);const k=(t.length?"("+t.map(s=>'"'+s+'"').join(" OR ")+") ":"")+(c.length>1?"("+c.map(s=>'"'+s+'"').join(" OR ")+")":'"'+c[0]+'"');return "https://www.linkedin.com/search/results/people/?keywords="+encodeURIComponent(k)}
 function srcInit(){
   const el=document.getElementById("srcxGroups"); if(!el) return;
   const e=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
@@ -2193,24 +2205,28 @@ function srcInit(){
    <label>Category<select id="sxCat">${opt("","All categories")}${SRC_CATS.map(([i,t])=>opt(t,i+" "+t)).join("")}</select></label>
    <label class="sxq">Company<input id="sxQ" type="search" placeholder="Filter by name" autocomplete="off"></label>
    <label class="sxrm"><input id="sxRm" type="checkbox"> Remote-first only</label>
-  </div><p class="sxn" id="sxN" aria-live="polite"></p><p class="sxnote" id="sxNote" hidden></p><div class="sxl" id="sxL"></div>`;
+  </div><div class="sxbar"><p class="sxn" id="sxN" aria-live="polite"></p><button type="button" class="sxcp" id="sxCp">📋 Copy company list</button></div><p class="sxnote" id="sxNote" hidden></p><div class="sxl" id="sxL"></div>`;
   const bind=(id,k,ev,get)=>document.getElementById(id).addEventListener(ev,x=>{srcState[k]=get(x.target);if(k==="reg"){srcState.cty="";document.getElementById("sxCty").value=""}srcRender()});
   bind("sxRole","role","change",t=>t.value);bind("sxReg","reg","change",t=>t.value);bind("sxCty","cty","change",t=>t.value);
-  bind("sxCat","cat","change",t=>t.value);bind("sxQ","q","input",t=>t.value.trim().toLowerCase());bind("sxRm","remote","change",t=>t.checked);
+  bind("sxCat","cat","change",t=>t.value);
+  document.getElementById("sxCp").addEventListener("click",async ev=>{const b=ev.currentTarget;const names=[...new Set(srcRows().map(x=>srcBase(x.n)))];const txt=names.join("\n");
+    try{await navigator.clipboard.writeText(txt)}catch(_){const ta=document.createElement("textarea");ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove()}
+    b.textContent=`✓ Copied ${names.length} compan${names.length===1?"y":"ies"}`;clearTimeout(b._t);b._t=setTimeout(()=>b.textContent="📋 Copy company list",2200)});bind("sxQ","q","input",t=>t.value.trim().toLowerCase());bind("sxRm","remote","change",t=>t.checked);
   srcRender();
 }
 function srcSet(st){Object.assign(srcState,{role:"",reg:"",cty:"",cat:"",q:"",remote:false},st);
   const m={sxRole:"role",sxReg:"reg",sxCty:"cty",sxCat:"cat",sxQ:"q"};for(const[id,k]of Object.entries(m)){const x=document.getElementById(id);if(x)x.value=srcState[k]}
   const r=document.getElementById("sxRm");if(r)r.checked=srcState.remote;srcRender()}
+function srcRows(){const s=srcState;const rows=SRC2.filter(x=>(!s.role||x.r.includes(s.role))&&(!s.cat||x.c.includes(s.cat))&&(!s.remote||x.rm)
+    &&(!s.cty||x.co.includes(s.cty))&&(!s.reg||x.co.some(c=>srcIn(s.reg,c)))&&(!s.q||x.n.toLowerCase().includes(s.q)));
+  return rows.sort((a,b)=>(a.f==="competitor")-(b.f==="competitor")||srcName(a.n).localeCompare(srcName(b.n)))}
 function srcRender(){
   const L=document.getElementById("sxL"); if(!L) return;
   const e=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
   const s=srcState, rl=Object.fromEntries(SRC_ROLES.map(([k,,sh])=>[k,sh]));
   const cy=document.getElementById("sxCty");
   if(cy){const keep=cy.value;const list=[...new Set(SRC2.flatMap(x=>x.co))].filter(c=>!s.reg||srcIn(s.reg,c)).sort();cy.innerHTML=`<option value="">All countries</option>`+list.map(c=>`<option${c===keep?" selected":""}>${e(c)}</option>`).join("")}
-  const rows=SRC2.filter(x=>(!s.role||x.r.includes(s.role))&&(!s.cat||x.c.includes(s.cat))&&(!s.remote||x.rm)
-    &&(!s.cty||x.co.includes(s.cty))&&(!s.reg||x.co.some(c=>srcIn(s.reg,c)))&&(!s.q||x.n.toLowerCase().includes(s.q)));
-  rows.sort((a,b)=>(a.f==="competitor")-(b.f==="competitor")||srcName(a.n).localeCompare(srcName(b.n)));
+  const rows=srcRows();
   document.getElementById("sxN").textContent=`${rows.length} compan${rows.length===1?"y":"ies"}`+(rows.length<SRC2.length?` of ${SRC2.length}`:"");
   const cat=SRC_CATS.find(c=>c[1]===s.cat),nt=document.getElementById("sxNote");
   nt.hidden=!(cat&&cat[2]);if(cat&&cat[2])nt.textContent=cat[2];
@@ -2220,7 +2236,7 @@ function srcRender(){
     return `<article class="sx${x.f?" f-"+x.f:""}"><div class="sxh"><b>${e(srcName(x.n))}</b>${badge(x)}<span class="sxc">${ci?ci[0]+" "+e(ci[1].split(":")[0]):""}</span></div>
     <p class="sxw">${e(x.w)}</p>
     <div class="sxm"><span class="sxloc">📍 ${x.co.map((c,i)=>i===0&&c===x.hq?`<b>${e(c)}</b> <small>HQ</small>`:e(c)).join(" · ")}${x.rm?` · <i>Remote-first</i>`:""}</span>
-    <span class="sxr">${x.r.map(k=>`<i class="${k===s.role?"on":""}">${e(rl[k]||k)}</i>`).join("")}</span></div></article>`}).join("")
+    <span class="sxr">${x.r.map(k=>`<i class="${k===s.role?"on":""}">${e(rl[k]||k)}</i>`).join("")}</span>${x.f==="competitor"?"":`<a class="sxli" href="${srcLI(x,s.role)}" target="_blank" rel="noopener" title="${s.role?"People at this company with the "+e(rl[s.role]||"")+" job titles":"People at this company. Pick a role to add job titles"}">Search on LinkedIn ↗</a>`}</div></article>`}).join("")
     :`<p class="sxempty">No companies match these filters. Try a wider region or another role.</p>`;
 }
 try{srcInit()}catch(_){}
